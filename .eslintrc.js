@@ -10,13 +10,13 @@ module.exports = {
     sourceType: 'module',
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['next/core-web-vitals', 'react', '@typescript-eslint', 'prettier', 'import', 'unused-imports'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'import', 'unused-imports'],
   extends: [
     'airbnb',
     'airbnb/hooks',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:storybook/recommended',
+    'next/core-web-vitals',
     'plugin:tailwindcss/recommended',
   ],
   rules: {
