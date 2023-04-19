@@ -17,6 +17,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',
