@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if [ "$CURRENT_SCOPE" = "main" ]; then
+  echo "main 브랜치에는 Push할 수 없습니다."
+  exit 1
+fi
