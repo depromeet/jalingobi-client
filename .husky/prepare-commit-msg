@@ -5,6 +5,6 @@ CURRENT_SCOPE=$(git branch --show-current | cut -d '/' -f 1)
 COMMIT_MESSAGE=$(cat "$1")
 
 if [ "$CURRENT_SCOPE" = "main" ]; then
-  echo "main 브랜치에는 Commit할 수 없습니다."
+  echo "ERROR: main 브랜치에는 Commit할 수 없습니다."
   exit 1
 fi
