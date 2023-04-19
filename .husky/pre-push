@@ -5,3 +5,14 @@ if [ "$CURRENT_SCOPE" = "main" ]; then
   echo "main 브랜치에는 Push할 수 없습니다."
   exit 1
 fi
+
+protected_branch='main'
+
+while read local_ref local_sha remote_ref remote_sha
+do
+    if [[ $remote_ref == *"refs/heads/$protected_branch"* ]]
+    then
+        echo "$protected_branch 브랜치에는 Push할 수 없습니다."
+        exit 1
+    fi
+done
