@@ -1,5 +1,6 @@
 const plugin = require('tailwindcss/plugin');
 
+const color = require('./styles/tailwind/color');
 const typography = require('./styles/tailwind/typography');
 
 /** @type {import('tailwindcss').Config} */
@@ -19,6 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-pretendard)'],
       },
+      colors: { ...color },
     },
   },
   plugins: [
