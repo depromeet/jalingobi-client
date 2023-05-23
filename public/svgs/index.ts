@@ -1,10 +1,10 @@
-import IconAdd from './IconAdd.svg';
-import IconCancel from './IconCancel.svg';
-import IconChevronDown from './IconChevronDown.svg';
-import IconChevronLeft from './IconChevronLeft.svg';
-import IconChevronRight from './IconChevronRight.svg';
-import IconChevronUp from './IconChevronUp.svg';
-import IconOverflow from './IconOverflow.svg';
+import IconAdd from './icon-add.svg';
+import IconCancel from './icon-cancel.svg';
+import IconChevronDown from './icon-chevron-down.svg';
+import IconChevronLeft from './icon-chevron-left.svg';
+import IconChevronRight from './icon-chevron-right.svg';
+import IconChevronUp from './icon-chevron-up.svg';
+import IconOverflow from './icon-overflow.svg';
 
 export {
   IconAdd,

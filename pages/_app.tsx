@@ -5,12 +5,12 @@ import localFont from 'next/font/local';
 const pretendard = localFont({
   src: [
     {
-      path: '../styles/font/Pretendard-Regular.woff2',
+      path: '../public/fonts/Pretendard-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../styles/font/Pretendard-Medium.woff2',
+      path: '../public/fonts/Pretendard-Medium.woff2',
       weight: '500',
       style: 'normal',
     },
