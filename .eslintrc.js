@@ -10,14 +10,19 @@ module.exports = {
     sourceType: 'module',
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['react', '@typescript-eslint', 'prettier', 'import', 'unused-imports'],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'prettier',
+    'import',
+    'unused-imports',
+  ],
   extends: [
     'airbnb',
     'airbnb/hooks',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
-    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -46,7 +51,12 @@ module.exports = {
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
-      { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
     ],
 
     'import/no-extraneous-dependencies': 'off',
@@ -57,7 +67,13 @@ module.exports = {
       'error',
       {
         'newlines-between': 'always',
-        groups: [['builtin', 'external'], 'internal', 'parent', 'sibling', 'index'],
+        groups: [
+          ['builtin', 'external'],
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
         pathGroups: [
           {
             pattern: '{react*,react*/**,next*,next*/**}',
