@@ -12,9 +12,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
     "next": "13.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
