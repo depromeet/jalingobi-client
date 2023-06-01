@@ -9,6 +9,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './shared/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
+    './shared/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
