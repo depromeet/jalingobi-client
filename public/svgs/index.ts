@@ -8,6 +8,8 @@ import IconChevronRight from './icon-chevron-right.svg';
 import IconChevronUp from './icon-chevron-up.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
+import IconPolygonDown from './icon-polygon-down.svg';
+import IconPolygonUp from './icon-polygon-up.svg';
 import IconSearch from './icon-search.svg';
 import IconUser from './icon-user.svg';
 
@@ -24,4 +26,6 @@ export {
   IconNote,
   IconSearch,
   IconUser,
+  IconPolygonDown,
+  IconPolygonUp,
 };
