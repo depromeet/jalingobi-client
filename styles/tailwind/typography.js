@@ -3,7 +3,7 @@ module.exports = {
   '.font-title-medium-lg': {
     fontWeight: 500,
     fontSize: '1.75rem',
-    lineHeight: '2.625',
+    lineHeight: '2.625rem',
   },
   '.font-title-medium-md': {
     fontWeight: 500,
@@ -25,7 +25,7 @@ module.exports = {
   '.font-body-regular-sm': {
     fontWeight: 400,
     fontSize: '0.875rem',
-    lineHeight: '1.5rem',
+    lineHeight: '1.25rem',
   },
 
   // Button
@@ -46,9 +46,14 @@ module.exports = {
     fontSize: '1rem',
     lineHeight: '1.5rem',
   },
-  '.font-caption-medium-sm': {
+  '.font-caption-medium-md': {
     fontWeight: 500,
     fontSize: '0.75rem',
-    lineHeight: '1.125',
+    lineHeight: '1.125rem',
+  },
+  '.font-caption-medium-sm': {
+    fontWeight: 500,
+    fontSize: '0.625rem',
+    lineHeight: '1rem',
   },
 };
