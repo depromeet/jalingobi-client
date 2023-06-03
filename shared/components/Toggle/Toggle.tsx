@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent } from 'react';
 
 interface ToggleProps {
   checked: boolean;
@@ -16,32 +16,44 @@ export function Toggle({
   const width = getStyleClassNamesBySize(size);
 
   return (
-    <label className={`relative inline-flex items-center cursor-pointer aspect-video ${className}`} style={{ width }} >
-      <input type="checkbox" checked={checked} className="sr-only peer" onClick={onChange} />
-      <div className={`
-        w-[100%]
+    <button
+      type="button"
+      className={`relative inline-flex aspect-video cursor-pointer items-center ${className}`}
+      style={{ width }}
+    >
+      <input
+        type="checkbox"
+        id="toggle"
+        checked={checked}
+        className="peer sr-only"
+        onClick={onChange}
+      />
+      <div
+        className={`
+        peer
         h-[100%]
 
-        bg-gray-30
+        w-[100%]
         rounded-full
 
-        peer
-        peer-focus:outline-none
+        bg-gray-30
+        after:absolute
+        after:left-[6%]
+        after:top-[7.5%]
+        after:h-[85%]
+
+        after:w-[48%]
+        after:rounded-full
+        after:bg-white
+        after:transition-all
+        after:content-['']
         peer-checked:bg-primary
         peer-checked:after:translate-x-[85%]
         peer-checked:after:border-white
-
-        after:w-[48%]
-        after:h-[85%]
-        after:content-['']
-        after:absolute
-        after:top-[7.5%]
-        after:left-[6%]
-        after:bg-white
-        after:rounded-full
-        after:transition-all
-      `}/>
-    </label>
+        peer-focus:outline-none
+      `}
+      />
+    </button>
   );
 }
 
