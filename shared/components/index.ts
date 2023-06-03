@@ -1,4 +1,5 @@
-import Spacing from './Spacing';
-import { Tooltip } from './Tooltip';
+import { BottomSheet } from './bottom-sheet';
+import Spacing from './spacing';
+import { Tooltip } from './tooltip';
 
-export { Tooltip, Spacing };
+export { Tooltip, Spacing, BottomSheet };

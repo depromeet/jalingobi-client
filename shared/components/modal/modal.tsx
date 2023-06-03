@@ -4,7 +4,6 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { IconCancel } from '@/public/svgs';
@@ -58,7 +57,6 @@ const Content = React.forwardRef<
       {children}
       <DialogPrimitive.Close className="ring-offset-background  data-[state=open]:text-muted-foreground 2 absolute right-[20px] top-[25px] rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-accent">
         <IconCancel className=" h-[20px] w-[20px] stroke-gray-50" />
-        <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
