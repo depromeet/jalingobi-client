@@ -1,67 +1,39 @@
-import React, { ChangeEvent, useState } from 'react';
+import * as React from 'react';
 
-interface TextFieldsProps {
+import { cva } from 'class-variance-authority';
+
+import { Input, TextArea } from './Input/input';
+
+const textFieldVariants = cva('relative resize-none rounded-lg bg-white', {
+  variants: {
+    variant: {
+      default: '',
+      price: '',
+      memo: '',
+      comment: '',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
+
+interface TextFieldProps {
   value: string;
-  className?: string;
-  size?: 'lg' | 'sm';
-  placeholder?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  variant: 'default' | 'price' | 'memo' | 'comment';
 }
 
-export function TextFields({
-  value,
-  onChange,
-  size = 'sm',
-  placeholder = '',
-  className,
-}: TextFieldsProps) {
-  const [inputValue, setInputValue] = useState(value);
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-    onChange(e);
-  };
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const width = getStyleClassNamesBySize(size);
-  const inputStyle = {
-    width,
-    color: '#1E1E1E',
-  };
-
-  const placeholderStyle = {
-    color: isFocused ? '#C7C7D0' : '#1E1E1E',
-  };
-
+const TextField = ({ value, variant }: TextFieldProps) => {
   return (
-    <div>
-      <input
-        type="text"
-        value={inputValue}
-        className={`rounded ${className}`}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        placeholder={`${placeholder}`}
-        style={inputStyle}
-      />
+    <div className="relative h-[44px] w-[335px] rounded-lg bg-white">
+      {variant !== 'memo' ? (
+        <Input variant={variant} />
+      ) : (
+        <TextArea variant={variant} />
+      )}
     </div>
   );
-}
+};
+TextField.displayName = 'TextField';
 
-function getStyleClassNamesBySize(size: TextFieldsProps['size']) {
-  if (size === 'sm') {
-    return '150px';
-  }
-
-  return '325px';
-}
+export { TextField, textFieldVariants };
