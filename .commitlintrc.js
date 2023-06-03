@@ -14,6 +14,7 @@ module.exports = {
         'perf',
         'refactor',
         'revert',
+        'lint',
         'style',
         'test',
         'add',
