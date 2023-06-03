@@ -47,6 +47,16 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/react-in-jsx-scope': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: [],
+        labelAttributes: [],
+        controlComponents: [],
+        assert: 'either',
+        depth: 3,
+      },
+    ],
 
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
