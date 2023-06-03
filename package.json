@@ -47,7 +47,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
     "postcss": "8.4.22",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.3.0",
@@ -56,7 +57,15 @@
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "5.0.4"
   },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
