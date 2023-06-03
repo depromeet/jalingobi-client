@@ -12,7 +12,7 @@ export function TextFields({
   value,
   onChange,
   size = 'sm',
-  placeholder = '이름을 입력해주세요',
+  placeholder = '',
   className,
 }: TextFieldsProps) {
   const [inputValue, setInputValue] = useState(value);
