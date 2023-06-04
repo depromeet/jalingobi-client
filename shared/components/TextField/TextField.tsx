@@ -25,7 +25,7 @@ interface TextFieldProps {
 
 const TextField = ({ value, variant }: TextFieldProps) => {
   return (
-    <div className="relative h-[44px] w-[335px] rounded-lg bg-white">
+    <div className="relative w-[335px] rounded-lg bg-white">
       {variant !== 'memo' ? (
         <Input variant={variant} />
       ) : (
