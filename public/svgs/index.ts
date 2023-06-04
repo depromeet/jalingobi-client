@@ -12,6 +12,7 @@ import IconPolygonDown from './icon-polygon-down.svg';
 import IconPolygonUp from './icon-polygon-up.svg';
 import IconSearch from './icon-search.svg';
 import IconUser from './icon-user.svg';
+import IconVector from './icon-vector.svg';
 
 export {
   IconAdd,
@@ -28,4 +29,5 @@ export {
   IconUser,
   IconPolygonDown,
   IconPolygonUp,
+  IconVector,
 };
