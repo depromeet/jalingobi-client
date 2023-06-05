@@ -1,12 +1,20 @@
-import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 
-import { GlobalLayout } from '../shared/components/layout';
+import { GlobalLayout } from '@/shared/components/layout';
+import { NextPageWithLayout } from '@/shared/types/layout';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
+import '@/styles/globals.css';
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
+  return getLayout(
     <GlobalLayout>
       <Component {...pageProps} />
-    </GlobalLayout>
+    </GlobalLayout>,
   );
 }
