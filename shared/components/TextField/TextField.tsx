@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { cva } from 'class-variance-authority';
-
 import { Input, TextArea } from './Input/input';
+
+// eslint-disable-next-line import/order
+import { cva } from 'class-variance-authority';
 
 const textFieldVariants = cva('relative resize-none rounded-lg bg-white', {
   variants: {

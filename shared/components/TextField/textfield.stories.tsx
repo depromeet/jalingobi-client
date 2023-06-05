@@ -1,4 +1,3 @@
-// textfield.stories.ts|tsx
 import { Meta, StoryObj } from '@storybook/react';
 
 import { TextField } from './textfield';

@@ -91,7 +91,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <div className="absolute right-5 top-1/2 w-[26px] -translate-y-1/2 transform text-sm text-[#9EA3AD]">
           <InputLabel value={text} variant={variant} />
-          {variant === 'comment' ? <IconVector /> : '12'}
+          {variant === 'comment' ? <IconVector /> : ''}
         </div>
       </label>
     );
