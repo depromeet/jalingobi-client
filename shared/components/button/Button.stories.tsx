@@ -2,8 +2,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { IconAdd } from '@/public/svgs';
-import { Button } from '@/shared/components/ui/button/Button';
+import { IconSearch } from '@/public/svgs';
+import { Button } from '@/shared/components/button';
 
 const meta: Meta<typeof Button> = {
   title: 'ButtonTest',
@@ -26,10 +26,10 @@ export const WithIcon: Story = {
     variant: 'contained',
     size: 'md',
     children: (
-      <div className="flex">
-        <IconAdd />
-        Button labeled
-      </div>
+      <>
+        <IconSearch className="mr-1 h-6 w-6" />
+        Button Label
+      </>
     ),
   },
 };
