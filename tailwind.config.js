@@ -1,16 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin');
 
-const color = require('./styles/tailwind/color');
-const typography = require('./styles/tailwind/typography');
+const color = require('./src/styles/tailwind/color');
+const typography = require('./src/styles/tailwind/typography');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './shared/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
-    './shared/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./public/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       backgroundImage: {

@@ -8,12 +8,12 @@ interface Props {
 const pretendard = localFont({
   src: [
     {
-      path: '../../../public/fonts/Pretendard-Regular.woff2',
+      path: '../../../../public/fonts/Pretendard-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../../public/fonts/Pretendard-Medium.woff2',
+      path: '../../../../public/fonts/Pretendard-Medium.woff2',
       weight: '500',
       style: 'normal',
     },
