@@ -9,7 +9,9 @@ interface GlobalLayoutProps {
 export default function GlobalLayout({ children }: GlobalLayoutProps) {
   return (
     <ApplyingFont>
-      <div className="mx-auto my-0 h-screen w-[335px]">{children}</div>
+      <div className="mx-auto my-0 h-screen w-full max-w-[600px]">
+        {children}
+      </div>
     </ApplyingFont>
   );
 }
