@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { TextField } from './textfield';
+import { TextField } from './textField';
 
 export default {
   title: 'TextField',

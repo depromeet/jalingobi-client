@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { IconVector } from '@/public/svgs';
+import { IconArrowUpFill } from '@/public/svgs';
 
 const inputVariants = cva(
   'w-[265px] rounded-lg border-transparent bg-white text-xs text-black caret-[#FF916F] focus:outline-none',
@@ -29,8 +29,14 @@ export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     VariantProps<typeof inputVariants> {}
 
-const InputLabel = ({ value, variant }: { value: string; variant: any }) => {
-  const getDisplayText = (variant: string) => {
+const InputLabel = ({
+  value,
+  variant,
+}: {
+  value: string;
+  variant: string | null | undefined;
+}) => {
+  const getDisplayText = (variant: string | null | undefined) => {
     if (variant === 'default') {
       return `/16`;
     }
@@ -48,11 +54,13 @@ const InputLabel = ({ value, variant }: { value: string; variant: any }) => {
 
   return (
     <div>
-      <span className={`text-${value.length > 0 ? 'black' : 'gray'}`}>
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {variant === 'default' || variant === 'memo' ? `${value}`.length : ''}
-      </span>
-      <span className={`${variant === 'price' ? 'px-3' : ''}`}>
+      {variant === 'default' ||
+        (variant === 'memo' && (
+          <span className={`text-${value.length > 0 ? 'black' : 'gray'}`}>
+            {value.length}
+          </span>
+        ))}
+      <span className={`${variant === 'price' && 'px-3'}`}>
         {getDisplayText(variant)}
       </span>
     </div>
@@ -91,7 +99,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <div className="absolute right-5 top-1/2 w-[26px] -translate-y-1/2 transform text-sm text-[#9EA3AD]">
           <InputLabel value={text} variant={variant} />
-          {variant === 'comment' ? <IconVector /> : ''}
+          {variant === 'comment' ? <IconArrowUpFill /> : ''}
         </div>
       </label>
     );
@@ -120,7 +128,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         />
         <div className="absolute bottom-[16px] right-5 w-[26px] -translate-y-1/2 transform text-sm text-[#9EA3AD]">
           <InputLabel value={text} variant={variant} />
-          {variant === 'comment' ? <IconVector /> : ''}
+          {variant === 'comment' ? <IconArrowUpFill /> : ''}
         </div>
       </div>
     );
