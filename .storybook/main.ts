@@ -21,7 +21,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
 
     const imageRule = config.module.rules.find((rule) => {
