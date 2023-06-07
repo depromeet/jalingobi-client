@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Input, TextArea } from './Input/input';
+import { Input, TextArea } from './Input/Input';
 
 // eslint-disable-next-line import/order
 import { cva } from 'class-variance-authority';
@@ -12,6 +12,7 @@ const textFieldVariants = cva('relative resize-none rounded-lg bg-white', {
       price: '',
       memo: '',
       comment: '',
+      custom: '',
     },
   },
   defaultVariants: {
@@ -22,15 +23,16 @@ const textFieldVariants = cva('relative resize-none rounded-lg bg-white', {
 interface TextFieldProps {
   value: string;
   variant: 'default' | 'price' | 'memo' | 'comment';
+  displayText: string | undefined;
 }
 
-const TextField = ({ value, variant }: TextFieldProps) => {
+const TextField = ({ value, variant, displayText }: TextFieldProps) => {
   return (
     <div className="relative w-[335px] rounded-lg bg-white">
       {variant !== 'memo' ? (
-        <Input variant={variant} />
+        <Input variant={variant} displayText={displayText} />
       ) : (
-        <TextArea variant={variant} />
+        <TextArea variant={variant} displayText={displayText} />
       )}
     </div>
   );

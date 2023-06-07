@@ -23,54 +23,60 @@ const inputVariants = cva(
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  displayText: string | undefined;
+}
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  displayText: string | undefined;
+}
 
-const InputLabel = ({
-  value,
-  variant,
-}: {
+export interface DivProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof inputVariants> {
   value: string;
-  variant: string | null | undefined;
-}) => {
-  const getDisplayText = (variant: string | null | undefined) => {
-    if (variant === 'default') {
-      return `/16`;
-    }
-    if (variant === 'price') {
-      return ` 원`;
-    }
-    if (variant === 'memo') {
-      return `/80`;
-    }
-    if (variant === 'comment') {
-      return ``;
-    }
-    return ``;
-  };
+  displayText: string | undefined;
+}
 
-  return (
-    <div>
-      {variant === 'default' ||
-        (variant === 'memo' && (
+const InputLabel = React.forwardRef<HTMLDivElement, DivProps>(
+  ({ value, displayText, className, variant, ...props }, ref) => {
+    return (
+      <div>
+        {(variant === 'default' || variant === 'memo') && (
           <span className={`text-${value.length > 0 ? 'black' : 'gray'}`}>
             {value.length}
           </span>
-        ))}
-      <span className={`${variant === 'price' && 'px-3'}`}>
-        {getDisplayText(variant)}
-      </span>
-    </div>
-  );
+        )}
+        <span className={`${variant === 'price' && 'px-3'}`}>
+          {displayText}
+        </span>
+      </div>
+    );
+  },
+);
+InputLabel.displayName = 'InputLabel';
+
+const getDisplayTextByVariant = (variant: string | null | undefined) => {
+  if (variant === 'default') {
+    return `/16`;
+  }
+  if (variant === 'price') {
+    return ` 원`;
+  }
+  if (variant === 'memo') {
+    return `/80`;
+  }
+  if (variant === 'comment') {
+    return ``;
+  }
+  return ``;
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant, ...props }, ref) => {
-    const [_text, setText] = React.useState(props.value || '');
-    const text = _text as string;
+  ({ displayText, className, variant, ...props }, ref) => {
+    const [text, setText] = React.useState('');
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setText(e.target.value);
       if (props.onChange) {
@@ -87,6 +93,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return numericValue.toLocaleString();
     };
 
+    const displayTextValue = displayText || getDisplayTextByVariant(variant);
+
     return (
       <label className="left-5 top-5 h-11 w-[271px] px-3 pl-3 pr-4 text-black caret-[#FF916F]">
         <input
@@ -98,7 +106,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         <div className="absolute right-5 top-1/2 w-[26px] -translate-y-1/2 transform text-sm text-[#9EA3AD]">
-          <InputLabel value={text} variant={variant} />
+          <InputLabel
+            value={text}
+            displayText={displayTextValue}
+            variant={variant}
+          />
           {variant === 'comment' ? <IconArrowUpFill /> : ''}
         </div>
       </label>
@@ -108,15 +120,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = 'Input';
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, variant, ...props }, ref) => {
-    const [_text, setText] = React.useState(props.value || '');
-    const text = _text as string;
+  ({ displayText, className, variant, ...props }, ref) => {
+    const [text, setText] = React.useState('');
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setText(e.target.value);
       if (props.onChange) {
         props.onChange(e);
       }
     };
+
+    const displayTextValue = displayText || getDisplayTextByVariant(variant);
     return (
       <div>
         <textarea
@@ -127,7 +140,11 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
         />
         <div className="absolute bottom-[16px] right-5 w-[26px] -translate-y-1/2 transform text-sm text-[#9EA3AD]">
-          <InputLabel value={text} variant={variant} />
+          <InputLabel
+            value={text}
+            displayText={displayTextValue}
+            variant={variant}
+          />
           {variant === 'comment' ? <IconArrowUpFill /> : ''}
         </div>
       </div>

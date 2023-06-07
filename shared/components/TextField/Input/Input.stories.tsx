@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Input, TextArea } from './input';
+import { Input, TextArea } from './Input';
 
 export default {
   title: 'Input',
@@ -36,4 +36,12 @@ export const Comment: InputStory = {
     variant: 'comment',
   },
   render: (args) => <Input {...args} placeholder="댓글을 남겨보세요" />,
+};
+
+export const DefaultCustom: InputStory = {
+  args: {
+    variant: 'default',
+    displayText: 'custom',
+  },
+  render: (args) => <Input {...args} placeholder="이름을 입력해주세요" />,
 };
