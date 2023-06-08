@@ -35,7 +35,8 @@ module.exports = {
     'no-shadow': 'off',
     'no-alert': 'off',
     'no-param-reassign': 'off',
-
+    'react-hooks/exhaustive-deps': 'off',
+    'react/no-array-index-key': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-filename-extension': [
       1,
