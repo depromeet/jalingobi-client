@@ -1,5 +1,6 @@
 import IconAddCircle from './icon-add-circle.svg';
 import IconAdd from './icon-add.svg';
+import IconArrowUpFill from './icon-arrow-up-fill.svg';
 import IconCancel from './icon-cancel.svg';
 import IconChat from './icon-chat.svg';
 import IconChevronDown from './icon-chevron-down.svg';
@@ -28,4 +29,5 @@ export {
   IconUser,
   IconPolygonDown,
   IconPolygonUp,
+  IconArrowUpFill,
 };
