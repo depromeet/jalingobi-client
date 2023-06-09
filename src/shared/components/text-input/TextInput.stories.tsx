@@ -2,7 +2,7 @@ import type { StoryObj } from '@storybook/react';
 import { Meta } from '@storybook/react';
 
 import { IconArrowUpFill } from '@/public/svgs';
-import { TextInput } from 'shared/components/molecules/text-input';
+import { TextInput } from '@/shared/components/text-input/TextInput';
 
 type Story = StoryObj<typeof TextInput>;
 

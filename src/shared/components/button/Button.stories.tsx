@@ -3,7 +3,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { IconSearch } from '@/public/svgs';
-import { Button } from '@/shared/components/button';
+import { Button } from '@/shared/components/button/Button';
 
 const meta: Meta<typeof Button> = {
   title: 'ButtonTest',

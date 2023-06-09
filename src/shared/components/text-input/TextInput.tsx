@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { cn } from '@/lib/utils';
-import { Input } from '@/shared/components/atoms/input';
+import { Input } from '@/shared/components/input';
 
 type StylesNames = {
   rightSection: string;

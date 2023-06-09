@@ -5,8 +5,8 @@ import { ReactNode } from 'react';
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
+import { cn } from '@/lib/utils';
 import { IconPolygonDown } from '@/public/svgs';
-import { cn } from '@/shared/utils';
 
 const { Provider } = TooltipPrimitive;
 
