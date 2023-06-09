@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
-  stories: ['../shared/components/ui/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../shared/components/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -21,7 +21,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
 
     const imageRule = config.module.rules.find((rule) => {
