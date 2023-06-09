@@ -4,12 +4,12 @@ interface ToggleProps {
   checked: boolean;
   className?: string;
   size?: 'lg' | 'sm';
-  onChange: (e: MouseEvent<HTMLInputElement>) => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export function Toggle({
   checked,
-  onChange,
+  onClick,
   size = 'sm',
   className,
 }: ToggleProps) {
@@ -18,15 +18,16 @@ export function Toggle({
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`relative inline-flex aspect-video cursor-pointer items-center ${className}`}
       style={{ width }}
     >
       <input
         type="checkbox"
         id="toggle"
+        readOnly
         checked={checked}
         className="peer sr-only"
-        onClick={onChange}
       />
       <div
         className={`
