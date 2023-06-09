@@ -101,10 +101,10 @@ interface ModalProps {
           <Spacing height={20} />
           <div className="font-body-regular-lg flex items-center justify-center">
             <p className="text-primary">
-              {transferToCurrencyForm(37000, '원')}
+              {convertNumberToCurrency(37000, '원')}
             </p>
             <p className="text-gray-60">
-              &nbsp;/ {transferToCurrencyForm(100000, '원')}
+              &nbsp;/ {convertNumberToCurrency(100000, '원')}
             </p>
           </div>
         </div>
