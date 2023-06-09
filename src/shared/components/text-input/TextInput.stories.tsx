@@ -15,8 +15,7 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    maxLength: 8,
-    countLength: true,
+    countLength: 8,
     placeholder: '이름을 입력해주세요',
   },
 };
