@@ -15,6 +15,7 @@
     "chromatic": "npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.0",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.6",
     "class-variance-authority": "^0.6.0",
@@ -23,8 +24,10 @@
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.44.3",
     "tailwind-merge": "^1.13.0",
-    "tailwindcss-animate": "^1.0.5"
+    "tailwindcss-animate": "^1.0.5",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
