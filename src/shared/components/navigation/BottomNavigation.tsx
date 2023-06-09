@@ -23,8 +23,8 @@ export default function BottomNavigation() {
     currentUrl: string;
   }) => {
     return currentUrl.includes(conditionalUrl)
-      ? 'stroke-primary'
-      : 'stroke-gray-50';
+      ? 'stroke-primary fill-none'
+      : 'stroke-gray-50 fill-none';
   };
 
   const getTextStyle = ({
