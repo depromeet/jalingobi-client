@@ -24,6 +24,13 @@ const AchievementOfChallengeInformation = ({
     unitOfCurrency: '원',
   });
 
+  const getDueDayPhrase = (dueDay: number) => {
+    if (dueDay !== 1) {
+      return `${dueDay}일 남았어요`;
+    }
+    return '오늘이 마지막 날이에요';
+  };
+
   return (
     <div className="h-15 w-full px-5 py-2.5">
       <div>
@@ -34,7 +41,9 @@ const AchievementOfChallengeInformation = ({
             </p>
             <p className="font-body-regular-lg text-gray-60">{`/${convertedGoalCharge}`}</p>
           </div>
-          <p className="font-body-regular-sm text-gray-50">{`${dueDay}일 남았어요`}</p>
+          <p className="font-body-regular-sm text-gray-50">
+            {getDueDayPhrase(dueDay)}
+          </p>
         </div>
         <ProgressBar percent={percent} />
       </div>
@@ -54,7 +63,6 @@ const ProgressBar = ({ percent }: ProgressBarProp) => {
     if (percent > 60 && percent <= 90) {
       return 'bg-primary';
     }
-    // TODO: system-danger값 확인 이후에 변경 필요하면 변경 필요
     if (percent > 90 && percent <= 100) {
       return 'bg-system-danger';
     }
