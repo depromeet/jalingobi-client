@@ -6,30 +6,36 @@ import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 
-interface MyFeedProps {
+interface OthersFeedProps {
   recordId: number;
-  title: string;
   price: number;
+  currentCharge: number;
+  nickname: string;
+  title: string;
   content: string;
   recordDate: string;
-  challengeImgUrl: string;
-  challengeTitle: string;
+  profileImgUrl: string;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
 }
 
-const MyFeed = ({
+const OthersFeed = ({
   recordId,
-  title,
   price,
+  currentCharge,
+  profileImgUrl,
+  nickname,
+  recordImgUrl,
+  title,
   content,
   recordDate,
-  challengeImgUrl,
-  challengeTitle,
-  recordImgUrl,
   onClickFeed,
-}: MyFeedProps) => {
+}: OthersFeedProps) => {
   const convertedDate = dayjs(recordDate).format('a hh:mm');
+  const convertedCurrentCharge = convertNumberToCurrency({
+    value: currentCharge,
+    unitOfCurrency: '원',
+  });
   const convertedPrice = convertNumberToCurrency({
     value: price,
     unitOfCurrency: '원',
@@ -44,10 +50,21 @@ const MyFeed = ({
     }
     return '';
   };
-
   return (
-    <div className="flex justify-end">
+    <div className="flex gap-[10px]">
+      <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
+        <Image src={profileImgUrl} alt="" fill />
+      </div>
       <div>
+        <div className="flex items-center gap-[4px]">
+          <p className="font-body-regular-sm w-40 truncate font-[600] text-black">
+            {nickname}
+          </p>
+          <p className="font-caption-medium-md text-gray-50 ">
+            {convertedCurrentCharge}
+          </p>
+        </div>
+        <Spacing height={8} />
         {recordImgUrl && (
           <>
             <div
@@ -81,23 +98,16 @@ const MyFeed = ({
             <p className="font-caption-medium-md truncate text-gray-50">
               {content}
             </p>
-            <Spacing height={5} />
-            <div className="flex gap-[5px]">
-              <div className="relative h-[1.125rem] w-[1.125rem]">
-                <Image src={challengeImgUrl} alt="" fill />
-              </div>
-              <p className="font-caption-medium-md w-44 truncate text-gray-60">
-                {challengeTitle}
-              </p>
-            </div>
           </div>
-          <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
-            {getKoreanDate(convertedDate)}
-          </p>
+          <div className="absolute bottom-0 left-[14rem] flex">
+            <p className="font-caption-medium-sm shrink-0 text-gray-50">
+              {getKoreanDate(convertedDate)}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export { MyFeed };
+export { OthersFeed };
