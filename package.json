@@ -58,6 +58,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
+    "openapi-typescript": "^6.2.6",
     "postcss": "8.4.22",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.3.0",
