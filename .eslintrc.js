@@ -26,6 +26,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    'global-require': 'off',
     'no-use-before-define': [
       'error',
       {
