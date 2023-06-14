@@ -1,9 +1,26 @@
 import type { AppProps } from 'next/app';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import '@/styles/globals.css';
+
 import { GlobalLayout } from '@/shared/components/layout';
 import { NextPageWithLayout } from '@/shared/types/layout';
 
-import '@/styles/globals.css';
+if (process.env.NODE_ENV === 'development') {
+  const isServer = typeof window === 'undefined';
+  if (isServer) {
+    (async () => {
+      const { server } = await import('../mocks/server');
+      server.listen();
+    })();
+  } else {
+    (async () => {
+      const { worker } = await import('../mocks/browser');
+      worker.start();
+    })();
+  }
+}
+const queryClient = new QueryClient();
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -13,8 +30,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return getLayout(
-    <GlobalLayout>
-      <Component {...pageProps} />
-    </GlobalLayout>,
+    <QueryClientProvider client={queryClient}>
+      <GlobalLayout>
+        <Component {...pageProps} />
+      </GlobalLayout>
+    </QueryClientProvider>,
   );
 }
