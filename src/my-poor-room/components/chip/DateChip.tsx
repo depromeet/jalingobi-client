@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 interface DateChipProps {
-  date: string;
+  date: string | null;
 }
 
 export default function DateChip({ date }: DateChipProps) {
