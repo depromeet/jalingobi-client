@@ -1,4 +1,4 @@
-import { ApiResponse } from '@/types/api';
+import { ApiResponse } from '@/shared/types/api';
 
 export type UserChallengeResult = {
   PROCEEDING: number;
