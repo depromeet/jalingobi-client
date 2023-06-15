@@ -7,7 +7,7 @@ import { TextInput } from '@/shared/components/text-input/TextInput';
 type Story = StoryObj<typeof TextInput>;
 
 const meta: Meta<typeof TextInput> = {
-  title: '/input/TextInput',
+  title: 'Input/TextInput',
   component: TextInput,
 };
 
@@ -15,7 +15,7 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    countLength: 8,
+    maxLength: 8,
     placeholder: '이름을 입력해주세요',
   },
 };
@@ -24,6 +24,9 @@ export const Price: Story = {
   args: {
     rightSection: <span>원</span>,
     placeholder: '0',
+    classNames: {
+      input: 'text-right',
+    },
   },
 };
 
