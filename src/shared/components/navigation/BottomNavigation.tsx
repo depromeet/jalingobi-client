@@ -10,7 +10,6 @@ import {
   IconUser,
 } from '@/public/svgs';
 
-// TODO: url 이름을 합의로 도출하면 좋을 듯.
 export default function BottomNavigation() {
   const router = useRouter();
   const currentUrl = router.asPath;

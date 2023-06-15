@@ -12,6 +12,7 @@ import IconOverflow from './icon-overflow.svg';
 import IconPolygonDown from './icon-polygon-down.svg';
 import IconPolygonUp from './icon-polygon-up.svg';
 import IconSearch from './icon-search.svg';
+import IconTile from './icon-tile.svg';
 import IconUser from './icon-user.svg';
 
 export {
@@ -30,4 +31,5 @@ export {
   IconPolygonDown,
   IconPolygonUp,
   IconArrowUpFill,
+  IconTile,
 };
