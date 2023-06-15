@@ -20,4 +20,9 @@ export type User = {
   };
 };
 
+export type UserUpdateRequest = {
+  nickName: string;
+  profileImgUrl: string;
+};
+
 export type UserResponse = User & ApiResponse;
