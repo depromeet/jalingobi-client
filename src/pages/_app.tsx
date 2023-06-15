@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app';
+import '@/styles/globals.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import '@/styles/globals.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { GlobalLayout } from '@/shared/components/layout';
 import { NextPageWithLayout } from '@/shared/types/layout';
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <GlobalLayout>
         <Component {...pageProps} />
       </GlobalLayout>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>,
   );
 }
