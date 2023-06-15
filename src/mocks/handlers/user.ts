@@ -1,7 +1,9 @@
 import { rest } from 'msw';
 
+import { createURL } from '@/shared/utils/url';
+
 export const userHandlers = [
-  rest.get('/api/mypage', (req, res, ctx) => {
+  rest.get(createURL('/mypage'), (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -21,6 +23,18 @@ export const userHandlers = [
             COMPLETED: 0,
           },
         },
+      }),
+    );
+  }),
+
+  rest.patch(createURL('/mypage/profile'), (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        isSuccess: true,
+        code: 0,
+        message: '요청에 성공하였습니다.',
+        result: 'SUCCESS',
       }),
     );
   }),
