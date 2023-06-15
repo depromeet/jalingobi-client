@@ -10,7 +10,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         contained: 'bg-primary hover:bg-primary-dark disabled:bg-gray-30',
-        label: 'font-semibold text-gray-40 underline-offset-4',
+        label:
+          'font-semibold text-black underline-offset-4 disabled:text-gray-40',
       },
       size: {
         lg: 'h-12 w-[2rem] rounded-lg px-[2.5rem] py-3',
