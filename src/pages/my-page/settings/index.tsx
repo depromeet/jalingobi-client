@@ -5,7 +5,7 @@ import { IconArrowLeft, IconArrowRight } from '@/public/svgs';
 
 const ManagePage = () => {
   return (
-    <section>
+    <body>
       <header className="relative flex h-12 w-full items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
           <IconArrowLeft className="h-4 w-4" />
@@ -32,7 +32,7 @@ const ManagePage = () => {
           <span className="text-system-danger">회원탈퇴</span>
         </li>
       </ul>
-    </section>
+    </body>
   );
 };
 
