@@ -21,6 +21,7 @@ module.exports = {
         'update',
         'design',
         'remove',
+        'rename',
       ],
     ],
   },

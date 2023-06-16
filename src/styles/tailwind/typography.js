@@ -1,15 +1,17 @@
 module.exports = {
-  // Title
+  // size-28 height-42
   '.font-title-medium-lg': {
     fontWeight: 500,
     fontSize: '1.75rem',
     lineHeight: '2.625rem',
   },
+  // size-20, height-30
   '.font-title-medium-md': {
     fontWeight: 500,
     fontSize: '1.25rem',
     lineHeight: '1.875rem',
   },
+  // size-18, height-28
   '.font-title-medium-sm': {
     fontWeight: 500,
     fontSize: '1.125rem',

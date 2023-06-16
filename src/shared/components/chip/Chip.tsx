@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-type ChipGroupProps = {
+type ChipGroupProps = React.HTMLAttributes<HTMLDivElement> & {
   children?: React.ReactNode;
   initialChips: string;
 };
@@ -19,7 +19,12 @@ const ChipGroupContext = React.createContext<ChipContext | undefined>(
   undefined,
 );
 
-function ChipGroup({ children, initialChips }: ChipGroupProps) {
+function ChipGroup({
+  children,
+  initialChips,
+  className,
+  ...props
+}: ChipGroupProps) {
   const [selectedChip, setSelectedChip] = React.useState(initialChips);
 
   const toggleChip = (chip: string) => {
@@ -37,13 +42,15 @@ function ChipGroup({ children, initialChips }: ChipGroupProps) {
 
   return (
     <ChipGroupContext.Provider value={contextValue}>
-      <div className="flex gap-x-[0.4rem]">{children}</div>
+      <div className={cn('flex gap-x-[0.4rem]', className)} {...props}>
+        {children}
+      </div>
     </ChipGroupContext.Provider>
   );
 }
 
 const chipVariants = cva(
-  'focus-visible:ring-ring ring-offset-background inline-flex items-center justify-center rounded-full px-1 py-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-full px-1 py-2 font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
