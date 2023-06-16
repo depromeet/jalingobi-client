@@ -51,7 +51,7 @@ const OthersFeed = ({
     return '';
   };
   return (
-    <div className="flex gap-[10px]">
+    <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
         <Image src={profileImgUrl} alt="" fill />
       </div>
@@ -106,7 +106,7 @@ const OthersFeed = ({
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

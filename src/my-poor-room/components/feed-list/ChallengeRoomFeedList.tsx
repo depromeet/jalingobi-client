@@ -4,8 +4,15 @@ import { Spacing } from '@/shared/components';
 
 import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
+import { OthersFeed } from '../feed/OthersFeed';
 
-interface IMyFeed {
+interface IChallengeFeed {
+  isMine: boolean;
+  userInfo: {
+    imgUrl: string;
+    nickname: string;
+    currentCharge: number;
+  };
   recordInfo: {
     id: number;
     imgUrl: string;
@@ -13,10 +20,6 @@ interface IMyFeed {
     content: string;
     price: number;
     date: string;
-  };
-  challengeInfo: {
-    imgUrl: string;
-    title: string;
   };
   emojiInfo: {
     selectedEmoji: string | null;
@@ -27,21 +30,22 @@ interface IMyFeed {
   };
 }
 
-// TODO: 시간대 한국으로 넘겨달라고 요청
 // MOCK
-const myFeedList: IMyFeed[] = [
+const challengeFeedList: IChallengeFeed[] = [
   {
+    isMine: true,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 27,
       imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀27',
+      title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-19T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-19T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -52,17 +56,19 @@ const myFeedList: IMyFeed[] = [
     },
   },
   {
+    isMine: false,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 28,
       imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀28',
+      title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-18T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-18T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -73,17 +79,19 @@ const myFeedList: IMyFeed[] = [
     },
   },
   {
+    isMine: false,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 29,
       imgUrl: '/images/떡볶이.jpg',
       title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-17T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-17T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -94,17 +102,19 @@ const myFeedList: IMyFeed[] = [
     },
   },
   {
+    isMine: true,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 30,
       imgUrl: '/images/떡볶이.jpg',
       title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-16T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-16T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -115,17 +125,19 @@ const myFeedList: IMyFeed[] = [
     },
   },
   {
+    isMine: false,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 31,
       imgUrl: '/images/떡볶이.jpg',
       title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-15T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-15T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -136,17 +148,19 @@ const myFeedList: IMyFeed[] = [
     },
   },
   {
+    isMine: false,
+    userInfo: {
+      imgUrl: '/images/avatar.png',
+      nickname: '사용자 닉네임',
+      currentCharge: 78000,
+    },
     recordInfo: {
       id: 32,
       imgUrl: '/images/떡볶이.jpg',
       title: '기록 타이틀',
       content: '기록 내용',
       price: 5000,
-      date: '2023-06-15T15:38:18.812',
-    },
-    challengeInfo: {
-      imgUrl: '/images/avatar.png',
-      title: '챌린지 타이틀',
+      date: '2023-06-15T15:34:50.756',
     },
     emojiInfo: {
       selectedEmoji: null,
@@ -158,30 +172,31 @@ const myFeedList: IMyFeed[] = [
   },
 ];
 
-export default function MyRoomFeedList() {
+export default function ChallengeRoomFeedList() {
   const feedRef = useRef<HTMLDivElement>(null);
 
   const [feedHeight, setFeedHeight] = useState<number>(0);
 
   const isDateChipVisible = ({
-    myFeedList,
+    challengeFeedList,
     index,
   }: {
-    myFeedList: IMyFeed[];
+    challengeFeedList: IChallengeFeed[];
     index: number;
   }) => {
-    const isLast = index === myFeedList.length - 1;
+    const isLast = index === challengeFeedList.length - 1;
 
     // TODO: 맨 위의 스크롤에 보이는 DateChip 조건에 대해서 고민해봐야 함.
     let nextRecordDate = null;
 
     // 마지막 요소가 아닌 경우 이전 recordDate 값을 설정
     if (!isLast) {
-      nextRecordDate = myFeedList[index + 1].recordInfo.date;
+      nextRecordDate = challengeFeedList[index + 1].recordInfo.date;
     }
 
     // 현재 요소의 recordDate와 다음 recordDate 비교
-    const isSameDate = myFeedList[index].recordInfo.date === nextRecordDate;
+    const isSameDate =
+      challengeFeedList[index].recordInfo.date === nextRecordDate;
 
     if (!isSameDate && !isLast) {
       return true;
@@ -221,28 +236,43 @@ export default function MyRoomFeedList() {
       className="overflow-y-auto bg-gray-10 px-5"
     >
       <ul className="flex flex-col-reverse">
-        {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
-          return (
-            <Fragment key={recordInfo.id}>
-              <MyFeed
-                recordId={recordInfo.id}
-                recordImgUrl={recordInfo.imgUrl}
-                title={recordInfo.title}
-                price={recordInfo.price}
-                content={recordInfo.content}
-                recordDate={recordInfo.date}
-                challengeImgUrl={challengeInfo.imgUrl}
-                challengeTitle={challengeInfo.title}
-                onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
-              />
-              {isDateChipVisible({ myFeedList, index }) ? (
-                <DateChip date={recordInfo.date} />
-              ) : (
-                <Spacing height={32} />
-              )}
-            </Fragment>
-          );
-        })}
+        {challengeFeedList.map(
+          ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
+            return (
+              <Fragment key={recordInfo.id}>
+                {isMine ? (
+                  <MyFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                  />
+                ) : (
+                  <OthersFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    profileImgUrl={userInfo.imgUrl}
+                    nickname={userInfo.nickname}
+                    currentCharge={userInfo.currentCharge}
+                    onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                  />
+                )}
+                {isDateChipVisible({ challengeFeedList, index }) ? (
+                  <DateChip date={recordInfo.date} />
+                ) : (
+                  <Spacing height={32} />
+                )}
+              </Fragment>
+            );
+          },
+        )}
       </ul>
     </div>
   );

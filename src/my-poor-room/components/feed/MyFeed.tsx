@@ -12,8 +12,8 @@ interface MyFeedProps {
   price: number;
   content: string;
   recordDate: string;
-  challengeImgUrl: string;
-  challengeTitle: string;
+  challengeImgUrl?: string;
+  challengeTitle?: string;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
 }
@@ -24,7 +24,7 @@ const MyFeed = ({
   price,
   content,
   recordDate,
-  challengeImgUrl,
+  challengeImgUrl = '',
   challengeTitle,
   recordImgUrl,
   onClickFeed,
@@ -34,6 +34,7 @@ const MyFeed = ({
     value: price,
     unitOfCurrency: '원',
   });
+  const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
 
   const getKoreanDate = (date: string) => {
     if (date.includes('am')) {
@@ -46,7 +47,7 @@ const MyFeed = ({
   };
 
   return (
-    <div className="flex justify-end">
+    <li className="flex justify-end">
       <div>
         {recordImgUrl && (
           <>
@@ -82,21 +83,23 @@ const MyFeed = ({
               {content}
             </p>
             <Spacing height={5} />
-            <div className="flex gap-[5px]">
-              <div className="relative h-[1.125rem] w-[1.125rem]">
-                <Image src={challengeImgUrl} alt="" fill />
+            {isChallengeExist && (
+              <div className="flex gap-[5px]">
+                <div className="relative h-[1.125rem] w-[1.125rem]">
+                  <Image src={challengeImgUrl} alt="" fill />
+                </div>
+                <p className="font-caption-medium-md w-44 truncate text-gray-60">
+                  {challengeTitle}
+                </p>
               </div>
-              <p className="font-caption-medium-md w-44 truncate text-gray-60">
-                {challengeTitle}
-              </p>
-            </div>
+            )}
           </div>
           <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
             {getKoreanDate(convertedDate)}
           </p>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
