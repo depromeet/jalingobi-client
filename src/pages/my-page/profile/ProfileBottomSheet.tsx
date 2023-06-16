@@ -22,13 +22,15 @@ const ProfileBottomSheet = ({ profileImage, handleImageUpload }: Props) => {
         <SheetTrigger asChild>
           <div>
             <div className="absolute -bottom-4 -right-4 h-11 w-11 rounded-full bg-gray-20" />
-            <Image
-              src={profileImage || ''}
-              alt="avatar"
-              width="90"
-              height="90"
-              className="rounded-xl"
-            />
+            {profileImage && (
+              <Image
+                src={profileImage}
+                alt="avatar"
+                width="90"
+                height="90"
+                className="rounded-xl"
+              />
+            )}
           </div>
         </SheetTrigger>
         <SheetContent
