@@ -1,10 +1,33 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
 
+interface IMyFeed {
+  recordInfo: {
+    id: number;
+    imgUrl: string;
+    title: string;
+    content: string;
+    price: number;
+    date: string;
+  };
+  challengeInfo: {
+    imgUrl: string;
+    title: string;
+  };
+  emojiInfo: {
+    selectedEmoji: string | null;
+    crazy: number;
+    regretful: number;
+    wellDone: number;
+    comment: number;
+  };
+}
+
 // TODO: 시간대 한국으로 넘겨달라고 요청
-const myFeedList = [
+// MOCK
+const myFeedList: IMyFeed[] = [
   {
     recordInfo: {
       id: 27,
@@ -133,12 +156,41 @@ const myFeedList = [
   },
 ];
 
-// TODO: 내일은 여기 리펙토링부터 작업하기
 export default function MyRoomFeedList() {
-  const feedRef = useRef<HTMLUListElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
 
   const [feedHeight, setFeedHeight] = useState<number>(0);
-  const [isFeedScrollable, setIsFeedScrollable] = useState<boolean>(false);
+
+  const isDateChipVisible = ({
+    myFeedList,
+    index,
+  }: {
+    myFeedList: IMyFeed[];
+    index: number;
+  }) => {
+    const isLast = index === myFeedList.length - 1;
+
+    // TODO: 맨 위의 스크롤에 보이는 DateChip 조건에 대해서 고민해봐야 함.
+    let nextRecordDate = null;
+
+    // 마지막 요소가 아닌 경우 이전 recordDate 값을 설정
+    if (!isLast) {
+      nextRecordDate = myFeedList[index + 1].recordInfo.date;
+    }
+
+    // 현재 요소의 recordDate와 다음 recordDate 비교
+    const isSameDate = myFeedList[index].recordInfo.date === nextRecordDate;
+
+    if (!isSameDate && !isLast) {
+      return true;
+    }
+
+    if (isLast) {
+      return true;
+    }
+
+    return false;
+  };
 
   // TODO: feed height 구하는게 짜쳐보이긴 하는데, sticky가 안먹어서 이렇게 해결해 봤어요. 좋은 해결방법 있으면 같이 해결해봐요 !
   useEffect(() => {
@@ -151,74 +203,26 @@ export default function MyRoomFeedList() {
     );
   }, []);
 
+  // scroll을 맨 아래로 내리는 로직입니다.
   useEffect(() => {
     if (!feedRef.current) {
       return;
     }
 
-    setIsFeedScrollable(
-      feedRef.current.scrollHeight > feedRef.current.clientHeight,
-    );
-  }, [feedHeight]);
-
-  // scroll이 가능하다면, scroll이 맨 아래로 내려가 있는 로직입니다.
-  useEffect(() => {
-    if (!isFeedScrollable || !feedRef.current) {
-      return;
-    }
-
     feedRef.current.scrollTop = feedRef.current.scrollHeight;
-  }, [isFeedScrollable]);
+  }, []);
 
   return (
-    <ul
+    <div
       ref={feedRef}
       style={{ height: `${feedHeight}px` }}
       className="overflow-y-auto bg-gray-10 px-5"
     >
-      {isFeedScrollable ? (
-        <div className="flex flex-col-reverse">
-          {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
-            const isLast = index === myFeedList.length - 1;
-
-            // TODO: 맨 위의 스크롤에 보이는 DateChip 조건에 대해서 고민해봐야 함.
-            let nextRecordDate = null;
-
-            // 마지막 요소가 아닌 경우 이전 recordDate 값을 설정
-            if (!isLast) {
-              nextRecordDate = myFeedList[index + 1].recordInfo.date;
-            }
-
-            // 현재 요소의 recordDate와 다음 recordDate 비교
-            const isSameDate = recordInfo.date === nextRecordDate;
-
-            return (
-              <Fragment key={recordInfo.id}>
-                <MyFeed
-                  recordId={recordInfo.id}
-                  recordImgUrl={recordInfo.imgUrl}
-                  title={recordInfo.title}
-                  price={recordInfo.price}
-                  content={recordInfo.content}
-                  recordDate={recordInfo.date}
-                  challengeImgUrl={challengeInfo.imgUrl}
-                  challengeTitle={challengeInfo.title}
-                  onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
-                />
-                {!isSameDate && !isLast && <DateChip date={recordInfo.date} />}
-                {isLast && <DateChip date={recordInfo.date} />}
-              </Fragment>
-            );
-          })}
-        </div>
-      ) : (
-        <>
-          {/* TODO: date를 가져오는 더 좋은 방법 없나 ? */}
-          <DateChip date={myFeedList[0].recordInfo.date} />
-          {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }) => {
-            return (
+      <ul className="flex flex-col-reverse">
+        {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
+          return (
+            <li key={recordInfo.id}>
               <MyFeed
-                key={recordInfo.id}
                 recordId={recordInfo.id}
                 recordImgUrl={recordInfo.imgUrl}
                 title={recordInfo.title}
@@ -229,10 +233,13 @@ export default function MyRoomFeedList() {
                 challengeTitle={challengeInfo.title}
                 onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
               />
-            );
-          })}
-        </>
-      )}
-    </ul>
+              {isDateChipVisible({ myFeedList, index }) && (
+                <DateChip date={recordInfo.date} />
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
