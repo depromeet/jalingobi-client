@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { UserChallengeResult } from '@/shared/types/user';
+import { UserChallengeResult } from '@/types/user';
 
 type Props = {
   board?: UserChallengeResult;

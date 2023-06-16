@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { IconArrowRight } from '@/public/svgs';
-import { Profile } from '@/shared/types/user';
+import { Profile } from '@/types/user';
 
 type Props = {
   profile?: Profile;
