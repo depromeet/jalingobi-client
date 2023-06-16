@@ -64,7 +64,7 @@ const Profile = () => {
   };
 
   return (
-    <body className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-5">
       <ProfileHeader hasChanged={hasChanged} />
       <ProfileBottomSheet
         profileImage={profileImage}
@@ -96,7 +96,7 @@ const Profile = () => {
           />
         </form>
       </Form>
-    </body>
+    </div>
   );
 };
 

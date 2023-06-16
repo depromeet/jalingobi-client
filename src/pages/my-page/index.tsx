@@ -13,7 +13,7 @@ export default function MyPage() {
   const [isNotificationOn, setIsNotificationOn] = useState(false);
 
   return (
-    <body>
+    <div className="px-5">
       <header className="mb-4 flex h-12 items-center justify-between">
         <span className="font-title-medium-md">마이페이지</span>
         <Link href="/my-page/settings">
@@ -64,7 +64,7 @@ export default function MyPage() {
           <span>1.0.0</span>
         </li>
       </ul>
-    </body>
+    </div>
   );
 }
 

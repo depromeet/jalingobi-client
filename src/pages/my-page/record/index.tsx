@@ -17,7 +17,7 @@ const RecordPage = () => {
   };
 
   return (
-    <section>
+    <div className="px-5">
       <header className="relative flex h-12 items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
           <IconArrowLeft className="h-4 w-4" />
@@ -76,7 +76,7 @@ const RecordPage = () => {
           </div>
         </li>
       </ul>
-    </section>
+    </div>
   );
 };
 
