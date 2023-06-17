@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}"
+    "chromatic": "npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}",
+    "generate:interface:own": "npx openapi-typescript https://jalingobi.com/v3/api-docs/%EC%9E%90%EB%A6%B0%EA%B3%A0%EB%B9%84%20API%20v1 --output ./src/lib/interfaces/api.interface.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
@@ -64,6 +65,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
+    "openapi-typescript": "^6.2.6",
     "msw": "^1.2.2",
     "postcss": "8.4.22",
     "prettier": "^2.8.7",
