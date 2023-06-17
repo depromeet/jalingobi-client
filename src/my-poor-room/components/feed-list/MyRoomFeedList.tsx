@@ -39,7 +39,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-19T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -60,7 +60,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-18T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -81,7 +81,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-17T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -102,7 +102,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-16T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -123,7 +123,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-15T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -144,7 +144,7 @@ const myFeedList: IMyFeed[] = [
       date: '2023-06-15T15:38:18.812',
     },
     challengeInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       title: '챌린지 타이틀',
     },
     emojiInfo: {
@@ -219,6 +219,7 @@ export default function MyRoomFeedList() {
       className="overflow-y-auto bg-gray-10 px-5"
     >
       <ul className="flex flex-col-reverse">
+        <Spacing height={32} />
         {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
           return (
             <Fragment key={recordInfo.id}>

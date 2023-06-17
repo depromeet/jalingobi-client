@@ -235,6 +235,7 @@ export default function ChallengeRoomFeedList() {
       className="overflow-y-auto bg-gray-10 px-5"
     >
       <ul className="flex flex-col-reverse">
+        <Spacing height={32} />
         {challengeFeedList.map(
           ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
             return (
