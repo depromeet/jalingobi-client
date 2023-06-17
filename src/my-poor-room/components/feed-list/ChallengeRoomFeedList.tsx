@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 
 import { Spacing } from '@/shared/components';
 
@@ -173,71 +173,46 @@ const challengeFeedList: IChallengeFeed[] = [
 ];
 
 export default function ChallengeRoomFeedList() {
-  const feedRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-  const [feedHeight, setFeedHeight] = useState<number>(0);
-
-  const isDateChipVisible = ({
-    challengeFeedList,
-    index,
+  const isFeedDateDifferent = ({
+    currentFeed,
+    nextFeed,
   }: {
-    challengeFeedList: IChallengeFeed[];
-    index: number;
+    currentFeed: IChallengeFeed;
+    nextFeed: IChallengeFeed;
   }) => {
-    const isLast = index === challengeFeedList.length - 1;
+    if (!nextFeed) return true; // if there is no next feed, show the DateChip
 
-    let nextRecordDate = null;
-
-    // 마지막 요소가 아닌 경우 이전 recordDate 값을 설정
-    if (!isLast) {
-      nextRecordDate = challengeFeedList[index + 1].recordInfo.date;
-    }
-
-    // 현재 요소의 recordDate와 다음 recordDate 비교
-    const isSameDate =
-      challengeFeedList[index].recordInfo.date === nextRecordDate;
-
-    if (!isSameDate && !isLast) {
-      return true;
-    }
-
-    if (isLast) {
-      return true;
-    }
-
-    return false;
-  };
-
-  // TODO: feed height 구하는게 짜쳐보이긴 하는데, sticky가 안먹어서 이렇게 해결해 봤어요. 좋은 해결방법 있으면 같이 해결해봐요 !
-  useEffect(() => {
-    if (!feedRef.current) {
-      return;
-    }
-    // 60은 bottom-nav의 height 이에요.
-    setFeedHeight(
-      window.innerHeight - feedRef.current.getBoundingClientRect().top - 60,
+    const currentDate = new Date(currentFeed.recordInfo.date).setHours(
+      0,
+      0,
+      0,
+      0,
     );
-  }, []);
+    const nextDate = new Date(nextFeed.recordInfo.date).setHours(0, 0, 0, 0);
+
+    return currentDate !== nextDate; // return true if the dates are different
+  };
 
   // scroll을 맨 아래로 내리는 로직입니다.
   useEffect(() => {
-    if (!feedRef.current) {
-      return;
-    }
-
-    feedRef.current.scrollTop = feedRef.current.scrollHeight;
-  }, []);
+    if (!bottomRef.current) return;
+    bottomRef.current.scrollIntoView();
+  }, [bottomRef.current]);
 
   return (
-    <div
-      ref={feedRef}
-      style={{ height: `${feedHeight}px` }}
-      className="overflow-y-auto bg-gray-10 px-5"
-    >
+    <div className="-z-10 overflow-y-auto bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {challengeFeedList.map(
           ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
+            const currentFeed = challengeFeedList[index];
+            const nextFeed = challengeFeedList[index + 1];
+            const isDateDifferent = isFeedDateDifferent({
+              currentFeed,
+              nextFeed,
+            });
             return (
               <Fragment key={recordInfo.id}>
                 {isMine ? (
@@ -264,7 +239,7 @@ export default function ChallengeRoomFeedList() {
                     onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
                   />
                 )}
-                {isDateChipVisible({ challengeFeedList, index }) ? (
+                {isDateDifferent ? (
                   <DateChip date={recordInfo.date} />
                 ) : (
                   <Spacing height={32} />
@@ -274,6 +249,7 @@ export default function ChallengeRoomFeedList() {
           },
         )}
       </ul>
+      <div ref={bottomRef} />
     </div>
   );
 }
