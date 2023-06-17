@@ -77,13 +77,14 @@ export default function ChallengeCategories() {
 
   return (
     <div className="relative flex h-[5.375rem] items-center ">
-      <div className="absolute right-0 flex h-full w-[4.375rem] items-center items-center justify-center">
+      <div className="absolute right-0 flex h-full w-[4.375rem] flex-col items-center justify-center gap-1">
         <div
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-20"
           onClick={handleClickIcon}
         >
           <IconTile />
         </div>
+        <p className="font-caption-medium-md text-gray-60">전체보기</p>
       </div>
       <div className="scrollbar-hide flex w-[calc(100vw-4.375rem)] overflow-auto">
         {categories.map(({ challengeId, imgUrl, title }) => {
