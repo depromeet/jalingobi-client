@@ -27,7 +27,6 @@ interface IMyFeed {
   };
 }
 
-// TODO: 시간대 한국으로 넘겨달라고 요청
 // MOCK
 const myFeedList: IMyFeed[] = [
   {
@@ -172,7 +171,6 @@ export default function MyRoomFeedList() {
   }) => {
     const isLast = index === myFeedList.length - 1;
 
-    // TODO: 맨 위의 스크롤에 보이는 DateChip 조건에 대해서 고민해봐야 함.
     let nextRecordDate = null;
 
     // 마지막 요소가 아닌 경우 이전 recordDate 값을 설정
