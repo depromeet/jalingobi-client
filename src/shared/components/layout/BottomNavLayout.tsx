@@ -10,10 +10,8 @@ interface BottomNavLayoutProps {
 export default function BottomNavLayout({ children }: BottomNavLayoutProps) {
   return (
     <div className="relative h-screen">
-      <div>{children}</div>
-      <div className="absolute bottom-0">
-        <BottomNavigation />
-      </div>
+      {children}
+      <BottomNavigation />
     </div>
   );
 }

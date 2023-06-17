@@ -18,7 +18,7 @@ export default function MyPoorRoom() {
 
   return (
     <div>
-      <div className="sticky top-0 bg-white">
+      <div className="sticky top-0 z-10 bg-white">
         <ChallengeCategories />
         {!isMyRoom && <ChallengeAchievement />}
       </div>
