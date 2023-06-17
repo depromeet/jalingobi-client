@@ -60,6 +60,7 @@ const MyFeed = ({
                 alt="피드 이미지"
                 fill
                 className="object-cover"
+                sizes="(max-width: 600px) 60vw"
               />
             </div>
             <Spacing height={6} />
@@ -86,7 +87,12 @@ const MyFeed = ({
             {isChallengeExist && (
               <div className="flex gap-[5px]">
                 <div className="relative h-[1.125rem] w-[1.125rem]">
-                  <Image src={challengeImgUrl} alt="" fill />
+                  <Image
+                    src={challengeImgUrl}
+                    alt=""
+                    fill
+                    sizes="(max-width: 600px) 10vw"
+                  />
                 </div>
                 <p className="font-caption-medium-md w-44 truncate text-gray-60">
                   {challengeTitle}

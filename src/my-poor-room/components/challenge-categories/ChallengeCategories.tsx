@@ -131,7 +131,7 @@ function ChallengeCategory({
             'border-2 border-solid border-primary  shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
         )}
       >
-        <Image src={imgUrl} alt="" fill />
+        <Image src={imgUrl} alt="" fill sizes="(max-width: 600px) 10vw" />
       </div>
       <p
         className={clsx(

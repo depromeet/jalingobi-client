@@ -76,6 +76,7 @@ const OthersFeed = ({
                 alt="피드 이미지"
                 fill
                 className="object-cover"
+                sizes="(max-width: 600px) 60vw"
               />
             </div>
             <Spacing height={6} />
