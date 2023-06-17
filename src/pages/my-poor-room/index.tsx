@@ -10,8 +10,6 @@ import {
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 
 export default function MyPoorRoom() {
-  // TODO: my room 여부 연동 필요
-
   const router = useRouter();
   const { challengeId } = router.query;
   const isMyRoom = !Number(challengeId);
