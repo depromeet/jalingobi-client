@@ -1,6 +1,6 @@
-interface ProgressBarProps {
+type ProgressBarProps = {
   percent: number;
-}
+};
 
 const ProgressBar = ({ percent }: ProgressBarProps) => {
   const getBarColor = (percent: number) => {

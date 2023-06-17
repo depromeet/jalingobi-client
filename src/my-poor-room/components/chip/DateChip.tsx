@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-interface DateChipProps {
+type DateChipProps = {
   date: string | null;
-}
+};
 
 export default function DateChip({ date }: DateChipProps) {
   const convertedDate = dayjs(date).format('YYYY년 M월 DD일');

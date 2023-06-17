@@ -6,7 +6,7 @@ import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 
-interface OthersFeedProps {
+type OthersFeedProps = {
   recordId: number;
   price: number;
   currentCharge: number;
@@ -17,7 +17,7 @@ interface OthersFeedProps {
   profileImgUrl: string;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
-}
+};
 
 const OthersFeed = ({
   recordId,

@@ -6,7 +6,7 @@ import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
 import { OthersFeed } from '../feed/OthersFeed';
 
-interface IChallengeFeed {
+type IChallengeFeed = {
   isMine: boolean;
   userInfo: {
     imgUrl: string;
@@ -28,7 +28,7 @@ interface IChallengeFeed {
     wellDone: number;
     comment: number;
   };
-}
+};
 
 // MOCK
 const challengeFeedList: IChallengeFeed[] = [

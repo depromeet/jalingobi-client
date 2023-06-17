@@ -5,7 +5,7 @@ import { Spacing } from '@/shared/components';
 
 import { MyFeed } from '../feed/MyFeed';
 
-interface IMyFeed {
+type IMyFeed = {
   recordInfo: {
     id: number;
     imgUrl: string;
@@ -25,7 +25,7 @@ interface IMyFeed {
     wellDone: number;
     comment: number;
   };
-}
+};
 
 // MOCK
 const myFeedList: IMyFeed[] = [

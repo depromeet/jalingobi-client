@@ -8,11 +8,11 @@ import { IconTile } from '@/public/svgs';
 
 import { ChallengeCategory } from './ChallengeCategory';
 
-interface ICategory {
+type ICategory = {
   challengeId: number;
   imgUrl: string;
   title: string;
-}
+};
 
 // Mock
 const categories: ICategory[] = [

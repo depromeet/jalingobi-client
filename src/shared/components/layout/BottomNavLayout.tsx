@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 
 import { BottomNavigation } from '../navigation';
 
-interface BottomNavLayoutProps {
+type BottomNavLayoutProps = {
   children: ReactNode;
-}
+};
 
 export default function BottomNavLayout({ children }: BottomNavLayoutProps) {
   return (

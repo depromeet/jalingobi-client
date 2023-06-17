@@ -1,7 +1,7 @@
-interface ConvertNumberToCurrencyProps {
+type ConvertNumberToCurrencyProps = {
   value: number;
   unitOfCurrency: string;
-}
+};
 /**
  *
  * @example

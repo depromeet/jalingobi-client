@@ -2,12 +2,12 @@ import { convertNumberToCurrency } from '@/shared/utils/currency';
 
 import { ProgressBar } from './Progressbar';
 
-interface IAchievement {
+type IAchievement = {
   goalCharge: number;
   currentCharge: number;
   percent: number;
   dueDay: number;
-}
+};
 
 // mock
 const achievement: IAchievement = {

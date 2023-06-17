@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 import clsx from 'clsx';
 
-interface ChallengeCategoryProps {
+type ChallengeCategoryProps = {
   challengeId: number;
   imgUrl: string;
   title: string;
   selected: boolean;
   onClick: (challengeId: number) => void;
-}
+};
 
 const ChallengeCategory = ({
   challengeId,
