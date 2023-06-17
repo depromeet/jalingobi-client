@@ -32,7 +32,7 @@ const BottomSheetOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm transition-all duration-100',
+      'fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
       className,
     )}
     {...props}
@@ -49,7 +49,7 @@ const Content = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'bg-background animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 grid gap-4 rounded-b-lg shadow-lg sm:max-w-lg sm:rounded-lg',
+        'bg-background fixed z-50 grid gap-4 rounded-b-lg shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:max-w-lg sm:rounded-lg sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0',
         className,
       )}
       {...props}
@@ -83,12 +83,12 @@ interface BottomSheetProps {
 /**
  *
  * @example
-  <BottomSheet trigger={<Button>trigger</Button>}>
-    <p className="text-black">프로필 설정</p>
-    <p className="text-black">텍스트를 입력하세요</p>
-    <p className="text-black">텍스트를 입력하세요</p>
-    <p className="text-black">텍스트를 입력하세요</p>
-  </BottomSheet>
+ <ProfileBottomSheet trigger={<Button>trigger</Button>}>
+ <p className="text-black">프로필 설정</p>
+ <p className="text-black">텍스트를 입력하세요</p>
+ <p className="text-black">텍스트를 입력하세요</p>
+ <p className="text-black">텍스트를 입력하세요</p>
+ </ProfileBottomSheet>
  */
 const BottomSheet = ({ trigger, children }: BottomSheetProps) => {
   return (

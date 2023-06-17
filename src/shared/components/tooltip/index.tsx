@@ -22,7 +22,7 @@ const Content = React.forwardRef<
     ref={ref}
     sideOffset={sideOffset}
     className={cn(
-      'bg-popover text-popover-foreground animate-in fade-in-50 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 z-50 overflow-hidden rounded-md px-3 py-1.5 text-sm',
+      'bg-popover text-popover-foreground z-50 overflow-hidden rounded-md px-3 py-1.5 text-sm animate-in fade-in-50 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1',
       className,
     )}
     {...props}

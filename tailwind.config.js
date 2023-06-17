@@ -21,6 +21,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwindcss-animate'),
     plugin(({ addComponents }) => {
       addComponents({ ...typography });
     }),

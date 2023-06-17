@@ -27,6 +27,7 @@ module.exports = {
   ignorePatterns: ['src/lib/interfaces/*'],
   rules: {
     'prettier/prettier': 'error',
+    'global-require': 'off',
     'no-use-before-define': [
       'error',
       {
