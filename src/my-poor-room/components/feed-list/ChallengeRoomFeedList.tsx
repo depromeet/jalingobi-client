@@ -35,7 +35,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: true,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -58,7 +58,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: false,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -81,7 +81,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: false,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -104,7 +104,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: true,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -127,7 +127,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: false,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -150,7 +150,7 @@ const challengeFeedList: IChallengeFeed[] = [
   {
     isMine: false,
     userInfo: {
-      imgUrl: '/images/avatar.png',
+      imgUrl: '/images/profile.png',
       nickname: '사용자 닉네임',
       currentCharge: 78000,
     },
@@ -195,14 +195,15 @@ export default function ChallengeRoomFeedList() {
     return currentDate !== nextDate; // return true if the dates are different
   };
 
-  // scroll을 맨 아래로 내리는 로직입니다.
   useEffect(() => {
-    if (!bottomRef.current) return;
+    if (!bottomRef.current) {
+      return;
+    }
     bottomRef.current.scrollIntoView();
   }, [bottomRef.current]);
 
   return (
-    <div className="-z-10 overflow-y-auto bg-gray-10 px-5">
+    <div className="-z-10 bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {challengeFeedList.map(

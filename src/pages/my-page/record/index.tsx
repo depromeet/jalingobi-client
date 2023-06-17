@@ -53,7 +53,7 @@ const RecordPage = () => {
         <li className="grid min-h-[130px] w-full grid-cols-4 rounded-md bg-gray-5">
           <div className="">
             <Image
-              src="/images/avatar.png"
+              src="/images/profile.png"
               width={54}
               height={54}
               alt="item"

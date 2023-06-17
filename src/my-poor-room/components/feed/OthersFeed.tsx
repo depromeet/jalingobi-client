@@ -53,7 +53,12 @@ const OthersFeed = ({
   return (
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
-        <Image src={profileImgUrl} alt="" fill />
+        <Image
+          src={profileImgUrl}
+          alt=""
+          fill
+          sizes="(max-width: 600px) 10vw"
+        />
       </div>
       <div>
         <div className="flex items-center gap-[4px]">

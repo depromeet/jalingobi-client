@@ -180,9 +180,10 @@ export default function MyRoomFeedList() {
     return currentDate !== nextDate; // return true if the dates are different
   };
 
-  // scroll을 맨 아래로 내리는 로직입니다.
   useEffect(() => {
-    if (!bottomRef.current) return;
+    if (!bottomRef.current) {
+      return;
+    }
     bottomRef.current.scrollIntoView();
   }, [bottomRef.current]);
 
