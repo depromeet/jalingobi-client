@@ -17,7 +17,7 @@ interface ICategory {
 const categories: ICategory[] = [
   {
     challengeId: 0,
-    title: 'room0',
+    title: '내 방',
     imgUrl: '/images/떡볶이.jpg',
   },
   {

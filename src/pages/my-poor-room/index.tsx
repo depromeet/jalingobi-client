@@ -1,6 +1,7 @@
+import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
-import { AchievementOfChallengeInformation } from '@/my-poor-room/components/achievement-of-challenge-information';
+import { ChallengeAchievement } from '@/my-poor-room/components/challenge-achievement';
 import { ChallengeCategories } from '@/my-poor-room/components/challenge-categories';
 import {
   ChallengeRoomFeedList,
@@ -10,21 +11,17 @@ import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 
 export default function MyPoorRoom() {
   // TODO: my room 여부 연동 필요
-  const isMyRoom = true;
+
+  const router = useRouter();
+  const { challengeId } = router.query;
+  const isMyRoom = !Number(challengeId);
 
   return (
     <div>
       <div className="sticky top-0 bg-white">
         <ChallengeCategories />
-        {/* TODO: challenge room에서만 제공 필요 */}
-        <AchievementOfChallengeInformation
-          goalCharge={100000}
-          currentCharge={42000}
-          percent={42}
-          dueDay={11}
-        />
+        {!isMyRoom && <ChallengeAchievement />}
       </div>
-      {/* TODO: 이것도 추상화 하면 좋을듯?  */}
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
     </div>
   );

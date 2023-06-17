@@ -1,19 +1,25 @@
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 
-/* eslint-disable no-use-before-define */
-interface AchievementOfChallengeInformationProps {
+import { ProgressBar } from './Progressbar';
+
+interface IAchievement {
   goalCharge: number;
   currentCharge: number;
   percent: number;
   dueDay: number;
 }
 
-const AchievementOfChallengeInformation = ({
-  goalCharge,
-  currentCharge,
-  percent,
-  dueDay,
-}: AchievementOfChallengeInformationProps) => {
+// mock
+const achievement: IAchievement = {
+  goalCharge: 100000,
+  currentCharge: 42000,
+  percent: 42,
+  dueDay: 11,
+};
+
+const ChallengeAchievement = () => {
+  const { goalCharge, currentCharge, percent, dueDay } = achievement;
+
   const convertedCurrentCharge = convertNumberToCurrency({
     value: currentCharge,
     unitOfCurrency: '원',
@@ -24,6 +30,7 @@ const AchievementOfChallengeInformation = ({
     unitOfCurrency: '원',
   });
 
+  // TODO: 동호님에게 이렇게 오는지 물어보기
   const getDueDayPhrase = (dueDay: number) => {
     if (dueDay !== 1) {
       return `${dueDay}일 남았어요`;
@@ -51,31 +58,4 @@ const AchievementOfChallengeInformation = ({
   );
 };
 
-interface ProgressBarProp {
-  percent: number;
-}
-
-const ProgressBar = ({ percent }: ProgressBarProp) => {
-  const getBarColor = (percent: number) => {
-    if (percent > 0 && percent <= 60) {
-      return 'bg-accent-dark';
-    }
-    if (percent > 60 && percent <= 90) {
-      return 'bg-primary';
-    }
-    if (percent > 90 && percent <= 100) {
-      return 'bg-system-danger';
-    }
-    return '';
-  };
-  return (
-    <div className="h-2 w-full rounded-full bg-gray-20">
-      <div
-        className={`h-2 rounded-full ${getBarColor(percent)}`}
-        style={{ width: `${percent}%` }}
-      />
-    </div>
-  );
-};
-
-export { AchievementOfChallengeInformation };
+export { ChallengeAchievement };
