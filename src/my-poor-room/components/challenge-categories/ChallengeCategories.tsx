@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 
+import { CHALLENGE_ID_MY_ROOM } from '@/my-poor-room/constants';
 import { IconTile } from '@/public/svgs';
 
 interface ICategory {
@@ -16,7 +17,7 @@ interface ICategory {
 // Mock
 const categories: ICategory[] = [
   {
-    challengeId: 0,
+    challengeId: CHALLENGE_ID_MY_ROOM,
     title: '내 방',
     imgUrl: '/images/떡볶이.jpg',
   },
