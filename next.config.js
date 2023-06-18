@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -28,6 +28,15 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/auth/kakao',
+        destination: 'https://jalingobi.com/auth/kakao', // Proxy to Backend
+      },
+    ];
+  },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
