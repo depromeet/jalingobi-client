@@ -27,7 +27,11 @@ export default function RedirectedKakao() {
     test();
   }, []);
 
-  return <button type="button">loading</button>;
+  return (
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-t-4 border-solid border-blue-500 border-gray-300" />
+    </div>
+  );
 }
 
 // export default function authKakao() {
