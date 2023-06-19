@@ -3,33 +3,13 @@ import { Fragment } from 'react';
 import { DateChip } from '@/my-poor-room/components/chip';
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
+import { isFeedDateDifferent } from '@/shared/utils/date';
+import { TMyFeed } from '@/types/feed';
 
 import { MyFeed } from '../feed/MyFeed';
 
-type IMyFeed = {
-  recordInfo: {
-    id: number;
-    imgUrl: string;
-    title: string;
-    content: string;
-    price: number;
-    date: string;
-  };
-  challengeInfo: {
-    imgUrl: string;
-    title: string;
-  };
-  emojiInfo: {
-    selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
-    comment: number;
-  };
-};
-
 // MOCK
-const myFeedList: IMyFeed[] = [
+const myFeedList: TMyFeed[] = [
   {
     recordInfo: {
       id: 27,
@@ -162,25 +142,6 @@ export default function MyRoomFeedList() {
   const { bottomRef } = useScrollToBottom();
 
   // TODO: 1. util 함수로 빼고, 2. 파일들 옮기고 3. export default -> export
-  const isFeedDateDifferent = ({
-    currentFeed,
-    nextFeed,
-  }: {
-    currentFeed: IMyFeed;
-    nextFeed: IMyFeed;
-  }) => {
-    if (!nextFeed) return true; // if there is no next feed, show the DateChip
-
-    const currentDate = new Date(currentFeed.recordInfo.date).setHours(
-      0,
-      0,
-      0,
-      0,
-    );
-    const nextDate = new Date(nextFeed.recordInfo.date).setHours(0, 0, 0, 0);
-
-    return currentDate !== nextDate; // return true if the dates are different
-  };
 
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5">

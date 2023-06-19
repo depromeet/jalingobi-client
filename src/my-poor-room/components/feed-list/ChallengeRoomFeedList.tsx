@@ -2,37 +2,15 @@ import { Fragment } from 'react';
 
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
+import { isFeedDateDifferent } from '@/shared/utils/date';
+import { TChallengeFeed } from '@/types/feed';
 
 import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
 import { OthersFeed } from '../feed/OthersFeed';
 
-type IChallengeFeed = {
-  isMine: boolean;
-  userInfo: {
-    imgUrl: string;
-    nickname: string;
-    currentCharge: number;
-  };
-  recordInfo: {
-    id: number;
-    imgUrl: string;
-    title: string;
-    content: string;
-    price: number;
-    date: string;
-  };
-  emojiInfo: {
-    selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
-    comment: number;
-  };
-};
-
 // MOCK
-const challengeFeedList: IChallengeFeed[] = [
+const challengeFeedList: TChallengeFeed[] = [
   {
     isMine: true,
     userInfo: {
@@ -175,26 +153,6 @@ const challengeFeedList: IChallengeFeed[] = [
 
 export default function ChallengeRoomFeedList() {
   const { bottomRef } = useScrollToBottom();
-
-  const isFeedDateDifferent = ({
-    currentFeed,
-    nextFeed,
-  }: {
-    currentFeed: IChallengeFeed;
-    nextFeed: IChallengeFeed;
-  }) => {
-    if (!nextFeed) return true; // if there is no next feed, show the DateChip
-
-    const currentDate = new Date(currentFeed.recordInfo.date).setHours(
-      0,
-      0,
-      0,
-      0,
-    );
-    const nextDate = new Date(nextFeed.recordInfo.date).setHours(0, 0, 0, 0);
-
-    return currentDate !== nextDate; // return true if the dates are different
-  };
 
   return (
     <div className="-z-10 bg-gray-10 px-5">
