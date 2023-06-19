@@ -4,7 +4,7 @@ type DateChipProps = {
   date: string | null;
 };
 
-export default function DateChip({ date }: DateChipProps) {
+export const DateChip = ({ date }: DateChipProps) => {
   const convertedDate = dayjs(date).format('YYYY년 M월 DD일');
 
   return (
@@ -14,4 +14,4 @@ export default function DateChip({ date }: DateChipProps) {
       </p>
     </li>
   );
-}
+};

@@ -138,10 +138,8 @@ const myFeedList: TMyFeed[] = [
   },
 ];
 
-export default function MyRoomFeedList() {
+export const MyRoomFeedList = () => {
   const { bottomRef } = useScrollToBottom();
-
-  // TODO: 1. util 함수로 빼고, 2. 파일들 옮기고 3. export default -> export
 
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5">
@@ -150,6 +148,7 @@ export default function MyRoomFeedList() {
         {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
           return (
             <Fragment key={recordInfo.id}>
+              {/* TODO: 서버 데이터랑 네이밍 통일 */}
               <MyFeed
                 recordId={recordInfo.id}
                 recordImgUrl={recordInfo.imgUrl}
@@ -176,4 +175,4 @@ export default function MyRoomFeedList() {
       <div ref={bottomRef} />
     </div>
   );
-}
+};

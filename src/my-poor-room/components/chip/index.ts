@@ -1,3 +1,3 @@
-import DateChip from './DateChip';
+import { DateChip } from './DateChip';
 
 export { DateChip };

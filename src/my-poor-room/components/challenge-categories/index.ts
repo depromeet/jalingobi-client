@@ -1,3 +1,4 @@
-import ChallengeCategories from './ChallengeCategories';
+import { ChallengeCategories } from './ChallengeCategories';
+import { ChallengeCategory } from './ChallengeCategory';
 
-export { ChallengeCategories };
+export { ChallengeCategories, ChallengeCategory };

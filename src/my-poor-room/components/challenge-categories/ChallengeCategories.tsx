@@ -48,7 +48,7 @@ const categories: ICategory[] = [
   },
 ];
 
-export default function ChallengeCategories() {
+export const ChallengeCategories = () => {
   const router = useRouter();
 
   // TODO: 전역 상태 관리 라이브러리로 전환 필요
@@ -102,4 +102,4 @@ export default function ChallengeCategories() {
       </div>
     </div>
   );
-}
+};

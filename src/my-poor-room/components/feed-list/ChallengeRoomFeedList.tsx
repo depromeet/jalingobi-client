@@ -151,7 +151,7 @@ const challengeFeedList: TChallengeFeed[] = [
   },
 ];
 
-export default function ChallengeRoomFeedList() {
+export const ChallengeRoomFeedList = () => {
   const { bottomRef } = useScrollToBottom();
 
   return (
@@ -160,6 +160,7 @@ export default function ChallengeRoomFeedList() {
         <Spacing height={32} />
         {challengeFeedList.map(
           ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
+            // TODO: 서버 데이터랑 네이밍 통일
             return (
               <Fragment key={recordInfo.id}>
                 {isMine ? (
@@ -202,4 +203,4 @@ export default function ChallengeRoomFeedList() {
       <div ref={bottomRef} />
     </div>
   );
-}
+};

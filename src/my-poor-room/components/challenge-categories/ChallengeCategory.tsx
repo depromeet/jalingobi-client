@@ -10,7 +10,7 @@ type ChallengeCategoryProps = {
   onClick: (challengeId: number) => void;
 };
 
-const ChallengeCategory = ({
+export const ChallengeCategory = ({
   challengeId,
   imgUrl,
   title,
@@ -42,5 +42,3 @@ const ChallengeCategory = ({
     </div>
   );
 };
-
-export { ChallengeCategory };
