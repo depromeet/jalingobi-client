@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment } from 'react';
 
 import { DateChip } from '@/my-poor-room/components/chip';
 import { Spacing } from '@/shared/components';
+import { useScrollToBottom } from '@/shared/hooks';
 
 import { MyFeed } from '../feed/MyFeed';
 
@@ -158,8 +159,9 @@ const myFeedList: IMyFeed[] = [
 ];
 
 export default function MyRoomFeedList() {
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const { bottomRef } = useScrollToBottom();
 
+  // TODO: 1. util 함수로 빼고, 2. 파일들 옮기고 3. export default -> export
   const isFeedDateDifferent = ({
     currentFeed,
     nextFeed,
@@ -180,24 +182,11 @@ export default function MyRoomFeedList() {
     return currentDate !== nextDate; // return true if the dates are different
   };
 
-  useEffect(() => {
-    if (!bottomRef.current) {
-      return;
-    }
-    bottomRef.current.scrollIntoView();
-  }, [bottomRef.current]);
-
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
-          const currentFeed = myFeedList[index];
-          const nextFeed = myFeedList[index + 1];
-          const isDateDifferent = isFeedDateDifferent({
-            currentFeed,
-            nextFeed,
-          });
           return (
             <Fragment key={recordInfo.id}>
               <MyFeed
@@ -211,7 +200,10 @@ export default function MyRoomFeedList() {
                 challengeTitle={challengeInfo.title}
                 onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
               />
-              {isDateDifferent ? (
+              {isFeedDateDifferent({
+                currentFeed: myFeedList[index],
+                nextFeed: myFeedList[index + 1],
+              }) ? (
                 <DateChip date={recordInfo.date} />
               ) : (
                 <Spacing height={32} />

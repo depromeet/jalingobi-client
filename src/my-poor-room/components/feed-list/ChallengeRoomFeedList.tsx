@@ -1,6 +1,7 @@
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment } from 'react';
 
 import { Spacing } from '@/shared/components';
+import { useScrollToBottom } from '@/shared/hooks';
 
 import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
@@ -173,7 +174,7 @@ const challengeFeedList: IChallengeFeed[] = [
 ];
 
 export default function ChallengeRoomFeedList() {
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const { bottomRef } = useScrollToBottom();
 
   const isFeedDateDifferent = ({
     currentFeed,
@@ -195,25 +196,12 @@ export default function ChallengeRoomFeedList() {
     return currentDate !== nextDate; // return true if the dates are different
   };
 
-  useEffect(() => {
-    if (!bottomRef.current) {
-      return;
-    }
-    bottomRef.current.scrollIntoView();
-  }, [bottomRef.current]);
-
   return (
     <div className="-z-10 bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {challengeFeedList.map(
           ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
-            const currentFeed = challengeFeedList[index];
-            const nextFeed = challengeFeedList[index + 1];
-            const isDateDifferent = isFeedDateDifferent({
-              currentFeed,
-              nextFeed,
-            });
             return (
               <Fragment key={recordInfo.id}>
                 {isMine ? (
@@ -240,7 +228,10 @@ export default function ChallengeRoomFeedList() {
                     onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
                   />
                 )}
-                {isDateDifferent ? (
+                {isFeedDateDifferent({
+                  currentFeed: challengeFeedList[index],
+                  nextFeed: challengeFeedList[index + 1],
+                }) ? (
                   <DateChip date={recordInfo.date} />
                 ) : (
                   <Spacing height={32} />
