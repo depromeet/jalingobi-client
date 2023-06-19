@@ -39,7 +39,7 @@ const ChallengeAchievement = () => {
   };
 
   return (
-    <div className="h-15 w-full px-5 py-2.5">
+    <div className="h-15 w-full border-t border-gray-30 px-5 py-2.5">
       <div>
         <div className="flex justify-between">
           <div className="flex">

@@ -3,7 +3,6 @@ import { ReactElement } from 'react';
 
 import { ChallengeAchievement } from '@/my-poor-room/components/challenge-achievement';
 import { ChallengeCategories } from '@/my-poor-room/components/challenge-categories';
-import { Divider } from '@/my-poor-room/components/Divider';
 import {
   ChallengeRoomFeedList,
   MyRoomFeedList,
@@ -20,12 +19,7 @@ export default function MyPoorRoom() {
     <div>
       <div className="sticky top-0 z-10 bg-white">
         <ChallengeCategories />
-        {!isMyRoom && (
-          <>
-            <Divider />
-            <ChallengeAchievement />
-          </>
-        )}
+        {!isMyRoom && <ChallengeAchievement />}
       </div>
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
       <Spacing height={60} />
