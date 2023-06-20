@@ -20,7 +20,7 @@ module.exports = {
   accent: '#68BBFF',
   'accent-dark': '#2092F0',
 
-  'system-danger': '#F5656A',
+  'system-danger': '#FD5056',
   'system-success': '#38C77A',
   'system-basic': '#FCF6F1',
 };
