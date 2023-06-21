@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { DateChip } from '@/my-poor-room/components/chip';
+import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
 import { isFeedDateDifferent } from '@/shared/utils/date';

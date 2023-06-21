@@ -1,11 +1,10 @@
 import { Fragment } from 'react';
 
+import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 import { TChallengeFeed } from '@/types/feed';
-
-import { DateChip } from '../../my-poor-room/components/chip';
 
 import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';

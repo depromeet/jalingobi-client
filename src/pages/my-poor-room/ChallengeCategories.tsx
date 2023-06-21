@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { CHALLENGE_ID_MY_ROOM } from '@/my-poor-room/constants';
 import { IconTile } from '@/public/svgs';
+import { CHALLENGE_ID_MY_ROOM } from '@/shared/constants';
 
 import { ChallengeCategory } from './ChallengeCategory';
 
