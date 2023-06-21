@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
 import { v4 as uuidv4 } from 'uuid';
 
 import { IconTile } from '@/public/svgs';
 import { CHALLENGE_ID_MY_ROOM } from '@/shared/constants';
+import { useRoom } from '@/shared/store/room';
 
 import { ChallengeCategory } from './ChallengeCategory';
 
@@ -49,31 +47,17 @@ const categories: ICategory[] = [
 ];
 
 export const ChallengeCategories = () => {
-  const router = useRouter();
+  const [selectedChallengeId, setChallengeId] = useRoom((state) => [
+    state.challengeId,
+    state.setChallengeId,
+  ]);
 
-  // TODO: 전역 상태 관리 라이브러리로 전환 필요
   const handleClickCategory = (challengeId: number) => {
-    router.replace({
-      query: {
-        challengeId,
-      },
-    });
+    setChallengeId(challengeId);
   };
 
   // TODO: 라우팅 필요
   const handleClickIcon = () => console.log('아이콘 클릭');
-
-  /**
-   * TODO: 전역 상태 관리 라이브러리 사용시 로직 변경 필요
-   * categories[0]이 내 방이 맞는지 ?
-   */
-  useEffect(() => {
-    router.replace({
-      query: {
-        challengeId: categories[0].challengeId,
-      },
-    });
-  }, []);
 
   return (
     <div className="relative flex h-[5.375rem] items-center">
@@ -85,7 +69,7 @@ export const ChallengeCategories = () => {
               challengeId={challengeId}
               imgUrl={imgUrl}
               title={title}
-              selected={challengeId === Number(router.query.challengeId)}
+              selected={challengeId === selectedChallengeId}
               onClick={handleClickCategory}
             />
           );

@@ -1,17 +1,17 @@
-import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
 import { ChallengeRoomFeedList, MyRoomFeedList } from '@/features/feed';
 import { Spacing } from '@/shared/components';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
+import { useRoom } from '@/shared/store/room';
 
 import { ChallengeAchievement } from './ChallengeAchievement';
 import { ChallengeCategories } from './ChallengeCategories';
 
 export default function MyPoorRoom() {
-  const router = useRouter();
-  const { challengeId } = router.query;
-  const isMyRoom = !Number(challengeId);
+  const challengeId = useRoom((state) => state.challengeId);
+
+  const isMyRoom = !challengeId;
 
   return (
     <div>
