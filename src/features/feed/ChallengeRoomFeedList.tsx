@@ -171,6 +171,7 @@ export const ChallengeRoomFeedList = () => {
                     price={recordInfo.price}
                     content={recordInfo.content}
                     recordDate={recordInfo.date}
+                    emojiInfo={emojiInfo}
                     onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
                   />
                 ) : (
@@ -184,6 +185,7 @@ export const ChallengeRoomFeedList = () => {
                     profileImgUrl={userInfo.imgUrl}
                     nickname={userInfo.nickname}
                     currentCharge={userInfo.currentCharge}
+                    emojiInfo={emojiInfo}
                     onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
                   />
                 )}

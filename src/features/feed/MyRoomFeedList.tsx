@@ -49,7 +49,7 @@ const myFeedList: TMyFeed[] = [
       crazy: 2,
       regretful: 0,
       wellDone: 3,
-      comment: 5,
+      comment: 6,
     },
   },
   {
@@ -70,7 +70,7 @@ const myFeedList: TMyFeed[] = [
       crazy: 2,
       regretful: 0,
       wellDone: 3,
-      comment: 5,
+      comment: 7,
     },
   },
   {
@@ -91,7 +91,7 @@ const myFeedList: TMyFeed[] = [
       crazy: 2,
       regretful: 0,
       wellDone: 3,
-      comment: 5,
+      comment: 8,
     },
   },
   {
@@ -112,7 +112,7 @@ const myFeedList: TMyFeed[] = [
       crazy: 2,
       regretful: 0,
       wellDone: 3,
-      comment: 5,
+      comment: 9,
     },
   },
   {
@@ -133,7 +133,7 @@ const myFeedList: TMyFeed[] = [
       crazy: 2,
       regretful: 0,
       wellDone: 3,
-      comment: 5,
+      comment: 10,
     },
   },
 ];
@@ -158,6 +158,7 @@ export const MyRoomFeedList = () => {
                 recordDate={recordInfo.date}
                 challengeImgUrl={challengeInfo.imgUrl}
                 challengeTitle={challengeInfo.title}
+                emojiInfo={emojiInfo}
                 onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
               />
               {isFeedDateDifferent({

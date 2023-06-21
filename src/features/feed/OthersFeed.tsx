@@ -1,10 +1,15 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
+import { TEmojiInfo } from '@/types/feed';
+
+import { Emoji, reactType } from '../emoji/Emoji';
 
 type OthersFeedProps = {
   recordId: number;
@@ -15,6 +20,7 @@ type OthersFeedProps = {
   content: string;
   recordDate: string;
   profileImgUrl: string;
+  emojiInfo: TEmojiInfo;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
 };
@@ -25,10 +31,11 @@ const OthersFeed = ({
   currentCharge,
   profileImgUrl,
   nickname,
-  recordImgUrl,
   title,
   content,
   recordDate,
+  emojiInfo,
+  recordImgUrl,
   onClickFeed,
 }: OthersFeedProps) => {
   const convertedDate = dayjs(recordDate).format('a hh:mm');
@@ -41,6 +48,35 @@ const OthersFeed = ({
     unitOfCurrency: '원',
   });
 
+  const [emojis, setEmojis] = useState<
+    {
+      type: reactType;
+      count: number;
+      selected: boolean;
+    }[]
+  >([
+    {
+      type: 'crazy',
+      count: emojiInfo.crazy,
+      selected: emojiInfo.selectedEmoji === 'crazy',
+    },
+    {
+      type: 'regretful',
+      count: emojiInfo.regretful,
+      selected: emojiInfo.selectedEmoji === 'regretful',
+    },
+    {
+      type: 'wellDone',
+      count: emojiInfo.wellDone,
+      selected: emojiInfo.selectedEmoji === 'wellDone',
+    },
+    {
+      type: 'comment',
+      count: emojiInfo.comment,
+      selected: emojiInfo.selectedEmoji === 'comment',
+    },
+  ]);
+
   const getKoreanDate = (date: string) => {
     if (date.includes('am')) {
       return date.replace('am', '오전');
@@ -50,6 +86,12 @@ const OthersFeed = ({
     }
     return '';
   };
+
+  // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
+  const handleClickEmoji = (clickedEmojiType: reactType) => {
+    console.log(`clicked emoji ${clickedEmojiType}`);
+  };
+
   return (
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
@@ -104,6 +146,19 @@ const OthersFeed = ({
             <p className="font-caption-medium-md truncate text-gray-50">
               {content}
             </p>
+          </div>
+          <Spacing height={8} />
+          <div className="flex gap-1">
+            {emojis.map(({ type, count }) => {
+              return (
+                <Emoji
+                  key={uuidv4()}
+                  type={type}
+                  count={count}
+                  onClickEmoji={handleClickEmoji}
+                />
+              );
+            })}
           </div>
           <div className="absolute bottom-0 left-[14rem] flex">
             <p className="font-caption-medium-sm shrink-0 text-gray-50">

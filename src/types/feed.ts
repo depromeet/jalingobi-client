@@ -1,3 +1,11 @@
+export type TEmojiInfo = {
+  selectedEmoji: string | null;
+  crazy: number;
+  regretful: number;
+  wellDone: number;
+  comment: number;
+};
+
 export type TChallengeFeed = {
   isMine: boolean;
   userInfo: {
@@ -13,13 +21,7 @@ export type TChallengeFeed = {
     price: number;
     date: string;
   };
-  emojiInfo: {
-    selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
-    comment: number;
-  };
+  emojiInfo: TEmojiInfo;
 };
 
 export type TMyFeed = {

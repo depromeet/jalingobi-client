@@ -1,10 +1,16 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
+import { TEmojiInfo } from '@/types/feed';
+
+import { Emoji } from '../emoji';
+import { reactType } from '../emoji/Emoji';
 
 type MyFeedProps = {
   recordId: number;
@@ -12,6 +18,7 @@ type MyFeedProps = {
   price: number;
   content: string;
   recordDate: string;
+  emojiInfo: TEmojiInfo;
   challengeImgUrl?: string;
   challengeTitle?: string;
   recordImgUrl?: string;
@@ -24,6 +31,7 @@ const MyFeed = ({
   price,
   content,
   recordDate,
+  emojiInfo,
   challengeImgUrl = '',
   challengeTitle,
   recordImgUrl,
@@ -36,6 +44,35 @@ const MyFeed = ({
   });
   const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
 
+  const [emojis, setEmojis] = useState<
+    {
+      type: reactType;
+      count: number;
+      selected: boolean;
+    }[]
+  >([
+    {
+      type: 'crazy',
+      count: emojiInfo.crazy,
+      selected: emojiInfo.selectedEmoji === 'crazy',
+    },
+    {
+      type: 'regretful',
+      count: emojiInfo.regretful,
+      selected: emojiInfo.selectedEmoji === 'regretful',
+    },
+    {
+      type: 'wellDone',
+      count: emojiInfo.wellDone,
+      selected: emojiInfo.selectedEmoji === 'wellDone',
+    },
+    {
+      type: 'comment',
+      count: emojiInfo.comment,
+      selected: emojiInfo.selectedEmoji === 'comment',
+    },
+  ]);
+
   const getKoreanDate = (date: string) => {
     if (date.includes('am')) {
       return date.replace('am', '오전');
@@ -44,6 +81,11 @@ const MyFeed = ({
       return date.replace('pm', '오후');
     }
     return '';
+  };
+
+  // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
+  const handleClickEmoji = (clickedEmojiType: reactType) => {
+    console.log(`clicked emoji ${clickedEmojiType}`);
   };
 
   return (
@@ -99,6 +141,19 @@ const MyFeed = ({
                 </p>
               </div>
             )}
+          </div>
+          <Spacing height={8} />
+          <div className="flex gap-1">
+            {emojis.map(({ type, count }) => {
+              return (
+                <Emoji
+                  key={uuidv4()}
+                  type={type}
+                  count={count}
+                  onClickEmoji={handleClickEmoji}
+                />
+              );
+            })}
           </div>
           <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
             {getKoreanDate(convertedDate)}
