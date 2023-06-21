@@ -6,7 +6,7 @@ import { useScrollToBottom } from '@/shared/hooks';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 import { TMyFeed } from '@/types/feed';
 
-import { MyFeed } from '../feed/MyFeed';
+import { MyFeed } from './MyFeed';
 
 // MOCK
 const myFeedList: TMyFeed[] = [
