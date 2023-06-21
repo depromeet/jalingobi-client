@@ -10,7 +10,7 @@ export interface State {
 export default function RedirectedKakao() {
   const router = useRouter();
   useEffect(() => {
-    async function test() {
+    async function getToken() {
       const code = new URL(window.location.href).searchParams.get('code');
       if (code) {
         const kakao = await oauthRequestToKakao(code);
@@ -21,10 +21,12 @@ export default function RedirectedKakao() {
         if (login) {
           router.push('/search');
         }
+      } else {
+        router.push('/auth/login');
       }
     }
 
-    test();
+    getToken();
   }, []);
 
   return (
