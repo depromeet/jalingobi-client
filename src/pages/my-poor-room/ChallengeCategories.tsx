@@ -60,7 +60,7 @@ export const ChallengeCategories = () => {
   const handleClickIcon = () => console.log('아이콘 클릭');
 
   return (
-    <div className="relative flex h-[5.375rem] items-center">
+    <div className="relative flex h-[5.375rem] items-center justify-between">
       <div className="scrollbar-hide flex overflow-auto">
         {categories.map(({ challengeId, imgUrl, title }) => {
           return (
