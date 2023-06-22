@@ -1,3 +1,5 @@
+import { ApiResponse } from './api';
+
 export type TEmojiInfo = {
   selectedEmoji: string | null;
   crazy: number;
@@ -45,3 +47,32 @@ export type TMyFeed = {
     comment: number;
   };
 };
+
+export type TChallengeRoomFeedListResult = {
+  result: {
+    total: number;
+    limit: number;
+    current: number;
+    lastRecordId: number;
+    challengeFeedList: TChallengeFeed[];
+  };
+};
+
+export type TMyRoomFeedListResult = {
+  result: {
+    total: number;
+    limit: number;
+    current: number;
+    myFeedList: TMyFeed[];
+  };
+};
+
+export type ChallengeRoomFeedListRequest = {
+  challengeId: number;
+  offsetRecordId: number;
+};
+
+export type ChallengeRoomFeedListResponse = ApiResponse &
+  TChallengeRoomFeedListResult;
+
+export type MyRoomFeedListResponse = ApiResponse & TMyRoomFeedListResult;

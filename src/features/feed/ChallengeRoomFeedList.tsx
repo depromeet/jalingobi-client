@@ -3,162 +3,38 @@ import { Fragment } from 'react';
 import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
+import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
-import { TChallengeFeed } from '@/types/feed';
 
 import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
-
-// MOCK
-const challengeFeedList: TChallengeFeed[] = [
-  {
-    isMine: true,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 27,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-19T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-  {
-    isMine: false,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 28,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-18T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-  {
-    isMine: false,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 29,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-17T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-  {
-    isMine: true,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 30,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-16T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-  {
-    isMine: false,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 31,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-15T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-  {
-    isMine: false,
-    userInfo: {
-      imgUrl: '/images/profile.png',
-      nickname: '사용자 닉네임',
-      currentCharge: 78000,
-    },
-    recordInfo: {
-      id: 32,
-      imgUrl: '/images/떡볶이.jpg',
-      title: '기록 타이틀',
-      content: '기록 내용',
-      price: 5000,
-      date: '2023-06-15T15:34:50.756',
-    },
-    emojiInfo: {
-      selectedEmoji: null,
-      crazy: 2,
-      regretful: 0,
-      wellDone: 3,
-      comment: 5,
-    },
-  },
-];
+import { useChallengeRoomFeedList } from './queries';
 
 export const ChallengeRoomFeedList = () => {
-  const { bottomRef } = useScrollToBottom();
+  const challengeId = useRoom((state) => state.challengeId);
+  const offsetRecordId = 0;
+
+  const { data, isLoading, isError } = useChallengeRoomFeedList({
+    challengeId,
+    offsetRecordId,
+  });
+
+  const { bottomRef } = useScrollToBottom({ deps: isLoading });
+
+  // TODO: react-error-boundary, suspense 도입하기
+  if (isLoading) {
+    return <>...Loading</>;
+  }
+
+  if (isError) {
+    return <>Error Page</>;
+  }
 
   return (
     <div className="-z-10 bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {challengeFeedList.map(
+        {data.result.challengeFeedList.map(
           ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
             // TODO: 서버 데이터랑 네이밍 통일
             return (
@@ -190,8 +66,8 @@ export const ChallengeRoomFeedList = () => {
                   />
                 )}
                 {isFeedDateDifferent({
-                  currentFeed: challengeFeedList[index],
-                  nextFeed: challengeFeedList[index + 1],
+                  currentFeed: data.result.challengeFeedList[index],
+                  nextFeed: data.result.challengeFeedList[index + 1],
                 }) ? (
                   <DateChip date={recordInfo.date} />
                 ) : (
