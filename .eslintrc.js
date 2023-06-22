@@ -16,6 +16,7 @@ module.exports = {
     'prettier',
     'import',
     'unused-imports',
+    '@tanstack/query',
   ],
   extends: [
     'airbnb',
@@ -23,6 +24,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   ignorePatterns: ['src/lib/interfaces/*'],
   rules: {
