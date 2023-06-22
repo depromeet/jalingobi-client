@@ -89,7 +89,7 @@ const OthersFeed = ({
 
   // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
   const handleClickEmoji = (clickedEmojiType: reactType) => {
-    console.log(`clicked emoji ${clickedEmojiType}`);
+    // console.log(`clicked emoji ${clickedEmojiType}`);
   };
 
   return (

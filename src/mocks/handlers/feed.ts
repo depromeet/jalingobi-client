@@ -2,6 +2,23 @@ import { rest } from 'msw';
 
 // QUESTION: 창완님 ! createUrl을 사용하는 이유가 무엇인가요 ??
 export const feedHandlers = [
+  rest.get(`/challenge/:challengeId/proceeding/info`, (req, res, ctx) => {
+    return res(
+      ctx.delay(500),
+      ctx.status(200),
+      ctx.json({
+        isSuccess: true,
+        code: 200,
+        message: '요청에 성공하였습니다.',
+        result: {
+          goalCharge: 100000,
+          currentCharge: 65000,
+          percent: 65,
+          dueDay: 11,
+        },
+      }),
+    );
+  }),
   rest.get('/challenge/my-room/feed?offset=:offset', (req, res, ctx) => {
     return res(
       ctx.delay(500),

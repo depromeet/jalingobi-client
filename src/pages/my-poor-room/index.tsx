@@ -5,7 +5,7 @@ import { Spacing } from '@/shared/components';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import { useRoom } from '@/shared/store/room';
 
-import { ChallengeAchievement } from './ChallengeAchievement';
+import { ChallengeAchievementContainer } from './ChallengeAchievementContainer';
 import { ChallengeCategories } from './ChallengeCategories';
 
 export default function MyPoorRoom() {
@@ -17,7 +17,7 @@ export default function MyPoorRoom() {
     <div>
       <div className="sticky top-0 z-10 bg-white">
         <ChallengeCategories />
-        {!isMyRoom && <ChallengeAchievement />}
+        {!isMyRoom && <ChallengeAchievementContainer />}
       </div>
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
       <Spacing height={60} />

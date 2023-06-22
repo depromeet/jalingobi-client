@@ -1,9 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getChallengeRoomFeedList, getMyRoomFeedList } from '@/service/feed';
+import {
+  getChallengeAchievement,
+  getChallengeRoomFeedList,
+  getMyRoomFeedList,
+} from '@/service/feed';
 import {
   ChallengeRoomFeedListRequest,
   MyRoomFeedListRequest,
+  ChallengeAchievementRequest,
 } from '@/types/feed';
 
 // QUESTION: key 값 관리 이렇게 하는거 맞나용..??
@@ -33,5 +38,14 @@ export const useMyRoomFeedList = ({ offset }: MyRoomFeedListRequest) => {
   return useQuery({
     queryKey: ['myRoomFeedList', offset],
     queryFn: () => getMyRoomFeedList({ offset }),
+  });
+};
+
+export const useChallengeAchievement = ({
+  challengeId,
+}: ChallengeAchievementRequest) => {
+  return useQuery({
+    queryKey: ['challengeAchievement', challengeId],
+    queryFn: () => getChallengeAchievement({ challengeId }),
   });
 };

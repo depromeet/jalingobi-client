@@ -67,6 +67,15 @@ export type TMyRoomFeedListResult = {
   };
 };
 
+export type TAchievementResult = {
+  result: {
+    goalCharge: number;
+    currentCharge: number;
+    percent: number;
+    dueDay: number;
+  };
+};
+
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
   offsetRecordId: number;
@@ -76,7 +85,13 @@ export type MyRoomFeedListRequest = {
   offset: number;
 };
 
+export type ChallengeAchievementRequest = {
+  challengeId: number;
+};
+
 export type ChallengeRoomFeedListResponse = ApiResponse &
   TChallengeRoomFeedListResult;
 
 export type MyRoomFeedListResponse = ApiResponse & TMyRoomFeedListResult;
+
+export type ChallengeAchievementResponse = ApiResponse & TAchievementResult;

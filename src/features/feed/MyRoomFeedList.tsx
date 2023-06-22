@@ -18,6 +18,7 @@ export const MyRoomFeedList = () => {
   const { bottomRef } = useScrollToBottom({ deps: isLoading });
 
   // TODO: react-error-boundary, suspense 도입하기
+  // TODO: 디자인 팀에 에러 페이지, 로더 요청하기
   if (isLoading) {
     return <>...Loading</>;
   }
