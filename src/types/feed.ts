@@ -76,6 +76,15 @@ export type TAchievementResult = {
   };
 };
 
+export type TChallengeListResult = {
+  result: {
+    challengeId: number;
+    title: string;
+    imgUrl: string;
+    active: boolean;
+  }[];
+};
+
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
   offsetRecordId: number;
@@ -95,3 +104,5 @@ export type ChallengeRoomFeedListResponse = ApiResponse &
 export type MyRoomFeedListResponse = ApiResponse & TMyRoomFeedListResult;
 
 export type ChallengeAchievementResponse = ApiResponse & TAchievementResult;
+
+export type ChallengeListResponse = ApiResponse & TChallengeListResult;

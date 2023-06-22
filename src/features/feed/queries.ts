@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import {
   getChallengeAchievement,
+  getChallengeList,
   getChallengeRoomFeedList,
   getMyRoomFeedList,
 } from '@/service/feed';
@@ -47,5 +48,12 @@ export const useChallengeAchievement = ({
   return useQuery({
     queryKey: ['challengeAchievement', challengeId],
     queryFn: () => getChallengeAchievement({ challengeId }),
+  });
+};
+
+export const useChallengeList = () => {
+  return useQuery({
+    queryKey: ['challengeList'],
+    queryFn: getChallengeList,
   });
 };

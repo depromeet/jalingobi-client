@@ -1,6 +1,7 @@
 import {
   ChallengeAchievementRequest,
   ChallengeAchievementResponse,
+  ChallengeListResponse,
   ChallengeRoomFeedListRequest,
   ChallengeRoomFeedListResponse,
   MyRoomFeedListRequest,
@@ -38,5 +39,10 @@ export const getChallengeAchievement = async ({
   const response = await httpClient.get(
     `challenge/${challengeId}/proceeding/info`,
   );
+  return response.data;
+};
+
+export const getChallengeList = async (): Promise<ChallengeListResponse> => {
+  const response = await httpClient.get('challenge/my-list');
   return response.data;
 };

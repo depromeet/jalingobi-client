@@ -1,52 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 
+import { useChallengeList } from '@/features/feed/queries';
 import { IconTile } from '@/public/svgs';
-import { CHALLENGE_ID_MY_ROOM } from '@/shared/constants';
 import { useRoom } from '@/shared/store/room';
 
 import { ChallengeCategory } from './ChallengeCategory';
 
-type ICategory = {
-  challengeId: number;
-  imgUrl: string;
-  title: string;
-};
-
-// Mock
-const categories: ICategory[] = [
-  {
-    challengeId: CHALLENGE_ID_MY_ROOM,
-    title: '내 방',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-  {
-    challengeId: 1,
-    title: 'room1',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-  {
-    challengeId: 2,
-    title: 'room2',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-  {
-    challengeId: 3,
-    title: 'room3',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-  {
-    challengeId: 4,
-    title: 'room4',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-  {
-    challengeId: 5,
-    title: 'room5',
-    imgUrl: '/images/떡볶이.jpg',
-  },
-];
-
 export const ChallengeCategories = () => {
+  const { data, isLoading, isError } = useChallengeList();
+
   const [selectedChallengeId, setChallengeId] = useRoom((state) => [
     state.challengeId,
     state.setChallengeId,
@@ -59,10 +21,20 @@ export const ChallengeCategories = () => {
   // TODO: 라우팅 필요
   const handleClickIcon = () => console.log('아이콘 클릭');
 
+  // TODO: react-error-boundary, suspense 도입하기
+  // TODO: 디자인 팀에 에러 페이지, 로더 요청하기
+  if (isLoading) {
+    return <>...Loading</>;
+  }
+
+  if (isError) {
+    return <>Error Page</>;
+  }
+
   return (
     <div className="relative flex h-[5.375rem] items-center justify-between">
       <div className="scrollbar-hide flex overflow-auto">
-        {categories.map(({ challengeId, imgUrl, title }) => {
+        {data.result.map(({ challengeId, imgUrl, title }) => {
           return (
             <ChallengeCategory
               key={uuidv4()}
