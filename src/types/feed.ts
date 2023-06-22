@@ -72,6 +72,10 @@ export type ChallengeRoomFeedListRequest = {
   offsetRecordId: number;
 };
 
+export type MyRoomFeedListRequest = {
+  offset: number;
+};
+
 export type ChallengeRoomFeedListResponse = ApiResponse &
   TChallengeRoomFeedListResult;
 

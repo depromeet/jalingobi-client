@@ -1,6 +1,7 @@
 import {
   ChallengeRoomFeedListRequest,
   ChallengeRoomFeedListResponse,
+  MyRoomFeedListRequest,
   MyRoomFeedListResponse,
 } from '@/types/feed';
 
@@ -18,9 +19,9 @@ export const getChallengeRoomFeedList = async ({
   return response.data;
 };
 
-export const getMyRoomFeedList = async (
-  offset: number,
-): Promise<MyRoomFeedListResponse> => {
+export const getMyRoomFeedList = async ({
+  offset,
+}: MyRoomFeedListRequest): Promise<MyRoomFeedListResponse> => {
   const response = await httpClient.get(`/challenge/my-room/feed`, {
     params: {
       offset,
