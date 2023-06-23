@@ -87,7 +87,7 @@ export type TChallengeListResult = {
 
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
-  offsetRecordId: number;
+  offsetRecordId: number | null;
 };
 
 export type MyRoomFeedListRequest = {

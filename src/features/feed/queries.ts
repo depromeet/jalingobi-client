@@ -18,9 +18,19 @@ export const useChallengeRoomFeedList = ({
   challengeId,
   offsetRecordId,
 }: ChallengeRoomFeedListRequest) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['challengeRoomFeedList', challengeId, offsetRecordId],
-    queryFn: () => getChallengeRoomFeedList({ challengeId, offsetRecordId }),
+    queryFn: ({ pageParam = offsetRecordId }) =>
+      getChallengeRoomFeedList({ challengeId, offsetRecordId: pageParam }),
+    getNextPageParam: ({ result }) => {
+      const isLastPage = result.current < 20;
+
+      if (isLastPage) {
+        return false;
+      }
+
+      return result.lastRecordId;
+    },
   });
 };
 
