@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable consistent-return */
 /* eslint-disable no-use-before-define */
-import { RefObject, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 type Option = IntersectionObserverInit & {
   triggerOnlyOnce?: boolean;
@@ -10,21 +10,24 @@ type Option = IntersectionObserverInit & {
 type IntersectingCallback = (() => void) | (() => Promise<void>);
 
 export default function useIntersectionObserver(
-  targetRef: RefObject<HTMLElement>,
   doWhenIntersecting: IntersectingCallback,
   option: Option,
 ) {
+  const intersectedRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (!targetRef || !targetRef.current) {
+    if (!intersectedRef || !intersectedRef.current) {
       return;
     }
 
-    const target = targetRef.current;
+    const target = intersectedRef.current;
     const observer = createObserver(doWhenIntersecting, option);
     observer.observe(target);
 
     return () => observer && observer.disconnect();
-  }, [doWhenIntersecting, option, targetRef]);
+  }, [doWhenIntersecting, option, intersectedRef]);
+
+  return { intersectedRef };
 }
 
 const createObserver = (

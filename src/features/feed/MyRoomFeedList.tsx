@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useRef } from 'react';
+import { Fragment, useMemo } from 'react';
 
 import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
@@ -11,6 +11,7 @@ import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 1;
 
+// TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const MyRoomFeedList = () => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useMyRoomFeedList({
@@ -23,14 +24,10 @@ export const MyRoomFeedList = () => {
   );
 
   const hasUsedInfiniteScroll = feeds.length > 20;
-
   const { bottomRef } = useScrollToBottom({
     earlyReturn: hasUsedInfiniteScroll,
   });
-
-  const topRef = useRef<HTMLDivElement>(null);
-  useIntersectionObserver(topRef, fetchNextPage, {});
-
+  const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
   const { containerRef } = useKeepScrollPosition([feeds]);
 
   // TODO: react-error-boundary, suspense 도입하기
@@ -45,7 +42,7 @@ export const MyRoomFeedList = () => {
 
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
-      {hasNextPage && <div ref={topRef} />}
+      {hasNextPage && <div ref={intersectedRef} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {/* TODO: 서버 데이터랑 네이밍 통일 */}
