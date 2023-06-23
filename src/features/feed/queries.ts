@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import {
   getChallengeAchievement,
@@ -12,18 +12,7 @@ import {
   ChallengeAchievementRequest,
 } from '@/types/feed';
 
-// QUESTION: key 값 관리 이렇게 하는거 맞나용..??
-// const challengeFeedKeys = {
-//   all: ['challengeFeed'] as const,
-//   challengeFeedLists: () => [...challengeFeedKeys.all, 'list'] as const,
-//   challengeFeed: (challengeId: number) => [...challengeFeedKeys.all, {challengeId}] as const
-// }
-
-// const myRoomFeedKeys = {
-//   all: ['myRoomFeedKeys'] as const,
-//   myRoomFeedLists: () => [...myRoomFeedKeys.all, 'list'] as const,
-//   myRoomFeed: () => [...myRoomFeedKeys.all, {CHALLENGE_ID_MY_ROOM}] as const
-// }
+// TODO: 키값 한번에 관리하기
 
 export const useChallengeRoomFeedList = ({
   challengeId,
@@ -36,9 +25,18 @@ export const useChallengeRoomFeedList = ({
 };
 
 export const useMyRoomFeedList = ({ offset }: MyRoomFeedListRequest) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['myRoomFeedList', offset],
-    queryFn: () => getMyRoomFeedList({ offset }),
+    queryFn: ({ pageParam = offset }) =>
+      getMyRoomFeedList({ offset: pageParam }),
+    getNextPageParam: ({ result }) => {
+      const isLastPage = result.current < 20;
+
+      if (isLastPage) {
+        return false;
+      }
+      return offset + result.current;
+    },
   });
 };
 
