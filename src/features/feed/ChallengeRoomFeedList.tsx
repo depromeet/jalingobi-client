@@ -3,6 +3,7 @@ import { Fragment, useMemo, useRef } from 'react';
 import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
+import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
@@ -33,6 +34,8 @@ export const ChallengeRoomFeedList = () => {
   const topRef = useRef<HTMLDivElement>(null);
   useIntersectionObserver(topRef, fetchNextPage, {});
 
+  const { containerRef } = useKeepScrollPosition([feeds]);
+
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
     return <>...Loading</>;
@@ -43,7 +46,7 @@ export const ChallengeRoomFeedList = () => {
   }
 
   return (
-    <div className="-z-10 bg-gray-10 px-5">
+    <div className="-z-10 bg-gray-10 px-5" ref={containerRef}>
       {hasNextPage && <div ref={topRef} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
