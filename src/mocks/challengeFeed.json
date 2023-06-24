@@ -15,7 +15,7 @@
       "date": "2023-06-18T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -38,7 +38,7 @@
       "date": "2023-06-17T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -61,7 +61,7 @@
       "date": "2023-06-16T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -84,7 +84,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -107,7 +107,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -130,7 +130,7 @@
       "date": "2023-06-19T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -153,7 +153,7 @@
       "date": "2023-06-18T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -176,7 +176,7 @@
       "date": "2023-06-17T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -199,7 +199,7 @@
       "date": "2023-06-16T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -222,7 +222,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -245,7 +245,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -268,7 +268,7 @@
       "date": "2023-06-19T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -291,7 +291,7 @@
       "date": "2023-06-18T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -314,7 +314,7 @@
       "date": "2023-06-17T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -337,7 +337,7 @@
       "date": "2023-06-16T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -360,7 +360,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -383,7 +383,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -406,7 +406,7 @@
       "date": "2023-06-19T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -429,7 +429,7 @@
       "date": "2023-06-18T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -452,7 +452,7 @@
       "date": "2023-06-17T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -475,7 +475,7 @@
       "date": "2023-06-16T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -498,7 +498,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -521,7 +521,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -544,7 +544,7 @@
       "date": "2023-06-19T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -567,7 +567,7 @@
       "date": "2023-06-18T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -590,7 +590,7 @@
       "date": "2023-06-17T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -613,7 +613,7 @@
       "date": "2023-06-16T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -636,7 +636,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -659,7 +659,7 @@
       "date": "2023-06-15T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
@@ -682,7 +682,7 @@
       "date": "2023-06-19T15:34:50.756"
     },
     "emojiInfo": {
-      "selectedEmoji": null,
+      "selected": null,
       "CRAZY": 2,
       "REGRETFUL": 0,
       "WELLDONE": 3,
