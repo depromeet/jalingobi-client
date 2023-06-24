@@ -52,19 +52,19 @@ const MyFeed = ({
     }[]
   >([
     {
-      type: 'crazy',
-      count: emojiInfo.crazy,
-      selected: emojiInfo.selectedEmoji === 'crazy',
+      type: 'CRAZY',
+      count: emojiInfo.CRAZY,
+      selected: emojiInfo.selectedEmoji === 'CRAZY',
     },
     {
-      type: 'regretful',
-      count: emojiInfo.regretful,
-      selected: emojiInfo.selectedEmoji === 'regretful',
+      type: 'REGRETFUL',
+      count: emojiInfo.REGRETFUL,
+      selected: emojiInfo.selectedEmoji === 'REGRETFUL',
     },
     {
-      type: 'wellDone',
-      count: emojiInfo.wellDone,
-      selected: emojiInfo.selectedEmoji === 'wellDone',
+      type: 'WELLDONE',
+      count: emojiInfo.WELLDONE,
+      selected: emojiInfo.selectedEmoji === 'WELLDONE',
     },
     {
       type: 'comment',

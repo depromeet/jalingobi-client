@@ -2,9 +2,9 @@ import { ApiResponse } from './api';
 
 export type TEmojiInfo = {
   selectedEmoji: string | null;
-  crazy: number;
-  regretful: number;
-  wellDone: number;
+  CRAZY: number;
+  REGRETFUL: number;
+  WELLDONE: number;
   comment: number;
 };
 
@@ -41,9 +41,9 @@ export type TMyFeed = {
   };
   emojiInfo: {
     selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
+    CRAZY: number;
+    REGRETFUL: number;
+    WELLDONE: number;
     comment: number;
   };
 };

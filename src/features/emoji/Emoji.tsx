@@ -1,6 +1,6 @@
 import { IconComment, IconReaction } from '@/public/svgs';
 
-export type reactType = 'crazy' | 'regretful' | 'wellDone' | 'comment';
+export type reactType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
 
 type Props = {
   type: reactType;
@@ -10,9 +10,9 @@ type Props = {
 
 export const Emoji = ({ type, count, onClickEmoji }: Props) => {
   const bgColor = {
-    crazy: 'bg-system-danger',
-    regretful: 'bg-secondary-dark',
-    wellDone: 'bg-accent',
+    CRAZY: 'bg-system-danger',
+    REGRETFUL: 'bg-secondary-dark',
+    WELLDONE: 'bg-accent',
     comment: 'bg-gray-70',
   };
 
