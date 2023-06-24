@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
+import { getKoreanDate } from '@/shared/utils/date';
+import { createEmojiInfo } from '@/shared/utils/emoji';
 import { reactType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji';
@@ -58,17 +60,7 @@ const MyFeed = ({
 
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
-  const getKoreanDate = (date: string) => {
-    if (date.includes('am')) {
-      return date.replace('am', '오전');
-    }
-    if (date.includes('pm')) {
-      return date.replace('pm', '오후');
-    }
-    return '';
-  };
-
-  // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
+  // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: reactType) => {
     if (clickedEmojiType === 'comment') {
       return;
@@ -196,15 +188,3 @@ const MyFeed = ({
 };
 
 export { MyFeed };
-
-function createEmojiInfo(
-  type: reactType,
-  count: number,
-  selected: reactType | null,
-) {
-  return {
-    type,
-    count,
-    selected: selected === type,
-  };
-}

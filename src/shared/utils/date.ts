@@ -19,3 +19,13 @@ export const isFeedDateDifferent = ({
 
   return currentDate !== nextDate; // return true if the dates are different
 };
+
+export const getKoreanDate = (date: string) => {
+  if (date.includes('am')) {
+    return date.replace('am', '오전');
+  }
+  if (date.includes('pm')) {
+    return date.replace('pm', '오후');
+  }
+  return '';
+};

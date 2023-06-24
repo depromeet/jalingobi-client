@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
+import { getKoreanDate } from '@/shared/utils/date';
+import { createEmojiInfo } from '@/shared/utils/emoji';
 import { reactType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji/Emoji';
@@ -48,48 +50,70 @@ const OthersFeed = ({
     unitOfCurrency: '원',
   });
 
+  const DEFAULT_EMOJIS = [
+    createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
+    createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
+    createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
+    createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
+  ];
+
   const [emojis, setEmojis] = useState<
     {
       type: reactType;
       count: number;
       selected: boolean;
     }[]
-  >([
-    {
-      type: 'CRAZY',
-      count: emojiInfo.CRAZY,
-      selected: emojiInfo.selected === 'CRAZY',
-    },
-    {
-      type: 'REGRETFUL',
-      count: emojiInfo.REGRETFUL,
-      selected: emojiInfo.selected === 'REGRETFUL',
-    },
-    {
-      type: 'WELLDONE',
-      count: emojiInfo.WELLDONE,
-      selected: emojiInfo.selected === 'WELLDONE',
-    },
-    {
-      type: 'comment',
-      count: emojiInfo.comment,
-      selected: emojiInfo.selected === 'comment',
-    },
-  ]);
+  >(DEFAULT_EMOJIS);
 
-  const getKoreanDate = (date: string) => {
-    if (date.includes('am')) {
-      return date.replace('am', '오전');
-    }
-    if (date.includes('pm')) {
-      return date.replace('pm', '오후');
-    }
-    return '';
-  };
-
-  // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
+  // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: reactType) => {
-    // console.log(`clicked emoji ${clickedEmojiType}`);
+    if (clickedEmojiType === 'comment') {
+      return;
+    }
+
+    const clickedEmoji = emojis.find(
+      (emoji) => emoji.type === clickedEmojiType,
+    );
+    const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
+
+    if (isClickedEmojiSelectedBefore) {
+      setEmojis((prev) =>
+        prev.map((emoji) => {
+          if (emoji.type === clickedEmojiType) {
+            return {
+              ...emoji,
+              selected: false,
+              count: emoji.count - 1,
+            };
+          }
+          return emoji;
+        }),
+      );
+      return;
+    }
+
+    setEmojis((prev) =>
+      prev.map((emoji) => {
+        if (emoji.type === clickedEmojiType) {
+          return {
+            ...emoji,
+            selected: true,
+            count: emoji.count + 1,
+          };
+        }
+        if (emoji.selected) {
+          return {
+            ...emoji,
+            selected: false,
+            count: emoji.count - 1,
+          };
+        }
+        return {
+          ...emoji,
+          selected: false,
+        };
+      }),
+    );
   };
 
   return (
