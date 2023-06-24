@@ -1,7 +1,9 @@
 import { ApiResponse } from './api';
 
+export type reactType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+
 export type TEmojiInfo = {
-  selectedEmoji: string | null;
+  selected: reactType | null;
   CRAZY: number;
   REGRETFUL: number;
   WELLDONE: number;
@@ -40,7 +42,7 @@ export type TMyFeed = {
     title: string;
   };
   emojiInfo: {
-    selectedEmoji: string | null;
+    selected: reactType | null;
     CRAZY: number;
     REGRETFUL: number;
     WELLDONE: number;

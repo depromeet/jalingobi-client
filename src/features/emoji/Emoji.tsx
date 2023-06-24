@@ -1,6 +1,5 @@
 import { IconComment, IconReaction } from '@/public/svgs';
-
-export type reactType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+import { reactType } from '@/types/feed';
 
 type Props = {
   type: reactType;

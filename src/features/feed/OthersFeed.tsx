@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { TEmojiInfo } from '@/types/feed';
+import { reactType, TEmojiInfo } from '@/types/feed';
 
-import { Emoji, reactType } from '../emoji/Emoji';
+import { Emoji } from '../emoji/Emoji';
 
 type OthersFeedProps = {
   recordId: number;
@@ -58,22 +58,22 @@ const OthersFeed = ({
     {
       type: 'CRAZY',
       count: emojiInfo.CRAZY,
-      selected: emojiInfo.selectedEmoji === 'CRAZY',
+      selected: emojiInfo.selected === 'CRAZY',
     },
     {
       type: 'REGRETFUL',
       count: emojiInfo.REGRETFUL,
-      selected: emojiInfo.selectedEmoji === 'REGRETFUL',
+      selected: emojiInfo.selected === 'REGRETFUL',
     },
     {
       type: 'WELLDONE',
       count: emojiInfo.WELLDONE,
-      selected: emojiInfo.selectedEmoji === 'WELLDONE',
+      selected: emojiInfo.selected === 'WELLDONE',
     },
     {
       type: 'comment',
       count: emojiInfo.comment,
-      selected: emojiInfo.selectedEmoji === 'comment',
+      selected: emojiInfo.selected === 'comment',
     },
   ]);
 

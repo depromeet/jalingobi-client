@@ -7,10 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { TEmojiInfo } from '@/types/feed';
+import { reactType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji';
-import { reactType } from '../emoji/Emoji';
 
 type MyFeedProps = {
   recordId: number;
@@ -23,6 +22,12 @@ type MyFeedProps = {
   challengeTitle?: string;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
+};
+
+type TEmoji = {
+  type: reactType;
+  count: number;
+  selected: boolean;
 };
 
 const MyFeed = ({
@@ -44,34 +49,14 @@ const MyFeed = ({
   });
   const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
 
-  const [emojis, setEmojis] = useState<
-    {
-      type: reactType;
-      count: number;
-      selected: boolean;
-    }[]
-  >([
-    {
-      type: 'CRAZY',
-      count: emojiInfo.CRAZY,
-      selected: emojiInfo.selectedEmoji === 'CRAZY',
-    },
-    {
-      type: 'REGRETFUL',
-      count: emojiInfo.REGRETFUL,
-      selected: emojiInfo.selectedEmoji === 'REGRETFUL',
-    },
-    {
-      type: 'WELLDONE',
-      count: emojiInfo.WELLDONE,
-      selected: emojiInfo.selectedEmoji === 'WELLDONE',
-    },
-    {
-      type: 'comment',
-      count: emojiInfo.comment,
-      selected: emojiInfo.selectedEmoji === 'comment',
-    },
-  ]);
+  const DEFAULT_EMOJIS = [
+    createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
+    createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
+    createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
+    createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
+  ];
+
+  const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
   const getKoreanDate = (date: string) => {
     if (date.includes('am')) {
@@ -85,7 +70,53 @@ const MyFeed = ({
 
   // TODO: 서버 데이터 호출 이후에 리턴 값을 emoji로 set하는 방식 ?
   const handleClickEmoji = (clickedEmojiType: reactType) => {
-    console.log(`clicked emoji ${clickedEmojiType}`);
+    if (clickedEmojiType === 'comment') {
+      return;
+    }
+
+    const clickedEmoji = emojis.find(
+      (emoji) => emoji.type === clickedEmojiType,
+    );
+    const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
+
+    if (isClickedEmojiSelectedBefore) {
+      setEmojis((prev) =>
+        prev.map((emoji) => {
+          if (emoji.type === clickedEmojiType) {
+            return {
+              ...emoji,
+              selected: false,
+              count: emoji.count - 1,
+            };
+          }
+          return emoji;
+        }),
+      );
+      return;
+    }
+
+    setEmojis((prev) =>
+      prev.map((emoji) => {
+        if (emoji.type === clickedEmojiType) {
+          return {
+            ...emoji,
+            selected: true,
+            count: emoji.count + 1,
+          };
+        }
+        if (emoji.selected) {
+          return {
+            ...emoji,
+            selected: false,
+            count: emoji.count - 1,
+          };
+        }
+        return {
+          ...emoji,
+          selected: false,
+        };
+      }),
+    );
   };
 
   return (
@@ -165,3 +196,15 @@ const MyFeed = ({
 };
 
 export { MyFeed };
+
+function createEmojiInfo(
+  type: reactType,
+  count: number,
+  selected: reactType | null,
+) {
+  return {
+    type,
+    count,
+    selected: selected === type,
+  };
+}
