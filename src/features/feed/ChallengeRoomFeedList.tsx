@@ -11,6 +11,8 @@ import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
 
+const INITIAL_VALUE_OFFSET_RECORD_ID = 0;
+
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const ChallengeRoomFeedList = () => {
   const challengeId = useRoom((state) => state.challengeId);
@@ -18,7 +20,7 @@ export const ChallengeRoomFeedList = () => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
       challengeId,
-      offsetRecordId: null,
+      offsetRecordId: INITIAL_VALUE_OFFSET_RECORD_ID,
     });
 
   const feeds = useMemo(
@@ -26,6 +28,7 @@ export const ChallengeRoomFeedList = () => {
       data ? data.pages.flatMap(({ result }) => result.challengeFeedList) : [],
     [data],
   );
+
   const hasUsedInfiniteScroll = feeds.length > 20;
   const { bottomRef } = useScrollToBottom({
     earlyReturn: hasUsedInfiniteScroll,
@@ -47,7 +50,7 @@ export const ChallengeRoomFeedList = () => {
       {hasNextPage && <div ref={intersectedRef} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터랑 네이밍 통일 */}
+        {/* TODO: 서버 데이터 그대로 넘기기  */}
         {feeds.map(({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
           return (
             <Fragment key={recordInfo.id}>

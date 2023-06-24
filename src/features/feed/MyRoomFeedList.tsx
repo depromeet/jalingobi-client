@@ -9,7 +9,7 @@ import { isFeedDateDifferent } from '@/shared/utils/date';
 import { MyFeed } from './MyFeed';
 import { useMyRoomFeedList } from './queries';
 
-const INITIAL_VALUE_OFFSET = 1;
+const INITIAL_VALUE_OFFSET = 0;
 
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const MyRoomFeedList = () => {
@@ -45,7 +45,7 @@ export const MyRoomFeedList = () => {
       {hasNextPage && <div ref={intersectedRef} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터랑 네이밍 통일 */}
+        {/* TODO: 서버 데이터 그대로 넘기기  */}
         {feeds.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
           return (
             <Fragment key={recordInfo.id}>

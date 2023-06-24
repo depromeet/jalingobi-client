@@ -78,9 +78,9 @@ export const feedHandlers = [
         result: {
           total: 30,
           limit: 20,
-          current: offset === '1' ? 20 : 10,
+          current: offset === '0' ? 20 : 10,
           myFeedList:
-            offset === '1' ? myRoomFeed.slice(0, 20) : myRoomFeed.slice(20, 30),
+            offset === '0' ? myRoomFeed.slice(0, 20) : myRoomFeed.slice(20, 30),
         },
       }),
     );
@@ -100,10 +100,10 @@ export const feedHandlers = [
           result: {
             total: 30,
             limit: 20,
-            current: offsetRecordId === null ? 20 : 10,
-            lastRecordId: offsetRecordId === null ? 20 : 30,
+            current: offsetRecordId === '0' ? 20 : 10,
+            lastRecordId: offsetRecordId === '0' ? 20 : 30,
             challengeFeedList:
-              offsetRecordId === null
+              offsetRecordId === '0'
                 ? challengeFeed.slice(0, 20)
                 : challengeFeed.slice(20, 30),
           },

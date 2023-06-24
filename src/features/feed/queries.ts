@@ -23,7 +23,7 @@ export const useChallengeRoomFeedList = ({
     queryFn: ({ pageParam = offsetRecordId }) =>
       getChallengeRoomFeedList({ challengeId, offsetRecordId: pageParam }),
     getNextPageParam: ({ result }) => {
-      const isLastPage = result.current < 20;
+      const isLastPage = result.current < result.limit;
 
       if (isLastPage) {
         return false;
@@ -40,7 +40,7 @@ export const useMyRoomFeedList = ({ offset }: MyRoomFeedListRequest) => {
     queryFn: ({ pageParam = offset }) =>
       getMyRoomFeedList({ offset: pageParam }),
     getNextPageParam: ({ result }) => {
-      const isLastPage = result.current < 20;
+      const isLastPage = result.current < result.limit;
 
       if (isLastPage) {
         return false;
