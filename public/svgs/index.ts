@@ -16,6 +16,7 @@ import IconPolygonDown from './icon-polygon-down.svg';
 import IconPolygonUp from './icon-polygon-up.svg';
 import IconSearch from './icon-search.svg';
 import IconSettings from './icon-settings.svg';
+import IconTile from './icon-tile.svg';
 import IconUser from './icon-user.svg';
 
 export {
@@ -35,6 +36,7 @@ export {
   IconChevronRight,
   IconChevronUp,
   IconArrowUpFill,
+  IconTile,
   IconArrowRight,
   IconArrowLeft,
   IconClock,

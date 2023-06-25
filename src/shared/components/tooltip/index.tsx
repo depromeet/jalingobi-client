@@ -30,9 +30,9 @@ const Content = React.forwardRef<
 ));
 Content.displayName = TooltipPrimitive.Content.displayName;
 
-interface TooltipUiProps {
+type TooltipUiProps = {
   label: string;
-}
+};
 
 const TooltipUi = ({ label }: TooltipUiProps) => {
   return (
@@ -45,10 +45,10 @@ const TooltipUi = ({ label }: TooltipUiProps) => {
   );
 };
 
-interface TooltipProps {
+type TooltipProps = {
   trigger: ReactNode;
   label: string;
-}
+};
 
 const Tooltip = ({ trigger, label }: TooltipProps) => {
   return (

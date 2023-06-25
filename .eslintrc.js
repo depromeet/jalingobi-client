@@ -24,6 +24,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
   ],
+  ignorePatterns: ['src/lib/interfaces/*'],
   rules: {
     'prettier/prettier': 'error',
     'global-require': 'off',
@@ -33,6 +34,7 @@ module.exports = {
         functions: false,
       },
     ],
+    'no-console': 'off',
     'no-shadow': 'off',
     'no-alert': 'off',
     'no-param-reassign': 'off',
