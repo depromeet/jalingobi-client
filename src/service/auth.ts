@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { IAuthKakaoBody, IAuthKakaoResponse } from '@/lib/interfaces';
+import { AuthKakaoBody, AuthKakaoResponse } from '@/lib/interfaces';
 import { httpClient } from '@/service/index';
 
-interface oauthResposneFromKakao {
+type OAuthResposneFromKakao = {
   /** 토큰 타입, bearer 로 고정 */
   token_type: string;
   /** id 토큰 값 */
@@ -18,19 +18,19 @@ interface oauthResposneFromKakao {
   refresh_token_expires_in: number;
   /** 인증된 사용자의 정보 조회 권한 범위 */
   scope: string; // 범위가 여러 개일 경우, 공백으로 구분
-}
+};
 
 export const oauthRequestToKakao = async (
   code: string,
-): Promise<oauthResposneFromKakao> => {
+): Promise<OAuthResposneFromKakao> => {
   const response = await axios.post(
     'https://kauth.kakao.com/oauth/token',
     {
       grant_type: 'authorization_code',
-      client_id: '05853a15a5b25d2003a144e6e4c312c7',
-      redirect_uri: 'http://localhost:3000/auth/kakao',
+      client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
+      redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
       code,
-      client_secret: 'p7ABkLq3Izo05Ci78aPfKRN21ASoWyLT',
+      client_secret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET,
     },
     {
       headers: {
@@ -43,8 +43,8 @@ export const oauthRequestToKakao = async (
 };
 
 export const authKakao = async (
-  body: IAuthKakaoBody,
-): Promise<IAuthKakaoResponse> => {
+  body: AuthKakaoBody,
+): Promise<AuthKakaoResponse> => {
   return httpClient.post('https://jalingobi.com/auth/kakao', body, {
     headers: {
       'Content-Type': 'application/json',

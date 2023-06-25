@@ -9,8 +9,8 @@ export type Props = {
 
 export default function KakaoLogin({ label = '카카오톡으로 시작' }: Props) {
   const onClick = () => {
-    const clientId = '05853a15a5b25d2003a144e6e4c312c7';
-    const redirectUrl = 'http://localhost:3000/auth/kakao';
+    const clientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+    const redirectUrl = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL;
 
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code`;
   };
