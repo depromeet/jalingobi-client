@@ -19,6 +19,11 @@ export type Profile = {
   imgUrl: string;
 };
 
+export type ProfileImage = {
+  image?: File;
+  imageUrl: string;
+};
+
 export type User = {
   result: {
     profile: Profile;
@@ -29,7 +34,7 @@ export type User = {
 
 export type UserUpdateRequest = {
   nickName: string;
-  profileImgUrl: string;
+  profileImage?: ProfileImage;
 };
 
 export type UserResponse = User & ApiResponse;
@@ -45,10 +50,11 @@ export type UserChallenge = {
     endAt: string;
   };
   availableCount: number;
+  participantCount: number;
   status: Status;
+  statusTag: string[];
   categories: string[];
   keywords: string[];
-  participantCount: number;
 };
 
 export type UserChallengeListResult = ApiResponse & {
