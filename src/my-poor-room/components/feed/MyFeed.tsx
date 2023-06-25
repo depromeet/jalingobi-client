@@ -51,6 +51,7 @@ const MyFeed = ({
       <div>
         {recordImgUrl && (
           <>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <div
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
@@ -67,6 +68,7 @@ const MyFeed = ({
           </>
         )}
         <div className="relative">
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div
             className="w-[13.75rem] rounded-md bg-white p-2.5"
             onClick={() => onClickFeed(recordId)}

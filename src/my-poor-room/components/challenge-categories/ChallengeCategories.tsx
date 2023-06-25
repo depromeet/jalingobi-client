@@ -61,7 +61,9 @@ export const ChallengeCategories = () => {
   };
 
   // TODO: 라우팅 필요
-  const handleClickIcon = () => console.log('아이콘 클릭');
+  const handleClickIcon = () => {
+    // console.log('아이콘 클릭');
+  };
 
   /**
    * TODO: 전역 상태 관리 라이브러리 사용시 로직 변경 필요

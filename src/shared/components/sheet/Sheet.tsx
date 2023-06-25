@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 
 import * as SheetPrimitive from '@radix-ui/react-dialog';
@@ -57,7 +55,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  'bg-background fixed z-50 scale-100 gap-4 border p-6 opacity-100 shadow-lg',
+  'bg-background fixed z-50 scale-100 gap-4 border opacity-100 shadow-lg',
   {
     variants: {
       position: {
@@ -153,7 +151,7 @@ const SheetContent = React.forwardRef<
   DialogContentProps
 >(({ position, size, className, children, ...props }, ref) => (
   <SheetPortal position={position}>
-    <SheetOverlay />
+    <SheetOverlay onClick={(e) => e.preventDefault()} />
     <SheetPrimitive.Content
       ref={ref}
       className={cn(sheetVariants({ position, size }), className)}

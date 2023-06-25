@@ -1,4 +1,4 @@
-import { TChallengeFeed, TMyFeed } from '@/types/feed';
+import { TChallengeFeed, TMyFeed } from '@/shared/types/feed';
 
 export const isFeedDateDifferent = ({
   currentFeed,

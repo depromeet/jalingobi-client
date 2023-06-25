@@ -3,8 +3,8 @@ import { Fragment } from 'react';
 import { DateChip } from '@/my-poor-room/components/chip';
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
+import { TMyFeed } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date';
-import { TMyFeed } from '@/types/feed';
 
 import { MyFeed } from '../feed/MyFeed';
 
@@ -145,7 +145,7 @@ export const MyRoomFeedList = () => {
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {myFeedList.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
+        {myFeedList.map(({ recordInfo, challengeInfo }, index) => {
           return (
             <Fragment key={recordInfo.id}>
               {/* TODO: 서버 데이터랑 네이밍 통일 */}

@@ -38,4 +38,53 @@ export const userHandlers = [
       }),
     );
   }),
+
+  rest.get(createURL('/mypage/challenges'), (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        isSuccess: true,
+        code: 0,
+        message: 'string',
+        result: {
+          participatedChallenges: [
+            {
+              challengeId: 1,
+              title: '배달 10만원 이하로 쓰기',
+              imgUrl: '이미지 URL',
+              active: true,
+              duration: {
+                period: 30,
+                startAt: '2023-06-20',
+                endAt: '2023-06-20',
+              },
+              availableCount: 10,
+              status: 'PROCEEDING',
+              statusTag: ['마감임박'],
+              categories: ['식비', '문화생활'],
+              keywords: ['카페인 줄이기', '커피값', '커피'],
+              participantCount: 3,
+            },
+            {
+              challengeId: 2,
+              title: '배달 10만원 이하로 쓰기',
+              imgUrl: '이미지 URL',
+              active: true,
+              duration: {
+                period: 30,
+                startAt: '2023-06-20',
+                endAt: '2023-06-20',
+              },
+              availableCount: 10,
+              status: 'SUCCESS',
+              statusTag: ['마감임박'],
+              categories: ['식비'],
+              keywords: ['카페인 줄이기', '커피값', '커피'],
+              participantCount: 3,
+            },
+          ],
+        },
+      }),
+    );
+  }),
 ];

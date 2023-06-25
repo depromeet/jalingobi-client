@@ -9,6 +9,7 @@ import IconChevronDown from './icon-chevron-down.svg';
 import IconChevronLeft from './icon-chevron-left.svg';
 import IconChevronRight from './icon-chevron-right.svg';
 import IconChevronUp from './icon-chevron-up.svg';
+import IconClock from './icon-clock.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
 import IconPolygonDown from './icon-polygon-down.svg';
@@ -38,4 +39,5 @@ export {
   IconTile,
   IconArrowRight,
   IconArrowLeft,
+  IconClock,
 };

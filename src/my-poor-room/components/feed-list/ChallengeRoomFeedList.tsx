@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 
 import { Spacing } from '@/shared/components';
 import { useScrollToBottom } from '@/shared/hooks';
+import { TChallengeFeed } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date';
-import { TChallengeFeed } from '@/types/feed';
 
 import { DateChip } from '../chip';
 import { MyFeed } from '../feed/MyFeed';
@@ -158,47 +158,45 @@ export const ChallengeRoomFeedList = () => {
     <div className="-z-10 bg-gray-10 px-5">
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {challengeFeedList.map(
-          ({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
-            // TODO: 서버 데이터랑 네이밍 통일
-            return (
-              <Fragment key={recordInfo.id}>
-                {isMine ? (
-                  <MyFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
-                  />
-                ) : (
-                  <OthersFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    profileImgUrl={userInfo.imgUrl}
-                    nickname={userInfo.nickname}
-                    currentCharge={userInfo.currentCharge}
-                    onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
-                  />
-                )}
-                {isFeedDateDifferent({
-                  currentFeed: challengeFeedList[index],
-                  nextFeed: challengeFeedList[index + 1],
-                }) ? (
-                  <DateChip date={recordInfo.date} />
-                ) : (
-                  <Spacing height={32} />
-                )}
-              </Fragment>
-            );
-          },
-        )}
+        {challengeFeedList.map(({ isMine, userInfo, recordInfo }, index) => {
+          // TODO: 서버 데이터랑 네이밍 통일
+          return (
+            <Fragment key={recordInfo.id}>
+              {isMine ? (
+                <MyFeed
+                  recordId={recordInfo.id}
+                  recordImgUrl={recordInfo.imgUrl}
+                  title={recordInfo.title}
+                  price={recordInfo.price}
+                  content={recordInfo.content}
+                  recordDate={recordInfo.date}
+                  onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                />
+              ) : (
+                <OthersFeed
+                  recordId={recordInfo.id}
+                  recordImgUrl={recordInfo.imgUrl}
+                  title={recordInfo.title}
+                  price={recordInfo.price}
+                  content={recordInfo.content}
+                  recordDate={recordInfo.date}
+                  profileImgUrl={userInfo.imgUrl}
+                  nickname={userInfo.nickname}
+                  currentCharge={userInfo.currentCharge}
+                  onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                />
+              )}
+              {isFeedDateDifferent({
+                currentFeed: challengeFeedList[index],
+                nextFeed: challengeFeedList[index + 1],
+              }) ? (
+                <DateChip date={recordInfo.date} />
+              ) : (
+                <Spacing height={32} />
+              )}
+            </Fragment>
+          );
+        })}
       </ul>
       <div ref={bottomRef} />
     </div>
