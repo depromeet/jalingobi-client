@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { authKakao, oauthRequestToKakao } from '@/service/auth';
+import { OAuthRequestToKakao, authKakao } from '@/service/auth';
 
 export interface State {
   code: string;
@@ -13,7 +13,7 @@ export default function RedirectedKakao() {
     async function getToken() {
       const code = new URL(window.location.href).searchParams.get('code');
       if (code) {
-        const kakao = await oauthRequestToKakao(code);
+        const kakao = await OAuthRequestToKakao(code);
         const login = await authKakao({
           idToken: kakao.id_token,
           accessToken: kakao.access_token,

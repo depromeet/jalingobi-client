@@ -20,7 +20,7 @@ type OAuthResposneFromKakao = {
   scope: string; // 범위가 여러 개일 경우, 공백으로 구분
 };
 
-export const oauthRequestToKakao = async (
+export const OAuthRequestToKakao = async (
   code: string,
 ): Promise<OAuthResposneFromKakao> => {
   const response = await axios.post(
@@ -45,9 +45,14 @@ export const oauthRequestToKakao = async (
 export const authKakao = async (
   body: AuthKakaoBody,
 ): Promise<AuthKakaoResponse> => {
-  return httpClient.post('https://jalingobi.com/auth/kakao', body, {
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await httpClient.post(
+    'https://jalingobi.com/auth/kakao',
+    body,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
+  return response.data;
 };
