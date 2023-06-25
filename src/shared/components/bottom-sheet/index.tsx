@@ -64,9 +64,9 @@ const Content = React.forwardRef<
 ));
 Content.displayName = DialogPrimitive.Content.displayName;
 
-interface BottomSheetUiProps {
+type BottomSheetUiProps = {
   children: ReactNode;
-}
+};
 const BottomSheetUi = ({ children }: BottomSheetUiProps) => {
   return (
     <div className="flex w-screen flex-col items-center rounded-[10px] bg-white ">
@@ -75,10 +75,10 @@ const BottomSheetUi = ({ children }: BottomSheetUiProps) => {
   );
 };
 
-interface BottomSheetProps {
+type BottomSheetProps = {
   trigger: ReactNode;
   children: ReactNode;
-}
+};
 
 /**
  *

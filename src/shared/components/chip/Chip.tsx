@@ -5,9 +5,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-type ChipGroupProps = React.HTMLAttributes<HTMLDivElement> & {
+type ChipGroupProps = {
   children?: React.ReactNode;
   initialChips: string;
+  className?: string;
+  onChange?: (chip: string) => void;
 };
 
 type ChipContext = {
@@ -23,6 +25,7 @@ function ChipGroup({
   children,
   initialChips,
   className,
+  onChange,
   ...props
 }: ChipGroupProps) {
   const [selectedChip, setSelectedChip] = React.useState(initialChips);
@@ -30,6 +33,7 @@ function ChipGroup({
   const toggleChip = (chip: string) => {
     if (selectedChip === chip) return;
     setSelectedChip(chip);
+    onChange?.(chip);
   };
 
   const contextValue = useMemo(
@@ -68,7 +72,7 @@ const chipVariants = cva(
   },
 );
 
-interface ChipProps
+export interface ChipProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof chipVariants> {
   value: string;

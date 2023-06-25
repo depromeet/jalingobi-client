@@ -1,9 +1,9 @@
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
-interface Props {
+type Props = {
   children: ReactNode;
-}
+};
 
 const pretendard = localFont({
   src: [

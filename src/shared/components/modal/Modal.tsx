@@ -32,7 +32,7 @@ const ModalOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm transition-all duration-100',
+      'fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
       className,
     )}
     {...props}
@@ -49,7 +49,7 @@ const Content = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'bg-background animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 grid gap-4 rounded-b-lg shadow-lg sm:max-w-lg sm:rounded-lg',
+        'bg-background fixed z-50 grid gap-4 rounded-b-lg shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:max-w-lg sm:rounded-lg sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0',
         className,
       )}
       {...props}
@@ -64,9 +64,9 @@ const Content = React.forwardRef<
 ));
 Content.displayName = DialogPrimitive.Content.displayName;
 
-interface ModalUiProps {
+type ModalUiProps = {
   children: ReactNode;
-}
+};
 const ModalUi = ({ children }: ModalUiProps) => {
   return (
     <div className="flex w-[300px] flex-col items-center rounded-[10px] bg-white px-[20px] py-[20px]">
@@ -75,10 +75,10 @@ const ModalUi = ({ children }: ModalUiProps) => {
   );
 };
 
-interface ModalProps {
+type ModalProps = {
   trigger: ReactNode;
   children: ReactNode;
-}
+};
 
 /**
  * 
@@ -88,27 +88,27 @@ interface ModalProps {
         <div className="font-title-medium-md flex items-center justify-center text-black">
           <p>챌린지 성공</p>
         </div>
-        <Spacing height={20} />
+        <spacing height={20} />
         <div className="flex flex-col items-center">
           <IconJaringobi />
-          <Spacing height={20} />
+          <spacing height={20} />
           <p className="font-body-regular-lg text-gray-60">
             배달비 10만원 이하로 쓰기에
           </p>
           <p className="font-body-regular-lg text-gray-60">
             성공해서 자린고비가 레벨업했어요!
           </p>
-          <Spacing height={20} />
+          <spacing height={20} />
           <div className="font-body-regular-lg flex items-center justify-center">
             <p className="text-primary">
-              {transferToCurrencyForm(37000, '원')}
+              {convertNumberToCurrency(37000, '원')}
             </p>
             <p className="text-gray-60">
-              &nbsp;/ {transferToCurrencyForm(100000, '원')}
+              &nbsp;/ {convertNumberToCurrency(100000, '원')}
             </p>
           </div>
         </div>
-        <Spacing height={56} />
+        <spacing height={56} />
         <Button size="md">비슷한 챌린지 둘러보기</Button>
         <Button size="md" variant="label">
           자린고비 확인하기

@@ -34,6 +34,7 @@ module.exports = {
         functions: false,
       },
     ],
+    'no-console': 'off',
     'no-shadow': 'off',
     'no-alert': 'off',
     'no-param-reassign': 'off',

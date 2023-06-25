@@ -10,12 +10,14 @@ import IconChevronLeft from './icon-chevron-left.svg';
 import IconChevronRight from './icon-chevron-right.svg';
 import IconChevronUp from './icon-chevron-up.svg';
 import IconCircle from './icon-circle.svg';
+import IconClock from './icon-clock.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
 import IconPolygonDown from './icon-polygon-down.svg';
 import IconPolygonUp from './icon-polygon-up.svg';
 import IconSearch from './icon-search.svg';
 import IconSettings from './icon-settings.svg';
+import IconTile from './icon-tile.svg';
 import IconTimer from './icon-timer.svg';
 import IconUser from './icon-user.svg';
 import IconX from './icon-x.svg';
@@ -40,6 +42,8 @@ export {
   IconChevronRight,
   IconChevronUp,
   IconArrowUpFill,
+  IconTile,
   IconArrowRight,
   IconArrowLeft,
+  IconClock,
 };
