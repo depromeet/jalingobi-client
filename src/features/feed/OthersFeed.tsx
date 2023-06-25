@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,6 +12,7 @@ import { createEmojiInfo } from '@/shared/utils/emoji';
 import { emojiType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji/Emoji';
+import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';
 
 type OthersFeedProps = {
   recordId: number;
@@ -25,6 +26,12 @@ type OthersFeedProps = {
   emojiInfo: TEmojiInfo;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
+};
+
+type TEmoji = {
+  type: emojiType;
+  count: number;
+  selected: boolean;
 };
 
 const OthersFeed = ({
@@ -57,19 +64,19 @@ const OthersFeed = ({
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
 
-  const [emojis, setEmojis] = useState<
-    {
-      type: emojiType;
-      count: number;
-      selected: boolean;
-    }[]
-  >(DEFAULT_EMOJIS);
+  const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+
+  const updateEmoji = useUpdateEmoji();
+  const deleteEmoji = useDeleteEmoji();
 
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: emojiType) => {
     if (clickedEmojiType === 'comment') {
       return;
     }
+
+    setPrevEmojis(emojis);
 
     const clickedEmoji = emojis.find(
       (emoji) => emoji.type === clickedEmojiType,
@@ -80,6 +87,10 @@ const OthersFeed = ({
       setEmojis((prev) =>
         prev.map((emoji) => {
           if (emoji.type === clickedEmojiType) {
+            deleteEmoji.mutate({
+              recordId,
+              type: clickedEmojiType,
+            });
             return {
               ...emoji,
               selected: false,
@@ -95,6 +106,10 @@ const OthersFeed = ({
     setEmojis((prev) =>
       prev.map((emoji) => {
         if (emoji.type === clickedEmojiType) {
+          updateEmoji.mutate({
+            recordId,
+            type: clickedEmojiType,
+          });
           return {
             ...emoji,
             selected: true,
@@ -115,6 +130,22 @@ const OthersFeed = ({
       }),
     );
   };
+
+  useEffect(() => {
+    if (!updateEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [updateEmoji.isError]);
+
+  useEffect(() => {
+    if (!deleteEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [deleteEmoji.isError]);
 
   return (
     <li className="flex gap-[10px]">

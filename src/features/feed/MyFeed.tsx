@@ -71,6 +71,7 @@ const MyFeed = ({
     if (clickedEmojiType === 'comment') {
       return;
     }
+
     setPrevEmojis(emojis);
 
     const clickedEmoji = emojis.find(
