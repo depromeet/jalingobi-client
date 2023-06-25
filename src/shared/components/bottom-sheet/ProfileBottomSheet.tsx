@@ -13,12 +13,19 @@ import {
 type Props = {
   profileImage: string;
   handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 };
 
-const ProfileBottomSheet = ({ profileImage, handleImageUpload }: Props) => {
+const ProfileBottomSheet = ({
+  profileImage,
+  handleImageUpload,
+  isOpen,
+  onOpenChange,
+}: Props) => {
   return (
     <div className="relative mb-[60px]">
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={onOpenChange}>
         <SheetTrigger asChild>
           <div>
             <div className="absolute -bottom-4 -right-4 h-11 w-11 rounded-full bg-gray-20" />
