@@ -1,5 +1,7 @@
+import axios from 'axios';
+
+import { getPresignedUrl } from '@/service/image';
 import { httpClient } from '@/service/index';
-import { ApiResponse } from '@/shared/types/api';
 import {
   UserChallengeListResult,
   UserResponse,
@@ -11,10 +13,16 @@ export const fetchUserProfile = async (): Promise<UserResponse> => {
   return response.data;
 };
 
-export const updateUserProfile = async (
-  user: UserUpdateRequest,
-): Promise<ApiResponse> => {
-  return httpClient.patch('/mypage/profile', user);
+export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
+  const presignedUrl = await getPresignedUrl(userUpdate.profileImage?.image);
+  if (presignedUrl) {
+    await axios.put(presignedUrl, userUpdate.profileImage?.image);
+  }
+
+  return httpClient.patch('/mypage/profile', {
+    ...userUpdate,
+    profileImgUrl: presignedUrl || userUpdate.profileImage?.imageUrl,
+  });
 };
 
 export const fetchUserChallengeList =
@@ -22,3 +30,7 @@ export const fetchUserChallengeList =
     const response = await httpClient.get('/mypage/challenges');
     return response.data;
   };
+
+export const leaveChallenge = async (challengeId: number) => {
+  return httpClient.delete(`/mypage/challenges/${challengeId}`);
+};
