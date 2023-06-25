@@ -9,7 +9,7 @@ import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
-import { reactType, TEmojiInfo } from '@/types/feed';
+import { emojiType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji/Emoji';
 
@@ -59,14 +59,14 @@ const OthersFeed = ({
 
   const [emojis, setEmojis] = useState<
     {
-      type: reactType;
+      type: emojiType;
       count: number;
       selected: boolean;
     }[]
   >(DEFAULT_EMOJIS);
 
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
-  const handleClickEmoji = (clickedEmojiType: reactType) => {
+  const handleClickEmoji = (clickedEmojiType: emojiType) => {
     if (clickedEmojiType === 'comment') {
       return;
     }

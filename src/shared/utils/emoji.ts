@@ -1,9 +1,9 @@
-import { reactType } from '@/types/feed';
+import { emojiType } from '@/types/feed';
 
 export function createEmojiInfo(
-  type: reactType,
+  type: emojiType,
   count: number,
-  selected: reactType | null,
+  selected: emojiType | null,
 ) {
   return {
     type,

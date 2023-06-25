@@ -1,10 +1,10 @@
 import { IconComment, IconReaction } from '@/public/svgs';
-import { reactType } from '@/types/feed';
+import { emojiType } from '@/types/feed';
 
 type Props = {
-  type: reactType;
+  type: emojiType;
   count: number;
-  onClickEmoji: (type: reactType) => void;
+  onClickEmoji: (type: emojiType) => void;
 };
 
 export const Emoji = ({ type, count, onClickEmoji }: Props) => {
