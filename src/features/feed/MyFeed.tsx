@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,9 +9,10 @@ import { Spacing } from '@/shared/components';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
-import { reactType, TEmojiInfo } from '@/types/feed';
+import { emojiType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji';
+import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';
 
 type MyFeedProps = {
   recordId: number;
@@ -27,7 +28,7 @@ type MyFeedProps = {
 };
 
 type TEmoji = {
-  type: reactType;
+  type: emojiType;
   count: number;
   selected: boolean;
 };
@@ -59,12 +60,18 @@ const MyFeed = ({
   ];
 
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
+  const updateEmoji = useUpdateEmoji();
+  const deleteEmoji = useDeleteEmoji();
+
+  // TODO: 이모지 컨테이너 분리하기
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
-  const handleClickEmoji = (clickedEmojiType: reactType) => {
+  const handleClickEmoji = (clickedEmojiType: emojiType) => {
     if (clickedEmojiType === 'comment') {
       return;
     }
+    setPrevEmojis(emojis);
 
     const clickedEmoji = emojis.find(
       (emoji) => emoji.type === clickedEmojiType,
@@ -75,6 +82,10 @@ const MyFeed = ({
       setEmojis((prev) =>
         prev.map((emoji) => {
           if (emoji.type === clickedEmojiType) {
+            deleteEmoji.mutate({
+              recordId,
+              type: clickedEmojiType,
+            });
             return {
               ...emoji,
               selected: false,
@@ -90,6 +101,11 @@ const MyFeed = ({
     setEmojis((prev) =>
       prev.map((emoji) => {
         if (emoji.type === clickedEmojiType) {
+          // TODO: debounce 적용이 필요할 수도.
+          updateEmoji.mutate({
+            recordId,
+            type: clickedEmojiType,
+          });
           return {
             ...emoji,
             selected: true,
@@ -97,6 +113,7 @@ const MyFeed = ({
           };
         }
         if (emoji.selected) {
+          // TODO: 민정님께 여쭤보기 delete를 넣어줘야 하나 ?
           return {
             ...emoji,
             selected: false,
@@ -110,6 +127,22 @@ const MyFeed = ({
       }),
     );
   };
+
+  useEffect(() => {
+    if (!updateEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [updateEmoji.isError]);
+
+  useEffect(() => {
+    if (!deleteEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [deleteEmoji.isError]);
 
   return (
     <li className="flex justify-end">
