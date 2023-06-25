@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import { emojiType, TEmojiInfo } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
-import { emojiType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji/Emoji';
 import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';
@@ -169,6 +169,7 @@ const OthersFeed = ({
         <Spacing height={8} />
         {recordImgUrl && (
           <>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <div
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
@@ -185,6 +186,7 @@ const OthersFeed = ({
           </>
         )}
         <div className="relative">
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div
             className="w-[13.75rem] rounded-md bg-white p-2.5"
             onClick={() => onClickFeed(recordId)}

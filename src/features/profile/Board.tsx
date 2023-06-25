@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { UserChallengeResult } from '@/types/user';
+import { ChallengeStatus } from '@/shared/types/user';
 
 type Props = {
-  board?: UserChallengeResult;
+  board?: ChallengeStatus;
 };
 const Board = ({ board }: Props) => {
   return (
