@@ -1,4 +1,4 @@
-import { ProgressBar } from './Progressbar';
+import { ProgressBar } from '@/shared/components/progress-bar';
 
 type Props = {
   goalCharge: string;

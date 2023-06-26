@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 
 const useKeepScrollPosition = (deps: any[]) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ const useKeepScrollPosition = (deps: any[]) => {
   }, [...deps]);
 
   // TODO: window가 아닌 특정 Ref의 scroll값을 변경시키도록 수정하면 좋을 듯.
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (containerRef?.current) {
       const container = containerRef?.current || {};
 

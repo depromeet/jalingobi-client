@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import { emojiType, TEmojiInfo } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
-import { emojiType, TEmojiInfo } from '@/types/feed';
 
 import { Emoji } from '../emoji';
 import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';

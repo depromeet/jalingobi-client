@@ -6,7 +6,7 @@ import {
   ChallengeRoomFeedListResponse,
   MyRoomFeedListRequest,
   MyRoomFeedListResponse,
-} from '@/types/feed';
+} from '@/shared/types/feed';
 
 import { httpClient } from '.';
 

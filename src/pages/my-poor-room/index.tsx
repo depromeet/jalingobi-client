@@ -2,11 +2,10 @@ import { ReactElement } from 'react';
 
 import { ChallengeRoomFeedList, MyRoomFeedList } from '@/features/feed';
 import { Spacing } from '@/shared/components';
+import { ChallengeAchievementContainer } from '@/shared/components/challenge-achievement/ChallengeAchievementContainer';
+import { ChallengeCategories } from '@/shared/components/challenge-category/ChallengeCategories';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import { useRoom } from '@/shared/store/room';
-
-import { ChallengeAchievementContainer } from './ChallengeAchievementContainer';
-import { ChallengeCategories } from './ChallengeCategories';
 
 export default function MyPoorRoom() {
   const challengeId = useRoom((state) => state.challengeId);

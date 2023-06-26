@@ -7,10 +7,10 @@ import {
   getMyRoomFeedList,
 } from '@/service/feed';
 import {
+  ChallengeAchievementRequest,
   ChallengeRoomFeedListRequest,
   MyRoomFeedListRequest,
-  ChallengeAchievementRequest,
-} from '@/types/feed';
+} from '@/shared/types/feed';
 
 // TODO: 키값 한번에 관리하기
 

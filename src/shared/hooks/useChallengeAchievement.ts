@@ -1,4 +1,4 @@
-import { ChallengeAchievementResponse } from '@/types/feed';
+import { ChallengeAchievementResponse } from '@/shared/types/feed';
 
 import { convertNumberToCurrency } from '../utils/currency';
 

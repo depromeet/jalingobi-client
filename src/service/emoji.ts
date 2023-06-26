@@ -1,5 +1,5 @@
-import { ApiResponse } from '@/types/api';
-import { EmojiRequest } from '@/types/emoji';
+import { ApiResponse } from '@/shared/types/api';
+import { EmojiRequest } from '@/shared/types/emoji';
 
 import { httpClient } from '.';
 

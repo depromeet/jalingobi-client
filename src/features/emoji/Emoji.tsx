@@ -1,5 +1,5 @@
 import { IconComment, IconReaction } from '@/public/svgs';
-import { emojiType } from '@/types/feed';
+import { emojiType } from '@/shared/types/feed';
 
 type Props = {
   type: emojiType;

@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 
-import { DateChip } from '@/pages/my-poor-room/DateChip';
 import { Spacing } from '@/shared/components';
+import { DateChip } from '@/shared/components/date-chip';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { isFeedDateDifferent } from '@/shared/utils/date';

@@ -1,4 +1,4 @@
-import { emojiType } from '@/types/feed';
+import { emojiType } from '@/shared/types/feed';
 
 export function createEmojiInfo(
   type: emojiType,
