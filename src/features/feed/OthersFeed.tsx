@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
-import { v4 as uuidv4 } from 'uuid';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
@@ -206,10 +205,10 @@ const OthersFeed = ({
           </div>
           <Spacing height={8} />
           <div className="flex gap-1">
-            {emojis.map(({ type, count }) => {
+            {emojis.map(({ type, count }, index) => {
               return (
                 <Emoji
-                  key={uuidv4()}
+                  key={index}
                   type={type}
                   count={count}
                   onClickEmoji={handleClickEmoji}

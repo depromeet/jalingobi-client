@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import { useChallengeList } from '@/features/feed/queries';
 import { IconTile } from '@/public/svgs';
 import { useRoom } from '@/shared/store/room';
@@ -37,7 +35,7 @@ export const ChallengeCategories = () => {
         {data.result.map(({ challengeId, imgUrl, title }) => {
           return (
             <ChallengeCategory
-              key={uuidv4()}
+              key={challengeId}
               challengeId={challengeId}
               imgUrl={imgUrl}
               title={title}
