@@ -113,7 +113,6 @@ const MyFeed = ({
           };
         }
         if (emoji.selected) {
-          // TODO: 민정님께 여쭤보기 delete를 넣어줘야 하나 ?
           return {
             ...emoji,
             selected: false,

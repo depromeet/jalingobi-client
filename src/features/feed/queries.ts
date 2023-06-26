@@ -12,8 +12,6 @@ import {
   MyRoomFeedListRequest,
 } from '@/shared/types/feed';
 
-// TODO: 키값 한번에 관리하기
-
 export const useChallengeRoomFeedList = ({
   challengeId,
   offsetRecordId,
