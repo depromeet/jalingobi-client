@@ -16,7 +16,8 @@ export const Emoji = ({ type, count, onClickEmoji }: Props) => {
   };
 
   return (
-    <div
+    <button
+      type="button"
       className="flex h-7 w-[3.25rem] items-center justify-center gap-1.5 rounded bg-white"
       onClick={() => onClickEmoji(type)}
     >
@@ -26,6 +27,6 @@ export const Emoji = ({ type, count, onClickEmoji }: Props) => {
         {type === 'comment' ? <IconComment /> : <IconReaction />}
       </div>
       <p className="font-caption-medium-md text-gray-60">{count}</p>
-    </div>
+    </button>
   );
 };
