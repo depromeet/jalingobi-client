@@ -1,11 +1,11 @@
-import { TChallengeFeed, TMyFeed } from '@/shared/types/feed';
+import { ChallengeFeedType, MyFeedType } from '@/shared/types/feed';
 
 export const isFeedDateDifferent = ({
   currentFeed,
   nextFeed,
 }: {
-  currentFeed: TMyFeed | TChallengeFeed;
-  nextFeed: TMyFeed | TChallengeFeed;
+  currentFeed: MyFeedType | ChallengeFeedType;
+  nextFeed: MyFeedType | ChallengeFeedType;
 }) => {
   if (!nextFeed) return true; // if there is no next feed, show the DateChip
 

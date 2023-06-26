@@ -1,6 +1,7 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, DependencyList } from 'react';
 
-const useKeepScrollPosition = (deps: any[]) => {
+// TODO: 수정이 필요한 훅입니다.
+const useKeepScrollPosition = (deps: DependencyList[]) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const previousScrollPosition = useRef<number>(0);
 

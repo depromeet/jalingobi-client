@@ -11,7 +11,7 @@ export const useUpdateEmoji = () => {
 
   return useMutation({
     mutationFn: updateEmoji,
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['useUpdateEmoji', id] });
     },
   });
@@ -23,7 +23,7 @@ export const useDeleteEmoji = () => {
 
   return useMutation({
     mutationFn: deleteEmoji,
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['juseDeleteEmoji', id] });
     },
   });

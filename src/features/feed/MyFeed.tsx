@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { emojiType, TEmojiInfo } from '@/shared/types/feed';
+import { emojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
@@ -19,7 +19,7 @@ type MyFeedProps = {
   price: number;
   content: string;
   recordDate: string;
-  emojiInfo: TEmojiInfo;
+  emojiInfo: EmojiInfoType;
   challengeImgUrl?: string;
   challengeTitle?: string;
   recordImgUrl?: string;

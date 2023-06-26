@@ -2,7 +2,7 @@ import { ApiResponse } from './api';
 
 export type emojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
 
-export type TEmojiInfo = {
+export type EmojiInfoType = {
   selected: emojiType | null;
   CRAZY: number;
   REGRETFUL: number;
@@ -10,7 +10,7 @@ export type TEmojiInfo = {
   comment: number;
 };
 
-export type TChallengeFeed = {
+export type ChallengeFeedType = {
   isMine: boolean;
   userInfo: {
     imgUrl: string;
@@ -25,10 +25,10 @@ export type TChallengeFeed = {
     price: number;
     date: string;
   };
-  emojiInfo: TEmojiInfo;
+  emojiInfo: EmojiInfoType;
 };
 
-export type TMyFeed = {
+export type MyFeedType = {
   recordInfo: {
     id: number;
     imgUrl: string;
@@ -50,26 +50,26 @@ export type TMyFeed = {
   };
 };
 
-export type TChallengeRoomFeedListResult = {
+export type ChallengeRoomFeedListResultType = {
   result: {
     total: number;
     limit: number;
     current: number;
     lastRecordId: number;
-    challengeFeedList: TChallengeFeed[];
+    challengeFeedList: ChallengeFeedType[];
   };
 };
 
-export type TMyRoomFeedListResult = {
+export type MyRoomFeedListResultType = {
   result: {
     total: number;
     limit: number;
     current: number;
-    myFeedList: TMyFeed[];
+    myFeedList: MyFeedType[];
   };
 };
 
-export type TAchievementResult = {
+export type AchievementResultType = {
   result: {
     goalCharge: number;
     currentCharge: number;
@@ -78,7 +78,7 @@ export type TAchievementResult = {
   };
 };
 
-export type TChallengeListResult = {
+export type ChallengeListResultType = {
   result: {
     challengeId: number;
     title: string;
@@ -101,10 +101,10 @@ export type ChallengeAchievementRequest = {
 };
 
 export type ChallengeRoomFeedListResponse = ApiResponse &
-  TChallengeRoomFeedListResult;
+  ChallengeRoomFeedListResultType;
 
-export type MyRoomFeedListResponse = ApiResponse & TMyRoomFeedListResult;
+export type MyRoomFeedListResponse = ApiResponse & MyRoomFeedListResultType;
 
-export type ChallengeAchievementResponse = ApiResponse & TAchievementResult;
+export type ChallengeAchievementResponse = ApiResponse & AchievementResultType;
 
-export type ChallengeListResponse = ApiResponse & TChallengeListResult;
+export type ChallengeListResponse = ApiResponse & ChallengeListResultType;
