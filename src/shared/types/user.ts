@@ -37,7 +37,7 @@ export type UserUpdateRequest = {
   profileImage?: ProfileImage;
 };
 
-export type UserResponse = User & ApiResponse;
+export type UserResponse = ApiResponse<User>;
 
 export type UserChallenge = {
   challengeId: number;
@@ -57,8 +57,6 @@ export type UserChallenge = {
   keywords: string[];
 };
 
-export type UserChallengeListResult = ApiResponse & {
-  result: {
-    participatedChallenges: UserChallenge[];
-  };
-};
+export type UserChallengeListResult2 = ApiResponse<{
+  participatedChallenges: UserChallenge[];
+}>;
