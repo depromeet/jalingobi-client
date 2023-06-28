@@ -1,3 +1,4 @@
+import useIntersectionObserver from './useIntersectionObserver';
 import { useScrollToBottom } from './useScrollToBottom';
 
-export { useScrollToBottom };
+export { useScrollToBottom, useIntersectionObserver };

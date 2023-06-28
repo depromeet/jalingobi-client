@@ -1,4 +1,16 @@
-export type TChallengeFeed = {
+import { ApiResponse } from './api';
+
+export type emojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+
+export type EmojiInfoType = {
+  selected: emojiType | null;
+  CRAZY: number;
+  REGRETFUL: number;
+  WELLDONE: number;
+  comment: number;
+};
+
+export type ChallengeFeedType = {
   isMine: boolean;
   userInfo: {
     imgUrl: string;
@@ -13,16 +25,10 @@ export type TChallengeFeed = {
     price: number;
     date: string;
   };
-  emojiInfo: {
-    selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
-    comment: number;
-  };
+  emojiInfo: EmojiInfoType;
 };
 
-export type TMyFeed = {
+export type MyFeedType = {
   recordInfo: {
     id: number;
     imgUrl: string;
@@ -36,10 +42,69 @@ export type TMyFeed = {
     title: string;
   };
   emojiInfo: {
-    selectedEmoji: string | null;
-    crazy: number;
-    regretful: number;
-    wellDone: number;
+    selected: emojiType | null;
+    CRAZY: number;
+    REGRETFUL: number;
+    WELLDONE: number;
     comment: number;
   };
 };
+
+export type ChallengeRoomFeedListResultType = {
+  result: {
+    total: number;
+    limit: number;
+    current: number;
+    lastRecordId: number;
+    challengeFeedList: ChallengeFeedType[];
+  };
+};
+
+export type MyRoomFeedListResultType = {
+  result: {
+    total: number;
+    limit: number;
+    current: number;
+    myFeedList: MyFeedType[];
+  };
+};
+
+export type AchievementResultType = {
+  result: {
+    goalCharge: number;
+    currentCharge: number;
+    percent: number;
+    dueDay: number;
+  };
+};
+
+export type ChallengeListResultType = {
+  result: {
+    challengeId: number;
+    title: string;
+    imgUrl: string;
+    active: boolean;
+  }[];
+};
+
+export type ChallengeRoomFeedListRequest = {
+  challengeId: number;
+  offsetRecordId: number;
+};
+
+export type MyRoomFeedListRequest = {
+  offset: number;
+};
+
+export type ChallengeAchievementRequest = {
+  challengeId: number;
+};
+
+export type ChallengeRoomFeedListResponse = ApiResponse &
+  ChallengeRoomFeedListResultType;
+
+export type MyRoomFeedListResponse = ApiResponse & MyRoomFeedListResultType;
+
+export type ChallengeAchievementResponse = ApiResponse & AchievementResultType;
+
+export type ChallengeListResponse = ApiResponse & ChallengeListResultType;
