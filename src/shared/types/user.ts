@@ -13,6 +13,11 @@ export const StatusMap: Record<Status, string> = {
   COMPLETED: '완료',
 };
 
+export type Social = {
+  id: string;
+  platform: string;
+};
+
 export type Profile = {
   name: string;
   email: string;
@@ -25,11 +30,10 @@ export type ProfileImage = {
 };
 
 export type User = {
-  result: {
-    profile: Profile;
-    notification: boolean;
-    userChallengeResult: ChallengeStatus;
-  };
+  social: Social;
+  profile: Profile;
+  notification: boolean;
+  userChallengeResult: ChallengeStatus;
 };
 
 export type UserUpdateRequest = {
@@ -57,6 +61,6 @@ export type UserChallenge = {
   keywords: string[];
 };
 
-export type UserChallengeListResult2 = ApiResponse<{
+export type UserChallengeListResult = ApiResponse<{
   participatedChallenges: UserChallenge[];
 }>;
