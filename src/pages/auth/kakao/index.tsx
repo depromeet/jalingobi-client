@@ -9,6 +9,7 @@ export interface State {
 
 export default function RedirectedKakao() {
   const router = useRouter();
+
   useEffect(() => {
     async function getToken() {
       const code = new URL(window.location.href).searchParams.get('code');
