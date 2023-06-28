@@ -1,10 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import { useRoom } from '@/shared/store/room';
 import { emojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -57,6 +59,8 @@ const MyFeed = ({
     createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
+
+  const challengeId = useRoom((state) => state.challengeId);
 
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
   const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
@@ -145,25 +149,31 @@ const MyFeed = ({
 
   return (
     <li className="flex justify-end">
-      <div>
+      <div className="relative">
         {recordImgUrl && (
           <>
-            <div
-              className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
-              onClick={() => onClickFeed(recordId)}
-            >
-              <Image
-                src={recordImgUrl}
-                alt="피드 이미지"
-                fill
-                className="object-cover"
-                sizes="(max-width: 600px) 60vw"
-              />
-            </div>
+            <Link href={`/my-poor-room/${challengeId}/${recordId}`}>
+              <button
+                type="button"
+                className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
+                onClick={() => onClickFeed(recordId)}
+              >
+                <Image
+                  src={recordImgUrl}
+                  alt="피드 이미지"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 600px) 60vw"
+                />
+              </button>
+            </Link>
             <Spacing height={6} />
           </>
         )}
-        <div className="relative">
+        <Link
+          href={`/my-poor-room/${challengeId}/${recordId}`}
+          className="relative"
+        >
           <div
             className="w-[13.75rem] rounded-md bg-white p-2.5"
             onClick={() => onClickFeed(recordId)}
@@ -197,23 +207,23 @@ const MyFeed = ({
               </div>
             )}
           </div>
-          <Spacing height={8} />
-          <div className="flex gap-1">
-            {emojis.map(({ type, count }, index) => {
-              return (
-                <Emoji
-                  key={index}
-                  type={type}
-                  count={count}
-                  onClickEmoji={handleClickEmoji}
-                />
-              );
-            })}
-          </div>
-          <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
-            {getKoreanDate(convertedDate)}
-          </p>
+        </Link>
+        <Spacing height={8} />
+        <div className="flex gap-1">
+          {emojis.map(({ type, count }, index) => {
+            return (
+              <Emoji
+                key={index}
+                type={type}
+                count={count}
+                onClickEmoji={handleClickEmoji}
+              />
+            );
+          })}
         </div>
+        <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
+          {getKoreanDate(convertedDate)}
+        </p>
       </div>
     </li>
   );
