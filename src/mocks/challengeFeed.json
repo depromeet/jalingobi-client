@@ -1,0 +1,692 @@
+[
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 1,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-18T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 2,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-17T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 3,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-16T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 4,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 5,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 6,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-19T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 7,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-18T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 8,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-17T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 9,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-16T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 10,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 11,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 12,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-19T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 13,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-18T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 14,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-17T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 15,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-16T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 16,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 17,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 18,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-19T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 19,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-18T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 20,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-17T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 21,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-16T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 22,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 23,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 24,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-19T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 25,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-18T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 26,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-17T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 27,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-16T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 28,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": false,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 29,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-15T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  },
+  {
+    "isMine": true,
+    "userInfo": {
+      "imgUrl": "/images/profile.png",
+      "nickname": "사용자 닉네임",
+      "currentCharge": 78000
+    },
+    "recordInfo": {
+      "id": 30,
+      "imgUrl": "/images/떡볶이.jpg",
+      "title": "기록 타이틀",
+      "content": "기록 내용",
+      "price": 5000,
+      "date": "2023-06-19T15:34:50.756"
+    },
+    "emojiInfo": {
+      "selected": null,
+      "CRAZY": 2,
+      "REGRETFUL": 0,
+      "WELLDONE": 3,
+      "comment": 5
+    }
+  }
+]

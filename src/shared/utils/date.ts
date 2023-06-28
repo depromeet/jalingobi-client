@@ -1,11 +1,11 @@
-import { TChallengeFeed, TMyFeed } from '@/shared/types/feed';
+import { ChallengeFeedType, MyFeedType } from '@/shared/types/feed';
 
 export const isFeedDateDifferent = ({
   currentFeed,
   nextFeed,
 }: {
-  currentFeed: TMyFeed | TChallengeFeed;
-  nextFeed: TMyFeed | TChallengeFeed;
+  currentFeed: MyFeedType | ChallengeFeedType;
+  nextFeed: MyFeedType | ChallengeFeedType;
 }) => {
   if (!nextFeed) return true; // if there is no next feed, show the DateChip
 
@@ -18,4 +18,14 @@ export const isFeedDateDifferent = ({
   const nextDate = new Date(nextFeed.recordInfo.date).setHours(0, 0, 0, 0);
 
   return currentDate !== nextDate; // return true if the dates are different
+};
+
+export const getKoreanDate = (date: string) => {
+  if (date.includes('am')) {
+    return date.replace('am', '오전');
+  }
+  if (date.includes('pm')) {
+    return date.replace('pm', '오후');
+  }
+  return '';
 };

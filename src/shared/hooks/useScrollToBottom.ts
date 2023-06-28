@@ -1,14 +1,15 @@
 import { useEffect, useRef } from 'react';
 
-const useScrollToBottom = () => {
+const useScrollToBottom = ({ earlyReturn }: { earlyReturn?: boolean }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!bottomRef.current) {
+    if (!bottomRef.current || earlyReturn) {
       return;
     }
+
     bottomRef.current.scrollIntoView();
-  }, [bottomRef.current]);
+  }, [[bottomRef.current]]);
 
   return { bottomRef };
 };

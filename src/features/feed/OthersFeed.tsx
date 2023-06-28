@@ -1,10 +1,17 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import { emojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
+import { getKoreanDate } from '@/shared/utils/date';
+import { createEmojiInfo } from '@/shared/utils/emoji';
+
+import { Emoji } from '../emoji/Emoji';
+import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';
 
 type OthersFeedProps = {
   recordId: number;
@@ -15,8 +22,15 @@ type OthersFeedProps = {
   content: string;
   recordDate: string;
   profileImgUrl: string;
+  emojiInfo: EmojiInfoType;
   recordImgUrl?: string;
   onClickFeed: (recordId: number) => void;
+};
+
+type TEmoji = {
+  type: emojiType;
+  count: number;
+  selected: boolean;
 };
 
 const OthersFeed = ({
@@ -25,10 +39,11 @@ const OthersFeed = ({
   currentCharge,
   profileImgUrl,
   nickname,
-  recordImgUrl,
   title,
   content,
   recordDate,
+  emojiInfo,
+  recordImgUrl,
   onClickFeed,
 }: OthersFeedProps) => {
   const convertedDate = dayjs(recordDate).format('a hh:mm');
@@ -41,15 +56,96 @@ const OthersFeed = ({
     unitOfCurrency: '원',
   });
 
-  const getKoreanDate = (date: string) => {
-    if (date.includes('am')) {
-      return date.replace('am', '오전');
+  const DEFAULT_EMOJIS = [
+    createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
+    createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
+    createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
+    createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
+  ];
+
+  const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+
+  const updateEmoji = useUpdateEmoji();
+  const deleteEmoji = useDeleteEmoji();
+
+  // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
+  const handleClickEmoji = (clickedEmojiType: emojiType) => {
+    if (clickedEmojiType === 'comment') {
+      return;
     }
-    if (date.includes('pm')) {
-      return date.replace('pm', '오후');
+
+    setPrevEmojis(emojis);
+
+    const clickedEmoji = emojis.find(
+      (emoji) => emoji.type === clickedEmojiType,
+    );
+    const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
+
+    if (isClickedEmojiSelectedBefore) {
+      setEmojis((prev) =>
+        prev.map((emoji) => {
+          if (emoji.type === clickedEmojiType) {
+            deleteEmoji.mutate({
+              recordId,
+              type: clickedEmojiType,
+            });
+            return {
+              ...emoji,
+              selected: false,
+              count: emoji.count - 1,
+            };
+          }
+          return emoji;
+        }),
+      );
+      return;
     }
-    return '';
+
+    setEmojis((prev) =>
+      prev.map((emoji) => {
+        if (emoji.type === clickedEmojiType) {
+          updateEmoji.mutate({
+            recordId,
+            type: clickedEmojiType,
+          });
+          return {
+            ...emoji,
+            selected: true,
+            count: emoji.count + 1,
+          };
+        }
+        if (emoji.selected) {
+          return {
+            ...emoji,
+            selected: false,
+            count: emoji.count - 1,
+          };
+        }
+        return {
+          ...emoji,
+          selected: false,
+        };
+      }),
+    );
   };
+
+  useEffect(() => {
+    if (!updateEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [updateEmoji.isError]);
+
+  useEffect(() => {
+    if (!deleteEmoji.isError) {
+      return;
+    }
+
+    setEmojis(prevEmojis);
+  }, [deleteEmoji.isError]);
+
   return (
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
@@ -106,6 +202,19 @@ const OthersFeed = ({
             <p className="font-caption-medium-md truncate text-gray-50">
               {content}
             </p>
+          </div>
+          <Spacing height={8} />
+          <div className="flex gap-1">
+            {emojis.map(({ type, count }, index) => {
+              return (
+                <Emoji
+                  key={index}
+                  type={type}
+                  count={count}
+                  onClickEmoji={handleClickEmoji}
+                />
+              );
+            })}
           </div>
           <div className="absolute bottom-0 left-[14rem] flex">
             <p className="font-caption-medium-sm shrink-0 text-gray-50">
