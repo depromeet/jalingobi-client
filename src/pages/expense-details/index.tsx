@@ -4,14 +4,10 @@ import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 
 import { useChallengeDetail } from '@/features/feed/queries';
-import {
-  IconArrowLeft,
-  IconCrazyBig,
-  IconRegretfulBig,
-  IconWelldoneBig,
-} from '@/public/svgs';
+import { IconArrowLeft, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
+import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
 import { TextInput } from '@/shared/components/text-input';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -105,35 +101,7 @@ export default function ExpenseDetails() {
         <Spacing height={20} />
       </div>
       <div className="border-t-[1px] border-gray-20" />
-      <div className="flex justify-between px-6 py-4">
-        <div className="flex">
-          <IconCrazyBig className="h-10 w-10" />
-          <div className="flex w-14 flex-col items-center">
-            <p className="font-caption-medium-sm text-gray-60">미친거지</p>
-            <p className="font-caption-medium-lg text-gray-70">
-              {data.result.emojiInfo.CRAZY}
-            </p>
-          </div>
-        </div>
-        <div className="flex">
-          <IconRegretfulBig className="h-10 w-10" />
-          <div className="flex w-14 flex-col items-center">
-            <p className="font-caption-medium-sm text-gray-60">후회할거지</p>
-            <p className="font-caption-medium-lg text-gray-70">
-              {data.result.emojiInfo.REGRETFUL}
-            </p>
-          </div>
-        </div>
-        <div className="flex">
-          <IconWelldoneBig className="h-10 w-10" />
-          <div className="flex w-14 flex-col items-center">
-            <p className="font-caption-medium-sm text-gray-60">잘할거지</p>
-            <p className="font-caption-medium-lg text-gray-70">
-              {data.result.emojiInfo.WELLDONE}
-            </p>
-          </div>
-        </div>
-      </div>
+      <ExpenseDetailsEmojiContainer {...data.result.emojiInfo} />
       <div className="border-t-[1px] border-gray-20" />
       <Spacing height={16} />
       <CommentContainer comments={data.result.commentInfoList} />
