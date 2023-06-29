@@ -23,7 +23,7 @@ export const Comment = (commentInfo: CommentInfoType) => {
           <p className="font-body-regular-sm text-black">{nickname}</p>
           <p className="font-body-regular-sm text-gray-60">{content}</p>
           <p className="font-caption-medium-md text-gray-50">
-            {timeDifference('2023-06-24T14:37:47.323', new Date())}
+            {timeDifference(commentDate, new Date())}
           </p>
         </div>
       </div>
