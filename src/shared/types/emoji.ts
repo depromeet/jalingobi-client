@@ -1,6 +1,6 @@
-import { emojiType } from './feed';
+import { EmojiType } from './feed';
 
 export type EmojiRequest = {
   recordId: number;
-  type: emojiType;
+  type: EmojiType;
 };

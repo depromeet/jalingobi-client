@@ -1,9 +1,11 @@
 import { ApiResponse } from './api';
 
-export type emojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+export type EmojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+
+export type EmojiTypeName = '미친거지' | '후회할거지' | '잘할거지';
 
 export type EmojiInfoType = {
-  selected: emojiType | null;
+  selected: EmojiType | null;
   CRAZY: number;
   REGRETFUL: number;
   WELLDONE: number;
