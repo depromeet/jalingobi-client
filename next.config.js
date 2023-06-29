@@ -28,6 +28,15 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/auth/kakao',
+        destination: 'https://jalingobi.com/auth/kakao', // Proxy to Backend
+      },
+    ];
+  },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;

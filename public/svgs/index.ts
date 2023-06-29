@@ -10,6 +10,7 @@ import IconChevronLeft from './icon-chevron-left.svg';
 import IconChevronRight from './icon-chevron-right.svg';
 import IconChevronUp from './icon-chevron-up.svg';
 import IconClock from './icon-clock.svg';
+import IconKakao from './icon-kakao.svg';
 import IconComment from './icon-comment.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
@@ -25,6 +26,7 @@ export {
   IconComment,
   IconReaction,
   IconAdd,
+  IconKakao,
   IconCancel,
   IconOverflow,
   IconAddCircle,
