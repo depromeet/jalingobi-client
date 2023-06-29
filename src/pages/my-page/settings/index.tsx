@@ -1,7 +1,12 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { IconArrowLeft, IconArrowRight } from '@/public/svgs';
+import { logout } from '@/service/auth';
+import { Spacing } from '@/shared/components';
+import { Button } from '@/shared/components/button';
+import { Modal } from '@/shared/components/modal';
 
 const ManagePage = () => {
   return (
@@ -25,12 +30,57 @@ const ManagePage = () => {
             <IconArrowRight className="h-4 w-4" />
           </Link>
         </li>
-        <li className="flex items-center justify-between py-4">
-          <span>로그아웃</span>
-        </li>
-        <li className="flex items-center justify-between py-4">
-          <span className="text-system-danger">회원탈퇴</span>
-        </li>
+        <button type="button" onClick={logout}>
+          <li className="flex items-center justify-between py-4">
+            <span>로그아웃</span>
+          </li>
+        </button>
+        <Modal
+          trigger={
+            <button type="button">
+              <li className="flex items-center justify-between py-4">
+                <span className="text-system-danger">회원탈퇴</span>
+              </li>
+            </button>
+          }
+        >
+          <div className="flex flex-col items-center px-[5px]">
+            <div className="flex items-center justify-center text-black">
+              <p className="font-title-medium-sm font-semibold">제목</p>
+            </div>
+            <Spacing height={20} />
+            <Image
+              src="/images/tear-fish.png"
+              alt="avatar"
+              width="172"
+              height="172"
+            />
+            <div className="flex flex-col items-center">
+              <Spacing height={20} />
+              <p className="font-body-regular-sm">
+                정말로 자린고비를 떠나시나요?
+              </p>
+              <p className="font-body-regular-sm">자린고비 탈퇴시 지출내역과</p>
+              <p className="font-body-regular-sm">캐릭터 레벨이 삭제됩니다.</p>
+              <Spacing height={20} />
+              <div className="font-body-regular-sm flex items-center justify-center">
+                <p className="font-semibold text-primary">
+                  언제든 자린고비로 돌아와주세요
+                </p>
+              </div>
+            </div>
+            <Spacing height={32} />
+            <Button size="md">
+              <span className="font-button-medium-sm">취소</span>
+            </Button>
+            <Spacing height={6} />
+            <Button size="md" variant="label" onClick={logout}>
+              <span className="font-button-medium-sm text-gray-60">
+                탈퇴하기
+              </span>
+            </Button>
+          </div>
+        </Modal>
       </ul>
     </div>
   );
