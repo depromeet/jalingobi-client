@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -9,9 +10,34 @@ import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
 import { TextInput } from '@/shared/components/text-input';
-import { RecordInfoType, UserInfoType } from '@/shared/types/feed';
+import {
+  CommentInfoType,
+  RecordInfoType,
+  UserInfoType,
+} from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
+
+const MAX = 100000;
+
+// TODO: 서버 연동 필요
+const user = {
+  social: {
+    id: 'something',
+    platform: 'KAKAO',
+  },
+  profile: {
+    name: '나현우',
+    email: 'email@gmail.com',
+    imgUrl: '/images/profile.png',
+  },
+  notification: false,
+  userChallengeResult: {
+    PROCEEDING: 1,
+    SUCCESS: 0,
+    COMPLETED: 0,
+  },
+};
 
 export default function ExpenseDetails() {
   const router = useRouter();
@@ -22,6 +48,47 @@ export default function ExpenseDetails() {
     challengeId: Number(challengeId),
     recordId: Number(recordId),
   });
+
+  const [comments, setComments] = useState<CommentInfoType[]>([]);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.key !== 'Enter' ||
+      inputValue.length === 0 ||
+      e.nativeEvent.isComposing // It is for korean onKeyDown / onKeyUp bug
+    ) {
+      return;
+    }
+
+    const addedComment = {
+      isMine: true,
+      // TODO: 동호님에게 commenterId는 왜 number인지 묻기
+      commenterId: Math.floor(Math.random() * MAX),
+      // TODO: nickname으로 수정하기
+      nickname: user.profile.name,
+      imgUrl: user.profile.imgUrl,
+      // QUESTION: 임의로 사용되는 정수 key값을 넣어야 하는데 랜덤으로 넣어줘도 크게 상관 없을 것 같아서 이렇게 했어요. 다른 의견 있으시면 부탁드릴게요
+      commentId: Math.floor(Math.random() * MAX),
+      content: inputValue,
+      commentDate: `${new Date()}`,
+    };
+
+    setComments((prev) => [...prev, addedComment]);
+    setInputValue('');
+  };
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setComments(data.result.commentInfoList);
+  }, [data]);
 
   if (isLoading) {
     return <>...loading</>;
@@ -42,8 +109,12 @@ export default function ExpenseDetails() {
       <ExpenseDetailsEmojiContainer {...data.result.emojiInfo} />
       <Divider />
       <Spacing height={16} />
-      <CommentContainer comments={data.result.commentInfoList} />
-      <Bottom />
+      <CommentContainer comments={comments} />
+      <Bottom
+        inputValue={inputValue}
+        onChange={handleChangeInput}
+        onKeyDown={handleKeyDown}
+      />
       <Spacing height={68} />
     </section>
   );
@@ -133,12 +204,26 @@ function Contents({
   );
 }
 
-function Bottom() {
+function Bottom({
+  inputValue,
+  onChange,
+  onKeyDown,
+}: {
+  inputValue: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+}) {
   return (
     <div className="fixed bottom-0 w-full ">
       <Divider />
       <div className="bg-white px-5 py-3">
-        <TextInput className="w-full" placeholder="눌러서 댓글을 남겨보세요." />
+        <TextInput
+          className="w-full"
+          placeholder="눌러서 댓글을 남겨보세요."
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          value={inputValue}
+        />
       </div>
     </div>
   );
