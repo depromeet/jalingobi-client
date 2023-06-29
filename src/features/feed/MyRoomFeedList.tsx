@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
+import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { MyFeed } from './MyFeed';
@@ -13,10 +15,14 @@ const INITIAL_VALUE_OFFSET = 0;
 
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const MyRoomFeedList = () => {
+  const router = useRouter();
+
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useMyRoomFeedList({
       offset: INITIAL_VALUE_OFFSET,
     });
+
+  const challengeId = useRoom((state) => state.challengeId);
 
   const feeds = useMemo(
     () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
@@ -29,6 +35,12 @@ export const MyRoomFeedList = () => {
   });
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
   const { containerRef } = useKeepScrollPosition([feeds]);
+
+  const handleClickFeed = (recordId: number) => {
+    router.push(
+      `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
+    );
+  };
 
   // TODO: react-error-boundary, suspense 도입하기
   // TODO: 디자인 팀에 에러 페이지, 로더 요청하기
@@ -59,7 +71,7 @@ export const MyRoomFeedList = () => {
                 challengeImgUrl={challengeInfo.imgUrl}
                 challengeTitle={challengeInfo.title}
                 emojiInfo={emojiInfo}
-                onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                onClickFeed={handleClickFeed}
               />
               {isFeedDateDifferent({
                 currentFeed: feeds[index],

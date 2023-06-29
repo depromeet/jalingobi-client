@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
@@ -173,44 +172,40 @@ const OthersFeed = ({
         {recordImgUrl && (
           <>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <Link href={`/my-poor-room/${challengeId}/${recordId}`}>
-              <div
-                className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
-                onClick={() => onClickFeed(recordId)}
-              >
-                <Image
-                  src={recordImgUrl}
-                  alt="피드 이미지"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 600px) 60vw"
-                />
-              </div>
-            </Link>
+            <div
+              className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
+              onClick={() => onClickFeed(recordId)}
+            >
+              <Image
+                src={recordImgUrl}
+                alt="피드 이미지"
+                fill
+                className="object-cover"
+                sizes="(max-width: 600px) 60vw"
+              />
+            </div>
             <Spacing height={6} />
           </>
         )}
         <div className="relative">
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <Link href={`/my-poor-room/${challengeId}/${recordId}`}>
-            <div
-              className="w-[13.75rem] rounded-md bg-white p-2.5"
-              onClick={() => onClickFeed(recordId)}
-            >
-              <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
-                <div>
-                  <p className="w-[6.75rem] truncate">{title}</p>
-                </div>
-                <div className="flex items-center gap-1.5 ">
-                  <p>{convertedPrice}</p>
-                  <IconChevronRight className="h-2 w-1 fill-none" />
-                </div>
+          <div
+            className="w-[13.75rem] rounded-md bg-white p-2.5"
+            onClick={() => onClickFeed(recordId)}
+          >
+            <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
+              <div>
+                <p className="w-[6.75rem] truncate">{title}</p>
               </div>
-              <p className="font-caption-medium-md truncate text-gray-50">
-                {content}
-              </p>
+              <div className="flex items-center gap-1.5 ">
+                <p>{convertedPrice}</p>
+                <IconChevronRight className="h-2 w-1 fill-none" />
+              </div>
             </div>
-          </Link>
+            <p className="font-caption-medium-md truncate text-gray-50">
+              {content}
+            </p>
+          </div>
         </div>
         <Spacing height={8} />
         <div className="flex gap-1">

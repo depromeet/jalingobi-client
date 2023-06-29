@@ -1,12 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { useRoom } from '@/shared/store/room';
 import { emojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -59,8 +57,6 @@ const MyFeed = ({
     createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
-
-  const challengeId = useRoom((state) => state.challengeId);
 
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
   const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
@@ -152,62 +148,56 @@ const MyFeed = ({
       <div className="relative">
         {recordImgUrl && (
           <>
-            <Link href={`/my-poor-room/${challengeId}/${recordId}`}>
-              <button
-                type="button"
-                className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
-                onClick={() => onClickFeed(recordId)}
-              >
-                <Image
-                  src={recordImgUrl}
-                  alt="피드 이미지"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 600px) 60vw"
-                />
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
+              onClick={() => onClickFeed(recordId)}
+            >
+              <Image
+                src={recordImgUrl}
+                alt="피드 이미지"
+                fill
+                className="object-cover"
+                sizes="(max-width: 600px) 60vw"
+              />
+            </button>
             <Spacing height={6} />
           </>
         )}
-        <Link
-          href={`/my-poor-room/${challengeId}/${recordId}`}
-          className="relative"
+        <div
+          className="relative w-[13.75rem] rounded-md bg-white p-2.5"
+          onClick={() => onClickFeed(recordId)}
         >
-          <div
-            className="w-[13.75rem] rounded-md bg-white p-2.5"
-            onClick={() => onClickFeed(recordId)}
-          >
-            <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
-              <div>
-                <p className="w-[6.75rem] truncate">{title}</p>
-              </div>
-              <div className="flex items-center gap-1.5 ">
-                <p>{convertedPrice}</p>
-                <IconChevronRight className="h-2 w-1 fill-none" />
-              </div>
+          <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
+            <div>
+              <p className="w-[6.75rem] truncate">{title}</p>
             </div>
-            <p className="font-caption-medium-md truncate text-gray-50">
-              {content}
-            </p>
-            <Spacing height={5} />
-            {isChallengeExist && (
-              <div className="flex gap-[5px]">
-                <div className="relative h-[1.125rem] w-[1.125rem]">
-                  <Image
-                    src={challengeImgUrl}
-                    alt=""
-                    fill
-                    sizes="(max-width: 600px) 10vw"
-                  />
-                </div>
-                <p className="font-caption-medium-md w-44 truncate text-gray-60">
-                  {challengeTitle}
-                </p>
-              </div>
-            )}
+            <div className="flex items-center gap-1.5 ">
+              <p>{convertedPrice}</p>
+              <IconChevronRight className="h-2 w-1 fill-none" />
+            </div>
           </div>
-        </Link>
+          <p className="font-caption-medium-md truncate text-gray-50">
+            {content}
+          </p>
+          <Spacing height={5} />
+          {isChallengeExist && (
+            <div className="flex gap-[5px]">
+              <div className="relative h-[1.125rem] w-[1.125rem]">
+                <Image
+                  src={challengeImgUrl}
+                  alt=""
+                  fill
+                  sizes="(max-width: 600px) 10vw"
+                />
+              </div>
+              <p className="font-caption-medium-md w-44 truncate text-gray-60">
+                {challengeTitle}
+              </p>
+            </div>
+          )}
+        </div>
+
         <Spacing height={8} />
         <div className="flex gap-1">
           {emojis.map(({ type, count }, index) => {

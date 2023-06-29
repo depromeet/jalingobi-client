@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
 import { Spacing } from '@/shared/components';
@@ -23,6 +24,8 @@ export const ChallengeRoomFeedList = () => {
       offsetRecordId: INITIAL_VALUE_OFFSET_RECORD_ID,
     });
 
+  const router = useRouter();
+
   const feeds = useMemo(
     () =>
       data ? data.pages.flatMap(({ result }) => result.challengeFeedList) : [],
@@ -35,6 +38,12 @@ export const ChallengeRoomFeedList = () => {
   });
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
   const { containerRef } = useKeepScrollPosition([feeds]);
+
+  const handleClickFeed = (recordId: number) => {
+    router.push(
+      `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
+    );
+  };
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
@@ -63,7 +72,7 @@ export const ChallengeRoomFeedList = () => {
                   content={recordInfo.content}
                   recordDate={recordInfo.date}
                   emojiInfo={emojiInfo}
-                  onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                  onClickFeed={handleClickFeed}
                 />
               ) : (
                 <OthersFeed
@@ -77,7 +86,7 @@ export const ChallengeRoomFeedList = () => {
                   nickname={userInfo.nickname}
                   currentCharge={userInfo.currentCharge}
                   emojiInfo={emojiInfo}
-                  onClickFeed={(id) => console.log(`Feed Id: ${id}`)}
+                  onClickFeed={handleClickFeed}
                 />
               )}
               {isFeedDateDifferent({
