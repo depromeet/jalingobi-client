@@ -11,17 +11,23 @@ import IconChevronRight from './icon-chevron-right.svg';
 import IconChevronUp from './icon-chevron-up.svg';
 import IconClock from './icon-clock.svg';
 import IconComment from './icon-comment.svg';
+import IconCrazyBig from './icon-crazy-big.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
 import IconPolygonDown from './icon-polygon-down.svg';
 import IconPolygonUp from './icon-polygon-up.svg';
 import IconReaction from './icon-reaction.svg';
+import IconRegretfulBig from './icon-regretful-big.svg';
 import IconSearch from './icon-search.svg';
 import IconSettings from './icon-settings.svg';
 import IconTile from './icon-tile.svg';
 import IconUser from './icon-user.svg';
+import IconWelldoneBig from './icon-welldone-big.svg';
 
 export {
+  IconCrazyBig,
+  IconRegretfulBig,
+  IconWelldoneBig,
   IconComment,
   IconReaction,
   IconAdd,

@@ -199,6 +199,7 @@ const MyFeed = ({
         </div>
 
         <Spacing height={8} />
+        {/* TODO: 이모지 변경 필요 */}
         <div className="flex gap-1">
           {emojis.map(({ type, count }, index) => {
             return (
