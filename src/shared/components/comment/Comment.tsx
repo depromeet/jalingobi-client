@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import dayjs from 'dayjs';
-
 import { IconOverflow } from '@/public/svgs';
 import { CommentInfoType } from '@/shared/types/feed';
+import { timeDifference } from '@/shared/utils/date';
 
 export const Comment = (commentInfo: CommentInfoType) => {
   const { imgUrl, nickname, content, commentDate } = commentInfo;
@@ -24,7 +23,7 @@ export const Comment = (commentInfo: CommentInfoType) => {
           <p className="font-body-regular-sm text-black">{nickname}</p>
           <p className="font-body-regular-sm text-gray-60">{content}</p>
           <p className="font-caption-medium-md text-gray-50">
-            {timeDifference(commentDate, new Date())}
+            {timeDifference('2023-06-24T14:37:47.323', new Date())}
           </p>
         </div>
       </div>
@@ -32,20 +31,3 @@ export const Comment = (commentInfo: CommentInfoType) => {
     </div>
   );
 };
-
-function timeDifference(date1: string, date2: Date) {
-  const diffMinutes = dayjs(date2).diff(date1, 'minute');
-  const diffHours = dayjs(date2).diff(date1, 'hour');
-  const diffDays = dayjs(date2).diff(date1, 'day');
-
-  if (diffMinutes < 60) {
-    return `${diffMinutes}분 전`;
-  }
-  if (diffHours < 24) {
-    return `${diffHours}시간 전`;
-  }
-  if (diffDays <= 7) {
-    return `${diffDays}일 전`;
-  }
-  return dayjs(date1).format('M월 DD일');
-}
