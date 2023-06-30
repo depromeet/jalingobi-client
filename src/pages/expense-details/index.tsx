@@ -4,6 +4,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
+import { useAddComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
 import { IconArrowLeft, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
@@ -49,7 +50,10 @@ export default function ExpenseDetails() {
     recordId: Number(recordId),
   });
 
+  const addComment = useAddComment();
+
   const [comments, setComments] = useState<CommentInfoType[]>([]);
+  const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +68,13 @@ export default function ExpenseDetails() {
     ) {
       return;
     }
+
+    setPrevComments(comments);
+
+    addComment.mutate({
+      recordId: Number(recordId),
+      content: inputValue,
+    });
 
     const addedComment = {
       isMine: true,
@@ -89,6 +100,14 @@ export default function ExpenseDetails() {
 
     setComments(data.result.commentInfoList);
   }, [data]);
+
+  useEffect(() => {
+    if (!addComment.isError) {
+      return;
+    }
+
+    setComments(prevComments);
+  }, [addComment.isError]);
 
   if (isLoading) {
     return <>...loading</>;
