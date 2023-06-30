@@ -51,7 +51,7 @@ export const userHandlers = [
           {
             challengeId: 1,
             title: '배달 10만원 이하로 쓰기',
-            imgUrl: '이미지 URL',
+            imgUrl: '/images/profile.png',
             active: true,
             duration: {
               period: 30,
@@ -68,7 +68,7 @@ export const userHandlers = [
           {
             challengeId: 2,
             title: '배달 10만원 이하로 쓰기',
-            imgUrl: '이미지 URL',
+            imgUrl: '/images/profile.png',
             active: true,
             duration: {
               period: 30,
