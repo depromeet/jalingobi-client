@@ -196,16 +196,20 @@ function Contents({
           </p>
         </div>
       </div>
-      <Spacing height={20} />
-      <div className="relative h-[12.5rem] w-[21rem] overflow-hidden rounded-lg">
-        <Image
-          src={recordImgUrl}
-          alt=""
-          fill
-          className="object-cover"
-          sizes="(max-width: 600px) 60vw"
-        />
-      </div>
+      {recordImgUrl && (
+        <>
+          <Spacing height={20} />
+          <div className="relative h-[12.5rem] w-[21rem] overflow-hidden rounded-lg">
+            <Image
+              src={recordImgUrl}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 600px) 60vw"
+            />
+          </div>
+        </>
+      )}
       <Spacing height={20} />
       <div className="flex justify-between">
         <div>
