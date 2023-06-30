@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useUserChallengeList } from '@/features/record/queries';
 import { cn } from '@/lib/utils';
@@ -7,14 +7,30 @@ import { IconArrowLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
+import { ALL } from '@/shared/constant';
 import { Status, StatusMap } from '@/shared/types/user';
 
 const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
 
 const RecordPage = () => {
   const [status, setStatus] = React.useState<Status>('PROCEEDING');
+  const [uniqueCategorySet, setUniqueCategorySet] = React.useState<Set<string>>(
+    new Set(),
+  );
   const [category, setCategory] = React.useState('전체');
   const { data } = useUserChallengeList();
+
+  useEffect(() => {
+    const categoriesSet: Set<string> = new Set();
+    categoriesSet.add(ALL);
+    data?.result.participatedChallenges.forEach((challenge) => {
+      challenge.categories.forEach((category) => {
+        categoriesSet.add(category);
+      });
+    });
+    setUniqueCategorySet(categoriesSet);
+  }, [data?.result.participatedChallenges]);
+
   const select = (status: Status) => {
     setStatus(status);
   };
@@ -48,10 +64,11 @@ const RecordPage = () => {
         ))}
       </div>
       <ChipGroup initialChips="전체" className="py-5" onChange={setCategory}>
-        <ChipGroup.Chip value="전체">전체</ChipGroup.Chip>
-        <ChipGroup.Chip value="식비">식비</ChipGroup.Chip>
-        <ChipGroup.Chip value="문화생활">문화생활</ChipGroup.Chip>
-        <ChipGroup.Chip value="취미">취미</ChipGroup.Chip>
+        {Array.from(uniqueCategorySet).map((category, index) => (
+          <ChipGroup.Chip value={category} key={index}>
+            {category}
+          </ChipGroup.Chip>
+        ))}
       </ChipGroup>
       <ChallengeList
         challenges={data?.result.participatedChallenges}
