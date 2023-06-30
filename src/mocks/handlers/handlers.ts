@@ -1,3 +1,5 @@
 import { userHandlers } from '@/mocks/handlers/user';
 
-export const handlers = [...userHandlers];
+import { challengeHandlers } from './challenge';
+
+export const handlers = [...userHandlers, ...challengeHandlers];
