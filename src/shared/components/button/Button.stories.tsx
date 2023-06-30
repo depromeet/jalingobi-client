@@ -15,15 +15,15 @@ type Story = StoryObj<typeof Button>;
 
 export const Contained: Story = {
   args: {
-    variant: 'contained',
+    variant: 'primary',
     size: 'md',
-    children: 'Contained',
+    children: 'Primary',
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    variant: 'contained',
+    variant: 'primary',
     size: 'md',
     children: (
       <>
