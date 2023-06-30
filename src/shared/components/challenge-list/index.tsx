@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/shared/components/button';
@@ -8,7 +7,7 @@ import { Status, UserChallenge } from '@/shared/types/user';
 type Props = {
   challenges?: UserChallenge[];
   category: string;
-  status: Status;
+  status?: Status;
 };
 
 const ChallengeList = ({ challenges, category, status }: Props) => {
@@ -34,12 +33,7 @@ const ChallengeList = ({ challenges, category, status }: Props) => {
   return (
     <ul className="flex flex-col gap-y-2.5">
       {filteredCategoryList?.map((challenge) => (
-        <Link
-          key={challenge.challengeId}
-          href={`/challenge/${challenge.challengeId}`}
-        >
-          <ChallengeCard key={challenge.challengeId} challenge={challenge} />
-        </Link>
+        <ChallengeCard key={challenge.challengeId} challenge={challenge} />
       ))}
     </ul>
   );
