@@ -88,17 +88,17 @@ type ModalProps = {
         <div className="font-title-medium-md flex items-center justify-center text-black">
           <p>챌린지 성공</p>
         </div>
-        <spacing height={20} />
+        <Spacing height={20} />
         <div className="flex flex-col items-center">
           <IconJaringobi />
-          <spacing height={20} />
+          <Spacing height={20} />
           <p className="font-body-regular-lg text-gray-60">
             배달비 10만원 이하로 쓰기에
           </p>
           <p className="font-body-regular-lg text-gray-60">
             성공해서 자린고비가 레벨업했어요!
           </p>
-          <spacing height={20} />
+          <Spacing height={20} />
           <div className="font-body-regular-lg flex items-center justify-center">
             <p className="text-primary">
               {convertNumberToCurrency(37000, '원')}
@@ -108,7 +108,7 @@ type ModalProps = {
             </p>
           </div>
         </div>
-        <spacing height={56} />
+        <Spacing height={56} />
         <Button size="md">비슷한 챌린지 둘러보기</Button>
         <Button size="md" variant="label">
           자린고비 확인하기

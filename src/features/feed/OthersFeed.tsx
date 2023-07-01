@@ -5,7 +5,8 @@ import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { emojiType, EmojiInfoType } from '@/shared/types/feed';
+import { useRoom } from '@/shared/store/room';
+import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
@@ -28,7 +29,7 @@ type OthersFeedProps = {
 };
 
 type TEmoji = {
-  type: emojiType;
+  type: EmojiType;
   count: number;
   selected: boolean;
 };
@@ -63,6 +64,8 @@ const OthersFeed = ({
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
 
+  const challengeId = useRoom((state) => state.challengeId);
+
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
   const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
@@ -70,7 +73,7 @@ const OthersFeed = ({
   const deleteEmoji = useDeleteEmoji();
 
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
-  const handleClickEmoji = (clickedEmojiType: emojiType) => {
+  const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
       return;
     }
@@ -156,7 +159,7 @@ const OthersFeed = ({
           sizes="(max-width: 600px) 10vw"
         />
       </div>
-      <div>
+      <div className="relative">
         <div className="flex items-center gap-[4px]">
           <p className="font-body-regular-sm w-40 truncate font-[600] text-black">
             {nickname}
@@ -203,24 +206,24 @@ const OthersFeed = ({
               {content}
             </p>
           </div>
-          <Spacing height={8} />
-          <div className="flex gap-1">
-            {emojis.map(({ type, count }, index) => {
-              return (
-                <Emoji
-                  key={index}
-                  type={type}
-                  count={count}
-                  onClickEmoji={handleClickEmoji}
-                />
-              );
-            })}
-          </div>
-          <div className="absolute bottom-0 left-[14rem] flex">
-            <p className="font-caption-medium-sm shrink-0 text-gray-50">
-              {getKoreanDate(convertedDate)}
-            </p>
-          </div>
+        </div>
+        <Spacing height={8} />
+        <div className="flex gap-1">
+          {emojis.map(({ type, count }, index) => {
+            return (
+              <Emoji
+                key={index}
+                type={type}
+                count={count}
+                onClickEmoji={handleClickEmoji}
+              />
+            );
+          })}
+        </div>
+        <div className="absolute bottom-0 left-[14rem] flex">
+          <p className="font-caption-medium-sm shrink-0 text-gray-50">
+            {getKoreanDate(convertedDate)}
+          </p>
         </div>
       </div>
     </li>

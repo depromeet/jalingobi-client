@@ -18,7 +18,6 @@ export const ChallengeCategory = ({
   onClick,
 }: ChallengeCategoryProps) => {
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <button
       type="button"
       className="flex flex-col items-center gap-1 px-2"

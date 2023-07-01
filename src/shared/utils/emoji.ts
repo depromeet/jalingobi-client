@@ -1,9 +1,9 @@
-import { emojiType } from '@/shared/types/feed';
+import { EmojiType } from '@/shared/types/feed';
 
 export function createEmojiInfo(
-  type: emojiType,
+  type: EmojiType,
   count: number,
-  selected: emojiType | null,
+  selected: EmojiType | null,
 ) {
   return {
     type,

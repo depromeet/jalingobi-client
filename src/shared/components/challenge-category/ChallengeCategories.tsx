@@ -1,3 +1,5 @@
+import { shallow } from 'zustand/shallow';
+
 import { useChallengeList } from '@/features/feed/queries';
 import { IconTile } from '@/public/svgs';
 import { useRoom } from '@/shared/store/room';
@@ -7,10 +9,10 @@ import { ChallengeCategory } from './ChallengeCategory';
 export const ChallengeCategories = () => {
   const { data, isLoading, isError } = useChallengeList();
 
-  const [selectedChallengeId, setChallengeId] = useRoom((state) => [
-    state.challengeId,
-    state.setChallengeId,
-  ]);
+  const [selectedChallengeId, setChallengeId] = useRoom(
+    (state) => [state.challengeId, state.setChallengeId],
+    shallow,
+  );
 
   const handleClickCategory = (challengeId: number) => {
     setChallengeId(challengeId);
