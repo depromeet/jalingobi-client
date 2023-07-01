@@ -13,6 +13,12 @@ export const StatusMap: Record<Status, string> = {
   COMPLETED: '완료',
 };
 
+export type Social = {
+  id: string;
+  platform: 'KAKAO';
+};
+
+// QUESITON: 창완님 swagger에서는 nickname으로 되어있네요. 수정 필요할 것 같아요
 export type Profile = {
   name: string;
   email: string;
@@ -26,6 +32,7 @@ export type ProfileImage = {
 
 export type User = {
   result: {
+    social: Social;
     profile: Profile;
     notification: boolean;
     userChallengeResult: ChallengeStatus;
