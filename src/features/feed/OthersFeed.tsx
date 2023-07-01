@@ -170,8 +170,8 @@ const OthersFeed = ({
         <Spacing height={8} />
         {recordImgUrl && (
           <>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <div
+            <button
+              type="button"
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
             >
@@ -182,29 +182,25 @@ const OthersFeed = ({
                 className="object-cover"
                 sizes="(max-width: 600px) 60vw"
               />
-            </div>
+            </button>
             <Spacing height={6} />
           </>
         )}
-        <div className="relative">
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <div
-            className="w-[13.75rem] rounded-md bg-white p-2.5"
-            onClick={() => onClickFeed(recordId)}
-          >
-            <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
-              <div>
-                <p className="w-[6.75rem] truncate">{title}</p>
-              </div>
-              <div className="flex items-center gap-1.5 ">
-                <p>{convertedPrice}</p>
-                <IconChevronRight className="h-2 w-1 fill-none" />
-              </div>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+        <div
+          className="relative w-[13.75rem] rounded-md bg-white p-2.5"
+          onClick={() => onClickFeed(recordId)}
+        >
+          <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
+            <p className="w-[6.75rem] truncate">{title}</p>
+            <div className="flex items-center gap-1.5 ">
+              <p>{convertedPrice}</p>
+              <IconChevronRight className="h-2 w-1 fill-none" />
             </div>
-            <p className="font-caption-medium-md truncate text-gray-50">
-              {content}
-            </p>
           </div>
+          <p className="font-caption-medium-md truncate text-gray-50">
+            {content}
+          </p>
         </div>
         <Spacing height={8} />
         <div className="flex gap-1">
