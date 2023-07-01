@@ -45,14 +45,10 @@ export const OAuthRequestToKakao = async (
 export const authKakao = async (
   body: AuthKakaoBody,
 ): Promise<AuthKakaoResponse> => {
-  const response = await httpClient.post(
-    'https://api.jalingobi.com/auth/kakao',
-    body,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await httpClient.post('/auth/kakao', body, {
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+  });
   return response.data;
 };

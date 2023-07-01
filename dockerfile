@@ -29,10 +29,6 @@ WORKDIR /usr/src/app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV NEXT_PUBLIC_API_URL https://api.jalingobi.com
-ENV NEXT_PUBLIC_KAKAO_CLIENT_ID 05853a15a5b25d2003a144e6e4c312c7
-ENV NEXT_PUBLIC_KAKAO_REDIRECT_URL https://jalingobi.com/auth/kakao
-ENV NEXT_PUBLIC_KAKAO_CLIENT_SECRET p7ABkLq3Izo05Ci78aPfKRN21ASoWyLT
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -40,6 +36,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.env.production ./.env.production
 
 USER nextjs
 
