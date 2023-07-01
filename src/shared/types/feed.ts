@@ -1,53 +1,48 @@
 import { ApiResponse } from './api';
 
-export type emojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+export type EmojiType = 'CRAZY' | 'REGRETFUL' | 'WELLDONE' | 'comment';
+
+export type EmojiTypeName = '미친거지' | '후회할거지' | '잘할거지';
 
 export type EmojiInfoType = {
-  selected: emojiType | null;
+  selected: EmojiType | null;
   CRAZY: number;
   REGRETFUL: number;
   WELLDONE: number;
   comment: number;
 };
 
+export type UserInfoType = {
+  imgUrl: string;
+  nickname: string;
+  currentCharge: number;
+};
+
+export type RecordInfoType = {
+  id: number;
+  imgUrl: string;
+  title: string;
+  content: string;
+  price: number;
+  date: string;
+};
+
+export type ChallengeInfoType = {
+  imgUrl: string;
+  title: string;
+};
+
 export type ChallengeFeedType = {
   isMine: boolean;
-  userInfo: {
-    imgUrl: string;
-    nickname: string;
-    currentCharge: number;
-  };
-  recordInfo: {
-    id: number;
-    imgUrl: string;
-    title: string;
-    content: string;
-    price: number;
-    date: string;
-  };
+  userInfo: UserInfoType;
+  recordInfo: RecordInfoType;
   emojiInfo: EmojiInfoType;
 };
 
 export type MyFeedType = {
-  recordInfo: {
-    id: number;
-    imgUrl: string;
-    title: string;
-    content: string;
-    price: number;
-    date: string;
-  };
-  challengeInfo: {
-    imgUrl: string;
-    title: string;
-  };
-  emojiInfo: {
-    selected: emojiType | null;
-    CRAZY: number;
-    REGRETFUL: number;
-    WELLDONE: number;
-    comment: number;
-  };
+  recordInfo: RecordInfoType;
+  challengeInfo: ChallengeInfoType;
+  emojiInfo: EmojiInfoType;
 };
 
 export type ChallengeRoomFeedListResultType = {
@@ -86,6 +81,33 @@ export type ChallengeListResultType = {
     active: boolean;
   }[];
 };
+
+export type ChallengeDetailRequest = {
+  challengeId: number;
+  recordId: number;
+};
+
+export type CommentInfoType = {
+  isMine: boolean;
+  commenterId: number;
+  nickname: string;
+  imgUrl: string;
+  commentId: number;
+  content: string;
+  commentDate: string;
+};
+
+export type ChallengeDetailResultType = {
+  result: {
+    isMine: boolean;
+    userInfo: UserInfoType;
+    recordInfo: RecordInfoType;
+    emojiInfo: EmojiInfoType;
+    commentInfoList: CommentInfoType[];
+  };
+};
+
+export type ChallengeDetailResponse = ApiResponse & ChallengeDetailResultType;
 
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;

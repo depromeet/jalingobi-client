@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
+import { getChallengeDetail } from '@/service/challenge';
 import {
   getChallengeAchievement,
   getChallengeList,
@@ -8,6 +9,7 @@ import {
 } from '@/service/feed';
 import {
   ChallengeAchievementRequest,
+  ChallengeDetailRequest,
   ChallengeRoomFeedListRequest,
   MyRoomFeedListRequest,
 } from '@/shared/types/feed';
@@ -61,5 +63,15 @@ export const useChallengeList = () => {
   return useQuery({
     queryKey: ['challengeList'],
     queryFn: getChallengeList,
+  });
+};
+
+export const useChallengeDetail = ({
+  challengeId,
+  recordId,
+}: ChallengeDetailRequest) => {
+  return useQuery({
+    queryKey: ['challengeDetail', challengeId, recordId],
+    queryFn: () => getChallengeDetail({ challengeId, recordId }),
   });
 };
