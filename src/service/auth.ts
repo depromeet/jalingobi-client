@@ -46,7 +46,7 @@ export const authKakao = async (
   body: AuthKakaoBody,
 ): Promise<AuthKakaoResponse> => {
   const response = await httpClient.post(
-    'https://jalingobi.com/auth/kakao',
+    'https://api.jalingobi.com/auth/kakao',
     body,
     {
       headers: {
