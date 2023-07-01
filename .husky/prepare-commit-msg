@@ -3,5 +3,3 @@
 
 CURRENT_SCOPE=$(git branch --show-current | cut -d '/' -f 1)
 COMMIT_MESSAGE=$(cat "$1")
-
-
