@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { setAuthHeader } from '@/service';
 import { OAuthRequestToKakao, authKakao } from '@/service/auth';
 
 export interface State {
@@ -22,7 +21,6 @@ export default function RedirectedKakao() {
         });
 
         if (login) {
-          setAuthHeader(login.result?.accessToken as string);
           router.push('/search');
         }
       } else {

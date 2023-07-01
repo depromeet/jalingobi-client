@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { AuthKakaoBody, AuthKakaoResponse } from '@/lib/interfaces';
-import { httpClient } from '@/service/index';
+import { httpClient, setAuthHeader } from '@/service/index';
 
 type OAuthResposneFromKakao = {
   /** 토큰 타입, bearer 로 고정 */
@@ -50,5 +50,7 @@ export const authKakao = async (
       'Content-Type': 'application/json',
     },
   });
+  setAuthHeader(response.data.result?.accessToken as string);
+
   return response.data;
 };
