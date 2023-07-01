@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
@@ -10,6 +9,7 @@ import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
+import ImageLoader from '@/shared/components/image/ImageLoader';
 import { TextInput } from '@/shared/components/text-input';
 import {
   CommentInfoType,
@@ -195,7 +195,7 @@ function Contents({
   return (
     <div className="p-5">
       <div className="flex gap-2.5">
-        <Image
+        <ImageLoader
           src={userImgUrl}
           alt=""
           width={40}
@@ -213,7 +213,7 @@ function Contents({
         <>
           <Spacing height={20} />
           <div className="relative h-[12.5rem] w-[21rem] overflow-hidden rounded-lg">
-            <Image
+            <ImageLoader
               src={recordImgUrl}
               alt=""
               fill
