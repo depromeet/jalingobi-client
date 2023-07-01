@@ -37,12 +37,12 @@ export const getChallengeAchievement = async ({
   challengeId,
 }: ChallengeAchievementRequest): Promise<ChallengeAchievementResponse> => {
   const response = await httpClient.get(
-    `challenge/${challengeId}/proceeding/info`,
+    `/challenge/${challengeId}/proceeding/info`,
   );
   return response.data;
 };
 
 export const getChallengeList = async (): Promise<ChallengeListResponse> => {
-  const response = await httpClient.get('challenge/my-list');
+  const response = await httpClient.get('/challenge/my-list');
   return response.data;
 };
