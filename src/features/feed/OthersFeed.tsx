@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { useRoom } from '@/shared/store/room';
-import { emojiType, EmojiInfoType } from '@/shared/types/feed';
+import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
@@ -29,7 +29,7 @@ type OthersFeedProps = {
 };
 
 type TEmoji = {
-  type: emojiType;
+  type: EmojiType;
   count: number;
   selected: boolean;
 };
@@ -73,7 +73,7 @@ const OthersFeed = ({
   const deleteEmoji = useDeleteEmoji();
 
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
-  const handleClickEmoji = (clickedEmojiType: emojiType) => {
+  const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
       return;
     }

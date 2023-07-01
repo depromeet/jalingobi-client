@@ -11,6 +11,10 @@ export const userHandlers = [
         code: 1000,
         message: '요청에 성공하였습니다.',
         result: {
+          social: {
+            id: 'something',
+            platform: 'KAKAO',
+          },
           profile: {
             name: '박정윤',
             email: 'email@gmail.com',
