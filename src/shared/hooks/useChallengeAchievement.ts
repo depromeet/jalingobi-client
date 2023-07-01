@@ -26,12 +26,11 @@ export const useConvertChallengeAcievement = (
     unitOfCurrency: '원',
   });
 
-  // TODO: 동호님에게 이렇게 오는지 물어보기
   const getDueDayPhrase = (dueDay: number) => {
-    if (dueDay !== 1) {
-      return `${dueDay}일 남았어요`;
+    if (dueDay !== 0) {
+      return `${dueDay}일 남음`;
     }
-    return '오늘이 마지막 날이에요';
+    return '오늘 종료';
   };
 
   return {

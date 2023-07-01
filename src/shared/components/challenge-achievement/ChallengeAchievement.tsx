@@ -21,7 +21,9 @@ const ChallengeAchievement = ({
             <p className="font-body-regular-lg text-black">{currentCharge}</p>
             <p className="font-body-regular-lg text-gray-60">{`/${goalCharge}`}</p>
           </div>
-          <p className="font-body-regular-sm text-gray-50">{dueDay}</p>
+          <p className="font-caption-medium-sm flex items-center text-gray-50">
+            {dueDay}
+          </p>
         </div>
         <ProgressBar percent={percent} />
       </div>
