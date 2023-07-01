@@ -105,6 +105,10 @@ export default function ExpenseDetails() {
     addCommentCommonLogic();
   };
 
+  const handleClickDelete = (commentId: number) => {
+    console.log(commentId);
+  };
+
   useEffect(() => {
     if (!data) {
       return;
@@ -140,7 +144,7 @@ export default function ExpenseDetails() {
       <ExpenseDetailsEmojiContainer {...data.result.emojiInfo} />
       <Divider />
       <Spacing height={16} />
-      <CommentContainer comments={comments} />
+      <CommentContainer comments={comments} onClickDelete={handleClickDelete} />
       <Bottom
         inputValue={inputValue}
         onChange={handleChangeInput}
