@@ -50,7 +50,7 @@ export const authKakao = async (
       'Content-Type': 'application/json',
     },
   });
-  setAuthHeader(response.data.result?.accessToken as string);
+  setAuthHeader(httpClient, response.data.result?.accessToken as string);
 
   return response.data;
 };
