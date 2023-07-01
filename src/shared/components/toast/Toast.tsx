@@ -11,7 +11,7 @@ export const Toast = ({ message }: ToastProps) => {
 
   return (
     <div
-      className={`fixed ${animation} font-caption-medium-md left-[50%] top-[80%] z-50 box-border max-w-[335px] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-black bg-opacity-80 px-2.5 py-3 text-white`}
+      className={`fixed ${animation} font-caption-medium-md left-[50%] top-[90%] z-50 box-border max-w-[335px] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-black bg-opacity-80 px-2.5 py-3 text-white`}
     >
       {message}
     </div>
