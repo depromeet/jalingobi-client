@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { IconArrowRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import { ImageLoader } from '@/shared/components/image/ImageLoader';
 import KakaoLogin from '@/shared/components/kakao-login';
 
 export default function Login() {
@@ -15,7 +15,12 @@ export default function Login() {
           거지들의 이야기로 쌓이는 소비습관
         </h1>
         <Spacing height={30} />
-        <Image src="/images/fish.png" alt="avatar" width="335" height="335" />
+        <ImageLoader
+          src="/images/fish.png"
+          alt="avatar"
+          width="335"
+          height="335"
+        />
         <Spacing height={70} />
         <span className="font-body-regular-sm items-center justify-center rounded-full bg-white px-4 py-2">
           5초안에 시작하고 소비 습관 챙기기🚀
