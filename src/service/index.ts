@@ -2,6 +2,10 @@ import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
 import { authRefresh } from './auth-refresh';
 
+export const setAuthHeader = (token: string) => {
+  axios.defaults.headers.common.Authorization = `${token}`;
+};
+
 export const interceptAfterResponseFail =
   (axiosInstance: AxiosInstance) => async (error: any) => {
     const { config } = error;
