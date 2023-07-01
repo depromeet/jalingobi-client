@@ -6,7 +6,7 @@ export const authRefresh = async (
   axiosInstance: AxiosInstance,
 ): Promise<AuthRefreshResponse> => {
   const response = await axiosInstance.post(
-    'https://jalingobi.com/auth/refresh',
+    'https://api.jalingobi.com/auth/refresh',
     undefined,
     {
       headers: {
