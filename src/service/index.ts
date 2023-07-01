@@ -4,8 +4,8 @@ import packageJson from '../../package.json';
 
 import { authRefresh } from './auth-refresh';
 
-export const setAuthHeader = (token: string) => {
-  axios.defaults.headers.common.Authorization = `${token}`;
+export const setAuthHeader = (axiosInstance: AxiosInstance, token: string) => {
+  axiosInstance.defaults.headers.common.Authorization = `${token}`;
 };
 
 export const interceptAfterResponseFail =
