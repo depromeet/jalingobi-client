@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { useRoom } from '@/shared/store/room';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -64,8 +63,6 @@ const OthersFeed = ({
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
 
-  const challengeId = useRoom((state) => state.challengeId);
-
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
   const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
@@ -86,13 +83,14 @@ const OthersFeed = ({
     const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
 
     if (isClickedEmojiSelectedBefore) {
+      deleteEmoji.mutate({
+        recordId,
+        type: clickedEmojiType,
+      });
+
       setEmojis((prev) =>
         prev.map((emoji) => {
           if (emoji.type === clickedEmojiType) {
-            deleteEmoji.mutate({
-              recordId,
-              type: clickedEmojiType,
-            });
             return {
               ...emoji,
               selected: false,
@@ -105,13 +103,14 @@ const OthersFeed = ({
       return;
     }
 
+    updateEmoji.mutate({
+      recordId,
+      type: clickedEmojiType,
+    });
+
     setEmojis((prev) =>
       prev.map((emoji) => {
         if (emoji.type === clickedEmojiType) {
-          updateEmoji.mutate({
-            recordId,
-            type: clickedEmojiType,
-          });
           return {
             ...emoji,
             selected: true,

@@ -1,3 +1,5 @@
+import { shallow } from 'zustand/shallow';
+
 import { useChallengeAchievement } from '@/features/feed/queries';
 import { useConvertChallengeAcievement } from '@/shared/hooks/useChallengeAchievement';
 import { useRoom } from '@/shared/store/room';
@@ -5,7 +7,7 @@ import { useRoom } from '@/shared/store/room';
 import { ChallengeAchievement } from './ChallengeAchievement';
 
 export const ChallengeAchievementContainer = () => {
-  const challengeId = useRoom((state) => state.challengeId);
+  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const { data, isLoading, isError } = useChallengeAchievement({ challengeId });
 

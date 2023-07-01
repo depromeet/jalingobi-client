@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import { shallow } from 'zustand/shallow';
+
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
@@ -22,7 +24,7 @@ export const MyRoomFeedList = () => {
       offset: INITIAL_VALUE_OFFSET,
     });
 
-  const challengeId = useRoom((state) => state.challengeId);
+  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const feeds = useMemo(
     () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
