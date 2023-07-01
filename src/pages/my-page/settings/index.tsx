@@ -1,14 +1,31 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { IconArrowLeft, IconArrowRight } from '@/public/svgs';
-import { logout } from '@/service/auth';
+import { drop, logout } from '@/service/auth';
 import { Spacing } from '@/shared/components';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
+import { useToast } from '@/shared/hooks/useToast';
 
 const ManagePage = () => {
+  const router = useRouter();
+  const { setToastMessage } = useToast();
+
+  const dropAndToast = () => {
+    router.push('/search');
+    setToastMessage('회원탈퇴가 완료되었습니다');
+    drop();
+  };
+
+  const logoutAndToast = () => {
+    router.push('/search');
+    setToastMessage('로그아웃 되었습니다');
+    logout();
+  };
+
   return (
     <div className="px-5">
       <header className="relative flex h-12 w-full items-center justify-center">
@@ -30,7 +47,7 @@ const ManagePage = () => {
             <IconArrowRight className="h-4 w-4" />
           </Link>
         </li>
-        <button type="button" onClick={logout}>
+        <button type="button" onClick={logoutAndToast}>
           <li className="flex items-center justify-between py-4">
             <span>로그아웃</span>
           </li>
@@ -44,16 +61,16 @@ const ManagePage = () => {
             </button>
           }
         >
-          <div className="flex flex-col items-center px-[5px]">
+          <div className="flex flex-col items-center justify-center px-[5px]">
             <div className="flex items-center justify-center text-black">
-              <p className="font-title-medium-sm font-semibold">제목</p>
+              <p className="font-title-medium-sm font-semibold">회원탈퇴</p>
             </div>
             <Spacing height={20} />
             <Image
-              src="/images/tear-fish.png"
+              src="/images/fish-with-tear.png"
               alt="avatar"
-              width="172"
-              height="172"
+              width="260"
+              height="120"
             />
             <div className="flex flex-col items-center">
               <Spacing height={20} />
@@ -74,7 +91,7 @@ const ManagePage = () => {
               <span className="font-button-medium-sm">취소</span>
             </Button>
             <Spacing height={6} />
-            <Button size="md" variant="label" onClick={logout}>
+            <Button size="md" variant="label" onClick={dropAndToast}>
               <span className="font-button-medium-sm text-gray-60">
                 탈퇴하기
               </span>

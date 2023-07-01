@@ -73,7 +73,7 @@ export const logout = async (): Promise<ApiResponse & { result: true }> => {
 
 export const drop = async (): Promise<ApiResponse & { result: true }> => {
   const response = await httpClient.delete(
-    'https://jalingobi.com//mypage/withdrawal',
+    'https://jalingobi.com/mypage/withdrawal',
     {
       headers: {
         'Content-Type': 'application/json',
