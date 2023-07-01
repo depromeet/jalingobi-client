@@ -9,8 +9,7 @@ WORKDIR /usr/src/app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
-RUN pnpm i --frozen-lockfile; 
+RUN npm ci
 
 # 프로젝트를 빌드하는 컨테이너입니다.
 FROM base AS builder
