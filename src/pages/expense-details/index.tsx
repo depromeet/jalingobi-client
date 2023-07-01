@@ -262,9 +262,9 @@ function Bottom({
           onKeyDown={onKeyDown}
           value={inputValue}
           rightSection={
-            <span>
-              <IconArrowUpFill onClick={onClickIcon} />
-            </span>
+            <button type="button" onClick={onClickIcon}>
+              <IconArrowUpFill />
+            </button>
           }
         />
       </div>
