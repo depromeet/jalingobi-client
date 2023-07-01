@@ -4,7 +4,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { useAddComment } from '@/features/comment/queries';
+import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
 import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
@@ -51,6 +51,7 @@ export default function ExpenseDetails() {
   });
 
   const addComment = useAddComment();
+  const deleteComment = useDeleteComment();
 
   const [comments, setComments] = useState<CommentInfoType[]>([]);
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
@@ -106,7 +107,16 @@ export default function ExpenseDetails() {
   };
 
   const handleClickDelete = (commentId: number) => {
-    console.log(commentId);
+    setPrevComments(comments);
+
+    deleteComment.mutate({
+      recordId: Number(recordId),
+      commentId,
+    });
+
+    setComments((prev) =>
+      prev.filter((comment) => comment.commentId !== commentId),
+    );
   };
 
   useEffect(() => {
@@ -124,6 +134,14 @@ export default function ExpenseDetails() {
 
     setComments(prevComments);
   }, [addComment.isError]);
+
+  useEffect(() => {
+    if (!deleteComment.isError) {
+      return;
+    }
+
+    setComments(prevComments);
+  }, [deleteComment.isError]);
 
   if (isLoading) {
     return <>...loading</>;

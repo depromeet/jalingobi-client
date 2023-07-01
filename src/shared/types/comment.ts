@@ -1,3 +1,5 @@
+import { ApiResponse } from './api';
+
 export type AddCommentRequest = {
   content: string;
   recordId: number;
@@ -14,3 +16,12 @@ export type AddCommentResult = {
 };
 
 export type AddCommentResponse = AddCommentRequest & AddCommentResult;
+
+export type DeleteCommentRequest = {
+  recordId: number;
+  commentId: number;
+};
+
+export type DeleteCommentResult = ApiResponse & {
+  result: { commentId: number };
+};

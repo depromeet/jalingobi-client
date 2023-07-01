@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { addComment } from '@/service/comment';
+import { addComment, deleteComment } from '@/service/comment';
 
 // TODO: key값 넣기
 export const useAddComment = () => {
@@ -10,6 +10,17 @@ export const useAddComment = () => {
     mutationFn: addComment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['addComment'] });
+    },
+  });
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['deleteComment'] });
     },
   });
 };
