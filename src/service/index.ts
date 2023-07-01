@@ -33,6 +33,7 @@ const setInterceptors = (axiosInstance: AxiosInstance) => {
 const createAxios = (axiosConfig: CreateAxiosDefaults) => {
   const axiosInstance = axios.create(axiosConfig);
 
+  axiosInstance.defaults.withCredentials = true;
   setInterceptors(axiosInstance);
 
   return axiosInstance;

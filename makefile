@@ -8,5 +8,5 @@ docker-rebuild:
 	docker build . -t $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) --no-cache
 
 docker-run:
-	docker run -d -it --rm -p 80:3000 $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+	docker run -d -it --rm -p 3000:3000 $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
 
