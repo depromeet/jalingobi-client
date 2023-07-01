@@ -9,8 +9,8 @@ WORKDIR /usr/src/app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN npm install pnpm && pnpm i --frozen-lockfile; 
-
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+RUN pnpm i --frozen-lockfile; 
 
 # 프로젝트를 빌드하는 컨테이너입니다.
 FROM base AS builder
@@ -28,11 +28,11 @@ FROM base AS runner
 WORKDIR /usr/src/app
 
 ENV NODE_ENV production
-# ENV NEXT_TELEMETRY_DISABLED 1
-# ENV NEXT_PUBLIC_API_URL https://api.jalingobi.com
-# ENV NEXT_PUBLIC_KAKAO_CLIENT_ID 05853a15a5b25d2003a144e6e4c312c7
-# ENV NEXT_PUBLIC_KAKAO_REDIRECT_URL https://jalingobi.com/auth/kakao
-# ENV NEXT_PUBLIC_KAKAO_CLIENT_SECRET p7ABkLq3Izo05Ci78aPfKRN21ASoWyLT
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_PUBLIC_API_URL https://api.jalingobi.com
+ENV NEXT_PUBLIC_KAKAO_CLIENT_ID 05853a15a5b25d2003a144e6e4c312c7
+ENV NEXT_PUBLIC_KAKAO_REDIRECT_URL https://jalingobi.com/auth/kakao
+ENV NEXT_PUBLIC_KAKAO_CLIENT_SECRET p7ABkLq3Izo05Ci78aPfKRN21ASoWyLT
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
