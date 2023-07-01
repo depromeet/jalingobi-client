@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 
 import { useAddComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
-import { IconArrowLeft, IconCrazyBig } from '@/public/svgs';
+import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
@@ -56,19 +56,7 @@ export default function ExpenseDetails() {
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (
-      e.key !== 'Enter' ||
-      inputValue.length === 0 ||
-      e.nativeEvent.isComposing // It is for korean onKeyDown / onKeyUp bug
-    ) {
-      return;
-    }
-
+  const addCommentCommonLogic = () => {
     setPrevComments(comments);
 
     addComment.mutate({
@@ -91,6 +79,30 @@ export default function ExpenseDetails() {
 
     setComments((prev) => [...prev, addedComment]);
     setInputValue('');
+  };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.key !== 'Enter' ||
+      inputValue.length === 0 ||
+      e.nativeEvent.isComposing // It is for korean onKeyDown / onKeyUp bug
+    ) {
+      return;
+    }
+
+    addCommentCommonLogic();
+  };
+
+  const handleClickIcon = () => {
+    if (inputValue.length === 0) {
+      return;
+    }
+
+    addCommentCommonLogic();
   };
 
   useEffect(() => {
@@ -133,6 +145,7 @@ export default function ExpenseDetails() {
         inputValue={inputValue}
         onChange={handleChangeInput}
         onKeyDown={handleKeyDown}
+        onClickIcon={handleClickIcon}
       />
       <Spacing height={68} />
     </section>
@@ -231,10 +244,12 @@ function Bottom({
   inputValue,
   onChange,
   onKeyDown,
+  onClickIcon,
 }: {
   inputValue: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onClickIcon: () => void;
 }) {
   return (
     <div className="fixed bottom-0 w-full ">
@@ -246,6 +261,11 @@ function Bottom({
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={inputValue}
+          rightSection={
+            <span>
+              <IconArrowUpFill onClick={onClickIcon} />
+            </span>
+          }
         />
       </div>
     </div>
