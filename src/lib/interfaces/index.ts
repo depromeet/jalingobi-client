@@ -1,7 +1,11 @@
 import { operations } from './api.interface';
 
-export type IUpdateChallenge = operations['updateChallenge'];
+export type UpdateChallenge = operations['updateChallenge'];
+export type AuthKakao = operations['authKakao'];
+export type AuthRefresh = operations['refreshToken'];
 
-// example of how to get the type of the body
-type IUpdateChallengeBody =
-  IUpdateChallenge['requestBody']['content']['application/json'];
+export type AuthKakaoBody =
+  AuthKakao['requestBody']['content']['application/json'];
+export type AuthKakaoResponse = AuthKakao['responses']['200']['content']['*/*'];
+export type AuthRefreshResponse =
+  AuthRefresh['responses']['200']['content']['*/*'];

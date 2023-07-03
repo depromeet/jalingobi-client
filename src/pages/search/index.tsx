@@ -7,9 +7,11 @@ import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
+import { useHandleBack } from '@/shared/hooks';
 import { SortedType } from '@/shared/types/challenge';
 
 export default function Search() {
+  useHandleBack();
   const [category, setCategory] = useState('전체'); // ['전체', '식비', '문화생활', '취미'
   const [showOnlyActiveRoom, setShowOnlyActiveRoom] = useState(true);
   const [sortedBy, setSortedBy] = useState<SortedType>('인원순');

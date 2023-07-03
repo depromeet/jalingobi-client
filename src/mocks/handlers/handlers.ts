@@ -1,5 +1,13 @@
+import { challengeHandlers } from '@/mocks/handlers/challenge';
+import { commentHandlers } from '@/mocks/handlers/comment';
+import { emojiHandlers } from '@/mocks/handlers/emoji';
+import { feedHandlers } from '@/mocks/handlers/feed';
 import { userHandlers } from '@/mocks/handlers/user';
 
-import { challengeHandlers } from './challenge';
-
-export const handlers = [...userHandlers, ...challengeHandlers];
+export const handlers = [
+  ...userHandlers,
+  ...feedHandlers,
+  ...emojiHandlers,
+  ...commentHandlers,
+  ...challengeHandlers,
+];

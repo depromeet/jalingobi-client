@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 
 import { Input } from '@/shared/components/input';
@@ -9,6 +8,8 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/shared/components/sheet';
+
+import { ImageLoader } from '../image';
 
 type Props = {
   profileImage: string;
@@ -30,7 +31,7 @@ const ProfileBottomSheet = ({
           <div>
             <div className="absolute -bottom-4 -right-4 h-11 w-11 rounded-full bg-gray-20" />
             {profileImage && (
-              <Image
+              <ImageLoader
                 src={profileImage}
                 alt="avatar"
                 width="90"

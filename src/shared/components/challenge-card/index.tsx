@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,6 +6,8 @@ import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeave
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
 import { calculateDaysLeft } from '@/shared/utils/time';
+
+import { ImageLoader } from '../image';
 
 type Props = {
   challenge: UserChallenge;
@@ -26,7 +27,7 @@ const ChallengeCard = ({ challenge }: Props) => {
         key={challenge.challengeId}
         className="relative grid min-h-[130px] w-full grid-cols-4 rounded-md bg-gray-5 px-5 py-4"
       >
-        <Image
+        <ImageLoader
           src={challenge.imgUrl}
           width={54}
           height={54}

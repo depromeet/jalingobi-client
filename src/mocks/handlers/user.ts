@@ -10,8 +10,8 @@ export const userHandlers = [
       message: '요청에 성공하였습니다.',
       result: {
         social: {
-          platform: 'GOOGLE',
-          id: '123456789',
+          id: 'something',
+          platform: 'KAKAO',
         },
         profile: {
           name: '박정윤',

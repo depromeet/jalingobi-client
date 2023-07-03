@@ -1,25 +1,24 @@
-import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
-import { ChallengeAchievement } from '@/my-poor-room/components/challenge-achievement';
-import { ChallengeCategories } from '@/my-poor-room/components/challenge-categories';
-import {
-  ChallengeRoomFeedList,
-  MyRoomFeedList,
-} from '@/my-poor-room/components/feed-list';
+import { shallow } from 'zustand/shallow';
+
+import { ChallengeRoomFeedList, MyRoomFeedList } from '@/features/feed';
 import { Spacing } from '@/shared/components';
+import { ChallengeAchievementContainer } from '@/shared/components/challenge-achievement/ChallengeAchievementContainer';
+import { ChallengeCategories } from '@/shared/components/challenge-category/ChallengeCategories';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
+import { useRoom } from '@/shared/store/room';
 
 export default function MyPoorRoom() {
-  const router = useRouter();
-  const { challengeId } = router.query;
-  const isMyRoom = !Number(challengeId);
+  const challengeId = useRoom((state) => state.challengeId, shallow);
+
+  const isMyRoom = !challengeId;
 
   return (
     <div>
       <div className="sticky top-0 z-10 bg-white">
         <ChallengeCategories />
-        {!isMyRoom && <ChallengeAchievement />}
+        {!isMyRoom && <ChallengeAchievementContainer />}
       </div>
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
       <Spacing height={60} />

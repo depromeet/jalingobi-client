@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { GlobalLayout } from '@/shared/components/layout';
+import { ToastsContainer } from '@/shared/components/toast';
 import { NextPageWithLayout } from '@/shared/types/layout';
 
 if (process.env.NODE_ENV === 'development') {
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <QueryClientProvider client={queryClient}>
       <GlobalLayout>
+        <ToastsContainer />
         <Component {...pageProps} />
       </GlobalLayout>
       <ReactQueryDevtools initialIsOpen={false} />

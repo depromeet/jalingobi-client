@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { IconArrowRight } from '@/public/svgs';
+import { ImageLoader } from '@/shared/components/image';
 import { Profile } from '@/shared/types/user';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const Profile = ({ profile }: Props) => {
   return (
     <section className="flex items-center justify-start pb-4">
-      <Image
+      <ImageLoader
         src={profile?.imgUrl || ''}
         alt="profile"
         width={60}
