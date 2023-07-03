@@ -33,22 +33,24 @@ export type ChallengeDetail = {
 export type ChallengeFilter = {
   category?: string;
   filter?: string;
-  sortType?: string;
+  sortedBy?: string;
 };
 
 export type ChallengeSearch = {
   id: number;
   title: string;
+  imgUrl: string;
   currentPeopleCount: number;
   availablePeopleCount: number;
-  imgUrl: string;
-  price: number;
-  keywords: string[];
   startAt: string;
   createdAt: string;
+  price: number;
+  keywords: string[];
   period: number;
   status: string;
 };
+
+export type SortedType = '인원순' | '금액 낮은순';
 
 export type ChallengeResponse = ApiResponse<ChallengeDetail>;
 export type ChallengeListResponse = ApiResponse<ChallengeDetail[]>;
