@@ -5,6 +5,7 @@ import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
+import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
@@ -49,11 +50,12 @@ export const ChallengeRoomFeedList = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    return <>...Loading</>;
+    <ComponentLoading />;
   }
 
   if (isError) {
-    return <>Error Page</>;
+    router.push('/not-found');
+    return null;
   }
 
   return (

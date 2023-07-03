@@ -13,6 +13,7 @@ import IconClock from './icon-clock.svg';
 import IconComment from './icon-comment.svg';
 import IconCrazyBig from './icon-crazy-big.svg';
 import IconKakao from './icon-kakao.svg';
+import IconLoading from './icon-loading.svg';
 import IconNote from './icon-note.svg';
 import IconOverflow from './icon-overflow.svg';
 import IconPolygonDown from './icon-polygon-down.svg';
@@ -26,6 +27,7 @@ import IconUser from './icon-user.svg';
 import IconWelldoneBig from './icon-welldone-big.svg';
 
 export {
+  IconLoading,
   IconCrazyBig,
   IconRegretfulBig,
   IconWelldoneBig,

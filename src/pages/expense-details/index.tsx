@@ -10,6 +10,7 @@ import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
+import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
 import { TextInput } from '@/shared/components/text-input';
 import {
   CommentInfoType,
@@ -144,11 +145,12 @@ export default function ExpenseDetails() {
   }, [deleteComment.isError]);
 
   if (isLoading) {
-    return <>...loading</>;
+    return <ComponentLoading />;
   }
 
   if (isError) {
-    return <>error occured</>;
+    router.push('/not-found');
+    return null;
   }
 
   return (
