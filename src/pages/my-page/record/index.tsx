@@ -35,6 +35,13 @@ const RecordPage = () => {
     setStatus(status);
   };
 
+  const filteredCategoryList = data?.result.participatedChallenges
+    .filter(
+      (challenge) =>
+        category === '전체' || challenge.categories.includes(category),
+    )
+    .filter((challenge) => challenge.status === status);
+
   return (
     <div className="relative flex h-full flex-col px-5">
       <header className="relative flex h-12 items-center justify-center">
@@ -43,7 +50,7 @@ const RecordPage = () => {
         </Link>
         <h1 className="font-title-medium-sm">거지방 기록</h1>
       </header>
-      <div className="flex h-[3.25rem] overflow-x-scroll">
+      <div className="flex h-[3.25rem]">
         {recordCategories.map((category, index) => (
           <button
             type="button"
@@ -70,11 +77,7 @@ const RecordPage = () => {
           </ChipGroup.Chip>
         ))}
       </ChipGroup>
-      <ChallengeList
-        challenges={data?.result.participatedChallenges}
-        category={category}
-        status={status}
-      />
+      <ChallengeList filteredCategoryList={filteredCategoryList} />
       <RecordBottomSheet />
     </div>
   );
