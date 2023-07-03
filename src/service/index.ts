@@ -13,7 +13,7 @@ export const interceptAfterResponseFail =
     const { config } = error;
     const originalRequest = config;
 
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && config.url !== '/auth/refresh') {
       try {
         const {
           result: { accessToken },

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { AuthKakaoBody, AuthKakaoResponse } from '@/lib/interfaces';
 import { httpClient, setAuthHeader } from '@/service/index';
+import { ApiResponse } from '@/shared/types/api';
 
 type OAuthResposneFromKakao = {
   /** 토큰 타입, bearer 로 고정 */
@@ -52,5 +53,30 @@ export const authKakao = async (
   });
   setAuthHeader(httpClient, response.data.result?.accessToken as string);
 
+  return response.data;
+};
+
+export const logout = async (): Promise<ApiResponse & { result: true }> => {
+  const response = await httpClient.post(
+    'https://jalingobi.com/mypage/logout',
+    undefined,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return response.data;
+};
+
+export const drop = async (): Promise<ApiResponse & { result: true }> => {
+  const response = await httpClient.delete(
+    'https://jalingobi.com/mypage/withdrawal',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
   return response.data;
 };
