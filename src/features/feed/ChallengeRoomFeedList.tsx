@@ -31,10 +31,9 @@ export const ChallengeRoomFeedList = () => {
     'challengeList',
   ]);
 
-  const currentCategoryInfo =
-    categoryList?.result.participatedChallengeList.find(
-      ({ challengeId: _challengeId }) => _challengeId === challengeId,
-    );
+  const currentCategoryInfo = categoryList?.participatedChallengeList.find(
+    ({ challengeId: _challengeId }) => _challengeId === challengeId,
+  );
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
@@ -63,8 +62,7 @@ export const ChallengeRoomFeedList = () => {
     );
   };
 
-  // if (currentCategoryInfo?.status === 'RECRUITING') {
-  if (true) {
+  if (currentCategoryInfo?.status === 'RECRUITING') {
     return (
       <ChallengeRoomRecruting
         title={currentCategoryInfo?.title}
