@@ -3,7 +3,6 @@ import { rest } from 'msw';
 import challengeFeed from '../challengeFeed.json';
 import myRoomFeed from '../myRoomFeed.json';
 
-// QUESTION: 창완님 ! createUrl을 사용하는 이유가 무엇인가요 ??
 export const feedHandlers = [
   rest.get(`/challenge/my-list`, (req, res, ctx) => {
     return res(
@@ -13,38 +12,40 @@ export const feedHandlers = [
         isSuccess: true,
         code: 200,
         message: '요청에 성공하였습니다.',
-        result: [
-          {
-            challengeId: 0,
-            title: '내 방',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-          {
-            challengeId: 1,
-            title: 'room1',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-          {
-            challengeId: 2,
-            title: 'room2',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-          {
-            challengeId: 3,
-            title: 'room3',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-          {
-            challengeId: 4,
-            title: 'room4',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-          {
-            challengeId: 5,
-            title: 'room5',
-            imgUrl: '/images/떡볶이.jpg',
-          },
-        ],
+        result: {
+          participatedChallengeList: [
+            {
+              challengeId: 0,
+              title: '내 방',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+            {
+              challengeId: 1,
+              title: 'room1',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+            {
+              challengeId: 2,
+              title: 'room2',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+            {
+              challengeId: 3,
+              title: 'room3',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+            {
+              challengeId: 4,
+              title: 'room4',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+            {
+              challengeId: 5,
+              title: 'room5',
+              imgUrl: '/images/떡볶이.jpg',
+            },
+          ],
+        },
       }),
     );
   }),

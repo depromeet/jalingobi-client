@@ -79,7 +79,9 @@ export type ChallengeListResultType = {
       challengeId: number;
       title: string;
       imgUrl: string;
-      active: boolean;
+      participants: number;
+      maxParticipants: number;
+      status: 'PROCEEDING' | 'RECRUITING';
     }[];
   };
 };
