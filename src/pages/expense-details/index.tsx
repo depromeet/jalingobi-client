@@ -3,13 +3,14 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { useAddComment } from '@/features/comment/queries';
+import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
 import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
 import ImageLoader from '@/shared/components/image/ImageLoader';
+import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
 import { TextInput } from '@/shared/components/text-input';
 import {
   CommentInfoType,
@@ -51,6 +52,7 @@ export default function ExpenseDetails() {
   });
 
   const addComment = useAddComment();
+  const deleteComment = useDeleteComment();
 
   const [comments, setComments] = useState<CommentInfoType[]>([]);
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
@@ -105,6 +107,19 @@ export default function ExpenseDetails() {
     addCommentCommonLogic();
   };
 
+  const handleClickDelete = (commentId: number) => {
+    setPrevComments(comments);
+
+    deleteComment.mutate({
+      recordId: Number(recordId),
+      commentId,
+    });
+
+    setComments((prev) =>
+      prev.filter((comment) => comment.commentId !== commentId),
+    );
+  };
+
   useEffect(() => {
     if (!data) {
       return;
@@ -121,12 +136,21 @@ export default function ExpenseDetails() {
     setComments(prevComments);
   }, [addComment.isError]);
 
+  useEffect(() => {
+    if (!deleteComment.isError) {
+      return;
+    }
+
+    setComments(prevComments);
+  }, [deleteComment.isError]);
+
   if (isLoading) {
-    return <>...loading</>;
+    return <ComponentLoading />;
   }
 
   if (isError) {
-    return <>error occured</>;
+    router.push('/not-found');
+    return null;
   }
 
   return (
@@ -140,7 +164,7 @@ export default function ExpenseDetails() {
       <ExpenseDetailsEmojiContainer {...data.result.emojiInfo} />
       <Divider />
       <Spacing height={16} />
-      <CommentContainer comments={comments} />
+      <CommentContainer comments={comments} onClickDelete={handleClickDelete} />
       <Bottom
         inputValue={inputValue}
         onChange={handleChangeInput}

@@ -1,5 +1,7 @@
 import { ReactElement } from 'react';
 
+import { shallow } from 'zustand/shallow';
+
 import { ChallengeRoomFeedList, MyRoomFeedList } from '@/features/feed';
 import { Spacing } from '@/shared/components';
 import { ChallengeAchievementContainer } from '@/shared/components/challenge-achievement/ChallengeAchievementContainer';
@@ -8,7 +10,7 @@ import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import { useRoom } from '@/shared/store/room';
 
 export default function MyPoorRoom() {
-  const challengeId = useRoom((state) => state.challengeId);
+  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const isMyRoom = !challengeId;
 

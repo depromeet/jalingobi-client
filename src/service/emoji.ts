@@ -7,7 +7,7 @@ export const updateEmoji = async ({
   recordId,
   type,
 }: EmojiRequest): Promise<ApiResponse> => {
-  const response = await httpClient.patch(`record/${recordId}/emoji`, {
+  const response = await httpClient.patch(`/record/${recordId}/emoji`, {
     type,
   });
 
@@ -18,7 +18,7 @@ export const deleteEmoji = async ({
   recordId,
   type,
 }: EmojiRequest): Promise<ApiResponse> => {
-  const response = await httpClient.delete(`record/${recordId}/emoji`, {
+  const response = await httpClient.delete(`/record/${recordId}/emoji`, {
     data: { type },
   });
 

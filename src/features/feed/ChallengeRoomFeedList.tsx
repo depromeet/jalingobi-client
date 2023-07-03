@@ -1,8 +1,11 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import { shallow } from 'zustand/shallow';
+
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
+import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
@@ -16,7 +19,7 @@ const INITIAL_VALUE_OFFSET_RECORD_ID = 0;
 
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const ChallengeRoomFeedList = () => {
-  const challengeId = useRoom((state) => state.challengeId);
+  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
@@ -47,11 +50,12 @@ export const ChallengeRoomFeedList = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    return <>...Loading</>;
+    <ComponentLoading />;
   }
 
   if (isError) {
-    return <>Error Page</>;
+    router.push('/not-found');
+    return null;
   }
 
   return (

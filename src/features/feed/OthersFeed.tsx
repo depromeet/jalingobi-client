@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import ImageLoader from '@/shared/components/image/ImageLoader';
-import { useRoom } from '@/shared/store/room';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -64,8 +63,6 @@ const OthersFeed = ({
     createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
   ];
 
-  const challengeId = useRoom((state) => state.challengeId);
-
   const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
   const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
 
@@ -86,13 +83,14 @@ const OthersFeed = ({
     const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
 
     if (isClickedEmojiSelectedBefore) {
+      deleteEmoji.mutate({
+        recordId,
+        type: clickedEmojiType,
+      });
+
       setEmojis((prev) =>
         prev.map((emoji) => {
           if (emoji.type === clickedEmojiType) {
-            deleteEmoji.mutate({
-              recordId,
-              type: clickedEmojiType,
-            });
             return {
               ...emoji,
               selected: false,
@@ -105,13 +103,14 @@ const OthersFeed = ({
       return;
     }
 
+    updateEmoji.mutate({
+      recordId,
+      type: clickedEmojiType,
+    });
+
     setEmojis((prev) =>
       prev.map((emoji) => {
         if (emoji.type === clickedEmojiType) {
-          updateEmoji.mutate({
-            recordId,
-            type: clickedEmojiType,
-          });
           return {
             ...emoji,
             selected: true,
@@ -171,8 +170,8 @@ const OthersFeed = ({
         <Spacing height={8} />
         {recordImgUrl && (
           <>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <div
+            <button
+              type="button"
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
             >
@@ -183,29 +182,25 @@ const OthersFeed = ({
                 className="object-cover"
                 sizes="(max-width: 600px) 60vw"
               />
-            </div>
+            </button>
             <Spacing height={6} />
           </>
         )}
-        <div className="relative">
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-          <div
-            className="w-[13.75rem] rounded-md bg-white p-2.5"
-            onClick={() => onClickFeed(recordId)}
-          >
-            <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
-              <div>
-                <p className="w-[6.75rem] truncate">{title}</p>
-              </div>
-              <div className="flex items-center gap-1.5 ">
-                <p>{convertedPrice}</p>
-                <IconChevronRight className="h-2 w-1 fill-none" />
-              </div>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+        <div
+          className="relative w-[13.75rem] rounded-md bg-white p-2.5"
+          onClick={() => onClickFeed(recordId)}
+        >
+          <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
+            <p className="w-[6.75rem] truncate">{title}</p>
+            <div className="flex items-center gap-1.5 ">
+              <p>{convertedPrice}</p>
+              <IconChevronRight className="h-2 w-1 fill-none" />
             </div>
-            <p className="font-caption-medium-md truncate text-gray-50">
-              {content}
-            </p>
           </div>
+          <p className="font-caption-medium-md truncate text-gray-50">
+            {content}
+          </p>
         </div>
         <Spacing height={8} />
         <div className="flex gap-1">

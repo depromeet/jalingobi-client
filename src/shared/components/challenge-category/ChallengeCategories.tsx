@@ -1,12 +1,18 @@
+import { useRouter } from 'next/router';
+
 import { shallow } from 'zustand/shallow';
 
 import { useChallengeList } from '@/features/feed/queries';
 import { IconTile } from '@/public/svgs';
 import { useRoom } from '@/shared/store/room';
 
+import { ComponentLoading } from '../loading/ComponentLoading';
+
 import { ChallengeCategory } from './ChallengeCategory';
 
 export const ChallengeCategories = () => {
+  const router = useRouter();
+
   const { data, isLoading, isError } = useChallengeList();
 
   const [selectedChallengeId, setChallengeId] = useRoom(
@@ -22,13 +28,13 @@ export const ChallengeCategories = () => {
   const handleClickIcon = () => console.log('아이콘 클릭');
 
   // TODO: react-error-boundary, suspense 도입하기
-  // TODO: 디자인 팀에 에러 페이지, 로더 요청하기
   if (isLoading) {
-    return <>...Loading</>;
+    return <ComponentLoading />;
   }
 
   if (isError) {
-    return <>Error Page</>;
+    router.push('/not-found');
+    return null;
   }
 
   return (
