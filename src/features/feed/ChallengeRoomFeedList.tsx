@@ -15,6 +15,7 @@ import { ChallengeListResultType } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
+import { ChallengeRoomRecruting } from './ChallengeRoomRecruting';
 import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
@@ -34,8 +35,6 @@ export const ChallengeRoomFeedList = () => {
     categoryList?.result.participatedChallengeList.find(
       ({ challengeId: _challengeId }) => _challengeId === challengeId,
     );
-
-  console.log(currentCategoryInfo);
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
@@ -63,6 +62,17 @@ export const ChallengeRoomFeedList = () => {
       `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
     );
   };
+
+  // if (currentCategoryInfo?.status === 'RECRUITING') {
+  if (true) {
+    return (
+      <ChallengeRoomRecruting
+        title={currentCategoryInfo?.title}
+        participants={currentCategoryInfo?.participants}
+        maxParticipants={currentCategoryInfo?.maxParticipants}
+      />
+    );
+  }
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
