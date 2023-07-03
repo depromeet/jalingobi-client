@@ -19,6 +19,7 @@ export default function RedirectedKakao() {
           idToken: kakao.id_token,
           accessToken: kakao.access_token,
         });
+
         if (login) {
           router.push('/search');
         }

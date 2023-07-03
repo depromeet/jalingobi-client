@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
+import ImageLoader from '@/shared/components/image/ImageLoader';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -151,7 +151,7 @@ const OthersFeed = ({
   return (
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
-        <Image
+        <ImageLoader
           src={profileImgUrl}
           alt=""
           fill
@@ -175,7 +175,7 @@ const OthersFeed = ({
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
             >
-              <Image
+              <ImageLoader
                 src={recordImgUrl}
                 alt="피드 이미지"
                 fill
