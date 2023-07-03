@@ -40,18 +40,20 @@ export const ChallengeCategories = () => {
   return (
     <div className="relative flex h-[5.375rem] items-center justify-between">
       <div className="flex overflow-auto scrollbar-hide">
-        {data.result.map(({ challengeId, imgUrl, title }) => {
-          return (
-            <ChallengeCategory
-              key={challengeId}
-              challengeId={challengeId}
-              imgUrl={imgUrl}
-              title={title}
-              selected={challengeId === selectedChallengeId}
-              onClick={handleClickCategory}
-            />
-          );
-        })}
+        {data.result.participatedChallengeList.map(
+          ({ challengeId, imgUrl, title }) => {
+            return (
+              <ChallengeCategory
+                key={challengeId}
+                challengeId={challengeId}
+                imgUrl={imgUrl}
+                title={title}
+                selected={challengeId === selectedChallengeId}
+                onClick={handleClickCategory}
+              />
+            );
+          },
+        )}
       </div>
       <div className="flex w-[5rem] shrink-0 flex-col items-center justify-center gap-1">
         <button
