@@ -75,11 +75,13 @@ export type AchievementResultType = {
 
 export type ChallengeListResultType = {
   result: {
-    challengeId: number;
-    title: string;
-    imgUrl: string;
-    active: boolean;
-  }[];
+    participatedChallengeList: {
+      challengeId: number;
+      title: string;
+      imgUrl: string;
+      active: boolean;
+    }[];
+  };
 };
 
 export type ChallengeDetailRequest = {
