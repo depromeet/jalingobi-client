@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/shared/components/sheet';
 
-import ImageLoader from '../image/ImageLoader';
+import { ImageLoader } from '../image';
 
 type Props = {
   profileImage: string;

@@ -6,7 +6,7 @@ import { useChallengeAchievement } from '@/features/feed/queries';
 import { useConvertChallengeAcievement } from '@/shared/hooks/useChallengeAchievement';
 import { useRoom } from '@/shared/store/room';
 
-import { ComponentLoading } from '../loading/ComponentLoading';
+import { PageLoading } from '../loading';
 
 import { ChallengeAchievement } from './ChallengeAchievement';
 
@@ -21,7 +21,7 @@ export const ChallengeAchievementContainer = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    return <ComponentLoading />;
+    return <PageLoading />;
   }
 
   if (isError) {

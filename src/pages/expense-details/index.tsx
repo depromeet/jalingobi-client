@@ -9,8 +9,8 @@ import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
-import ImageLoader from '@/shared/components/image/ImageLoader';
-import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
+import { ImageLoader } from '@/shared/components/image';
+import { PageLoading } from '@/shared/components/loading';
 import { TextInput } from '@/shared/components/text-input';
 import {
   CommentInfoType,
@@ -145,7 +145,7 @@ export default function ExpenseDetails() {
   }, [deleteComment.isError]);
 
   if (isLoading) {
-    return <ComponentLoading />;
+    return <PageLoading />;
   }
 
   if (isError) {

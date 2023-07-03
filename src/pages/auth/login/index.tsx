@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { IconArrowRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import ImageLoader from '@/shared/components/image/ImageLoader';
+import { ImageLoader } from '@/shared/components/image';
 import KakaoLogin from '@/shared/components/kakao-login';
 
 export default function Login() {

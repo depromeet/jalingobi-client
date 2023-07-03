@@ -6,7 +6,7 @@ import { useChallengeList } from '@/features/feed/queries';
 import { IconTile } from '@/public/svgs';
 import { useRoom } from '@/shared/store/room';
 
-import { ComponentLoading } from '../loading/ComponentLoading';
+import { PageLoading } from '../loading';
 
 import { ChallengeCategory } from './ChallengeCategory';
 
@@ -29,7 +29,7 @@ export const ChallengeCategories = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    return <ComponentLoading />;
+    return <PageLoading />;
   }
 
   if (isError) {

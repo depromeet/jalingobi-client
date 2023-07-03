@@ -1,6 +1,6 @@
 import Image, { ImageLoaderProps, ImageProps } from 'next/image';
 
-export default function ImageLoader(props: Omit<ImageProps, 'loader'>) {
+export const ImageLoader = (props: Omit<ImageProps, 'loader'>) => {
   const contentFulLoader = ({ src, quality, width }: ImageLoaderProps) => {
     const params = [`w=${width}`];
 
@@ -13,4 +13,4 @@ export default function ImageLoader(props: Omit<ImageProps, 'loader'>) {
 
   // eslint-disable-next-line jsx-a11y/alt-text
   return <Image loader={contentFulLoader} {...props} />;
-}
+};

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import ImageLoader from '../image/ImageLoader';
+import { ImageLoader } from '../image';
 
 type ChallengeCategoryProps = {
   challengeId: number;

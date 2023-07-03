@@ -4,7 +4,7 @@ import { IconOverflow } from '@/public/svgs';
 import { CommentInfoType } from '@/shared/types/feed';
 import { timeDifference } from '@/shared/utils/date';
 
-import ImageLoader from '../image/ImageLoader';
+import { ImageLoader } from '../image';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '../sheet';
 import Spacing from '../spacing';
 
