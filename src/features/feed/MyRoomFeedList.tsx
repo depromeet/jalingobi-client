@@ -13,7 +13,7 @@ import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { MyFeed } from './MyFeed';
-import { MyRoomFeedListEmpty } from './MyRoomFeedListEmpty';
+import { MyRoomEmpty } from './MyRoomEmpty';
 import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 0;
@@ -61,7 +61,7 @@ export const MyRoomFeedList = () => {
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
       {hasNextPage && <div ref={intersectedRef} />}
       {isEmpty(feeds) ? (
-        <MyRoomFeedListEmpty />
+        <MyRoomEmpty />
       ) : (
         <ul className="flex flex-col-reverse">
           <Spacing height={32} />

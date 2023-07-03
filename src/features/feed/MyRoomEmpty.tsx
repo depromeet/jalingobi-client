@@ -1,6 +1,6 @@
 import { ImageLoader } from '@/shared/components/image';
 
-export const MyRoomFeedListEmpty = () => {
+export const MyRoomEmpty = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-40">
       <p className="font-title-medium-md text-black">

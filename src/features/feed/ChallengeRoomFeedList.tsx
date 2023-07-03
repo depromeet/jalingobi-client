@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import { useQueryClient } from '@tanstack/react-query';
+import { isEmpty } from 'lodash-es';
 import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
@@ -9,8 +11,10 @@ import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
+import { ChallengeListResultType } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
+import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
 import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
@@ -20,6 +24,18 @@ const INITIAL_VALUE_OFFSET_RECORD_ID = 0;
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const ChallengeRoomFeedList = () => {
   const challengeId = useRoom((state) => state.challengeId, shallow);
+
+  const queryClient = useQueryClient();
+  const categoryList = queryClient.getQueryData<ChallengeListResultType>([
+    'challengeList',
+  ]);
+
+  const currentCategoryInfo =
+    categoryList?.result.participatedChallengeList.find(
+      ({ challengeId: _challengeId }) => _challengeId === challengeId,
+    );
+
+  console.log(currentCategoryInfo);
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
@@ -61,50 +77,59 @@ export const ChallengeRoomFeedList = () => {
   return (
     <div className="-z-10 bg-gray-10 px-5" ref={containerRef}>
       {hasNextPage && <div ref={intersectedRef} />}
-      <ul className="flex flex-col-reverse">
-        <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
-          return (
-            <Fragment key={recordInfo.id}>
-              {isMine ? (
-                <MyFeed
-                  recordId={recordInfo.id}
-                  recordImgUrl={recordInfo.imgUrl}
-                  title={recordInfo.title}
-                  price={recordInfo.price}
-                  content={recordInfo.content}
-                  recordDate={recordInfo.date}
-                  emojiInfo={emojiInfo}
-                  onClickFeed={handleClickFeed}
-                />
-              ) : (
-                <OthersFeed
-                  recordId={recordInfo.id}
-                  recordImgUrl={recordInfo.imgUrl}
-                  title={recordInfo.title}
-                  price={recordInfo.price}
-                  content={recordInfo.content}
-                  recordDate={recordInfo.date}
-                  profileImgUrl={userInfo.imgUrl}
-                  nickname={userInfo.nickname}
-                  currentCharge={userInfo.currentCharge}
-                  emojiInfo={emojiInfo}
-                  onClickFeed={handleClickFeed}
-                />
-              )}
-              {isFeedDateDifferent({
-                currentFeed: feeds[index],
-                nextFeed: feeds[index + 1],
-              }) ? (
-                <DateChip date={recordInfo.date} />
-              ) : (
-                <Spacing height={32} />
-              )}
-            </Fragment>
-          );
-        })}
-      </ul>
+      {isEmpty(feeds) ? (
+        <ChallengeRoomEmpty
+          title={currentCategoryInfo?.title}
+          participants={currentCategoryInfo?.participants}
+          maxParticipants={currentCategoryInfo?.maxParticipants}
+        />
+      ) : (
+        <ul className="flex flex-col-reverse">
+          <Spacing height={32} />
+          {/* TODO: 서버 데이터 그대로 넘기기  */}
+          {feeds.map(({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
+            return (
+              <Fragment key={recordInfo.id}>
+                {isMine ? (
+                  <MyFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    emojiInfo={emojiInfo}
+                    onClickFeed={handleClickFeed}
+                  />
+                ) : (
+                  <OthersFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    profileImgUrl={userInfo.imgUrl}
+                    nickname={userInfo.nickname}
+                    currentCharge={userInfo.currentCharge}
+                    emojiInfo={emojiInfo}
+                    onClickFeed={handleClickFeed}
+                  />
+                )}
+                {isFeedDateDifferent({
+                  currentFeed: feeds[index],
+                  nextFeed: feeds[index + 1],
+                }) ? (
+                  <DateChip date={recordInfo.date} />
+                ) : (
+                  <Spacing height={32} />
+                )}
+              </Fragment>
+            );
+          })}
+        </ul>
+      )}
+
       <div ref={bottomRef} />
     </div>
   );
