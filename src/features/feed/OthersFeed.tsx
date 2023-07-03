@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import ImageLoader from '@/shared/components/image/ImageLoader';
+import { ImageLoader } from '@/shared/components/image';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';

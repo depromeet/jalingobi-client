@@ -6,7 +6,7 @@ import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomShee
 import { UserChallenge } from '@/shared/types/user';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
-import ImageLoader from '../image/ImageLoader';
+import { ImageLoader } from '../image';
 
 type Props = {
   challenge: UserChallenge;

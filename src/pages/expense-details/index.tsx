@@ -9,7 +9,7 @@ import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
-import ImageLoader from '@/shared/components/image/ImageLoader';
+import { ImageLoader } from '@/shared/components/image';
 import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
 import { TextInput } from '@/shared/components/text-input';
 import {

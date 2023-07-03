@@ -3,7 +3,7 @@ import React from 'react';
 
 import { IconArrowLeft } from '@/public/svgs';
 
-import ImageLoader from '../image/ImageLoader';
+import { ImageLoader } from '../image';
 import Spacing from '../spacing';
 
 const ErrorPageBuilder = ({
