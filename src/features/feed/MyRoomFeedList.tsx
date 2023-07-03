@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import { isEmpty } from 'lodash-es';
 import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
@@ -12,6 +13,7 @@ import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { MyFeed } from './MyFeed';
+import { MyRoomEmpty } from './MyRoomEmpty';
 import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 0;
@@ -45,9 +47,9 @@ export const MyRoomFeedList = () => {
     );
   };
 
-  // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    <PageLoading />;
+    // TODO: react-error-boundary, suspense 도입하기
+    return <PageLoading />;
   }
 
   if (isError) {
@@ -58,36 +60,41 @@ export const MyRoomFeedList = () => {
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
       {hasNextPage && <div ref={intersectedRef} />}
-      <ul className="flex flex-col-reverse">
-        <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
-          return (
-            <Fragment key={recordInfo.id}>
-              <MyFeed
-                recordId={recordInfo.id}
-                recordImgUrl={recordInfo.imgUrl}
-                title={recordInfo.title}
-                price={recordInfo.price}
-                content={recordInfo.content}
-                recordDate={recordInfo.date}
-                challengeImgUrl={challengeInfo.imgUrl}
-                challengeTitle={challengeInfo.title}
-                emojiInfo={emojiInfo}
-                onClickFeed={handleClickFeed}
-              />
-              {isFeedDateDifferent({
-                currentFeed: feeds[index],
-                nextFeed: feeds[index + 1],
-              }) ? (
-                <DateChip date={recordInfo.date} />
-              ) : (
-                <Spacing height={32} />
-              )}
-            </Fragment>
-          );
-        })}
-      </ul>
+      {isEmpty(feeds) ? (
+        <MyRoomEmpty />
+      ) : (
+        <ul className="flex flex-col-reverse">
+          <Spacing height={32} />
+          {/* TODO: 서버 데이터 그대로 넘기기  */}
+          {feeds.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
+            return (
+              <Fragment key={recordInfo.id}>
+                <MyFeed
+                  recordId={recordInfo.id}
+                  recordImgUrl={recordInfo.imgUrl}
+                  title={recordInfo.title}
+                  price={recordInfo.price}
+                  content={recordInfo.content}
+                  recordDate={recordInfo.date}
+                  challengeImgUrl={challengeInfo.imgUrl}
+                  challengeTitle={challengeInfo.title}
+                  emojiInfo={emojiInfo}
+                  onClickFeed={handleClickFeed}
+                />
+                {isFeedDateDifferent({
+                  currentFeed: feeds[index],
+                  nextFeed: feeds[index + 1],
+                }) ? (
+                  <DateChip date={recordInfo.date} />
+                ) : (
+                  <Spacing height={32} />
+                )}
+              </Fragment>
+            );
+          })}
+        </ul>
+      )}
+
       <div ref={bottomRef} />
     </div>
   );

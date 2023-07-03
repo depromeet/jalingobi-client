@@ -22,6 +22,4 @@ export type DeleteCommentRequest = {
   commentId: number;
 };
 
-export type DeleteCommentResult = ApiResponse<{
-  result: { commentId: number };
-}>;
+export type DeleteCommentResult = ApiResponse<{ commentId: number }>;
