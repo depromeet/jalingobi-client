@@ -46,7 +46,13 @@ function ChipGroup({
 
   return (
     <ChipGroupContext.Provider value={contextValue}>
-      <div className={cn('flex gap-x-[0.4rem]', className)} {...props}>
+      <div
+        className={cn(
+          'flex gap-x-[0.4rem] overflow-x-scroll whitespace-nowrap scrollbar-hide',
+          className,
+        )}
+        {...props}
+      >
         {children}
       </div>
     </ChipGroupContext.Provider>

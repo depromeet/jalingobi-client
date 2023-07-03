@@ -39,7 +39,7 @@ export const ChallengeCategories = () => {
 
   return (
     <div className="relative flex h-[5.375rem] items-center justify-between">
-      <div className="scrollbar-hide flex overflow-auto">
+      <div className="flex overflow-auto scrollbar-hide">
         {data.result.participatedChallengeList.map(
           ({ challengeId, imgUrl, title }) => {
             return (

@@ -36,6 +36,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     require('tailwindcss-animate'),
     plugin(({ addComponents }) => {
       addComponents({ ...typography });

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useUserChallengeList } from '@/features/record/queries';
 import { cn } from '@/lib/utils';
@@ -7,17 +7,40 @@ import { IconArrowLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
+import { ALL } from '@/shared/constant';
 import { Status, StatusMap } from '@/shared/types/user';
 
 const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
 
 const RecordPage = () => {
   const [status, setStatus] = React.useState<Status>('PROCEEDING');
+  const [uniqueCategorySet, setUniqueCategorySet] = React.useState<Set<string>>(
+    new Set(),
+  );
   const [category, setCategory] = React.useState('전체');
   const { data } = useUserChallengeList();
+
+  useEffect(() => {
+    const categoriesSet: Set<string> = new Set();
+    categoriesSet.add(ALL);
+    data?.result.participatedChallenges.forEach((challenge) => {
+      challenge.categories.forEach((category) => {
+        categoriesSet.add(category);
+      });
+    });
+    setUniqueCategorySet(categoriesSet);
+  }, [data?.result.participatedChallenges]);
+
   const select = (status: Status) => {
     setStatus(status);
   };
+
+  const filteredCategoryList = data?.result.participatedChallenges
+    .filter(
+      (challenge) =>
+        category === '전체' || challenge.categories.includes(category),
+    )
+    .filter((challenge) => challenge.status === status);
 
   return (
     <div className="relative flex h-full flex-col px-5">
@@ -27,7 +50,7 @@ const RecordPage = () => {
         </Link>
         <h1 className="font-title-medium-sm">거지방 기록</h1>
       </header>
-      <div className="flex h-[3.25rem] overflow-x-scroll">
+      <div className="flex h-[3.25rem]">
         {recordCategories.map((category, index) => (
           <button
             type="button"
@@ -48,16 +71,13 @@ const RecordPage = () => {
         ))}
       </div>
       <ChipGroup initialChips="전체" className="py-5" onChange={setCategory}>
-        <ChipGroup.Chip value="전체">전체</ChipGroup.Chip>
-        <ChipGroup.Chip value="식비">식비</ChipGroup.Chip>
-        <ChipGroup.Chip value="문화생활">문화생활</ChipGroup.Chip>
-        <ChipGroup.Chip value="취미">취미</ChipGroup.Chip>
+        {Array.from(uniqueCategorySet).map((category, index) => (
+          <ChipGroup.Chip value={category} key={index}>
+            {category}
+          </ChipGroup.Chip>
+        ))}
       </ChipGroup>
-      <ChallengeList
-        challenges={data?.result.participatedChallenges}
-        category={category}
-        status={status}
-      />
+      <ChallengeList filteredCategoryList={filteredCategoryList} />
       <RecordBottomSheet />
     </div>
   );
