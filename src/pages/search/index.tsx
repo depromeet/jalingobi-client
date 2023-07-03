@@ -1,102 +1,69 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { ReactElement, useState } from 'react';
 
-import { IconCircle, IconSearch, IconTimer } from '@/public/svgs';
+import { useChallengeSearch } from '@/features/challenge/queries';
+import { IconCar, IconClothes, IconRice } from '@/public/svgs';
+import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
 import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
+import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
+import { SortedType } from '@/shared/types/challenge';
 
 export default function Search() {
-  const [isCheckedOnlyOnGoingRoom, setIsCheckedOnlyOnGoingRoom] =
-    useState(false);
+  const [category, setCategory] = useState('전체'); // ['전체', '식비', '문화생활', '취미'
+  const [showOnlyActiveRoom, setShowOnlyActiveRoom] = useState(true);
+  const [sortedBy, setSortedBy] = useState<SortedType>('인원순');
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const { data } = useChallengeSearch({
+    filter: showOnlyActiveRoom ? '' : 'all',
+    sortedBy,
+    category,
+  });
+
+  const handleSortedTypeChange = (sortedType: SortedType) => {
+    setSortedBy(sortedType);
+  };
+
   return (
     <div className="px-5">
-      <header className="mb-4 flex h-12 items-center justify-between">
-        <span className="font-title-medium-md">거지방 탐색</span>
+      <header className="mb-2.5 flex h-12 items-center justify-between">
+        <h2 className="font-title-medium-md">거지방 탐색</h2>
       </header>
-      <ul className="mt-4 flex flex-col gap-y-8 text-gray-60">
-        <li className="flex items-center justify-between">
-          <span className="font-body-regular-lg font-semibold">
-            <ChipGroup initialChips="chip1">
-              <ChipGroup.Chip value="chip1">전체</ChipGroup.Chip>
-              <ChipGroup.Chip value="chip2">
-                <IconSearch className="mr-1 h-6 w-6" />
-                식비
-              </ChipGroup.Chip>
-              <ChipGroup.Chip value="chip3">
-                <IconSearch className="mr-1 h-6 w-6" />
-                문화생활
-              </ChipGroup.Chip>
-              <ChipGroup.Chip value="chip4">
-                <IconSearch className="mr-1 h-6 w-6" />
-                취미
-              </ChipGroup.Chip>
-            </ChipGroup>
+      <ChipGroup onChange={setCategory} initialChips="전체" className="mb-4">
+        <ChipGroup.Chip value="전체" className="inline-block shrink-0">
+          전체
+        </ChipGroup.Chip>
+        <ChipGroup.Chip value="식비">
+          <IconRice className="mr-1 h-6 w-6" />
+          <span>식비</span>
+        </ChipGroup.Chip>
+        <ChipGroup.Chip value="문화생활">
+          <IconCar className="mr-1 h-6 w-6" />
+          <span>문화생활</span>
+        </ChipGroup.Chip>
+        <ChipGroup.Chip value="취미">
+          <IconClothes className="mr-1 h-6 w-6" />
+          취미
+        </ChipGroup.Chip>
+      </ChipGroup>
+      <div className="flex justify-between">
+        <div className="flex items-start gap-x-1 pb-7">
+          <span className="font-body-regular-sm text-gray-70">
+            모집 중인 방만 보기
           </span>
-        </li>
-        <li className="flex items-center justify-between">
-          <div className="flex-1">
-            <span className="font-body-regular-sm font-semibold">
-              모집 중인 방만 보기
-              <Toggle
-                checked={isCheckedOnlyOnGoingRoom}
-                onClick={() => setIsCheckedOnlyOnGoingRoom((prev) => !prev)}
-              />
-            </span>
-          </div>
-          <div className="flex items-center justify-end gap-x-2">
-            <span className="font-body-regular-sm">인원순 드랍다운</span>
-          </div>
-        </li>
-        <li className="flex">
-          <span className="font-body-regular-lg w-full font-semibold">
-            {/* // Link current not working */}
-            <Link href="/search/challenge">
-              <section className="flex h-[123px] rounded-lg bg-gray-5 p-5 text-gray-60">
-                <Image
-                  src=""
-                  alt="profile"
-                  width={54}
-                  height={54}
-                  className="mr-6"
-                />
-                <div className="flex items-center justify-end gap-x-2">
-                  <ul className="text-gray-60">
-                    <li className="flex items-center">
-                      <IconCircle className="h-4 w-4" />
-                      <span className="font-caption-medium-sm col-span-3 text-gray-50">
-                        3/10명
-                        <span className="text-red-400">마감임박</span>
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="font-body-regular-lg text-black">
-                        커피 5만원 이하로 쓰기
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="font-caption-medium-sm text-gray-50">
-                        #카페인줄이기 #커피값 #커피
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <IconTimer className="h-4 w-4 self-end stroke-black text-primary" />
-                      <span className="font-caption-medium-sm text-gray-50">
-                        내일 시작 / 30일 동안
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </section>
-            </Link>
-          </span>
-        </li>
-        <li className="flex items-center justify-between">
-          {/* <span className="font-body-regular-lg font-semibold">버전정보</span> */}
-          {/* <span>1.0.0</span> */}
-        </li>
-      </ul>
+          <Toggle
+            checked={showOnlyActiveRoom}
+            onClick={() => setShowOnlyActiveRoom((prev) => !prev)}
+          />
+        </div>
+        <ChallengeFilterSheet
+          isSheetOpen={isBottomSheetOpen}
+          setIsSheetOpen={setIsBottomSheetOpen}
+          sortedBy={sortedBy}
+          handleSortedTypeChange={handleSortedTypeChange}
+        />
+      </div>
+      <SearchChallengeList challengeList={data?.result} />
     </div>
   );
 }
