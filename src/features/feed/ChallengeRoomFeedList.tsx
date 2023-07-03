@@ -50,7 +50,7 @@ export const ChallengeRoomFeedList = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    <PageLoading />;
+    return <PageLoading />;
   }
 
   if (isError) {
