@@ -5,7 +5,7 @@ import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
-import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
+import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
@@ -47,7 +47,7 @@ export const MyRoomFeedList = () => {
 
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
-    <ComponentLoading />;
+    <PageLoading />;
   }
 
   if (isError) {

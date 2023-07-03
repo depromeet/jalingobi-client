@@ -10,7 +10,7 @@ import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
 import { ImageLoader } from '@/shared/components/image';
-import { ComponentLoading } from '@/shared/components/loading/ComponentLoading';
+import { PageLoading } from '@/shared/components/loading';
 import { TextInput } from '@/shared/components/text-input';
 import {
   CommentInfoType,
@@ -145,7 +145,7 @@ export default function ExpenseDetails() {
   }, [deleteComment.isError]);
 
   if (isLoading) {
-    return <ComponentLoading />;
+    return <PageLoading />;
   }
 
   if (isError) {
