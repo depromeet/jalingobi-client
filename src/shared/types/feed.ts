@@ -46,44 +46,36 @@ export type MyFeedType = {
 };
 
 export type ChallengeRoomFeedListResultType = {
-  result: {
-    total: number;
-    limit: number;
-    current: number;
-    lastRecordId: number;
-    challengeFeedList: ChallengeFeedType[];
-  };
+  total: number;
+  limit: number;
+  current: number;
+  lastRecordId: number;
+  challengeFeedList: ChallengeFeedType[];
 };
 
 export type MyRoomFeedListResultType = {
-  result: {
-    total: number;
-    limit: number;
-    current: number;
-    myFeedList: MyFeedType[];
-  };
+  total: number;
+  limit: number;
+  current: number;
+  myFeedList: MyFeedType[];
 };
 
 export type AchievementResultType = {
-  result: {
-    goalCharge: number;
-    currentCharge: number;
-    percent: number;
-    dueDay: number;
-  };
+  goalCharge: number;
+  currentCharge: number;
+  percent: number;
+  dueDay: number;
 };
 
 export type ChallengeListResultType = {
-  result: {
-    participatedChallengeList: {
-      challengeId: number;
-      title: string;
-      imgUrl: string;
-      participants: number;
-      maxParticipants: number;
-      status: 'PROCEEDING' | 'RECRUITING';
-    }[];
-  };
+  participatedChallengeList: {
+    challengeId: number;
+    title: string;
+    imgUrl: string;
+    participants: number;
+    maxParticipants: number;
+    status: 'PROCEEDING' | 'RECRUITING';
+  }[];
 };
 
 export type ChallengeDetailRequest = {
@@ -102,16 +94,14 @@ export type CommentInfoType = {
 };
 
 export type ChallengeDetailResultType = {
-  result: {
-    isMine: boolean;
-    userInfo: UserInfoType;
-    recordInfo: RecordInfoType;
-    emojiInfo: EmojiInfoType;
-    commentInfoList: CommentInfoType[];
-  };
+  isMine: boolean;
+  userInfo: UserInfoType;
+  recordInfo: RecordInfoType;
+  emojiInfo: EmojiInfoType;
+  commentInfoList: CommentInfoType[];
 };
 
-export type ChallengeDetailResponse = ApiResponse & ChallengeDetailResultType;
+export type ChallengeDetailResponse = ApiResponse<ChallengeDetailResultType>;
 
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
@@ -126,11 +116,11 @@ export type ChallengeAchievementRequest = {
   challengeId: number;
 };
 
-export type ChallengeRoomFeedListResponse = ApiResponse &
-  ChallengeRoomFeedListResultType;
+export type ChallengeRoomFeedListResponse =
+  ApiResponse<ChallengeRoomFeedListResultType>;
 
-export type MyRoomFeedListResponse = ApiResponse & MyRoomFeedListResultType;
+export type MyRoomFeedListResponse = ApiResponse<MyRoomFeedListResultType>;
 
-export type ChallengeAchievementResponse = ApiResponse & AchievementResultType;
+export type ChallengeAchievementResponse = ApiResponse<AchievementResultType>;
 
-export type ChallengeListResponse = ApiResponse & ChallengeListResultType;
+export type ChallengeListResponse = ApiResponse<ChallengeListResultType>;

@@ -1,37 +1,35 @@
 import { rest } from 'msw';
 
-import { createURL } from '@/shared/utils/url';
+import { UserChallengeListResult, UserResponse } from '@/shared/types/user';
 
 export const userHandlers = [
-  rest.get(createURL('/mypage'), (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        isSuccess: true,
-        code: 1000,
-        message: '요청에 성공하였습니다.',
-        result: {
-          social: {
-            id: 'something',
-            platform: 'KAKAO',
-          },
-          profile: {
-            name: '박정윤',
-            email: 'email@gmail.com',
-            imgUrl: '/images/profile.png',
-          },
-          notification: false,
-          userChallengeResult: {
-            PROCEEDING: 1,
-            SUCCESS: 0,
-            COMPLETED: 0,
-          },
+  rest.get('/api/mypage', (req, res, ctx) => {
+    const data: UserResponse = {
+      isSuccess: true,
+      code: 1000,
+      message: '요청에 성공하였습니다.',
+      result: {
+        social: {
+          id: 'something',
+          platform: 'KAKAO',
         },
-      }),
-    );
+        profile: {
+          name: '박정윤',
+          email: 'email@gmail.com',
+          imgUrl: '/images/profile.png',
+        },
+        notification: false,
+        userChallengeResult: {
+          PROCEEDING: 1,
+          SUCCESS: 0,
+          COMPLETED: 0,
+        },
+      },
+    };
+    return res(ctx.status(200), ctx.json(data));
   }),
 
-  rest.patch(createURL('/mypage/profile'), (req, res, ctx) => {
+  rest.patch('/api/mypage/profile', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -43,52 +41,50 @@ export const userHandlers = [
     );
   }),
 
-  rest.get(createURL('/mypage/challenges'), (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        isSuccess: true,
-        code: 0,
-        message: 'string',
-        result: {
-          participatedChallenges: [
-            {
-              challengeId: 1,
-              title: '배달 10만원 이하로 쓰기',
-              imgUrl: '이미지 URL',
-              active: true,
-              duration: {
-                period: 30,
-                startAt: '2023-06-20',
-                endAt: '2023-06-20',
-              },
-              availableCount: 10,
-              status: 'PROCEEDING',
-              statusTag: ['마감임박'],
-              categories: ['식비', '문화생활'],
-              keywords: ['카페인 줄이기', '커피값', '커피'],
-              participantCount: 3,
+  rest.get('/api/mypage/challenges', (req, res, ctx) => {
+    const data: UserChallengeListResult = {
+      isSuccess: true,
+      code: 0,
+      message: 'string',
+      result: {
+        participatedChallenges: [
+          {
+            challengeId: 1,
+            title: '배달 10만원 이하로 쓰기',
+            imgUrl: '/images/profile.png',
+            active: true,
+            duration: {
+              period: 30,
+              startAt: '2023-06-20',
+              endAt: '2023-06-20',
             },
-            {
-              challengeId: 2,
-              title: '배달 10만원 이하로 쓰기',
-              imgUrl: '이미지 URL',
-              active: true,
-              duration: {
-                period: 30,
-                startAt: '2023-06-20',
-                endAt: '2023-06-20',
-              },
-              availableCount: 10,
-              status: 'SUCCESS',
-              statusTag: ['마감임박'],
-              categories: ['식비'],
-              keywords: ['카페인 줄이기', '커피값', '커피'],
-              participantCount: 3,
+            availableCount: 10,
+            status: 'PROCEEDING',
+            statusTag: ['마감임박'],
+            categories: ['식비', '문화생활'],
+            keywords: ['카페인 줄이기', '커피값', '커피'],
+            participantCount: 3,
+          },
+          {
+            challengeId: 2,
+            title: '배달 10만원 이하로 쓰기',
+            imgUrl: '/images/profile.png',
+            active: true,
+            duration: {
+              period: 30,
+              startAt: '2023-06-20',
+              endAt: '2023-06-20',
             },
-          ],
-        },
-      }),
-    );
+            availableCount: 10,
+            status: 'SUCCESS',
+            statusTag: ['마감임박'],
+            categories: ['식비'],
+            keywords: ['카페인 줄이기', '커피값', '커피'],
+            participantCount: 3,
+          },
+        ],
+      },
+    };
+    return res(ctx.status(200), ctx.json(data));
   }),
 ];

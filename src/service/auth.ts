@@ -56,7 +56,7 @@ export const authKakao = async (
   return response.data;
 };
 
-export const logout = async (): Promise<ApiResponse & { result: true }> => {
+export const logout = async (): Promise<ApiResponse<{ result: true }>> => {
   const response = await httpClient.post(
     'https://jalingobi.com/mypage/logout',
     undefined,
@@ -69,7 +69,7 @@ export const logout = async (): Promise<ApiResponse & { result: true }> => {
   return response.data;
 };
 
-export const drop = async (): Promise<ApiResponse & { result: true }> => {
+export const drop = async (): Promise<ApiResponse<{ result: true }>> => {
   const response = await httpClient.delete(
     'https://jalingobi.com/mypage/withdrawal',
     {

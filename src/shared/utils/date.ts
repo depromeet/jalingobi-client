@@ -48,3 +48,25 @@ export const timeDifference = (date1: string, date2: Date) => {
   }
   return dayjs(date1).format('M월 DD일');
 };
+
+export const calculateDaysBetween = (
+  startAt?: string,
+  endAt?: string,
+): number => {
+  if (!startAt || !endAt) return 0;
+  const startDate = new Date(startAt);
+  const endDate = new Date(endAt);
+  const oneDay = 24 * 60 * 60 * 1000;
+  const diffDays = Math.round(
+    Math.abs((startDate.getTime() - endDate.getTime()) / oneDay),
+  );
+  return diffDays;
+};
+
+export const getDayOfWeek = (dateStr?: string): string => {
+  if (!dateStr) return '';
+  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+  const date = new Date(dateStr);
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  return dayOfWeek;
+};

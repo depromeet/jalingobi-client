@@ -15,10 +15,9 @@ export const StatusMap: Record<Status, string> = {
 
 export type Social = {
   id: string;
-  platform: 'KAKAO';
+  platform: string;
 };
 
-// QUESITON: 창완님 swagger에서는 nickname으로 되어있네요. 수정 필요할 것 같아요
 export type Profile = {
   name: string;
   email: string;
@@ -31,12 +30,10 @@ export type ProfileImage = {
 };
 
 export type User = {
-  result: {
-    social: Social;
-    profile: Profile;
-    notification: boolean;
-    userChallengeResult: ChallengeStatus;
-  };
+  social: Social;
+  profile: Profile;
+  notification: boolean;
+  userChallengeResult: ChallengeStatus;
 };
 
 export type UserUpdateRequest = {
@@ -44,7 +41,7 @@ export type UserUpdateRequest = {
   profileImage?: ProfileImage;
 };
 
-export type UserResponse = User & ApiResponse;
+export type UserResponse = ApiResponse<User>;
 
 export type UserChallenge = {
   challengeId: number;
@@ -64,8 +61,6 @@ export type UserChallenge = {
   keywords: string[];
 };
 
-export type UserChallengeListResult = ApiResponse & {
-  result: {
-    participatedChallenges: UserChallenge[];
-  };
-};
+export type UserChallengeListResult = ApiResponse<{
+  participatedChallenges: UserChallenge[];
+}>;
