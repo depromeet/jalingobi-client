@@ -6,7 +6,8 @@ import { httpClient } from '.';
 export const updateEmoji = async ({
   recordId,
   type,
-}: EmojiRequest): Promise<ApiResponse> => {
+}: // eslint-disable-next-line @typescript-eslint/ban-types
+EmojiRequest): Promise<ApiResponse<{}>> => {
   const response = await httpClient.patch(`/record/${recordId}/emoji`, {
     type,
   });
@@ -17,7 +18,8 @@ export const updateEmoji = async ({
 export const deleteEmoji = async ({
   recordId,
   type,
-}: EmojiRequest): Promise<ApiResponse> => {
+}: // eslint-disable-next-line @typescript-eslint/ban-types
+EmojiRequest): Promise<ApiResponse<{}>> => {
   const response = await httpClient.delete(`/record/${recordId}/emoji`, {
     data: { type },
   });
