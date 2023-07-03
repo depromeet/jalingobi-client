@@ -17,7 +17,7 @@ export default function MyPoorRoom() {
   return (
     <div className="h-full bg-gray-10">
       <Spacing height={86} />
-      <div className="fixed top-0 z-10 bg-white">
+      <div className="fixed top-0 z-10 w-full bg-white">
         <ChallengeCategories />
         {!isMyRoom && <ChallengeAchievementContainer />}
       </div>
