@@ -9,13 +9,8 @@ WORKDIR /usr/src/app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
+RUN npm install -g pnpm
+RUN pnpm i --frozen-lockfile
 
 # 프로젝트를 빌드하는 컨테이너입니다.
 FROM base AS builder
@@ -33,6 +28,7 @@ FROM base AS runner
 WORKDIR /usr/src/app
 
 ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -40,6 +36,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.env.production ./.env.production
 
 USER nextjs
 

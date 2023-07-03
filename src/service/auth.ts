@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { AuthKakaoBody, AuthKakaoResponse } from '@/lib/interfaces';
-import { httpClient } from '@/service/index';
+import { httpClient, setAuthHeader } from '@/service/index';
 import { ApiResponse } from '@/shared/types/api';
 
 type OAuthResposneFromKakao = {
@@ -46,15 +46,13 @@ export const OAuthRequestToKakao = async (
 export const authKakao = async (
   body: AuthKakaoBody,
 ): Promise<AuthKakaoResponse> => {
-  const response = await httpClient.post(
-    'https://api.jalingobi.com/auth/kakao',
-    body,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await httpClient.post('/auth/kakao', body, {
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+  });
+  setAuthHeader(httpClient, response.data.result?.accessToken as string);
+
   return response.data;
 };
 

@@ -1,8 +1,8 @@
-import Image from 'next/image';
-
 import { IconOverflow } from '@/public/svgs';
 import { CommentInfoType } from '@/shared/types/feed';
 import { timeDifference } from '@/shared/utils/date';
+
+import ImageLoader from '../image/ImageLoader';
 
 export const Comment = (commentInfo: CommentInfoType) => {
   const { imgUrl, nickname, content, commentDate } = commentInfo;
@@ -11,7 +11,7 @@ export const Comment = (commentInfo: CommentInfoType) => {
     <div className="flex justify-between pb-1.5">
       <div className="flex gap-2.5">
         <div className="relative h-10 w-10 object-cover">
-          <Image
+          <ImageLoader
             src={imgUrl}
             alt=""
             fill
