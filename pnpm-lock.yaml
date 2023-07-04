@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -20,6 +20,12 @@ dependencies:
   '@radix-ui/react-tooltip':
     specifier: ^1.0.6
     version: 1.0.6(@types/react-dom@18.0.11)(@types/react@18.0.35)(react-dom@18.2.0)(react@18.2.0)
+  '@suspensive/react':
+    specifier: ^1.11.2
+    version: 1.11.2(react@18.2.0)
+  '@suspensive/react-query':
+    specifier: ^1.11.2
+    version: 1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.13)(react@18.2.0)
   '@tanstack/react-query':
     specifier: ^4.29.13
     version: 4.29.13(react-dom@18.2.0)(react@18.2.0)
@@ -5443,6 +5449,31 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
+  /@suspensive/react-query@1.11.2(@suspensive/react@1.11.2)(@tanstack/react-query@4.29.13)(react@18.2.0):
+    resolution: {integrity: sha512-1x9Ee5PPaYhJ8/KXJsnp0P0xCWlYI5f+t7EKqdmiJkhkDE3s5Unt8KiNff3CRxniUwbzI4bmeG4V+ZIzta86rw==}
+    peerDependencies:
+      '@suspensive/react': ^1
+      '@tanstack/react-query': ^4
+      react: ^16.8 || ^17 || ^18
+    peerDependenciesMeta:
+      '@suspensive/react':
+        optional: true
+    dependencies:
+      '@suspensive/react': 1.11.2(react@18.2.0)
+      '@tanstack/react-query': 4.29.13(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+    bundledDependencies:
+      - tsd
+
+  /@suspensive/react@1.11.2(react@18.2.0):
+    resolution: {integrity: sha512-WdSjXu0x4KymU5Q3VNGy4O5Opl4cnbxHH8xsLTS+/GHmeIYVspRwF5EVGiFAFe8ZuBFzDGBOwA7WMA6pclaKuA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.22.5):
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
     engines: {node: '>=14'}
@@ -10166,7 +10197,7 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 4.1.1
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-width: 3.0.0
       external-editor: 3.1.0
