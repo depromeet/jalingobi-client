@@ -2,13 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import {
-  IconAddCircle,
-  IconChat,
-  IconNote,
-  IconSearch,
-  IconUser,
-} from '@/public/svgs';
+import { IconAddSquare, IconChat, IconSearch, IconUser } from '@/public/svgs';
 
 export default function BottomNavigation() {
   const router = useRouter();
@@ -22,8 +16,8 @@ export default function BottomNavigation() {
     currentUrl: string;
   }) => {
     return currentUrl.includes(conditionalUrl)
-      ? 'stroke-primary fill-none'
-      : 'stroke-gray-50 fill-none';
+      ? 'stroke-primary fill-primary'
+      : 'stroke-gray-50 fill-gray-50';
   };
 
   const getTextStyle = ({
@@ -39,7 +33,7 @@ export default function BottomNavigation() {
   };
 
   return (
-    <div className="fixed bottom-0 flex h-[60px] w-screen items-end justify-around bg-white">
+    <div className="fixed bottom-0 flex h-[60px] w-screen items-center justify-around bg-white">
       <button type="button">
         <Link className="flex flex-col items-center" href="/search">
           <IconSearch
@@ -78,7 +72,7 @@ export default function BottomNavigation() {
       </button>
       <button type="button">
         <Link className="flex flex-col items-center" href="/add-spending">
-          <IconAddCircle
+          <IconAddSquare
             className={`h-[24px] w-[24px] ${getIconStyle({
               conditionalUrl: 'add-spending',
               currentUrl,
@@ -94,7 +88,7 @@ export default function BottomNavigation() {
           </p>
         </Link>
       </button>
-      <button type="button">
+      {/* <button type="button">
         <Link className="flex flex-col items-center" href="/jaringobi">
           <IconNote
             className={`h-[24px] w-[24px] ${getIconStyle({
@@ -111,7 +105,7 @@ export default function BottomNavigation() {
             자린고비
           </p>
         </Link>
-      </button>
+      </button> */}
       <button type="button">
         <Link className="flex flex-col items-center" href="/my-page">
           <IconUser

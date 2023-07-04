@@ -1,5 +1,6 @@
 import IconFilter2 from './filter.svg';
 import IconAddCircle from './icon-add-circle.svg';
+import IconAddSquare from './icon-add-square.svg';
 import IconAdd from './icon-add.svg';
 import IconArrowLeft from './icon-arrow-left.svg';
 import IconArrowRight from './icon-arrow-right.svg';
@@ -39,6 +40,7 @@ import IconWelldoneSmall from './icon-welldone-small.svg';
 import IconX from './icon-x.svg';
 
 export {
+  IconAddSquare,
   IconCommentSmall,
   IconCrazySmall,
   IconRegretfulSmall,
