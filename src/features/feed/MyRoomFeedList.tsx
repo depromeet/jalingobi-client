@@ -2,14 +2,12 @@ import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
 import { isEmpty } from 'lodash-es';
-import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
 import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
-import { useRoom } from '@/shared/store/room';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { MyFeed } from './MyFeed';
@@ -27,8 +25,6 @@ export const MyRoomFeedList = () => {
       offset: INITIAL_VALUE_OFFSET,
     });
 
-  const challengeId = useRoom((state) => state.challengeId, shallow);
-
   const feeds = useMemo(
     () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
     [data],
@@ -41,7 +37,10 @@ export const MyRoomFeedList = () => {
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
   const { containerRef } = useKeepScrollPosition([feeds]);
 
-  const handleClickFeed = (recordId: number) => {
+  const handleClickFeed = (
+    recordId: number,
+    challengeId: string | undefined,
+  ) => {
     router.push(
       `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
     );
@@ -78,6 +77,7 @@ export const MyRoomFeedList = () => {
                   recordDate={recordInfo.date}
                   challengeImgUrl={challengeInfo.imgUrl}
                   challengeTitle={challengeInfo.title}
+                  challengeId={challengeInfo.challengeId}
                   emojiInfo={emojiInfo}
                   onClickFeed={handleClickFeed}
                 />
