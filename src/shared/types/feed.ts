@@ -105,7 +105,7 @@ export type ChallengeDetailResponse = ApiResponse<ChallengeDetailResultType>;
 
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
-  offsetRecordId: number;
+  offsetRecordId: number | null;
 };
 
 export type MyRoomFeedListRequest = {
