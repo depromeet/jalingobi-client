@@ -34,8 +34,8 @@ export const useConvertChallengeAcievement = (
   };
 
   return {
-    goalCharge: convertedCurrentCharge,
-    currentCharge: convertedGoalCharge,
+    goalCharge: convertedGoalCharge,
+    currentCharge: convertedCurrentCharge,
     percent,
     dueDay: getDueDayPhrase(dueDay),
   };

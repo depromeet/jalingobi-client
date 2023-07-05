@@ -20,7 +20,7 @@ import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
 
-const INITIAL_VALUE_OFFSET_RECORD_ID = 0;
+const INITIAL_VALUE_OFFSET_RECORD_ID = null;
 
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const ChallengeRoomFeedList = () => {

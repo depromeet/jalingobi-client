@@ -22,8 +22,9 @@ type MyFeedProps = {
   emojiInfo: EmojiInfoType;
   challengeImgUrl?: string;
   challengeTitle?: string;
+  challengeId?: string;
   recordImgUrl?: string;
-  onClickFeed: (recordId: number) => void;
+  onClickFeed: (recordId: number, challengeId: string | undefined) => void;
 };
 
 type TEmoji = {
@@ -41,6 +42,7 @@ const MyFeed = ({
   emojiInfo,
   challengeImgUrl = '',
   challengeTitle,
+  challengeId,
   recordImgUrl,
   onClickFeed,
 }: MyFeedProps) => {
@@ -49,7 +51,8 @@ const MyFeed = ({
     value: price,
     unitOfCurrency: '원',
   });
-  const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
+  const isChallengeExist =
+    !!challengeImgUrl || !!challengeTitle || !!challengeId;
 
   const DEFAULT_EMOJIS = [
     createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
@@ -153,7 +156,7 @@ const MyFeed = ({
             <button
               type="button"
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
-              onClick={() => onClickFeed(recordId)}
+              onClick={() => onClickFeed(recordId, challengeId)}
             >
               <ImageLoader
                 src={recordImgUrl}
@@ -168,7 +171,7 @@ const MyFeed = ({
         )}
         <div
           className="relative w-[13.75rem] rounded-md bg-white p-2.5"
-          onClick={() => onClickFeed(recordId)}
+          onClick={() => onClickFeed(recordId, challengeId)}
         >
           <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
             <div>

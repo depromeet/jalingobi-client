@@ -30,6 +30,7 @@ export type RecordInfoType = {
 export type ChallengeInfoType = {
   imgUrl: string;
   title: string;
+  challengeId: string;
 };
 
 export type ChallengeFeedType = {
@@ -105,7 +106,7 @@ export type ChallengeDetailResponse = ApiResponse<ChallengeDetailResultType>;
 
 export type ChallengeRoomFeedListRequest = {
   challengeId: number;
-  offsetRecordId: number;
+  offsetRecordId: number | null;
 };
 
 export type MyRoomFeedListRequest = {
