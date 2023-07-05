@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const emojiHandlers = [
-  rest.patch(`/record/:recordId/emoji`, (req, res, ctx) => {
+  rest.put(`/record/:recordId/emoji`, (req, res, ctx) => {
     return res(
       ctx.delay(500),
       ctx.status(200),
