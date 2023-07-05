@@ -30,7 +30,7 @@ export type RecordInfoType = {
 export type ChallengeInfoType = {
   imgUrl: string;
   title: string;
-  challengeId: string;
+  id: string;
 };
 
 export type ChallengeFeedType = {
