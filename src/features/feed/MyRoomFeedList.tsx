@@ -77,7 +77,7 @@ export const MyRoomFeedList = () => {
                   recordDate={recordInfo.date}
                   challengeImgUrl={challengeInfo.imgUrl}
                   challengeTitle={challengeInfo.title}
-                  challengeId={challengeInfo.challengeId}
+                  challengeId={challengeInfo.id}
                   emojiInfo={emojiInfo}
                   onClickFeed={handleClickFeed}
                 />
