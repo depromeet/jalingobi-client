@@ -6,7 +6,7 @@ import {
 } from '@/shared/types/challenge';
 
 export const challengeHandlers = [
-  rest.get('/api/challenge/search', (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/challenge/search', (req, res, ctx) => {
     const data: ChallengeSearchResponse = {
       isSuccess: true,
       code: 0,
@@ -14,7 +14,7 @@ export const challengeHandlers = [
       result: [
         {
           id: 1,
-          title: '배달 10만원 이하로 쓰기 msw!!',
+          title: '배달 10만원 이하로 쓰기 ',
           currentPeopleCount: 3,
           availablePeopleCount: 10,
           imgUrl: '/images/baemin.png',
@@ -27,7 +27,7 @@ export const challengeHandlers = [
         },
         {
           id: 2,
-          title: '배달 10만원 이하로 쓰기',
+          title: '30만원 이내로 사용하기',
           currentPeopleCount: 3,
           availablePeopleCount: 10,
           imgUrl: '/images/baemin.png',
