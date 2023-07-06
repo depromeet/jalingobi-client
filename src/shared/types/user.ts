@@ -24,7 +24,7 @@ export type Profile = {
   imgUrl: string;
 };
 
-export type ProfileImage = {
+export type ImageInfo = {
   image?: File;
   imageUrl: string;
 };
@@ -38,7 +38,7 @@ export type User = {
 
 export type UserUpdateRequest = {
   nickName: string;
-  profileImage?: ProfileImage;
+  profileImage?: ImageInfo;
 };
 
 export type UserResponse = ApiResponse<User>;
