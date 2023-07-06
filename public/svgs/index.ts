@@ -7,6 +7,7 @@ import IconArrowUpFill from './icon-arrow-up-fill.svg';
 import IconCancel from './icon-cancel.svg';
 import IconCar from './icon-car.svg';
 import IconChat from './icon-chat.svg';
+import IconCheck from './icon-check.svg';
 import IconChevronDown from './icon-chevron-down.svg';
 import IconChevronLeft from './icon-chevron-left.svg';
 import IconChevronRight from './icon-chevron-right.svg';
@@ -36,6 +37,7 @@ import IconX from './icon-x.svg';
 
 export {
   IconLoading,
+  IconCheck,
   IconCrazyBig,
   IconRegretfulBig,
   IconWelldoneBig,
