@@ -15,7 +15,7 @@ const buttonVariants = cva(
         disabled: 'bg-gray-40',
       },
       size: {
-        lg: 'h-12 w-[2rem] rounded-lg px-[2.5rem] py-3',
+        lg: 'h-12 w-[315px] rounded-lg px-[2.5rem] py-3',
         md: 'h-12 w-[16.25rem] rounded-md px-[2.5rem] py-3',
         sm: 'h-12 w-[12.5rem] rounded-md px-[2.5rem] py-3',
         xs: 'h-12 w-[10.25rem] rounded-md px-[2.5rem] py-3',
