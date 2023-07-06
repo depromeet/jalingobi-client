@@ -127,10 +127,10 @@ export const feedHandlers = [
           result: {
             total: 30,
             limit: 20,
-            current: offsetRecordId === '0' ? 20 : 10,
-            lastRecordId: offsetRecordId === '0' ? 20 : 30,
+            current: offsetRecordId === null ? 20 : 10,
+            lastRecordId: offsetRecordId === null ? 20 : 30,
             challengeFeedList:
-              offsetRecordId === '0'
+              offsetRecordId === null
                 ? challengeFeed.slice(0, 20)
                 : challengeFeed.slice(20, 30),
           },

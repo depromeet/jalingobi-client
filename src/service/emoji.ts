@@ -8,7 +8,7 @@ export const updateEmoji = async ({
   type,
 }: // eslint-disable-next-line @typescript-eslint/ban-types
 EmojiRequest): Promise<ApiResponse<{}>> => {
-  const response = await httpClient.patch(`/record/${recordId}/emoji`, {
+  const response = await httpClient.put(`/record/${recordId}/emoji`, {
     type,
   });
 

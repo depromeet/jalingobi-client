@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { useDeleteEmoji, useUpdateEmoji } from '@/features/emoji/queries';
 import {
-  IconComment,
+  IconCommentBig,
   IconCrazyBig,
   IconRegretfulBig,
   IconWelldoneBig,
@@ -22,7 +22,7 @@ const getIcon: Record<EmojiType, ReactNode> = {
   CRAZY: <IconCrazyBig className="h-10 w-10" />,
   REGRETFUL: <IconRegretfulBig className="h-10 w-10" />,
   WELLDONE: <IconWelldoneBig className="h-10 w-10" />,
-  comment: <IconComment className="h-10 w-10" />,
+  comment: <IconCommentBig className="h-10 w-10" />,
 };
 
 export const ExpenseDetailsEmojiContainer = (emojiInfo: EmojiInfoType) => {

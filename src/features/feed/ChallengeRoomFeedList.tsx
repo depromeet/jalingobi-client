@@ -11,7 +11,7 @@ import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
-import { ChallengeListResultType } from '@/shared/types/feed';
+import { ChallengeListResponse } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date';
 
 import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
@@ -20,20 +20,21 @@ import { MyFeed } from './MyFeed';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
 
-const INITIAL_VALUE_OFFSET_RECORD_ID = 0;
+const INITIAL_VALUE_OFFSET_RECORD_ID = null;
 
 // TODO: 비즈니스 로직을 커스텀 훅으로 빼도 좋을 것.
 export const ChallengeRoomFeedList = () => {
   const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const queryClient = useQueryClient();
-  const categoryList = queryClient.getQueryData<ChallengeListResultType>([
+  const categoryList = queryClient.getQueryData<ChallengeListResponse>([
     'challengeList',
   ]);
 
-  const currentCategoryInfo = categoryList?.participatedChallengeList.find(
-    ({ challengeId: _challengeId }) => _challengeId === challengeId,
-  );
+  const currentCategoryInfo =
+    categoryList?.result.participatedChallengeList.find(
+      ({ challengeId: _challengeId }) => _challengeId === challengeId,
+    );
 
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
