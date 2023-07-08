@@ -26,7 +26,7 @@ const Profile = ({ profile }: Props) => {
         <span className="font-title-medium-sm font-semibold">
           {profile?.name}
         </span>
-        <IconArrowRight className="h-4 w-4 " />
+        <IconArrowRight />
       </Link>
     </section>
   );
