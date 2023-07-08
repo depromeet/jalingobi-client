@@ -14,7 +14,7 @@ export const userHandlers = [
           platform: 'KAKAO',
         },
         profile: {
-          name: '박정윤',
+          name: '굴비씌',
           email: 'email@gmail.com',
           imgUrl: '/images/profile.png',
         },
@@ -41,7 +41,7 @@ export const userHandlers = [
     );
   }),
 
-  rest.get('/api/mypage/challenges', (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/mypage/challenges', (req, res, ctx) => {
     const data: UserChallengeListResult = {
       isSuccess: true,
       code: 0,
@@ -67,7 +67,7 @@ export const userHandlers = [
           },
           {
             challengeId: 2,
-            title: '배달 10만원 이하로 쓰기',
+            title: '30만원 이내로 사용하기',
             imgUrl: '/images/profile.png',
             active: true,
             duration: {

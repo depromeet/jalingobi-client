@@ -8,8 +8,8 @@ type BottomNavLayoutProps = {
 
 export default function BottomNavLayout({ children }: BottomNavLayoutProps) {
   return (
-    <div className="relative h-screen">
-      {children}
+    <div className="flex h-screen flex-col">
+      <div className="flex-1 overflow-auto">{children}</div>
       <BottomNavigation />
     </div>
   );

@@ -9,18 +9,7 @@ import { ToastsContainer } from '@/shared/components/toast';
 import { NextPageWithLayout } from '@/shared/types/layout';
 
 if (process.env.NODE_ENV === 'development') {
-  const isServer = typeof window === 'undefined';
-  if (isServer) {
-    (async () => {
-      const { server } = await import('../mocks/server');
-      server.listen();
-    })();
-  } else {
-    (async () => {
-      const { worker } = await import('../mocks/browser');
-      worker.start();
-    })();
-  }
+  await import('../mocks');
 }
 const queryClient = new QueryClient();
 

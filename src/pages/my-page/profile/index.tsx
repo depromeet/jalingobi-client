@@ -18,7 +18,7 @@ import {
 } from '@/shared/components/form/Form';
 import ProfileHeader from '@/shared/components/layout/header/ProfileHeader';
 import { TextInput } from '@/shared/components/text-input';
-import { ProfileImage } from '@/shared/types/user';
+import { ImageInfo } from '@/shared/types/user';
 
 const Profile = () => {
   const { data } = useUserProfile();
@@ -29,7 +29,7 @@ const Profile = () => {
       nickName: '',
     },
   });
-  const [profileImage, setProfileImage] = useState<ProfileImage>({
+  const [profileImage, setProfileImage] = useState<ImageInfo>({
     imageUrl: '',
   });
 

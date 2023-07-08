@@ -2,7 +2,16 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'jalingobi-bucket-test.s3.ap-northeast-2.amazonaws.com',
+        protocol: 'https',
+      },
+    ],
+  },
   webpack(config) {
+    config.experiments = { ...config.experiments, topLevelAwait: true };
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg'),
@@ -37,7 +46,6 @@ const nextConfig = {
       },
     ];
   },
-  trailingSlash: true,
 };
 
 module.exports = nextConfig;
