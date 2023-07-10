@@ -95,7 +95,6 @@ export const ChallengeRoomFeedList = () => {
 
   return (
     <div className="-z-10 bg-gray-10 px-5" ref={containerRef}>
-      {hasNextPage && <div ref={intersectedRef} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {/* TODO: 서버 데이터 그대로 넘기기  */}
@@ -139,6 +138,7 @@ export const ChallengeRoomFeedList = () => {
             </Fragment>
           );
         })}
+        {hasNextPage && <div ref={intersectedRef} />}
       </ul>
       <div ref={bottomRef} />
     </div>
