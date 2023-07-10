@@ -19,7 +19,7 @@ export type Social = {
 };
 
 export type Profile = {
-  name: string;
+  nickname: string;
   email: string;
   imgUrl: string;
 };

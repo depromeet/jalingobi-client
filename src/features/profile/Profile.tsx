@@ -24,7 +24,7 @@ const Profile = ({ profile }: Props) => {
         className="flex items-center gap-x-2 text-right"
       >
         <span className="font-title-medium-sm font-semibold">
-          {profile?.name}
+          {profile?.nickname}
         </span>
         <IconArrowRight />
       </Link>
