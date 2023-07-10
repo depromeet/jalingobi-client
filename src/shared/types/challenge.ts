@@ -33,7 +33,7 @@ export type ChallengeDetail = {
 export type ChallengeFilter = {
   category?: string;
   filter?: string;
-  sortedBy?: string;
+  sortedType?: string;
 };
 
 export type ChallengeSearch = {
@@ -50,8 +50,13 @@ export type ChallengeSearch = {
   status: string;
 };
 
+export type ChallengeSearchResult = {
+  challenges: ChallengeSearch[];
+  hasNext: boolean;
+};
+
 export type SortedType = '인원순' | '금액 낮은순';
 
 export type ChallengeResponse = ApiResponse<ChallengeDetail>;
 export type ChallengeListResponse = ApiResponse<ChallengeDetail[]>;
-export type ChallengeSearchResponse = ApiResponse<ChallengeSearch[]>;
+export type ChallengeSearchResponse = ApiResponse<ChallengeSearchResult>;
