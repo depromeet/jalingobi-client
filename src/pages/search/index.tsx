@@ -26,7 +26,11 @@ function Search() {
       <header className="mb-2.5 flex h-12 items-center justify-between">
         <h2 className="font-title-medium-md">거지방 탐색</h2>
       </header>
-      <ChipGroup onChange={setCategory} initialChips="전체" className="mb-4">
+      <ChipGroup
+        onChange={setCategory as (value: string) => void}
+        initialChips="전체"
+        className="mb-4"
+      >
         <ChipGroup.Chip value="전체" className="inline-block shrink-0">
           전체
         </ChipGroup.Chip>
