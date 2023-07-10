@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from '@suspensive/react-query';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
@@ -22,8 +23,8 @@ export const useJoinChallenge = (id?: number) => {
   });
 };
 
-export const useChallengeSearch = (filters: ChallengeFilter) => {
-  return useQuery({
+export const useSuspenseChallengeSearch = (filters: ChallengeFilter) => {
+  return useSuspenseQuery({
     queryKey: challengeKeys.list(filters),
     queryFn: () => searchChallengeList(filters),
   });

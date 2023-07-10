@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { useChallengeQuery } from '@/features/challenge/queries';
 import { IconArrowLeft, IconRice } from '@/public/svgs';
@@ -18,14 +17,16 @@ const ChallengeDetailPage = () => {
   return (
     <div className="flex h-screen flex-col">
       <div className="flex-1 overflow-auto">
-        <header className="relative flex h-[300px] items-center justify-center overflow-y-scroll bg-[#9ADEE3]">
-          <Link href="/search" className="absolute left-4 top-3">
-            <IconArrowLeft className="h-4 w-4" />
+        <header className="relative h-[348px]">
+          <Link
+            href="/search"
+            className="flex h-12 items-center justify-between p-3"
+          >
+            <IconArrowLeft className="z-10 h-4 w-4 stroke-white text-white" />
           </Link>
           <Image
             src={challenge?.result.challengeImgUrl || ''}
-            width={260}
-            height={260}
+            fill
             alt="item"
           />
         </header>

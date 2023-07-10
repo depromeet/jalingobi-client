@@ -1,4 +1,4 @@
-import React from 'react';
+import Link from 'next/link';
 
 import { Button } from '../button';
 
@@ -8,7 +8,9 @@ export default function ChallengeNotFound() {
       <h2 className="font-body-regular-lg text-gray-60">
         아직 아무기록이 없어요
       </h2>
-      <Button size="md">거지방 둘러보러 가기</Button>
+      <Link href="/search">
+        <Button size="md">거지방 둘러보러 가기</Button>
+      </Link>
     </div>
   );
 }

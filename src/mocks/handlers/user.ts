@@ -14,7 +14,7 @@ export const userHandlers = [
           platform: 'KAKAO',
         },
         profile: {
-          name: '굴비씌',
+          nickname: '굴비씌',
           email: 'email@gmail.com',
           imgUrl: '/images/profile.png',
         },

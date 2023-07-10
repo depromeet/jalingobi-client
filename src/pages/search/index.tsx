@@ -1,29 +1,24 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, Suspense, useState } from 'react';
 
-import { useChallengeSearch } from '@/features/challenge/queries';
 import { IconCar, IconClothes, IconRice } from '@/public/svgs';
 import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
 import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
+import { categoryMap } from '@/shared/constants/challenge';
 import { useHandleBack } from '@/shared/hooks';
 import { SortedType } from '@/shared/types/challenge';
 
-export default function Search() {
+function Search() {
   useHandleBack();
-  const [category, setCategory] = useState('전체'); // ['전체', '식비', '문화생활', '취미'
+  const [category, setCategory] = useState<keyof typeof categoryMap>('전체'); // ['전체', '식비', '문화생활', '취미'
   const [showOnlyActiveRoom, setShowOnlyActiveRoom] = useState(true);
-  const [sortedBy, setSortedBy] = useState<SortedType>('인원순');
+  const [sortedType, setSortedType] = useState<SortedType>('인원순');
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const { data } = useChallengeSearch({
-    filter: showOnlyActiveRoom ? '' : 'all',
-    sortedBy,
-    category,
-  });
 
   const handleSortedTypeChange = (sortedType: SortedType) => {
-    setSortedBy(sortedType);
+    setSortedType(sortedType);
   };
 
   return (
@@ -61,14 +56,22 @@ export default function Search() {
         <ChallengeFilterSheet
           isSheetOpen={isBottomSheetOpen}
           setIsSheetOpen={setIsBottomSheetOpen}
-          sortedBy={sortedBy}
+          sortedBy={sortedType}
           handleSortedTypeChange={handleSortedTypeChange}
         />
       </div>
-      <SearchChallengeList challengeList={data?.result} />
+      <Suspense>
+        <SearchChallengeList
+          category={category}
+          sortedType={sortedType}
+          filter={showOnlyActiveRoom ? '' : 'all'}
+        />
+      </Suspense>
     </div>
   );
 }
 Search.getLayout = function getLayout(page: ReactElement) {
   return <BottomNavLayout>{page}</BottomNavLayout>;
 };
+
+export default Search;
