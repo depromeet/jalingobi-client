@@ -22,7 +22,6 @@ export default function MyPoorRoom() {
         {!isMyRoom && <ChallengeAchievementContainer />}
       </div>
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
-      <Spacing height={60} />
     </div>
   );
 }
