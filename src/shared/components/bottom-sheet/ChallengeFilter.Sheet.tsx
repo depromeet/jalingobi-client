@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { IconFilter2 } from '@/public/svgs';
 import {
@@ -7,6 +7,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/shared/components/sheet';
+import { useClickOutside } from '@/shared/hooks/useClickOutside';
 import { SortedType } from '@/shared/types/challenge';
 
 type Props = {
@@ -22,6 +23,14 @@ const ChallengeFilterSheet = ({
   isSheetOpen,
   setIsSheetOpen,
 }: Props) => {
+  const contentRef = useRef<HTMLDivElement>(null!);
+  const closeSheet = () => {
+    if (!isSheetOpen) return;
+    setIsSheetOpen(false);
+  };
+
+  useClickOutside(contentRef, closeSheet);
+
   return (
     <div className="relative">
       <Sheet open={isSheetOpen}>
@@ -34,6 +43,7 @@ const ChallengeFilterSheet = ({
           </div>
         </SheetTrigger>
         <SheetContent
+          ref={contentRef}
           position="bottom"
           size="content"
           className="rounded-t-2xl bg-white"
