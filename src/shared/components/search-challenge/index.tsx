@@ -1,35 +1,50 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
+import { useSuspenseChallengeSearch } from '@/features/challenge/queries';
 import { IconClock } from '@/public/svgs';
-import { ChallengeSearch } from '@/shared/types/challenge';
+import { categoryMap } from '@/shared/constants/challenge';
+import { SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 import ChallengeNotFound from '../challenge/ChallengeNotFound';
 
 type Props = {
-  challengeList?: ChallengeSearch[];
+  category: keyof typeof categoryMap;
+  sortedType: SortedType;
+  filter: string;
 };
 
-export default function SearchChallengeList({ challengeList }: Props) {
-  if (!challengeList) {
+export default function SearchChallengeList({
+  category,
+  sortedType,
+  filter,
+}: Props) {
+  const {
+    data: { result },
+  } = useSuspenseChallengeSearch({
+    category: categoryMap[category],
+    filter,
+    sortedType,
+  });
+  if (!result.challenges || result.challenges.length === 0) {
     return <ChallengeNotFound />;
   }
+
   return (
     <ul className="flex flex-col gap-y-2.5">
-      {challengeList?.map((challenge) => (
+      {result.challenges?.map((challenge) => (
         <Link key={challenge.id} href={`/search/${challenge.id}`}>
           <li
             key={challenge.id}
-            className="relative grid min-h-[130px] w-full grid-cols-4 rounded-md bg-gray-5 px-5 py-4"
+            className="relative flex min-h-[130px] w-full items-start rounded-md bg-gray-5 px-5 py-4"
           >
             <Image
               src={challenge.imgUrl}
               width={54}
               height={54}
               alt="item"
-              className="relative top-5  mx-auto"
+              className="mr-4 aspect-square rounded-md"
             />
             <div className="col-span-3 flex flex-col gap-y-[1px]">
               <div className="font-caption-medium-md flex items-center  gap-x-1 font-semibold">
@@ -44,9 +59,9 @@ export default function SearchChallengeList({ challengeList }: Props) {
                 {challenge.keywords.map((keyword, index) => (
                   <li
                     key={index}
-                    className="font-caption-medium-md text-gray-50"
+                    className="font-caption-medium-md font-medium text-gray-50"
                   >
-                    #{keyword}
+                    {keyword}
                   </li>
                 ))}
               </ul>
