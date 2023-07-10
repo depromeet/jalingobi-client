@@ -4,21 +4,88 @@
  */
 
 export interface paths {
+  '/record/{recordId}/emoji': {
+    /**
+     * 이모지 생성 및 수정 API
+     * @description 이모지를 생성 및 수정합니다.
+     */
+    put: operations['createRecordEmoji'];
+    /**
+     * 이모지 삭제 API
+     * @description 이미 등록된 이모지를 삭제합니다.
+     */
+    delete: operations['deleteRecordEmoji'];
+  };
+  '/record/{recordId}/comment/{commentId}': {
+    /**
+     * 댓글 수정 API
+     * @description 댓글을 수정합니다.
+     */
+    put: operations['updateComment'];
+    /**
+     * 댓글 삭제 API
+     * @description 댓글을 삭제합니다.
+     */
+    delete: operations['deleteComment'];
+  };
   '/challenge/{challengeId}': {
+    /**
+     * 챌린지 상세정보 API
+     * @description 특정 챌린지의 상세정보를 보여줍니다.
+     */
+    get: operations['getChallenge'];
+    /**
+     * 챌린지 수정 API
+     * @description 챌린지를 수정합니다.
+     */
     put: operations['updateChallenge'];
+    /**
+     * 챌린지 삭제 API
+     * @description 챌린지를 삭제합니다.
+     */
+    delete: operations['deleteChallenge'];
+  };
+  '/{id}': {
+    post: operations['count'];
+  };
+  '/record/{recordId}/comment': {
+    /**
+     * 댓글 생성 API
+     * @description 댓글을 생성합니다.
+     */
+    post: operations['createComment'];
+  };
+  '/record/{challengeId}': {
+    /** 챌린지 지출을 기록하는 API */
+    post: operations['createRecord'];
+  };
+  '/mypage/logout': {
+    /** 사용자 로그아웃 API */
+    post: operations['logout'];
   };
   '/image/presigned': {
     /** presigned url을 발급받는 API */
     post: operations['createPresigned'];
   };
   '/challenge': {
+    /**
+     * 챌린지 생성 API
+     * @description 챌린지를 생성합니다.
+     */
     post: operations['createChallenge'];
   };
-  '/challenge/{challengeRoomId}/create': {
-    /** 챌린지 지출을 기록하는 API */
-    post: operations['createRecord'];
+  '/challenge/join/{challengeId}': {
+    /**
+     * 챌린지 참가 API
+     * @description 유저가 해당 챌린지에 참가합니다.
+     */
+    post: operations['joinChallenge'];
   };
   '/auth/refresh': {
+    /**
+     * 토큰 reissue API
+     * @description Refresh Token을 이용해 Access Token을 재발급합니다.
+     */
     post: operations['refreshToken'];
   };
   '/auth/kakao': {
@@ -28,32 +95,87 @@ export interface paths {
      */
     post: operations['authKakao'];
   };
-  '/challenge/{recordId}': {
+  '/record/{recordId}': {
     /** 챌린지 지출을 삭제하는 API */
     delete: operations['deleteRecord'];
     /** 챌린지 지출을 수정하는 API */
     patch: operations['updateRecord'];
   };
-  '/challenge/{challengeRoomId}/{recordId}': {
+  '/mypage/profile': {
+    /** 사용자 프로필을 수정하는 API */
+    patch: operations['updateUserProfile'];
+  };
+  '/user/info': {
+    /**
+     * 사용자 정보 API
+     * @description 사용자 정보를 가져옵니다.
+     */
+    get: operations['GetUserInfo'];
+  };
+  '/record/{challengeId}/{recordId}': {
     /**
      * 챌린지 지출 상세보기 API
      * @description 기록에 대한 본문 및 댓글들을 보여줍니다.
      */
     get: operations['getRecord'];
   };
-  '/challenge/{challengeRoomId}/proceeding/info': {
+  '/mypage': {
+    /** 마이페이지 조회 API */
+    get: operations['getUserProfile'];
+  };
+  '/mypage/jalingobi': {
+    /** 사용자 자린고비 이미지 URL 조회 API */
+    get: operations['getJalingobiImgUrl'];
+  };
+  '/mypage/challenges': {
+    /** 사용자의 전체 챌린지 목록 조회 API */
+    get: operations['getUserChallenges'];
+  };
+  '/jalingobi': {
+    /** 자린고비 홈 조회 API */
+    get: operations['getJalingobiHome'];
+  };
+  '/jalingobi/small-talk/{jalingobiId}': {
+    /** 자린고비 한마디 조회 API */
+    get: operations['getJalingobiSmallTalk'];
+  };
+  '/guest': {
+    /**
+     * 게스트 모드 API
+     * @description 게스트 모드로 진입하기 위한 access token을 발급합니다.
+     */
+    get: operations['experienceGuestMode'];
+  };
+  '/connect/{id}': {
+    get: operations['subscribe'];
+  };
+  '/challenge/{challengeId}/proceeding/info': {
     /**
      * 챌린지 진행 정보 API
      * @description 챌린지의 진행 정보(목표 지출액, 현재 지출액 등)를 가져옵니다.
      */
     get: operations['getChallengeProceedingInfo'];
   };
-  '/challenge/{challengeRoomId}/feed': {
+  '/challenge/{challengeId}/feed': {
     /**
      * 챌린지 방 피드 API
      * @description 챌린지 방에 있는 기록들을 20개씩 가져옵니다.
      */
     get: operations['getChallengeFeed'];
+  };
+  '/challenge/search': {
+    /**
+     * 챌린지 탐색 API
+     * @description 조건에 따라 챌린지를 탐색합니다.
+     */
+    get: operations['searchChallenges'];
+  };
+  '/challenge/random-nickname': {
+    /**
+     * 랜덤 닉네임 API
+     * @description 챌린지에서 사용할 랜덤 닉네임을 조회합니다.
+     */
+    get: operations['createRandomNickname'];
   };
   '/challenge/my-room/feed': {
     /**
@@ -65,12 +187,23 @@ export interface paths {
   '/challenge/my-list': {
     /**
      * 참여중인 챌린지 API
-     * @description 참여중인 챌린지 방들의 정보를 가져옵니다.
+     * @description 참여중인 챌린지들의 정보를 가져옵니다.
      */
     get: operations['getMyChallengeList'];
   };
   '/': {
     get: operations['home'];
+  };
+  '/mypage/withdrawal': {
+    /** 사용자 탈퇴 API */
+    delete: operations['withdrawal'];
+  };
+  '/mypage/challenge/{challengeId}': {
+    /**
+     * 챌린지 나가기 API
+     * @description 참여중인 챌린지를 나갑니다.
+     */
+    delete: operations['quitChallenge'];
   };
 }
 
@@ -78,30 +211,268 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    CommonResponse: {
+    Response: {
       isSuccess?: boolean;
       /** Format: int32 */
       code?: number;
       message?: string;
+      result?: Record<string, never>;
+    };
+    ResponseObject: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: Record<string, never>;
+    };
+    CreateEmojiRequest: {
+      /**
+       * @description WELLDONE | REGRETFUL | CRAZY
+       * @enum {string}
+       */
+      type: 'WELLDONE' | 'REGRETFUL' | 'CRAZY';
+    };
+    UpdateCommentRequest: {
+      /**
+       * @description 댓글 내용
+       * @example 안녕
+       */
+      content: string;
+    };
+    ResponseUpdateCommentResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['UpdateCommentResponse'];
+    };
+    UpdateCommentResponse: {
+      /**
+       * Format: int64
+       * @description 댓글 ID
+       * @example 1
+       */
+      commentId?: number;
     };
     UpdateChallengeRequest: {
-      categories?: string[];
-      title?: string;
-      /** Format: int32 */
-      price?: number;
+      /**
+       * @description 챌린지가 속한 카테고리
+       * @example [
+       *   "FOOD"
+       * ]
+       */
+      categories: string[];
+      /**
+       * @description 챌린지 제목
+       * @example 배달 10만원 이하로 쓰기
+       */
+      title: string;
+      /**
+       * Format: int32
+       * @description 챌린지 목표 금액
+       * @example 100000
+       */
+      price: number;
+      /**
+       * @description 챌린지 대표 이미지
+       * @example /test.jpg
+       */
       imgUrl?: string;
-      keywords?: string[];
+      /**
+       * @description 키워드
+       * @example [
+       *   "#배달비",
+       *   "#10만원챌린지"
+       * ]
+       */
+      keywords: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 수용 인원
+       * @example 30
+       */
+      availableCount: number;
+      /**
+       * @description 챌린지 규칙
+       * @example [
+       *   "광고 금지",
+       *   "악플 금지"
+       * ]
+       */
+      rules: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 기간
+       * @example 7
+       */
+      period: number;
+      /**
+       * Format: date
+       * @description 챌린지 시작 일자
+       * @example 2023-06-01
+       */
+      startAt: string;
+      /**
+       * Format: date
+       * @description 챌린지 종료 일자
+       * @example 2023-06-07
+       */
+      endAt: string;
+    };
+    ResponseUpdateChallengeResponse: {
+      isSuccess?: boolean;
       /** Format: int32 */
-      availableCount?: number;
-      rules?: string[];
-      /** Format: int32 */
-      period?: number;
-      /** Format: date */
-      startAt?: string;
-      /** Format: date */
-      endAt?: string;
-      /** Format: int64 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['UpdateChallengeResponse'];
+    };
+    UpdateChallengeResponse: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 1
+       */
       challengeId?: number;
+      /**
+       * @description 챌린지가 속한 카테고리
+       * @example FOOD
+       */
+      category?: string;
+      /**
+       * @description 챌린지 제목
+       * @example 배달 10만원 이하로 쓰기
+       */
+      title?: string;
+      /**
+       * Format: int32
+       * @description 챌린지 목표 금액
+       * @example 100000
+       */
+      price?: number;
+      /**
+       * @description 챌린지 대표 이미지
+       * @example /test.jpg
+       */
+      imgUrl?: string;
+      /**
+       * @description 키워드
+       * @example [
+       *   "#배달비",
+       *   "#10만원챌린지"
+       * ]
+       */
+      keywords?: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 수용 인원
+       * @example 30
+       */
+      availableCount?: number;
+      /**
+       * @description 챌린지 규칙
+       * @example [
+       *   "광고 금지",
+       *   "악플 금지"
+       * ]
+       */
+      rules?: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 기간
+       * @example 7
+       */
+      period?: number;
+      /**
+       * Format: date
+       * @description 챌린지 시작 일자
+       * @example 2023-06-01
+       */
+      startAt?: string;
+      /**
+       * Format: date
+       * @description 챌린지 종료 일자
+       * @example 2023-06-07
+       */
+      endAt?: string;
+    };
+    CreateCommentRequest: {
+      /**
+       * @description 댓글 내용
+       * @example 안녕
+       */
+      content: string;
+    };
+    CreateCommentResponse: {
+      /**
+       * Format: int64
+       * @description 댓글 ID
+       * @example 1
+       */
+      id?: number;
+      /**
+       * @description 댓글을 쓴 유저의 프로필 이미지
+       * @example /test.jpg
+       */
+      imgUrl?: string;
+      /**
+       * @description 유저의 닉네임
+       * @example 자린고비
+       */
+      nickname?: string;
+      /**
+       * @description 댓글 내용
+       * @example 안녕
+       */
+      content?: string;
+      /**
+       * Format: date-time
+       * @description 댓글 작성 일자
+       */
+      createdAt?: string;
+    };
+    ResponseCreateCommentResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['CreateCommentResponse'];
+    };
+    CreateRecordRequest: {
+      /** Format: int32 */
+      price: number;
+      /** @example 지출 명 */
+      title: string;
+      /** @example 지출 내용 */
+      content: string;
+      /** @example https://jalingobi-bucket-test.s3.ap-northeast-2.amazonaws.com/record/original/java.png */
+      imgUrl?: string | null;
+      /**
+       * @description 지출 평가, WELLDONE | REGRETFUL | CRAZY 중에서 선택 가능합니다.
+       * @enum {string}
+       */
+      evaluation: 'WELLDONE' | 'REGRETFUL' | 'CRAZY';
+    };
+    CreateRecordResponse: {
+      /** Format: int64 */
+      id?: number;
+      title?: string;
+      content?: string;
+      imgUrl?: string;
+      evaluation?: string;
+      userInfo?: components['schemas']['RecordUserInfo'];
+    };
+    RecordUserInfo: {
+      /** @example 사용자 닉네임 */
+      nickname?: string;
+      /** @example 사용자 이미지 URL */
+      userImgUrl?: string;
+    };
+    ResponseCreateRecordResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['CreateRecordResponse'];
     };
     IssuePresignedUrlRequest: {
       /**
@@ -110,13 +481,18 @@ export interface components {
        */
       imageFileExtension: 'JPEG' | 'JPG' | 'PNG';
       /**
-       * @description RECODE, PROFILE, CHALLENGE
+       * @description RECODE, PROFILE, CUSTOM_PROFILE, CHALLENGE
        * @enum {string}
        */
-      type: 'RECORD' | 'PROFILE' | 'CHALLENGE';
+      type: 'RECORD' | 'PROFILE' | 'CUSTOM_PROFILE' | 'CHALLENGE';
     };
     IssuePresignedUrlResponse: {
+      /** @example 업로드할 때 요청할 url */
       presignedUrl?: string;
+      /**
+       * @description s3에 저장될 경로
+       * @example record/2817216430/7e3e0dca-2491-4764-80f2-593166d9712b.png
+       */
       key?: string;
     };
     ResponseIssuePresignedUrlResponse: {
@@ -126,130 +502,135 @@ export interface components {
       message?: string;
       result?: components['schemas']['IssuePresignedUrlResponse'];
     };
-    Challenge: {
-      /** Format: date-time */
-      createdAt?: string;
-      /** Format: date-time */
-      updatedAt?: string;
-      /** Format: int64 */
-      id?: number;
-      challengeCategories?: components['schemas']['ChallengeCategories'];
-      title?: string;
-      /** Format: int32 */
-      price?: number;
-      imgUrl?: string;
-      challengeKeywords?: components['schemas']['ChallengeKeywords'];
-      /** Format: int32 */
-      availableCount?: number;
-      createdBy?: string;
-      userChallenges?: components['schemas']['UserChallenge'][];
-      challengeRules?: components['schemas']['ChallengeRule'][];
-      duration?: components['schemas']['Duration'];
-    };
-    ChallengeCategories: Record<string, never>;
-    ChallengeKeywords: {
-      keywords?: components['schemas']['Keyword'][];
-      keywordNames?: string[];
-    };
-    ChallengeRule: {
-      /** Format: int64 */
-      id?: number;
-      content?: string;
-      challenge?: components['schemas']['Challenge'];
-    };
     CreateChallengeRequest: {
+      /**
+       * @description 챌린지가 속한 카테고리
+       * @example [
+       *   "FOOD"
+       * ]
+       */
       category: string[];
+      /**
+       * @description 챌린지 제목
+       * @example 배달 10만원 이하로 쓰기
+       */
       title: string;
-      /** Format: int32 */
-      price: number;
-      imageUrl?: string;
-      keywords: string[];
-      /** Format: int32 */
-      availableCount: number;
-      challengeRule?: components['schemas']['ChallengeRule'][];
-      /** Format: int32 */
-      period: number;
-      /** Format: date */
-      startAt: string;
-      /** Format: date */
-      endAt: string;
-    };
-    Duration: {
-      /** Format: int32 */
-      period?: number;
-      /** Format: date */
-      startAt?: string;
-      /** Format: date */
-      endAt?: string;
-    };
-    Keyword: {
-      /** Format: int64 */
-      id?: number;
-      keyword?: string;
-    };
-    Profile: {
-      name?: string;
-      email?: string;
-      imgUrl?: string;
-    };
-    Social: {
-      id?: string;
-      /** @enum {string} */
-      platform?: 'KAKAO' | 'GOOGLE' | 'APPLE';
-    };
-    User: {
-      /** Format: date-time */
-      createdAt?: string;
-      /** Format: date-time */
-      updatedAt?: string;
-      /** Format: int64 */
-      id?: number;
-      profile?: components['schemas']['Profile'];
-      social?: components['schemas']['Social'];
-      /** @enum {string} */
-      role?: 'USER' | 'GUEST';
-      userChallenges?: components['schemas']['UserChallenge'][];
-    };
-    UserChallenge: {
-      /** Format: int64 */
-      id?: number;
-      user?: components['schemas']['User'];
-      challenge?: components['schemas']['Challenge'];
-      nickname?: string;
-      /** Format: int32 */
-      currentCharge?: number;
-    };
-    CreateRecordRequest: {
-      /** Format: int32 */
-      price: number;
-      /** @description 지출 명 */
-      title: string;
-      /** @description 지출 내용 */
-      content: string;
-      /** @description 사진 링크 */
-      imgUrl?: string | null;
       /**
        * Format: int32
-       * @description 지출 평가, [1,2,3,4] 중에서 선택 가능합니다.
+       * @description 챌린지 목표 금액
+       * @example 100000
        */
-      evaluation: number;
+      price: number;
+      /**
+       * @description 챌린지 대표 이미지
+       * @example /test.jpg
+       */
+      imageUrl?: string;
+      /**
+       * @description 키워드
+       * @example [
+       *   "#배달비",
+       *   "#10만원챌린지"
+       * ]
+       */
+      keywords: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 수용 인원
+       * @example 30
+       */
+      availableCount: number;
+      /**
+       * @description 챌린지 규칙
+       * @example [
+       *   "광고 금지",
+       *   "악플 금지"
+       * ]
+       */
+      challengeRule: string[];
+      /**
+       * Format: int32
+       * @description 챌린지 기간
+       * @example 7
+       */
+      period: number;
+      /**
+       * Format: date
+       * @description 챌린지 시작 일자
+       * @example 2023-06-01
+       */
+      startAt: string;
+      /**
+       * Format: date
+       * @description 챌린지 종료 일자
+       * @example 2023-06-07
+       */
+      endAt: string;
     };
-    CreateRecordResponse: {
-      /** Format: int64 */
+    CreateChallengeResponse: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 1
+       */
       id?: number;
-      title?: string;
-      content?: string;
-      imgUrl?: string;
-      /** Format: int32 */
-      evaluation?: number;
-      user?: components['schemas']['User'];
     };
-    ResponseCreateRecordResponse: {
+    ResponseCreateChallengeResponse: {
       isSuccess?: boolean;
       /** Format: int32 */
       code?: number;
       message?: string;
-      result?: components['schemas']['CreateRecordResponse'];
+      result?: components['schemas']['CreateChallengeResponse'];
+    };
+    JoinChallengeRequest: {
+      /**
+       * @description 챌린지에서 사용할 닉네임
+       * @example 눈누난나
+       */
+      nickname: string;
+      /**
+       * @description 프로필 이미지
+       * @example /test.jpg
+       */
+      imgUrl: string;
+    };
+    JoinChallengeResponse: {
+      /**
+       * @description 챌린지 제목
+       * @example 배달 10만원 이하로 쓰기
+       */
+      title?: string;
+      /**
+       * Format: date
+       * @description 챌린지 시작 일자
+       */
+      startAt?: string;
+      /**
+       * @description 챌린지 규칙
+       * @example [
+       *   "광고 금지",
+       *   "악플 금지"
+       * ]
+       */
+      rules?: string[];
+    };
+    ResponseJoinChallengeResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['JoinChallengeResponse'];
+    };
+    ResponseTokenResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['TokenResponse'];
+    };
+    TokenResponse: {
+      accessToken?: string;
+      existRefreshToken?: boolean;
     };
     KakaoAuthRequest: {
       idToken: string;
@@ -265,71 +646,125 @@ export interface components {
       message?: string;
       result?: components['schemas']['KakaoAuthResponse'];
     };
-    ResponseCustomExceptionStatus: {
+    UpdateRecordRequest: {
+      /** Format: int32 */
+      price: number;
+      /** @example 지출 명 */
+      title: string;
+      /** @example 지출 내용 */
+      content: string;
+      /** @example https://jalingobi-bucket-test.s3.ap-northeast-2.amazonaws.com/record/original/java.png */
+      imgUrl?: string | null;
+      /**
+       * @description 지출 평가, WELLDONE | REGRETFUL | CRAZY 중에서 선택 가능합니다.
+       * @enum {string}
+       */
+      evaluation: 'WELLDONE' | 'REGRETFUL' | 'CRAZY';
+    };
+    UpdateProfileRequest: {
+      /** @example 사용자 닉네임 */
+      nickName: string;
+      /** @example 사용자 프로필 URL */
+      profileImgUrl: string;
+    };
+    GetUserInfoResponse: {
+      /** Format: int64 */
+      id?: number;
+      nickname?: string;
+      email?: string;
+      imgUrl?: string;
+      platform?: string;
+      role?: string;
+      /** Format: int32 */
+      score?: number;
+    };
+    ResponseGetUserInfoResponse: {
       isSuccess?: boolean;
       /** Format: int32 */
       code?: number;
       message?: string;
-      /** @enum {string} */
-      result?:
-        | 'SUCCESS'
-        | 'BAD_REQUEST'
-        | 'TOO_MANY_REQUEST'
-        | 'INTERNAL_SERVER_ERROR'
-        | 'REQUEST_ERROR'
-        | 'EMPTY_JWT'
-        | 'INVALID_JWT'
-        | 'INVALID_REFRESH_TOKEN'
-        | 'NOT_AUTHENTICATED_ACCOUNT'
-        | 'INVALID_KEY'
-        | 'ACCOUNT_NOT_FOUND'
-        | 'ACCOUNT_NOT_VALID'
-        | 'POST_USERS_EMPTY_NAME'
-        | 'POST_USERS_INVALID_NAME'
-        | 'ACCOUNT_ALREADY_EXIST'
-        | 'ACCOUNT_ACCESS_DENIED'
-        | 'RESPONSE_ERROR'
-        | 'DATABASE_ERROR'
-        | 'SERVER_ERROR'
-        | 'FILE_CONVERT_FAIL'
-        | 'CHALLENGE_NOT_FOUND'
-        | 'CHALLENGE_IS_FULL'
-        | 'UNPARTICIPATED_CHALLENGE_USER'
-        | 'CHALLENGE_NOT_BELONG_TO_USER'
-        | 'FEED_NOT_FOUND'
-        | 'COMMENT_NOT_FOUND'
-        | 'RECORD_NOT_FOUND'
-        | 'RECORD_EVALUATION_NOT_VALID'
-        | 'INVALID_RECORD_USER'
-        | 'CATEGORY_NOT_FOUND'
-        | 'CANNOT_ADD_CATEGORY'
-        | 'INVALID_KEYWORD_FORMAT'
-        | 'CANNOT_ADD_KEYWORD'
-        | 'ALL_KEYWORD_LENGTH_IS_OVER';
+      result?: components['schemas']['GetUserInfoResponse'];
     };
-    ChallengeRecord: {
+    CommentInfo: {
+      /**
+       * @description 본인 댓글인지
+       * @example true
+       */
+      isMine?: boolean;
+      /**
+       * Format: int64
+       * @example 35
+       */
+      commenterId?: number;
+      /** @example 댓글 작성자 닉네임 */
+      nickname?: string;
+      /** @example 댓글 작성자 이미지 URL */
+      imgUrl?: string;
       /**
        * Format: int64
        * @example 27
        */
-      recordId?: number;
+      commentId?: number;
+      /** @example 댓글 내용 */
+      content?: string;
+      /**
+       * Format: date-time
+       * @description 댓글 작성일
+       */
+      commentDate?: string;
+    };
+    EmojiInfo: {
+      /**
+       * @description 내가 선택한 이모지
+       * @example CRAZY
+       */
+      selected?: string;
+      /**
+       * Format: int32
+       * @description 댓글수
+       * @example 5
+       */
+      comment?: number;
+      /**
+       * Format: int64
+       * @description CRAZY
+       * @example 2
+       */
+      CRAZY?: number;
+      /**
+       * Format: int64
+       * @description REGRETFUL
+       * @example 0
+       */
+      REGRETFUL?: number;
+      /**
+       * Format: int64
+       * @description WELLDONE
+       * @example 3
+       */
+      WELLDONE?: number;
+    };
+    GetRecordResponse: {
       /**
        * @description 본인 기록인지
        * @example true
        */
       isMine?: boolean;
-      /** @example 사용자 닉네임 */
-      nickname?: string;
-      /** @example 사용자 이미지 URL */
-      userImgUrl?: string;
+      userInfo?: components['schemas']['RecordUserInfo'];
+      recordInfo?: components['schemas']['RecordInfo'];
+      emojiInfo?: components['schemas']['EmojiInfo'];
+      commentInfoList?: components['schemas']['CommentInfo'][];
+    };
+    RecordInfo: {
       /**
-       * Format: date-time
-       * @description 기록 작성일
+       * Format: int64
+       * @description 기록 ID
+       * @example 27
        */
-      recordDate?: string;
+      id?: number;
       /** @example 기록 이미지 URL */
-      recordImgUrl?: string;
-      /** @example 지출 내역명 */
+      imgUrl?: string;
+      /** @example 기록 타이틀 */
       title?: string;
       /** @example 기록 내용 */
       content?: string;
@@ -339,33 +774,16 @@ export interface components {
        * @example 5000
        */
       price?: number;
-    };
-    GetRecordResponse: {
-      challengeRecord?: components['schemas']['ChallengeRecord'];
-      recordCommentList?: components['schemas']['RecordComment'][];
-    };
-    RecordComment: {
       /**
-       * Format: int64
-       * @example 27
+       * @description 평가
+       * @example CRAZY
        */
-      commentId?: number;
-      /**
-       * @description 본인 댓글인지
-       * @example true
-       */
-      isMine?: boolean;
-      /** @example 댓글 작성자 닉네임 */
-      nickname?: string;
-      /** @example 댓글 작성자 이미지 URL */
-      imgUrl?: string;
-      /** @example 댓글 내용 */
-      content?: string;
+      evaluation?: string;
       /**
        * Format: date-time
-       * @description 댓글 작성일
+       * @description 기록 작성일
        */
-      commentDate?: string;
+      date?: string;
     };
     ResponseGetRecordResponse: {
       isSuccess?: boolean;
@@ -374,7 +792,272 @@ export interface components {
       message?: string;
       result?: components['schemas']['GetRecordResponse'];
     };
-    ChallengeProgress: {
+    GetMyPageResponse: {
+      social?: components['schemas']['Social'];
+      profile?: components['schemas']['Profile'];
+      notification?: boolean;
+      userChallengeResult?: {
+        [key: string]: number | undefined;
+      };
+    };
+    Profile: {
+      nickname?: string;
+      email?: string;
+      imgUrl?: string;
+    };
+    ResponseGetMyPageResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetMyPageResponse'];
+    };
+    Social: {
+      id?: string;
+      /** @enum {string} */
+      platform?: 'KAKAO' | 'GOOGLE' | 'APPLE' | 'GUEST';
+    };
+    GetJalingobiImgResponse: {
+      /** @example 사용자 자린고비 이미지 URL */
+      imgUrl?: string;
+    };
+    ResponseGetJalingobiImgResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetJalingobiImgResponse'];
+    };
+    /** @description 챌린지 기간 */
+    DateInfo: {
+      /** Format: int32 */
+      period?: number;
+      /** Format: date */
+      startAt?: string;
+      /** Format: date */
+      endAt?: string;
+    };
+    GetUserChallengesResponse: {
+      participatedChallenges?: components['schemas']['MyPageUserChallenge'][];
+    };
+    MyPageUserChallenge: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 1
+       */
+      challengeId?: number;
+      /**
+       * @description 참여중인 챌린지 타이틀
+       * @example 배달 10만원 이하로 쓰기
+       */
+      title?: string;
+      /**
+       * @description 챌린지 대표 이미지
+       * @example 이미지 URL
+       */
+      imgUrl?: string;
+      /** @description 챌린지 진행 여부 */
+      active?: boolean;
+      duration?: components['schemas']['DateInfo'];
+      /**
+       * Format: int32
+       * @description 수용 가능 인원
+       */
+      availableCount?: number;
+      /**
+       * Format: int32
+       * @description 해당 챌린지에 참여 중인 사용자 수
+       */
+      participantCount?: number;
+      /** @description 챌린지 결과 */
+      status?: string;
+      /**
+       * @description 챌린지 기간에 따른 상태 태그 [new, 마감임박, 오픈 예정, 해당없음]
+       * @example ["마감임박"]
+       */
+      statusTag?: string;
+      /**
+       * @description 챌린지 카테고리
+       * @example FOOD
+       */
+      category?: string;
+      /** @description 챌린지 키워드 ["#마라탕", "#배달"] */
+      keywords?: string[];
+    };
+    ResponseGetUserChallengesResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetUserChallengesResponse'];
+    };
+    GetJalingobiResponse: {
+      /** @description 전체 자린고비 정보 리스트 */
+      jalingobiList?: components['schemas']['JalingobiInfo'][];
+      /**
+       * Format: int32
+       * @description 현재 사용자 자린고비 레벨
+       * @example 1
+       */
+      userLevel?: number;
+    };
+    /** @description 전체 자린고비 정보 리스트 */
+    JalingobiInfo: {
+      /** Format: int64 */
+      jalingobiId?: number;
+      /** Format: int32 */
+      level?: number;
+      name?: string;
+      acquisitionCondition?: string;
+    };
+    ResponseGetJalingobiResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetJalingobiResponse'];
+    };
+    GetSmallTalkResponse: {
+      /** @example 뭐, 대충 살고있어요 */
+      smallTalk?: string;
+    };
+    ResponseGetSmallTalkResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetSmallTalkResponse'];
+    };
+    ExperienceGuestModeResponse: {
+      /** @example 게스트 모드용 accessToken */
+      accessToken?: string;
+    };
+    ResponseExperienceGuestModeResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['ExperienceGuestModeResponse'];
+    };
+    SseEmitter: {
+      /** Format: int64 */
+      timeout?: number;
+    };
+    DateInfoResponse: {
+      /**
+       * Format: int32
+       * @description 챌린지 기간
+       * @example 30
+       */
+      period?: number;
+      /**
+       * Format: date
+       * @description 챌린지 시작 일자
+       * @example 2023-06-01
+       */
+      startAt?: string;
+      /**
+       * Format: date
+       * @description 챌린지 종료 일자
+       * @example 2023-06-30
+       */
+      endAt?: string;
+    };
+    GetChallengeResponse: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 1
+       */
+      challengeId?: number;
+      /**
+       * @description 챌린지 카테고리
+       * @example FOOD
+       */
+      category?: string;
+      /**
+       * @description 챌린지 제목
+       * @example 배달 10만원 이하로 쓰기
+       */
+      title?: string;
+      /**
+       * Format: int32
+       * @description 챌린지 목표 금액
+       * @example 100000
+       */
+      price?: number;
+      /**
+       * @description 챌린지 대표 이미지
+       * @example test.jpg
+       */
+      challengeImgUrl?: string;
+      /**
+       * @description 챌린지 키워드
+       * @example [
+       *   "#배달비",
+       *   "#10만원챌린지"
+       * ]
+       */
+      keywords?: string[];
+      headCount?: components['schemas']['HeadCountResponse'];
+      participantsInfo?: components['schemas']['ProfileResponse'][];
+      /**
+       * @description 챌린지 규칙
+       * @example [
+       *   "광고 금지",
+       *   "악플 금지"
+       * ]
+       */
+      rules?: string[];
+      /**
+       * @description 챌린지 상태
+       * @example new
+       */
+      status?: string;
+      dateInfo?: components['schemas']['DateInfoResponse'];
+      recruiting?: boolean;
+    };
+    HeadCountResponse: {
+      /**
+       * Format: int32
+       * @description 챌린지 최대 수용 인원
+       * @example 50
+       */
+      availableCount?: number;
+      /**
+       * Format: int32
+       * @description 현재 챌린지 참가 인원
+       * @example 30
+       */
+      participants?: number;
+    };
+    ProfileResponse: {
+      /**
+       * @description 유저의 프로필 이미지
+       * @example user.jpg
+       */
+      imgUrl?: string;
+      /**
+       * @description 유저 닉네임
+       * @example 티끌모아 티끌
+       */
+      nickname?: string;
+      /**
+       * Format: int32
+       * @description 유저 레벨
+       * @example 1
+       */
+      level?: number;
+    };
+    ResponseGetChallengeResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['GetChallengeResponse'];
+    };
+    GetChallengeProceedingInfoResponse: {
       /**
        * Format: int32
        * @description 목표 지출액
@@ -394,14 +1077,11 @@ export interface components {
        */
       percent?: number;
       /**
-       * Format: int32
+       * Format: int64
        * @description 남은 기간
        * @example 11
        */
       dueDay?: number;
-    };
-    GetChallengeProceedingInfoResponse: {
-      challengeProgress?: components['schemas']['ChallengeProgress'];
     };
     ResponseGetChallengeProceedingInfoResponse: {
       isSuccess?: boolean;
@@ -410,64 +1090,79 @@ export interface components {
       message?: string;
       result?: components['schemas']['GetChallengeProceedingInfoResponse'];
     };
-    Feed: {
-      /**
-       * Format: int64
-       * @description 지출 기록 ID
-       * @example 27
-       */
-      recordId?: number;
+    ChallengeFeed: {
       /**
        * @description 본인 기록인지
        * @example true
        */
       isMine?: boolean;
+      userInfo?: components['schemas']['FeedUserInfo'];
+      recordInfo?: components['schemas']['FeedRecordInfo'];
+      emojiInfo?: components['schemas']['EmojiInfo'];
+    };
+    FeedRecordInfo: {
       /**
-       * Format: int32
-       * @description 현재 지출액
-       * @example 78000
+       * Format: int64
+       * @description 기록 ID
+       * @example 27
        */
-      currentCharge?: number;
-      /** @example 유저 이미지 URL */
-      userImgUrl?: string;
-      /** @example 사용자 닉네임 */
-      nickname?: string;
+      id?: number;
       /** @example 기록 이미지 URL */
-      recordImgUrl?: string;
+      imgUrl?: string;
+      /** @example 기록 타이틀 */
+      title?: string;
+      /** @example 기록 내용 */
+      content?: string;
       /**
        * Format: int32
        * @description 가격
        * @example 5000
        */
       price?: number;
-      /** @example 기록 타이틀 */
-      title?: string;
-      /** @example 기록 내용 */
-      content?: string;
       /**
        * Format: date-time
        * @description 기록 작성일
        */
-      recordDate?: string;
+      date?: string;
+    };
+    FeedUserInfo: {
+      /** @example 유저 이미지 URL */
+      imgUrl?: string;
+      /** @example 사용자 닉네임 */
+      nickname?: string;
+      /**
+       * Format: int32
+       * @description 다른 유저의 현재 지출액
+       * @example 78000
+       */
+      currentCharge?: number;
     };
     GetChallengeFeedResponse: {
       /**
        * Format: int32
-       * @example 12
+       * @description 총 기록 개수
+       * @example 120
        */
-      totalPage?: number;
+      total?: number;
       /**
        * Format: int32
-       * @example 5
-       */
-      currentPage?: number;
-      /**
-       * Format: int32
-       * @description 페이지 당 기록수
+       * @description 최대 기록 개수
        * @example 20
        */
-      perPage?: number;
-      feedList?: components['schemas']['Feed'][];
+      limit?: number;
+      /**
+       * Format: int32
+       * @description 이번에 보낸 기록 개수
+       * @example 15
+       */
+      current?: number;
+      /**
+       * Format: int64
+       * @description 마지막 기록의 id
+       * @example 38
+       */
+      lastRecordId?: number;
+      challengeFeedList?: components['schemas']['ChallengeFeed'][];
     };
     ResponseGetChallengeFeedResponse: {
       isSuccess?: boolean;
@@ -476,56 +1171,90 @@ export interface components {
       message?: string;
       result?: components['schemas']['GetChallengeFeedResponse'];
     };
+    ChallengeData: {
+      /** Format: int64 */
+      id?: number;
+      title?: string;
+      /** Format: int32 */
+      currentPeopleCount?: number;
+      /** Format: int32 */
+      availablePeopleCount?: number;
+      imgUrl?: string;
+      /** Format: int32 */
+      price?: number;
+      keywords?: string[];
+      /** Format: date */
+      startAt?: string;
+      /** Format: date-time */
+      createdAt?: string;
+      /** Format: int32 */
+      period?: number;
+      status?: string;
+      keywordNames?: string[];
+      challengeStatus?: string;
+    };
+    ChallengeSlice: {
+      challenges?: components['schemas']['ChallengeData'][];
+      hasNext?: boolean;
+    };
+    ResponseChallengeSlice: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['ChallengeSlice'];
+    };
+    CreateRandomNicknameResponse: {
+      /**
+       * @description 랜덤 닉네임
+       * @example 거지의 민족
+       */
+      nickname?: string;
+    };
+    ResponseCreateRandomNicknameResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['CreateRandomNicknameResponse'];
+    };
+    ChallengeInfo: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 5
+       */
+      id?: number;
+      /** @example 챌린지 이미지 URL */
+      imgUrl?: string;
+      /** @example 챌린지 타이틀 */
+      title?: string;
+    };
     GetMyRoomFeedResponse: {
       /**
        * Format: int32
-       * @description 총 페이지
-       * @example 12
+       * @description 총 기록 개수
+       * @example 120
        */
-      totalPage?: number;
+      total?: number;
       /**
        * Format: int32
-       * @description 현재 페이지
-       * @example 5
-       */
-      currentPage?: number;
-      /**
-       * Format: int32
-       * @description 페이지 당 기록수
+       * @description 최대 기록 개수
        * @example 20
        */
-      perPage?: number;
+      limit?: number;
+      /**
+       * Format: int32
+       * @description 이번에 보낸 기록 개수
+       * @example 15
+       */
+      current?: number;
       myFeedList?: components['schemas']['MyFeed'][];
     };
     MyFeed: {
-      /**
-       * Format: int64
-       * @example 27
-       */
-      recordId?: number;
-      /** @example 사용자 닉네임 */
-      nickname?: string;
-      /** @example 유저 이미지 URL */
-      userImgUrl?: string;
-      /**
-       * Format: int32
-       * @description 가격
-       * @example 5000
-       */
-      price?: number;
-      /** @example 기록 타이틀 */
-      title?: string;
-      /** @example 기록 내용 */
-      content?: string;
-      /** @example 챌린지 이미지 URL */
-      challengeImgUrl?: string;
-      /** @example 챌린지 타이틀 */
-      challengeTitle?: string;
-      /**
-       * Format: date-time
-       * @description 기록 작성일
-       */
-      recordDate?: string;
+      recordInfo?: components['schemas']['FeedRecordInfo'];
+      challengeInfo?: components['schemas']['ChallengeInfo'];
+      emojiInfo?: components['schemas']['EmojiInfo'];
     };
     ResponseGetMyRoomFeedResponse: {
       isSuccess?: boolean;
@@ -540,10 +1269,10 @@ export interface components {
     ParticipatedChallenge: {
       /**
        * Format: int64
-       * @description 챌린지 방 ID
+       * @description 챌린지 ID
        * @example 13
        */
-      challengeRoomId?: number;
+      challengeId?: number;
       /**
        * @description 참여중인 챌린지 타이틀
        * @example 배달 10만원 이하로 쓰기
@@ -554,6 +1283,23 @@ export interface components {
        * @example 이미지 URL
        */
       imgUrl?: string;
+      /**
+       * @description 챌린지 진행 여부 - RECRUITING, PROCEEDING 둘 중 하나의 값
+       * @example PROCEEDING
+       */
+      status?: string;
+      /**
+       * Format: int32
+       * @description 최대 참여 인원
+       * @example 20
+       */
+      maxParticipants?: number;
+      /**
+       * Format: int32
+       * @description 현재 참여 인원
+       * @example 12
+       */
+      participants?: number;
     };
     ResponseGetMyChallengeListResponse: {
       isSuccess?: boolean;
@@ -561,6 +1307,54 @@ export interface components {
       code?: number;
       message?: string;
       result?: components['schemas']['GetMyChallengeListResponse'];
+    };
+    DeleteEmojiRequest: {
+      /**
+       * @description WELLDONE | REGRETFUL | CRAZY
+       * @enum {string}
+       */
+      type: 'WELLDONE' | 'REGRETFUL' | 'CRAZY';
+    };
+    DeleteCommentResponse: {
+      /**
+       * Format: int64
+       * @description 댓글 ID
+       * @example 1
+       */
+      commentId?: number;
+    };
+    ResponseDeleteCommentResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['DeleteCommentResponse'];
+    };
+    QuitChallengeResponse: {
+      /** Format: int64 */
+      challengeId?: number;
+    };
+    ResponseQuitChallengeResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['QuitChallengeResponse'];
+    };
+    DeleteChallengeResponse: {
+      /**
+       * Format: int64
+       * @description 챌린지 ID
+       * @example 1
+       */
+      challengeId?: number;
+    };
+    ResponseDeleteChallengeResponse: {
+      isSuccess?: boolean;
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      result?: components['schemas']['DeleteChallengeResponse'];
     };
   };
   responses: never;
@@ -573,6 +1367,162 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
+  /**
+   * 이모지 생성 및 수정 API
+   * @description 이모지를 생성 및 수정합니다.
+   */
+  createRecordEmoji: {
+    parameters: {
+      path: {
+        recordId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateEmojiRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['Response'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 이모지 삭제 API
+   * @description 이미 등록된 이모지를 삭제합니다.
+   */
+  deleteRecordEmoji: {
+    parameters: {
+      path: {
+        recordId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['DeleteEmojiRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['Response'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 댓글 수정 API
+   * @description 댓글을 수정합니다.
+   */
+  updateComment: {
+    parameters: {
+      path: {
+        recordId: number;
+        commentId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateCommentRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseUpdateCommentResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 댓글 삭제 API
+   * @description 댓글을 삭제합니다.
+   */
+  deleteComment: {
+    parameters: {
+      path: {
+        recordId: number;
+        commentId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseDeleteCommentResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 챌린지 상세정보 API
+   * @description 특정 챌린지의 상세정보를 보여줍니다.
+   */
+  getChallenge: {
+    parameters: {
+      path: {
+        challengeId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetChallengeResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 챌린지 수정 API
+   * @description 챌린지를 수정합니다.
+   */
   updateChallenge: {
     parameters: {
       path: {
@@ -588,13 +1538,146 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*': components['schemas']['ResponseUpdateChallengeResponse'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 챌린지 삭제 API
+   * @description 챌린지를 삭제합니다.
+   */
+  deleteChallenge: {
+    parameters: {
+      path: {
+        challengeId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseDeleteChallengeResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  count: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: never;
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 댓글 생성 API
+   * @description 댓글을 생성합니다.
+   */
+  createComment: {
+    parameters: {
+      path: {
+        recordId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateCommentRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseCreateCommentResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 챌린지 지출을 기록하는 API */
+  createRecord: {
+    parameters: {
+      path: {
+        challengeId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseCreateRecordResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 사용자 로그아웃 API */
+  logout: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['Response'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
@@ -616,11 +1699,17 @@ export interface operations {
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
   };
+  /**
+   * 챌린지 생성 API
+   * @description 챌린지를 생성합니다.
+   */
   createChallenge: {
     requestBody: {
       content: {
@@ -631,57 +1720,66 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*': components['schemas']['ResponseCreateChallengeResponse'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
   };
-  /** 챌린지 지출을 기록하는 API */
-  createRecord: {
+  /**
+   * 챌린지 참가 API
+   * @description 유저가 해당 챌린지에 참가합니다.
+   */
+  joinChallenge: {
     parameters: {
       path: {
-        challengeRoomId: number;
+        challengeId: number;
       };
     };
-    requestBody: {
+    requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateRecordRequest'];
+        'application/json': components['schemas']['JoinChallengeRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['ResponseCreateRecordResponse'];
+          '*/*': components['schemas']['ResponseJoinChallengeResponse'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
   };
+  /**
+   * 토큰 reissue API
+   * @description Refresh Token을 이용해 Access Token을 재발급합니다.
+   */
   refreshToken: {
     responses: {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*': components['schemas']['ResponseTokenResponse'];
         };
       };
-      /** @description Bad Request */
+      /** @description 유효하지 않은 Refresh Token으로 요청했을 때 */
       400: {
-        content: {
-          '*/*': components['schemas']['CommonResponse'];
-        };
+        content: {};
       };
     };
   };
@@ -723,13 +1821,15 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['ResponseCustomExceptionStatus'];
+          '*/*': components['schemas']['Response'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
@@ -743,20 +1843,68 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['CreateRecordRequest'];
+        'application/json': components['schemas']['UpdateRecordRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          '*/*': components['schemas']['ResponseCustomExceptionStatus'];
+          '*/*': components['schemas']['Response'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 사용자 프로필을 수정하는 API */
+  updateUserProfile: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateProfileRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['Response'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 사용자 정보 API
+   * @description 사용자 정보를 가져옵니다.
+   */
+  GetUserInfo: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetUserInfoResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
@@ -768,7 +1916,7 @@ export interface operations {
   getRecord: {
     parameters: {
       path: {
-        challengeRoomId: number;
+        challengeId: number;
         recordId: number;
       };
     };
@@ -779,9 +1927,158 @@ export interface operations {
           '*/*': components['schemas']['ResponseGetRecordResponse'];
         };
       };
-      /** @description 잘못된 요청값을 전달한 경우 */
+      /** @description Bad Request */
       400: {
-        content: {};
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 마이페이지 조회 API */
+  getUserProfile: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetMyPageResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 사용자 자린고비 이미지 URL 조회 API */
+  getJalingobiImgUrl: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetJalingobiImgResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 사용자의 전체 챌린지 목록 조회 API */
+  getUserChallenges: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetUserChallengesResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 자린고비 홈 조회 API */
+  getJalingobiHome: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetJalingobiResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 자린고비 한마디 조회 API */
+  getJalingobiSmallTalk: {
+    parameters: {
+      path: {
+        jalingobiId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseGetSmallTalkResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 게스트 모드 API
+   * @description 게스트 모드로 진입하기 위한 access token을 발급합니다.
+   */
+  experienceGuestMode: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseExperienceGuestModeResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  subscribe: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          'text/event-stream': components['schemas']['SseEmitter'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
       };
     };
   };
@@ -792,7 +2089,7 @@ export interface operations {
   getChallengeProceedingInfo: {
     parameters: {
       path: {
-        challengeRoomId: number;
+        challengeId: number;
       };
     };
     responses: {
@@ -802,9 +2099,13 @@ export interface operations {
           '*/*': components['schemas']['ResponseGetChallengeProceedingInfoResponse'];
         };
       };
-      /** @description 잘못된 요청값을 전달한 경우 */
+      /** @description Bad Request */
       400: {
-        content: {};
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
       };
     };
   };
@@ -814,11 +2115,12 @@ export interface operations {
    */
   getChallengeFeed: {
     parameters: {
-      query: {
-        page: number;
+      query?: {
+        /** @description 첫 화면은 null. 이후부터는 lastRecordId 값으로 설정 */
+        offsetRecordId?: string;
       };
       path: {
-        challengeRoomId: number;
+        challengeId: number;
       };
     };
     responses: {
@@ -828,9 +2130,73 @@ export interface operations {
           '*/*': components['schemas']['ResponseGetChallengeFeedResponse'];
         };
       };
-      /** @description 잘못된 요청값을 전달한 경우 */
+      /** @description Bad Request */
       400: {
-        content: {};
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 챌린지 탐색 API
+   * @description 조건에 따라 챌린지를 탐색합니다.
+   */
+  searchChallenges: {
+    parameters: {
+      query?: {
+        category?:
+          | 'FOOD'
+          | 'HOBBY_LEISURE'
+          | 'FASHION_BEAUTY'
+          | 'TRANSPORTATION_AUTOMOBILE';
+        filter?: string;
+        sortType?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseChallengeSlice'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 랜덤 닉네임 API
+   * @description 챌린지에서 사용할 랜덤 닉네임을 조회합니다.
+   */
+  createRandomNickname: {
+    parameters: {
+      query: {
+        category: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseCreateRandomNicknameResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
       };
     };
   };
@@ -841,7 +2207,8 @@ export interface operations {
   getMyRoomFeed: {
     parameters: {
       query: {
-        page: number;
+        /** @description 0 부터 시작해서 limit 만큼 더해가면서 요청 */
+        offset: string;
       };
     };
     responses: {
@@ -851,15 +2218,19 @@ export interface operations {
           '*/*': components['schemas']['ResponseGetMyRoomFeedResponse'];
         };
       };
-      /** @description 잘못된 요청값을 전달한 경우 */
+      /** @description Bad Request */
       400: {
-        content: {};
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
       };
     };
   };
   /**
    * 참여중인 챌린지 API
-   * @description 참여중인 챌린지 방들의 정보를 가져옵니다.
+   * @description 참여중인 챌린지들의 정보를 가져옵니다.
    */
   getMyChallengeList: {
     responses: {
@@ -869,9 +2240,13 @@ export interface operations {
           '*/*': components['schemas']['ResponseGetMyChallengeListResponse'];
         };
       };
-      /** @description 잘못된 요청값을 전달한 경우 */
+      /** @description Bad Request */
       400: {
-        content: {};
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
       };
     };
   };
@@ -886,7 +2261,55 @@ export interface operations {
       /** @description Bad Request */
       400: {
         content: {
-          '*/*': components['schemas']['CommonResponse'];
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /** 사용자 탈퇴 API */
+  withdrawal: {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['Response'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
+        };
+      };
+    };
+  };
+  /**
+   * 챌린지 나가기 API
+   * @description 참여중인 챌린지를 나갑니다.
+   */
+  quitChallenge: {
+    parameters: {
+      path: {
+        challengeId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          '*/*': components['schemas']['ResponseQuitChallengeResponse'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          '*/*':
+            | components['schemas']['ResponseObject']
+            | components['schemas']['Response'];
         };
       };
     };
