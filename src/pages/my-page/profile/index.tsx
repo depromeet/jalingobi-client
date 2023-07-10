@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { z } from 'zod';
@@ -36,7 +36,7 @@ const Profile = () => {
   const name = form.watch('nickName');
 
   const hasChanged =
-    name !== data?.result.profile.name ||
+    name !== data?.result.profile.nickname ||
     profileImage?.imageUrl !== data?.result.profile.imgUrl;
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Profile = () => {
       ...profileImage,
       imageUrl: data.result.profile.imgUrl,
     });
-    form.setValue('nickName', data.result.profile.name);
+    form.setValue('nickName', data.result.profile.nickname);
   }, [data]);
 
   const onSubmit = (values: z.infer<typeof profileSchema>) => {
@@ -91,7 +91,7 @@ const Profile = () => {
                     {...field}
                     className="w-full"
                     placeholder="이름을 입력해주세요"
-                    defaultValue={data?.result.profile.name}
+                    defaultValue={data?.result.profile.nickname}
                     maxLength={16}
                   />
                 </FormControl>
