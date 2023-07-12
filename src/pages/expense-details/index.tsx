@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -61,6 +61,8 @@ export default function ExpenseDetails() {
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
   const addCommentCommonLogic = () => {
     setPrevComments(comments);
 
@@ -81,7 +83,6 @@ export default function ExpenseDetails() {
 
     setComments((prev) => [...prev, addedComment]);
     setInputValue('');
-    window.scrollTo(0, document.body.scrollHeight);
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -120,6 +121,18 @@ export default function ExpenseDetails() {
       prev.filter((comment) => comment.commentId !== commentId),
     );
   };
+
+  useEffect(() => {
+    if (prevComments.length >= comments.length) {
+      return;
+    }
+
+    if (!bottomRef.current) {
+      return;
+    }
+
+    bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [comments]);
 
   useEffect(() => {
     if (!data) {
@@ -172,6 +185,7 @@ export default function ExpenseDetails() {
         onKeyDown={handleKeyDown}
         onClickIcon={handleClickIcon}
       />
+      <div ref={bottomRef} />
       <Spacing height={68} />
     </section>
   );
