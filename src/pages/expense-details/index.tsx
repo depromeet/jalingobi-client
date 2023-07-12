@@ -71,12 +71,9 @@ export default function ExpenseDetails() {
 
     const addedComment = {
       isMine: true,
-      // TODO: 동호님에게 commenterId는 왜 number인지 묻기
       commenterId: Math.floor(Math.random() * MAX),
-      // TODO: nickname으로 수정하기
       nickname: userInfo?.result.nickname || '',
       imgUrl: userInfo?.result.imgUrl || '',
-      // QUESTION: 임의로 사용되는 정수 key값을 넣어야 하는데 랜덤으로 넣어줘도 크게 상관 없을 것 같아서 이렇게 했어요. 다른 의견 있으시면 부탁드릴게요
       commentId: Math.floor(Math.random() * MAX),
       content: inputValue,
       commentDate: `${new Date()}`,
@@ -84,6 +81,7 @@ export default function ExpenseDetails() {
 
     setComments((prev) => [...prev, addedComment]);
     setInputValue('');
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
