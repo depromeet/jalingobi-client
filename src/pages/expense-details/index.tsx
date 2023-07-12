@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
+import { useUserInfo } from '@/features/profile/queries';
 import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
@@ -51,6 +52,8 @@ export default function ExpenseDetails() {
     recordId: Number(recordId),
   });
 
+  const { data: userInfo } = useUserInfo();
+
   const addComment = useAddComment();
   const deleteComment = useDeleteComment();
 
@@ -71,8 +74,8 @@ export default function ExpenseDetails() {
       // TODO: 동호님에게 commenterId는 왜 number인지 묻기
       commenterId: Math.floor(Math.random() * MAX),
       // TODO: nickname으로 수정하기
-      nickname: user.profile.name,
-      imgUrl: user.profile.imgUrl,
+      nickname: userInfo?.result.nickname || '',
+      imgUrl: userInfo?.result.imgUrl || '',
       // QUESTION: 임의로 사용되는 정수 key값을 넣어야 하는데 랜덤으로 넣어줘도 크게 상관 없을 것 같아서 이렇게 했어요. 다른 의견 있으시면 부탁드릴게요
       commentId: Math.floor(Math.random() * MAX),
       content: inputValue,

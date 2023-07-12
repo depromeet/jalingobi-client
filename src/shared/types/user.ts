@@ -36,12 +36,24 @@ export type User = {
   userChallengeResult: ChallengeStatus;
 };
 
+export type GetUserInfoType = {
+  id: number;
+  nickname: string;
+  email: string;
+  imgUrl: string;
+  platform: string;
+  role: string;
+  score: number;
+};
+
 export type UserUpdateRequest = {
   nickName: string;
   profileImage?: ImageInfo;
 };
 
 export type UserResponse = ApiResponse<User>;
+
+export type GetUserInfoResponse = ApiResponse<GetUserInfoType>;
 
 export type UserChallenge = {
   challengeId: number;

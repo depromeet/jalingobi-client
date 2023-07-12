@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchUserProfile, updateUserProfile } from '@/service/user';
+import {
+  fetchUserProfile,
+  getUserInfo,
+  updateUserProfile,
+} from '@/service/user';
 
 const userKeys = {
   all: ['user'] as const,
@@ -26,5 +30,12 @@ export const useUpdateUserProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(userKeys.all);
     },
+  });
+};
+
+export const useUserInfo = () => {
+  return useQuery({
+    queryKey: ['userProfile'],
+    queryFn: getUserInfo,
   });
 };
