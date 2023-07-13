@@ -73,9 +73,9 @@ export default function ExpenseDetails() {
 
     const addedComment = {
       isMine: true,
-      commenterId: Math.floor(Math.random() * MAX),
-      nickname: userInfo?.result.nickname || '',
-      imgUrl: userInfo?.result.imgUrl || '',
+      commenterId: userInfo?.result.id ?? Math.floor(Math.random() * MAX),
+      nickname: userInfo?.result.nickname ?? '',
+      imgUrl: userInfo?.result.imgUrl ?? '',
       commentId: Math.floor(Math.random() * MAX),
       content: inputValue,
       commentDate: `${new Date()}`,
@@ -123,7 +123,7 @@ export default function ExpenseDetails() {
   };
 
   useEffect(() => {
-    if (prevComments.length >= comments.length) {
+    if (prevComments.length === 0 || prevComments.length >= comments.length) {
       return;
     }
 
