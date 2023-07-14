@@ -33,18 +33,10 @@ const nextConfig = {
       },
     );
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    // Modify the file loader rule to ignore *.svg, since we have it hanFdled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/auth/kakao',
-        destination: 'https://api.jalingobi.com/auth/kakao', // Proxy to Backend
-      },
-    ];
   },
 };
 
