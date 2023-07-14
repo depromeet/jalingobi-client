@@ -2,7 +2,7 @@ import { ImageLoader } from '@/shared/components/image';
 
 export const MyRoomEmpty = () => {
   return (
-    <div className="flex flex-col items-center justify-center pt-40">
+    <div className="flex h-screen flex-col items-center justify-center">
       <p className="font-title-medium-md text-black">
         진행 중인 거지방이 없어요.
       </p>
