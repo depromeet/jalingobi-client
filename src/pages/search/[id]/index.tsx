@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,6 +8,7 @@ import { IconArrowLeft, IconRice } from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
+import { withAuth } from '@/shared/hof/withAuth';
 
 const ChallengeDetailPage = () => {
   const router = useRouter();
@@ -73,3 +75,9 @@ const ChallengeDetailPage = () => {
   );
 };
 export default ChallengeDetailPage;
+
+export const getServerSideProps: GetServerSideProps = withAuth(async () => {
+  return {
+    props: {},
+  };
+});

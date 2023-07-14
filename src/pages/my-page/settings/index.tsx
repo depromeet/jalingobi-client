@@ -1,13 +1,14 @@
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { IconArrowLeft, IconArrowRight } from '@/public/svgs';
 import { drop, logout } from '@/service/auth';
 import { Spacing } from '@/shared/components';
 import { Button } from '@/shared/components/button';
 import { Modal } from '@/shared/components/modal';
+import { withAuth } from '@/shared/hof/withAuth';
 import { useToast } from '@/shared/hooks/useToast';
 
 const ManagePage = () => {
@@ -104,3 +105,9 @@ const ManagePage = () => {
 };
 
 export default ManagePage;
+
+export const getServerSideProps: GetServerSideProps = withAuth(async () => {
+  return {
+    props: {},
+  };
+});

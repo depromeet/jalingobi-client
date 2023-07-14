@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { ReactElement, Suspense, useState } from 'react';
 
 import { IconCar, IconClothes, IconRice } from '@/public/svgs';
@@ -7,6 +8,7 @@ import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
 import { categoryMap } from '@/shared/constants/challenge';
+import { withAuth } from '@/shared/hof/withAuth';
 import { useHandleBack } from '@/shared/hooks';
 import { SortedType } from '@/shared/types/challenge';
 
@@ -79,3 +81,9 @@ Search.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Search;
+
+export const getServerSideProps: GetServerSideProps = withAuth(async () => {
+  return {
+    props: {},
+  };
+});

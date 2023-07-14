@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
@@ -8,6 +9,7 @@ import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomShee
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
 import { ALL } from '@/shared/constant';
+import { withAuth } from '@/shared/hof/withAuth';
 import { Status, StatusMap } from '@/shared/types/user';
 
 const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
@@ -84,3 +86,9 @@ const RecordPage = () => {
 };
 
 export default RecordPage;
+
+export const getServerSideProps: GetServerSideProps = withAuth(async () => {
+  return {
+    props: {},
+  };
+});

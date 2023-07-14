@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
@@ -7,6 +8,7 @@ import { useUserProfile } from '@/features/profile/queries';
 import { version } from '@/package.json';
 import { IconArrowRight, IconSettings } from '@/public/svgs';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
+import { withAuth } from '@/shared/hof/withAuth';
 
 export default function MyPage() {
   const { data } = useUserProfile();
@@ -71,3 +73,9 @@ export default function MyPage() {
 MyPage.getLayout = function getLayout(page: ReactElement) {
   return <BottomNavLayout>{page}</BottomNavLayout>;
 };
+
+export const getServerSideProps: GetServerSideProps = withAuth(async () => {
+  return {
+    props: {},
+  };
+});
