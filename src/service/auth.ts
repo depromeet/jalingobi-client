@@ -58,7 +58,7 @@ export const authKakao = async (
 
 export const logout = async (): Promise<ApiResponse<{ result: true }>> => {
   const response = await httpClient.post(
-    'https://jalingobi.com/mypage/logout',
+    'https://api.jalingobi.com/mypage/logout',
     undefined,
     {
       headers: {

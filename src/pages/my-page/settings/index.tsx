@@ -19,17 +19,17 @@ const ManagePage = () => {
     drop();
   };
 
-  const logoutAndToast = () => {
-    router.push('/search');
+  const logoutAndToast = async () => {
+    await logout();
+    router.push('/auth/login');
     setToastMessage('로그아웃 되었습니다');
-    logout();
   };
 
   return (
     <div className="px-5">
       <header className="relative flex h-12 w-full items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
-          <IconArrowLeft className="h-4 w-4" />
+          <IconArrowLeft className="h-4 w-4 stroke-gray-50" />
         </Link>
         <h1 className="font-title-medium-sm font-semibold">관리</h1>
       </header>
