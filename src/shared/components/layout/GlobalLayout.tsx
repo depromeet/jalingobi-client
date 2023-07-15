@@ -14,11 +14,8 @@ export default function GlobalLayout({ children }: GlobalLayoutProps) {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        console.log('hello');
-        const res = await httpClient.post('/auth/refresh');
-        console.log('res', res);
+        await httpClient.post('/auth/refresh');
       } catch (error) {
-        console.log('error', error);
         router.push('/auth/login');
       }
     };
