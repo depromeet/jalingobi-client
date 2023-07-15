@@ -26,6 +26,7 @@ export type Profile = {
 
 export type ImageInfo = {
   image?: File;
+  type?: string;
   imageUrl: string;
 };
 
