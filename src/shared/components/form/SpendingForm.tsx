@@ -54,7 +54,6 @@ export default function SpendingForm() {
   const memo = form.watch('memo');
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
-    console.log(values);
     addSpending.mutate({
       ...values,
       poorRoom,
