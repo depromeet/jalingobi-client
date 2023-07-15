@@ -1,4 +1,4 @@
-import { ReactElement, Suspense, useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 import { IconCar, IconClothes, IconRice } from '@/public/svgs';
 import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
@@ -64,13 +64,11 @@ function Search() {
           handleSortedTypeChange={handleSortedTypeChange}
         />
       </div>
-      <Suspense>
-        <SearchChallengeList
-          category={category}
-          sortedType={sortedType}
-          filter={showOnlyActiveRoom ? '' : 'all'}
-        />
-      </Suspense>
+      <SearchChallengeList
+        category={category}
+        sortedType={sortedType}
+        filter={showOnlyActiveRoom ? '' : 'all'}
+      />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -22,6 +21,7 @@ import { ImageInfo } from '@/shared/types/user';
 
 import { Button } from '../button';
 import { ChipGroup } from '../chip';
+import { ImageLoader } from '../image';
 import { Input } from '../input';
 import { Label } from '../label';
 import { TextInput } from '../text-input';
@@ -54,7 +54,6 @@ export default function SpendingForm() {
   const memo = form.watch('memo');
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
-    console.log(values);
     addSpending.mutate({
       ...values,
       poorRoom,
@@ -147,7 +146,7 @@ export default function SpendingForm() {
           <h4 className="font-caption-medium-lg font-semibold">사진</h4>
           {image.imageUrl ? (
             <div className="relative h-24 w-24">
-              <Image
+              <ImageLoader
                 src={image.imageUrl}
                 alt="image"
                 fill
@@ -208,7 +207,7 @@ export default function SpendingForm() {
             {images.map((image, index) => (
               <div key={index} className="relative">
                 {index === selected && (
-                  <Image
+                  <ImageLoader
                     src="/images/check.png"
                     width={24}
                     height={24}
@@ -216,7 +215,7 @@ export default function SpendingForm() {
                     className="absolute right-0 top-0"
                   />
                 )}
-                <Image
+                <ImageLoader
                   onClick={() => setSelected(index)}
                   className={cn('cursor-pointer rounded-sm')}
                   src={`${image.path}${index === selected ? '-check' : ''}.png`}

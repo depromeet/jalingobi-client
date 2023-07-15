@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
-import packageJson from '../../package.json';
-
 import { authRefresh } from './auth-refresh';
 
 export const setAuthHeader = (axiosInstance: AxiosInstance, token: string) => {
@@ -48,5 +46,3 @@ const createAxios = (axiosConfig: CreateAxiosDefaults) => {
 export const httpClient = createAxios({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
-
-console.log(packageJson.version);

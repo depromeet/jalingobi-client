@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Suspense } from 'react';
 
 import { IconArrowLeft } from '@/public/svgs';
 import SpendingForm from '@/shared/components/form/SpendingForm';

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 
 import { Input } from '@/shared/components/input';
@@ -31,7 +30,7 @@ const ProfileBottomSheet = ({
         <SheetTrigger asChild>
           <div>
             <div className="absolute -bottom-4 -right-4 h-8 w-8 rounded-full bg-gray-20 p-1">
-              <Image
+              <ImageLoader
                 src="/images/camera.png"
                 width={24}
                 height={24}

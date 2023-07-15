@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -7,6 +6,7 @@ import { IconArrowLeft, IconRice } from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
+import { ImageLoader } from '@/shared/components/image';
 
 const ChallengeDetailPage = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const ChallengeDetailPage = () => {
           >
             <IconArrowLeft className="z-10 h-4 w-4 stroke-white text-white" />
           </Link>
-          <Image
+          <ImageLoader
             src={challenge?.result.challengeImgUrl || ''}
             fill
             alt="item"
