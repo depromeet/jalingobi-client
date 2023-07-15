@@ -7,11 +7,12 @@ export type AddCommentRequest = {
 
 export type AddCommentResult = {
   result: {
+    commentDate: string;
+    commenterId: number;
+    content: string;
     id: number;
     imgUrl: string;
     nickname: string;
-    content: string;
-    createdAt: string;
   };
 };
 

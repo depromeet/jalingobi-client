@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 
 import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
-import { useUserInfo } from '@/features/profile/queries';
 import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
@@ -13,6 +12,7 @@ import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseD
 import { ImageLoader } from '@/shared/components/image';
 import { PageLoading } from '@/shared/components/loading';
 import { TextInput } from '@/shared/components/text-input';
+import { useToast } from '@/shared/hooks/useToast';
 import {
   CommentInfoType,
   RecordInfoType,
@@ -20,27 +20,6 @@ import {
 } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
-
-const MAX = 100000;
-
-// TODO: 서버 연동 필요
-const user = {
-  social: {
-    id: 'something',
-    platform: 'KAKAO',
-  },
-  profile: {
-    name: '나현우',
-    email: 'email@gmail.com',
-    imgUrl: '/images/profile.png',
-  },
-  notification: false,
-  userChallengeResult: {
-    PROCEEDING: 1,
-    SUCCESS: 0,
-    COMPLETED: 0,
-  },
-};
 
 export default function ExpenseDetails() {
   const router = useRouter();
@@ -52,10 +31,18 @@ export default function ExpenseDetails() {
     recordId: Number(recordId),
   });
 
-  const { data: userInfo } = useUserInfo();
+  const {
+    data: addCommentResponse,
+    mutateAsync: addComment,
+    isError: addCommentError,
+  } = useAddComment();
+  const {
+    data: deleteCommentResponse,
+    mutateAsync: deleteComment,
+    isError: deleteCommentError,
+  } = useDeleteComment();
 
-  const addComment = useAddComment();
-  const deleteComment = useDeleteComment();
+  const { setToastMessage } = useToast();
 
   const [comments, setComments] = useState<CommentInfoType[]>([]);
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
@@ -63,26 +50,13 @@ export default function ExpenseDetails() {
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const addCommentCommonLogic = () => {
+  const addCommentCommonLogic = async () => {
     setPrevComments(comments);
 
-    addComment.mutate({
+    await addComment({
       recordId: Number(recordId),
       content: inputValue,
     });
-
-    const addedComment = {
-      isMine: true,
-      commenterId: userInfo?.result.id ?? Math.floor(Math.random() * MAX),
-      nickname: userInfo?.result.nickname ?? '',
-      imgUrl: userInfo?.result.imgUrl ?? '',
-      commentId: Math.floor(Math.random() * MAX),
-      content: inputValue,
-      commentDate: `${new Date()}`,
-    };
-
-    setComments((prev) => [...prev, addedComment]);
-    setInputValue('');
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -112,15 +86,43 @@ export default function ExpenseDetails() {
   const handleClickDelete = (commentId: number) => {
     setPrevComments(comments);
 
-    deleteComment.mutate({
+    deleteComment({
       recordId: Number(recordId),
       commentId,
     });
+  };
+
+  useEffect(() => {
+    if (!addCommentResponse) {
+      return;
+    }
+
+    const addedComment = {
+      isMine: true,
+      commenterId: addCommentResponse.result.commenterId,
+      nickname: addCommentResponse.result.nickname,
+      imgUrl: addCommentResponse.result.imgUrl,
+      commentId: addCommentResponse.result.id,
+      content: inputValue,
+      commentDate: addCommentResponse.result.commentDate,
+    };
+
+    setComments((prev) => [...prev, addedComment]);
+    setInputValue('');
+  }, [addCommentResponse]);
+
+  useEffect(() => {
+    if (!deleteCommentResponse) {
+      return;
+    }
 
     setComments((prev) =>
-      prev.filter((comment) => comment.commentId !== commentId),
+      prev.filter(
+        (comment) =>
+          comment.commentId !== deleteCommentResponse.result.commentId,
+      ),
     );
-  };
+  }, [deleteCommentResponse]);
 
   useEffect(() => {
     if (prevComments.length === 0 || prevComments.length >= comments.length) {
@@ -143,20 +145,20 @@ export default function ExpenseDetails() {
   }, [data]);
 
   useEffect(() => {
-    if (!addComment.isError) {
+    if (!addCommentError) {
       return;
     }
 
-    setComments(prevComments);
-  }, [addComment.isError]);
+    setToastMessage('댓글 등록에 실패하였습니다.');
+  }, [addCommentError]);
 
   useEffect(() => {
-    if (!deleteComment.isError) {
+    if (!deleteCommentError) {
       return;
     }
 
-    setComments(prevComments);
-  }, [deleteComment.isError]);
+    setToastMessage('댓글 삭제에 실패하였습니다.');
+  }, [deleteCommentError]);
 
   if (isLoading) {
     return <PageLoading />;
