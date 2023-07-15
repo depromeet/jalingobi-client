@@ -1,6 +1,10 @@
 import { rest } from 'msw';
 
-import { UserChallengeListResult, UserResponse } from '@/shared/types/user';
+import {
+  GetUserInfoResponse,
+  UserChallengeListResult,
+  UserResponse,
+} from '@/shared/types/user';
 
 export const userHandlers = [
   rest.get('/api/mypage', (req, res, ctx) => {
@@ -83,6 +87,23 @@ export const userHandlers = [
             participantCount: 3,
           },
         ],
+      },
+    };
+    return res(ctx.status(200), ctx.json(data));
+  }),
+  rest.get('/user/info', (req, res, ctx) => {
+    const data: GetUserInfoResponse = {
+      isSuccess: true,
+      code: 200,
+      message: '요청에 성공하였습니다.',
+      result: {
+        id: 0,
+        nickname: 'hyunwoo',
+        email: 'hyunwoo@naver.com',
+        imgUrl: '/images/profile.png',
+        platform: 'kakao',
+        role: 'user',
+        score: 4,
       },
     };
     return res(ctx.status(200), ctx.json(data));

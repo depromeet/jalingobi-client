@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
+import { useUserInfo } from '@/features/profile/queries';
 import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
@@ -51,12 +52,16 @@ export default function ExpenseDetails() {
     recordId: Number(recordId),
   });
 
+  const { data: userInfo } = useUserInfo();
+
   const addComment = useAddComment();
   const deleteComment = useDeleteComment();
 
   const [comments, setComments] = useState<CommentInfoType[]>([]);
   const [prevComments, setPrevComments] = useState<CommentInfoType[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
+
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const addCommentCommonLogic = () => {
     setPrevComments(comments);
@@ -68,12 +73,9 @@ export default function ExpenseDetails() {
 
     const addedComment = {
       isMine: true,
-      // TODO: 동호님에게 commenterId는 왜 number인지 묻기
-      commenterId: Math.floor(Math.random() * MAX),
-      // TODO: nickname으로 수정하기
-      nickname: user.profile.name,
-      imgUrl: user.profile.imgUrl,
-      // QUESTION: 임의로 사용되는 정수 key값을 넣어야 하는데 랜덤으로 넣어줘도 크게 상관 없을 것 같아서 이렇게 했어요. 다른 의견 있으시면 부탁드릴게요
+      commenterId: userInfo?.result.id ?? Math.floor(Math.random() * MAX),
+      nickname: userInfo?.result.nickname ?? '',
+      imgUrl: userInfo?.result.imgUrl ?? '',
       commentId: Math.floor(Math.random() * MAX),
       content: inputValue,
       commentDate: `${new Date()}`,
@@ -119,6 +121,18 @@ export default function ExpenseDetails() {
       prev.filter((comment) => comment.commentId !== commentId),
     );
   };
+
+  useEffect(() => {
+    if (prevComments.length === 0 || prevComments.length >= comments.length) {
+      return;
+    }
+
+    if (!bottomRef.current) {
+      return;
+    }
+
+    bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [comments]);
 
   useEffect(() => {
     if (!data) {
@@ -171,6 +185,7 @@ export default function ExpenseDetails() {
         onKeyDown={handleKeyDown}
         onClickIcon={handleClickIcon}
       />
+      <div ref={bottomRef} />
       <Spacing height={68} />
     </section>
   );
@@ -194,7 +209,7 @@ function Header() {
         className="absolute left-5 flex h-6 w-6 items-center justify-center"
         onClick={handleClickPrev}
       >
-        <IconArrowLeft />
+        <IconArrowLeft className="stroke-gray-50" />
       </button>
       <p className="font-title-medium-sm py-2.5 text-black">지출 내역</p>
     </header>

@@ -15,14 +15,13 @@ export default function MyPoorRoom() {
   const isMyRoom = !challengeId;
 
   return (
-    <div className="h-full bg-gray-10">
+    <div className="bg-gray-10">
       <Spacing height={86} />
       <div className="fixed top-0 z-10 w-full bg-white">
         <ChallengeCategories />
         {!isMyRoom && <ChallengeAchievementContainer />}
       </div>
       {isMyRoom ? <MyRoomFeedList /> : <ChallengeRoomFeedList />}
-      <Spacing height={60} />
     </div>
   );
 }

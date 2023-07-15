@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { shallow } from 'zustand/shallow';
 
 import { useChallengeList } from '@/features/feed/queries';
-import { IconTile } from '@/public/svgs';
 import { useRoom } from '@/shared/store/room';
 
 import { PageLoading } from '../loading';
@@ -55,7 +54,7 @@ export const ChallengeCategories = () => {
           },
         )}
       </div>
-      <div className="flex w-[5rem] shrink-0 flex-col items-center justify-center gap-1">
+      {/* <div className="flex w-[5rem] shrink-0 flex-col items-center justify-center gap-1">
         <button
           type="button"
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-20"
@@ -64,7 +63,7 @@ export const ChallengeCategories = () => {
           <IconTile />
         </button>
         <p className="font-caption-medium-md text-gray-60">전체보기</p>
-      </div>
+      </div> */}
     </div>
   );
 };
