@@ -11,7 +11,7 @@ type BottomNavLayoutProps = {
 export default function BottomNavLayout({ children }: BottomNavLayoutProps) {
   return (
     <div className={styles.layout}>
-      <div className="flex-1 overflow-auto">{children}</div>
+      <div className="pb-bottom-nav">{children}</div>
       <BottomNavigation />
     </div>
   );
