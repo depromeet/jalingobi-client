@@ -38,6 +38,15 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/search',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -12,7 +12,7 @@ const ProfileHeader = ({ hasChanged }: Props) => {
   return (
     <header className="mb-10 flex h-12 w-full items-center justify-between">
       <Link href="/my-page">
-        <IconArrowLeft className="h-4 w-4" />
+        <IconArrowLeft className="h-4 w-4 stroke-gray-50" />
       </Link>
       <h1 className="font-title-medium-md font-semibold">프로필 수정</h1>
       <Button

@@ -62,6 +62,7 @@ const Profile = () => {
     setProfileImage({
       image: file,
       imageUrl: url,
+      type: 'PROFILE',
     });
     setIsBottomSheetOpen(false);
   };
