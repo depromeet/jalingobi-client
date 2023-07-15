@@ -1,10 +1,8 @@
-import { GetServerSideProps } from 'next';
-import React, { Fragment, Suspense } from 'react';
+import React, { Suspense } from 'react';
 
 import { IconArrowLeft } from '@/public/svgs';
 import SpendingForm from '@/shared/components/form/SpendingForm';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
-import { withAuth } from '@/shared/hof/withAuth';
 
 export default function CostPage() {
   return (
@@ -31,9 +29,3 @@ export default function CostPage() {
 CostPage.getLayout = function getLayout(page: React.ReactElement) {
   return <BottomNavLayout>{page}</BottomNavLayout>;
 };
-
-export const getServerSideProps: GetServerSideProps = withAuth(async () => {
-  return {
-    props: {},
-  };
-});

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useSuspenseChallengeSearch } from '@/features/challenge/queries';
+import { useChallengeSearch } from '@/features/challenge/queries';
 import { IconClock } from '@/public/svgs';
 import { categoryMap } from '@/shared/constants/challenge';
 import { SortedType } from '@/shared/types/challenge';
@@ -20,14 +20,13 @@ export default function SearchChallengeList({
   sortedType,
   filter,
 }: Props) {
-  const {
-    data: { result },
-  } = useSuspenseChallengeSearch({
+  const { data } = useChallengeSearch({
     category: categoryMap[category],
     filter,
     sortedType,
   });
-  if (!result.challenges || result.challenges.length === 0) {
+  const result = data?.result;
+  if (!result?.challenges || result.challenges.length === 0) {
     return <ChallengeNotFound />;
   }
 

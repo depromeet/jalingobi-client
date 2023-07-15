@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
@@ -13,7 +12,6 @@ import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseD
 import { ImageLoader } from '@/shared/components/image';
 import { PageLoading } from '@/shared/components/loading';
 import { TextInput } from '@/shared/components/text-input';
-import { withAuth } from '@/shared/hof/withAuth';
 import {
   CommentInfoType,
   RecordInfoType,
@@ -297,9 +295,3 @@ function Bottom({
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = withAuth(async () => {
-  return {
-    props: {},
-  };
-});

@@ -1,5 +1,4 @@
-import { GetServerSideProps } from 'next';
-import { ReactElement, Suspense, useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 import { IconCar, IconClothes, IconRice } from '@/public/svgs';
 import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
@@ -8,7 +7,6 @@ import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
 import { categoryMap } from '@/shared/constants/challenge';
-import { withAuth } from '@/shared/hof/withAuth';
 import { useHandleBack } from '@/shared/hooks';
 import { SortedType } from '@/shared/types/challenge';
 
@@ -66,13 +64,11 @@ function Search() {
           handleSortedTypeChange={handleSortedTypeChange}
         />
       </div>
-      <Suspense>
-        <SearchChallengeList
-          category={category}
-          sortedType={sortedType}
-          filter={showOnlyActiveRoom ? '' : 'all'}
-        />
-      </Suspense>
+      <SearchChallengeList
+        category={category}
+        sortedType={sortedType}
+        filter={showOnlyActiveRoom ? '' : 'all'}
+      />
     </div>
   );
 }
@@ -81,9 +77,3 @@ Search.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Search;
-
-export const getServerSideProps: GetServerSideProps = withAuth(async () => {
-  return {
-    props: {},
-  };
-});

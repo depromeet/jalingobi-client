@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -19,7 +18,6 @@ import {
 } from '@/shared/components/form/Form';
 import ProfileHeader from '@/shared/components/layout/header/ProfileHeader';
 import { TextInput } from '@/shared/components/text-input';
-import { withAuth } from '@/shared/hof/withAuth';
 import { ImageInfo } from '@/shared/types/user';
 
 const Profile = () => {
@@ -108,9 +106,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-export const getServerSideProps: GetServerSideProps = withAuth(async () => {
-  return {
-    props: {},
-  };
-});

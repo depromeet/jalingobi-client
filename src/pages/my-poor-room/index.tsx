@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 
 import { shallow } from 'zustand/shallow';
@@ -8,7 +7,6 @@ import { Spacing } from '@/shared/components';
 import { ChallengeAchievementContainer } from '@/shared/components/challenge-achievement/ChallengeAchievementContainer';
 import { ChallengeCategories } from '@/shared/components/challenge-category/ChallengeCategories';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
-import { withAuth } from '@/shared/hof/withAuth';
 import { useRoom } from '@/shared/store/room';
 
 export default function MyPoorRoom() {
@@ -32,9 +30,3 @@ export default function MyPoorRoom() {
 MyPoorRoom.getLayout = function getLayout(page: ReactElement) {
   return <BottomNavLayout>{page}</BottomNavLayout>;
 };
-
-export const getServerSideProps: GetServerSideProps = withAuth(async () => {
-  return {
-    props: {},
-  };
-});
