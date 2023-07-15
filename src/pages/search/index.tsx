@@ -21,6 +21,11 @@ function Search() {
     setSortedType(sortedType);
   };
 
+  const openSheet = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsBottomSheetOpen(true);
+  };
+
   return (
     <div className="px-5">
       <header className="mb-2.5 flex h-12 items-center justify-between">
@@ -59,6 +64,7 @@ function Search() {
         </div>
         <ChallengeFilterSheet
           isSheetOpen={isBottomSheetOpen}
+          openSheet={openSheet}
           setIsSheetOpen={setIsBottomSheetOpen}
           sortedBy={sortedType}
           handleSortedTypeChange={handleSortedTypeChange}
