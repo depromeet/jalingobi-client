@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { useChallengeSearch } from '@/features/challenge/queries';
@@ -8,6 +7,7 @@ import { SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 import ChallengeNotFound from '../challenge/ChallengeNotFound';
+import { ImageLoader } from '../image';
 
 type Props = {
   category: keyof typeof categoryMap;
@@ -38,7 +38,7 @@ export default function SearchChallengeList({
             key={challenge.id}
             className="relative flex min-h-[130px] w-full items-start rounded-md bg-gray-5 px-5 py-4"
           >
-            <Image
+            <ImageLoader
               src={challenge.imgUrl}
               width={54}
               height={54}
