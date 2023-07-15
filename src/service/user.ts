@@ -19,19 +19,30 @@ export const fetchUserProfile = async (): Promise<UserResponse> => {
   return response.data;
 };
 
+const putPresignedUrl = async (presignedUrl: string, file?: File) => {
+  await axios.put(presignedUrl, file, {
+    headers: {
+      'Content-Type': file?.type,
+    },
+  });
+};
+
 export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
-  const presignedUrl = await getPresignedUrl(
+  const presignedUrlInfo = await getPresignedUrl(
     userUpdate.profileImage?.image,
     userUpdate.profileImage?.type,
   );
 
-  if (presignedUrl) {
-    await axios.put(presignedUrl, userUpdate.profileImage?.image);
+  if (presignedUrlInfo) {
+    await putPresignedUrl(
+      presignedUrlInfo.presignedUrl,
+      userUpdate.profileImage?.image,
+    );
   }
 
   return httpClient.patch('/mypage/profile', {
-    ...userUpdate,
-    profileImgUrl: presignedUrl || userUpdate.profileImage?.imageUrl,
+    nickName: userUpdate.nickName,
+    profileImgUrl: presignedUrlInfo.imgUrl || userUpdate.profileImage?.imageUrl,
   });
 };
 
