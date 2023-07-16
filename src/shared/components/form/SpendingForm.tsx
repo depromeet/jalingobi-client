@@ -46,7 +46,7 @@ export default function SpendingForm() {
   const form = useForm<z.infer<typeof spendSchema>>({
     resolver: zodResolver(spendSchema),
     defaultValues: {
-      price: 0,
+      price: '',
       title: '',
       memo: '',
     },
@@ -103,6 +103,7 @@ export default function SpendingForm() {
                 </FormLabel>
                 <FormControl>
                   <TextInput
+                    placeholder="0"
                     type="number"
                     classNames={{
                       input: 'text-right',
@@ -146,30 +147,29 @@ export default function SpendingForm() {
         />
         <div className="flex flex-col items-start gap-y-2">
           <h4 className="font-caption-medium-lg font-semibold">사진</h4>
-          {image.imageUrl ? (
-            <div className="relative h-24 w-24">
-              <ImageLoader
-                src={image.imageUrl}
-                alt="image"
-                fill
-                className="rounded-lg object-cover"
-              />
-            </div>
-          ) : (
-            <Label
-              htmlFor="picture"
-              className="flex h-[84px] w-[84px] items-center justify-center rounded-lg bg-gray-10"
-            >
+          <Label
+            htmlFor="picture"
+            className="flex h-[84px] w-[84px] items-center justify-center rounded-lg bg-gray-10"
+          >
+            {image.imageUrl ? (
+              <div className="relative h-24 w-24">
+                <ImageLoader
+                  src={image.imageUrl}
+                  alt="image"
+                  fill
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            ) : (
               <IconAdd className="h-4 w-4 text-gray-50" />
-              {/* 앨범에서 선택 */}
-              <Input
-                id="picture"
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-            </Label>
-          )}
+            )}
+            <Input
+              onChange={handleImageUpload}
+              id="picture"
+              type="file"
+              accept="image/*"
+            />
+          </Label>
         </div>
         <FormField
           control={form.control}
@@ -189,7 +189,7 @@ export default function SpendingForm() {
                     <Textarea
                       placeholder="메모를 입력해주세요"
                       className="w-full"
-                      maxLength={16}
+                      maxLength={memoMaxLength}
                       {...field}
                     />
                     <span className="font-body-regular-sm text-right text-gray-50">
