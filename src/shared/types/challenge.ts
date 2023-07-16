@@ -47,6 +47,7 @@ export type ChallengeDetail = {
 export type SortedType = '인원순' | '금액 낮은순';
 
 export type ChallengeFilter = {
+  userId?: number;
   category?: string;
   filter?: string;
   sortedType?: SortedType;
