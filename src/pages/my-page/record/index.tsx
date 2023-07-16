@@ -17,7 +17,7 @@ const RecordPage = () => {
   const [uniqueCategorySet, setUniqueCategorySet] = React.useState<
     Set<keyof typeof categoryReverseMap>
   >(new Set());
-  const [category, setCategory] = React.useState('전체');
+  const [category, setCategory] = React.useState('ALL');
   const { data } = useUserChallengeList();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const RecordPage = () => {
     status: keyof ChallengeStatus,
   ) => {
     if (
-      (challengeStatus === 'PROCEEDING' || challengeStatus === 'WAITING') &&
+      ['PROCEEDING', 'WAITING'].includes(challengeStatus) &&
       status === 'PROCEEDING'
     ) {
       return true;
@@ -49,7 +49,7 @@ const RecordPage = () => {
     }
 
     if (
-      (challengeStatus === 'FAILURE' || challengeStatus === 'SUCCESS') &&
+      ['FAILURE', 'SUCCESS'].includes(challengeStatus) &&
       status === 'COMPLETED'
     ) {
       return true;
@@ -61,7 +61,7 @@ const RecordPage = () => {
   const filteredCategoryList = data?.result.participatedChallenges
     .filter(
       (challenge) =>
-        category === '전체' || challenge.category.includes(category),
+        category === 'ALL' || challenge.category.includes(category),
     )
     .filter((challenge) =>
       filterChallengeStatusCallbackFn(challenge.status, status),
@@ -95,9 +95,9 @@ const RecordPage = () => {
           </button>
         ))}
       </div>
-      <ChipGroup initialChips="전체" className="py-5" onChange={setCategory}>
+      <ChipGroup initialChips="ALL" className="py-5" onChange={setCategory}>
         {Array.from(uniqueCategorySet).map((category, index) => (
-          <ChipGroup.Chip value={categoryReverseMap[category]} key={index}>
+          <ChipGroup.Chip value={category} key={index}>
             {categoryReverseMap[category]}
           </ChipGroup.Chip>
         ))}
