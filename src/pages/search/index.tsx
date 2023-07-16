@@ -41,7 +41,7 @@ function Search() {
       </header>
       <ChipGroup
         onChange={setCategory as (value: string) => void}
-        initialChips="전체"
+        initialChips={category}
         className="mb-4"
       >
         <ChipGroup.Chip value="ALL" className="inline-block shrink-0">
