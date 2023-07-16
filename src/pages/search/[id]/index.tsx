@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useChallengeQuery } from '@/features/challenge/queries';
-import { IconArrowLeft, IconRice } from '@/public/svgs';
+import { IconChevronLeft, IconRice } from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
@@ -23,7 +23,7 @@ const ChallengeDetailPage = () => {
             href="/search"
             className="flex h-12 items-center justify-between p-3"
           >
-            <IconArrowLeft className="z-10 h-4 w-4 stroke-white text-white" />
+            <IconChevronLeft className="z-10 h-4 w-4 stroke-white text-white" />
           </Link>
           <ImageLoader
             src={challenge?.result.challengeImgUrl || ''}
@@ -55,7 +55,7 @@ const ChallengeDetailPage = () => {
           <Rules rules={challenge?.result.rules} />
           <ul className="font-body-regular-sm mb-4 flex gap-x-1 text-gray-50">
             {challenge?.result.keywords.map((keyword, index) => (
-              <li key={index}>#{keyword}</li>
+              <li key={index}>{keyword}</li>
             ))}
           </ul>
           <div>
