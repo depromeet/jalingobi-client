@@ -20,7 +20,11 @@ export const fetchUserProfile = async (): Promise<UserResponse> => {
 };
 
 export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
-  const presignedUrl = await getPresignedUrl(userUpdate.profileImage?.image);
+  const presignedUrl = await getPresignedUrl(
+    userUpdate.profileImage?.image,
+    userUpdate.profileImage?.type,
+  );
+
   if (presignedUrl) {
     await axios.put(presignedUrl, userUpdate.profileImage?.image);
   }

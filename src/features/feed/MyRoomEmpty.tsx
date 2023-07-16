@@ -4,7 +4,7 @@ export const MyRoomEmpty = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <p className="font-title-medium-md text-black">
-        진행 중인 거지방이 없어요.
+        아직 지출 기록이 없어요.
       </p>
       <ImageLoader
         width={110}
