@@ -25,11 +25,13 @@ const ChallengeDetailPage = () => {
           >
             <IconChevronLeft className="z-10 h-4 w-4 stroke-white text-white" />
           </Link>
-          <ImageLoader
-            src={challenge?.result.challengeImgUrl || ''}
-            fill
-            alt="item"
-          />
+          {challenge?.result.challengeImgUrl && (
+            <ImageLoader
+              src={challenge?.result.challengeImgUrl}
+              fill
+              alt="item"
+            />
+          )}
         </header>
         <section className="px-5">
           <div className="pt-4">
