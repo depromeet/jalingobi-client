@@ -53,5 +53,5 @@ export const fetchUserChallengeList =
   };
 
 export const leaveChallenge = async (challengeId: number) => {
-  return httpClient.delete(`/mypage/challenges/${challengeId}`);
+  return httpClient.delete(`/mypage/challenge/${challengeId}`);
 };

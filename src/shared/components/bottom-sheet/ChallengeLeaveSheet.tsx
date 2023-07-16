@@ -8,11 +8,30 @@ import { Sheet, SheetContent, SheetHeader } from '@/shared/components/sheet';
 type Props = {
   isOpen?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
+  onOpenChangeBottomSheet?: (isOpen: boolean) => void;
   challengeId: number;
 };
 
-const ChallengeLeaveSheet = ({ isOpen, onOpenChange, challengeId }: Props) => {
-  const { mutate } = useLeaveChallenge();
+const ChallengeLeaveSheet = ({
+  isOpen,
+  onOpenChange,
+  onOpenChangeBottomSheet,
+  challengeId,
+}: Props) => {
+  const { mutateAsync } = useLeaveChallenge();
+
+  const handleClickQuit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    await mutateAsync(challengeId);
+    onOpenChangeBottomSheet?.(false);
+    onOpenChange?.(false);
+  };
+
+  const handleClickCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onOpenChange?.(false);
+  };
+
   return (
     <div className="relative">
       <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -38,7 +57,7 @@ const ChallengeLeaveSheet = ({ isOpen, onOpenChange, challengeId }: Props) => {
             </div>
             <div className="flex items-center justify-center gap-x-2.5">
               <Button
-                onClick={() => mutate(challengeId)}
+                onClick={handleClickQuit}
                 size="xs"
                 className="font-body-regular-sm bg-system-danger"
               >
@@ -46,7 +65,7 @@ const ChallengeLeaveSheet = ({ isOpen, onOpenChange, challengeId }: Props) => {
               </Button>
               <Button
                 size="xs"
-                onClick={() => onOpenChange?.(false)}
+                onClick={(e) => handleClickCancel(e)}
                 className="font-body-regular-sm bg-gray-20 text-[#1E1E1E] text-opacity-50"
               >
                 취소

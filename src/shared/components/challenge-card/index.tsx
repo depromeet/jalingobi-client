@@ -21,6 +21,12 @@ const ChallengeCard = ({ challenge }: Props) => {
     e.preventDefault();
     setIsBottomSheetOpen(true);
   };
+
+  const handleOpenLeaveModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsLeaveModalOpen(true);
+  };
+
   return (
     <Link href={`/search/${challenge.challengeId}`}>
       <li
@@ -64,11 +70,12 @@ const ChallengeCard = ({ challenge }: Props) => {
         <RecordBottomSheet
           isOpen={isBottomSheetOpen}
           onOpenChange={setIsBottomSheetOpen}
-          openLeaveModal={() => setIsLeaveModalOpen(true)}
+          openLeaveModal={handleOpenLeaveModal}
         />
         <ChallengeLeaveSheet
           isOpen={isLeaveModalOpen}
           onOpenChange={setIsLeaveModalOpen}
+          onOpenChangeBottomSheet={setIsBottomSheetOpen}
           challengeId={challenge.challengeId}
         />
       </li>
