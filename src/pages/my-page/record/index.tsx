@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import { useUserChallengeList } from '@/features/challenge/queries';
 import { cn } from '@/lib/utils';
-import { IconArrowLeft } from '@/public/svgs';
+import { IconChevronLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
@@ -71,7 +71,7 @@ const RecordPage = () => {
     <div className="relative flex h-full flex-col px-5">
       <header className="relative flex h-12 items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
-          <IconArrowLeft className="h-4 w-4 stroke-gray-50" />
+          <IconChevronLeft className="h-4 w-4 " />
         </Link>
         <h1 className="font-title-medium-sm">거지방 기록</h1>
       </header>
