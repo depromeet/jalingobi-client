@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { useLeaveChallenge } from '@/features/record/queries';
+import {
+  useLeaveChallenge,
+  useUserChallengeList,
+} from '@/features/record/queries';
 import { IconCancel } from '@/public/svgs';
 import { Button } from '@/shared/components/button';
 import { Sheet, SheetContent, SheetHeader } from '@/shared/components/sheet';
@@ -19,10 +22,12 @@ const ChallengeLeaveSheet = ({
   challengeId,
 }: Props) => {
   const { mutateAsync } = useLeaveChallenge();
+  const { refetch } = useUserChallengeList();
 
   const handleClickQuit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await mutateAsync(challengeId);
+    refetch();
     onOpenChangeBottomSheet?.(false);
     onOpenChange?.(false);
   };
