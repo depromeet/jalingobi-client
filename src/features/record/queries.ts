@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from '@suspensive/react-query';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { fetchUserChallengeList, leaveChallenge } from '@/service/user';
@@ -12,13 +11,6 @@ const userChallengeKeys = {
 
 export const useUserChallengeList = () => {
   return useQuery({
-    queryKey: userChallengeKeys.all,
-    queryFn: fetchUserChallengeList,
-  });
-};
-
-export const useSuspenseUserChallengeList = () => {
-  return useSuspenseQuery({
     queryKey: userChallengeKeys.all,
     queryFn: fetchUserChallengeList,
   });
