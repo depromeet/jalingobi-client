@@ -3,13 +3,13 @@ import { ReactElement } from 'react';
 
 import Board from '@/features/profile/Board';
 import Profile from '@/features/profile/Profile';
-import { useUserProfile } from '@/features/profile/queries';
+import { useUserMyPage } from '@/features/profile/queries';
 import { version } from '@/package.json';
 import { IconArrowRight, IconSettings } from '@/public/svgs';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 
 export default function MyPage() {
-  const { data } = useUserProfile();
+  const { data } = useUserMyPage();
   // const [isNotificationOn, setIsNotificationOn] = useState(false);
 
   return (
