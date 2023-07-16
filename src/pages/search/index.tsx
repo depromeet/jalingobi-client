@@ -36,13 +36,13 @@ function Search() {
 
   return (
     <div className="px-5">
-      <header className="mb-2.5 flex h-12 items-center justify-between">
+      <header className="flex h-12 items-center justify-between">
         <h2 className="font-title-medium-md">거지방 탐색</h2>
       </header>
       <ChipGroup
         onChange={setCategory as (value: string) => void}
         initialChips={category}
-        className="mb-4"
+        className="my-2.5 mb-4"
       >
         <ChipGroup.Chip value="ALL" className="inline-block shrink-0">
           전체
