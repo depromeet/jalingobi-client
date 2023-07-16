@@ -40,7 +40,7 @@ export type User = {
   social: Social;
   profile: Profile;
   notification: boolean;
-  userChallengeResult: ChallengeStatus;
+  userChallengeResult: Partial<ChallengeStatus>;
 };
 
 export type UserProfile = {
