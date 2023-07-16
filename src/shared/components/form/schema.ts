@@ -1,18 +1,22 @@
 import { z } from 'zod';
 
-import { memoMaxLength } from '@/shared/constant';
+import { maxPrice, memoMaxLength } from '@/shared/constant';
 
 export const spendSchema = z.object({
-  price: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z
-      .number({
-        invalid_type_error: '금액은 숫자여야 합니다.',
-      })
-      .positive({
-        message: '금액은 정수여야 합니다.',
-      }),
-  ),
+  price: z
+    .string()
+    .transform((year) => Number(year))
+    .pipe(
+      z
+        .number()
+        .positive({
+          message: '금액은 0원 이상이어야 합니다.',
+        })
+        .max(maxPrice, {
+          message: `${maxPrice}원 이하로 입력해주세요`,
+        }),
+    )
+    .transform((year) => year.toString()),
   title: z
     .string()
     .max(16, {
@@ -21,5 +25,7 @@ export const spendSchema = z.object({
     .min(1, {
       message: '지출명을 입력해주세요',
     }),
-  memo: z.string().max(memoMaxLength),
+  memo: z.string().max(memoMaxLength, {
+    message: `${memoMaxLength}자 이하로 작성해주세요`,
+  }),
 });
