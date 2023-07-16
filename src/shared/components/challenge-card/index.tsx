@@ -45,11 +45,7 @@ const ChallengeCard = ({ challenge }: Props) => {
             <span className="text-gray-50">
               {challenge.participantCount}/{challenge.availableCount}명
             </span>
-            {challenge.statusTag?.map((tag, index) => (
-              <span key={index} className="text-red-400">
-                {tag}
-              </span>
-            ))}
+            <span className="text-red-400">{challenge.statusTag}</span>
           </div>
           <h3 className="font-title-medium-sm">커피 5만원 이하로 쓰기</h3>
           <ul className="flex gap-x-1">
