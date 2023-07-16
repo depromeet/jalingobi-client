@@ -55,7 +55,7 @@ export const challengeHandlers = [
         challengeId: 1,
         title: '배달 10만원 이하로 쓰기',
         challengeImgUrl: '/images/baemin.png',
-        category: '음식',
+        category: 'FOOD',
         keywords: ['배달', '10만원'],
         headCount: {
           availableCount: 10,
