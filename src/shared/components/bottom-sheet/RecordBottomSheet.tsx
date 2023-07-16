@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { Sheet, SheetContent, SheetHeader } from '@/shared/components/sheet';
 
 type Props = {
   isOpen?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
-  openLeaveModal?: () => void;
+  openLeaveModal?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 const RecordBottomSheet = ({ isOpen, onOpenChange, openLeaveModal }: Props) => {
@@ -28,7 +28,7 @@ const RecordBottomSheet = ({ isOpen, onOpenChange, openLeaveModal }: Props) => {
             <button
               type="button"
               className="w-full py-2.5 text-left"
-              onClick={openLeaveModal}
+              onClick={(e) => openLeaveModal?.(e)}
             >
               <span>챌린지 나가기</span>
             </button>
