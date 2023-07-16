@@ -7,6 +7,7 @@ import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
 import { ImageLoader } from '@/shared/components/image';
+import { categoryMap } from '@/shared/constants/challenge';
 
 const ChallengeDetailPage = () => {
   const router = useRouter();
@@ -38,7 +39,9 @@ const ChallengeDetailPage = () => {
               </span>
               <div className="flex items-center justify-center gap-x-1 rounded-md bg-gray-10 px-2.5">
                 <IconRice className="h-6 w-6" />
-                <span>{challenge?.result.category}</span>
+                {challenge && (
+                  <span>{categoryMap[challenge.result.category]}</span>
+                )}
               </div>
             </div>
             <h3 className="font-title-medium-sm font-semibold text-black">

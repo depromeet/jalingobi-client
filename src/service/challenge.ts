@@ -19,11 +19,17 @@ export const getChallengeDetail = async ({
   return response.data;
 };
 
-export const searchChallengeList = async (
-  filters: ChallengeFilter,
-): Promise<ChallengeSearchResponse> => {
+export const searchChallengeList = async ({
+  category,
+  filter,
+  sortedType,
+}: ChallengeFilter): Promise<ChallengeSearchResponse> => {
   const { data } = await httpClient.get('/challenge/search', {
-    params: filters,
+    params: {
+      category: category === 'ALL' ? '' : category,
+      filter,
+      sortedType: sortedType === '금액 낮은순' ? 'price' : '',
+    },
   });
   return data;
 };
