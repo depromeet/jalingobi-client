@@ -15,6 +15,7 @@ type Props = {
   handleSortedTypeChange: (sortedType: SortedType) => void;
   isSheetOpen: boolean;
   setIsSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  openSheet: (event: React.MouseEvent) => void;
 };
 
 const ChallengeFilterSheet = ({
@@ -22,6 +23,7 @@ const ChallengeFilterSheet = ({
   handleSortedTypeChange,
   isSheetOpen,
   setIsSheetOpen,
+  openSheet,
 }: Props) => {
   const contentRef = useRef<HTMLDivElement>(null!);
   const closeSheet = () => {
@@ -36,7 +38,7 @@ const ChallengeFilterSheet = ({
       <Sheet open={isSheetOpen}>
         <SheetTrigger asChild>
           <div className="font-body-regular-lg flex items-center text-gray-50">
-            <button type="button" onClick={() => setIsSheetOpen(true)}>
+            <button type="button" onClick={openSheet}>
               {sortedBy}
             </button>
             <IconFilter2 className="h-4 w-4" />

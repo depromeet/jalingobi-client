@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useSuspenseUserChallengeList } from '@/features/record/queries';
+import { useUserChallengeList } from '@/features/record/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
 import { IconAdd, IconCheck } from '@/public/svgs';
@@ -36,7 +36,7 @@ const images = [
 ];
 
 export default function SpendingForm() {
-  const { data: challengeList } = useSuspenseUserChallengeList();
+  const { data: challengeList } = useUserChallengeList();
   const addSpending = useAddSpendingMutation();
   const [poorRoom, setPoorRoom] = useState('');
   const [selected, setSelected] = useState<null | number>(null);
@@ -75,7 +75,9 @@ export default function SpendingForm() {
     <Form {...form}>
       <ChipGroup
         className="mb-4"
-        initialChips={challengeList?.result.participatedChallenges[0].title}
+        initialChips={
+          challengeList?.result.participatedChallenges[0].title || ''
+        }
         onChange={setPoorRoom}
       >
         {challengeList?.result.participatedChallenges.map((challenge) => (

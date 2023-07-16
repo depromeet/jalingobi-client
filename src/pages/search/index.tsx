@@ -1,24 +1,37 @@
 import { ReactElement, useState } from 'react';
 
-import { IconCar, IconClothes, IconRice } from '@/public/svgs';
+import {
+  IconCar,
+  IconClothes,
+  IconHobby,
+  IconRice,
+  IconSelectedCar,
+  IconSelectedClothes,
+  IconSelectedHobby,
+  IconSelectedRice,
+} from '@/public/svgs';
 import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
 import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
-import { categoryMap } from '@/shared/constants/challenge';
 import { useHandleBack } from '@/shared/hooks';
-import { SortedType } from '@/shared/types/challenge';
+import { CategoryKey, SortedType } from '@/shared/types/challenge';
 
 function Search() {
   useHandleBack();
-  const [category, setCategory] = useState<keyof typeof categoryMap>('전체'); // ['전체', '식비', '문화생활', '취미'
+  const [category, setCategory] = useState<CategoryKey>('ALL'); // ['전체', '식비', '문화생활', '취미'
   const [showOnlyActiveRoom, setShowOnlyActiveRoom] = useState(true);
   const [sortedType, setSortedType] = useState<SortedType>('인원순');
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const handleSortedTypeChange = (sortedType: SortedType) => {
     setSortedType(sortedType);
+  };
+
+  const openSheet = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsBottomSheetOpen(true);
   };
 
   return (
@@ -31,20 +44,40 @@ function Search() {
         initialChips="전체"
         className="mb-4"
       >
-        <ChipGroup.Chip value="전체" className="inline-block shrink-0">
+        <ChipGroup.Chip value="ALL" className="inline-block shrink-0">
           전체
         </ChipGroup.Chip>
-        <ChipGroup.Chip value="식비">
-          <IconRice className="mr-1 h-6 w-6" />
+        <ChipGroup.Chip value="FOOD">
+          {category === 'FOOD' ? (
+            <IconSelectedRice className="mr-1 h-6 w-6" />
+          ) : (
+            <IconRice className="mr-1 h-6 w-6" />
+          )}
           <span>식비</span>
         </ChipGroup.Chip>
-        <ChipGroup.Chip value="문화생활">
-          <IconCar className="mr-1 h-6 w-6" />
-          <span>문화생활</span>
+        <ChipGroup.Chip value="HOBBY_LEISURE">
+          {category === 'HOBBY_LEISURE' ? (
+            <IconSelectedHobby className="mr-1 h-6 w-6" />
+          ) : (
+            <IconHobby className="mr-1 h-6 w-6" />
+          )}
+          <span>취미/여가</span>
         </ChipGroup.Chip>
-        <ChipGroup.Chip value="취미">
-          <IconClothes className="mr-1 h-6 w-6" />
-          취미
+        <ChipGroup.Chip value="FASHION_BEAUTY">
+          {category === 'FASHION_BEAUTY' ? (
+            <IconSelectedClothes className="mr-1 h-6 w-6" />
+          ) : (
+            <IconClothes className="mr-1 h-6 w-6" />
+          )}
+          패션/뷰티
+        </ChipGroup.Chip>
+        <ChipGroup.Chip value="TRANSPORTATION_AUTOMOBILE">
+          {category === 'TRANSPORTATION_AUTOMOBILE' ? (
+            <IconSelectedCar className="mr-1 h-6 w-6" />
+          ) : (
+            <IconCar className="mr-1 h-6 w-6" />
+          )}
+          교통/차량
         </ChipGroup.Chip>
       </ChipGroup>
       <div className="flex justify-between">
@@ -59,13 +92,14 @@ function Search() {
         </div>
         <ChallengeFilterSheet
           isSheetOpen={isBottomSheetOpen}
+          openSheet={openSheet}
           setIsSheetOpen={setIsBottomSheetOpen}
           sortedBy={sortedType}
           handleSortedTypeChange={handleSortedTypeChange}
         />
       </div>
       <SearchChallengeList
-        category={category}
+        categoryKey={category}
         sortedType={sortedType}
         filter={showOnlyActiveRoom ? '' : 'all'}
       />

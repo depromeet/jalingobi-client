@@ -2,26 +2,25 @@ import Link from 'next/link';
 
 import { useChallengeSearch } from '@/features/challenge/queries';
 import { IconClock } from '@/public/svgs';
-import { categoryMap } from '@/shared/constants/challenge';
-import { SortedType } from '@/shared/types/challenge';
+import { CategoryKey, SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 import ChallengeNotFound from '../challenge/ChallengeNotFound';
 import { ImageLoader } from '../image';
 
 type Props = {
-  category: keyof typeof categoryMap;
+  categoryKey: CategoryKey;
   sortedType: SortedType;
   filter: string;
 };
 
 export default function SearchChallengeList({
-  category,
+  categoryKey,
   sortedType,
   filter,
 }: Props) {
   const { data } = useChallengeSearch({
-    category: categoryMap[category],
+    category: categoryKey,
     filter,
     sortedType,
   });
@@ -53,7 +52,7 @@ export default function SearchChallengeList({
                 </span>
                 <span className="text-red-400">{challenge.status}</span>
               </div>
-              <h3 className="font-title-medium-sm">커피 5만원 이하로 쓰기</h3>
+              <h3 className="font-title-medium-sm">{challenge.title}</h3>
               <ul className="flex gap-x-1">
                 {challenge.keywords.map((keyword, index) => (
                   <li
