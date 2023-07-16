@@ -28,7 +28,7 @@ const ProfileBottomSheet = ({
     <div className="relative mb-[60px]">
       <Sheet open={isOpen} onOpenChange={onOpenChange}>
         <SheetTrigger asChild>
-          <div>
+          <div className="relative h-[90px] w-[90px]">
             <div className="absolute -bottom-4 -right-4 h-8 w-8 rounded-full bg-gray-20 p-1">
               <ImageLoader
                 src="/images/camera.png"
@@ -41,9 +41,8 @@ const ProfileBottomSheet = ({
               <ImageLoader
                 src={profileImage}
                 alt="avatar"
-                width="90"
-                height="90"
-                className="rounded-xl"
+                fill
+                className="rounded-lg object-cover"
               />
             )}
           </div>

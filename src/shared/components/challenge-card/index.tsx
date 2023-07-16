@@ -53,7 +53,7 @@ const ChallengeCard = ({ challenge }: Props) => {
             </span>
             <span className="text-red-400">{challenge.statusTag}</span>
           </div>
-          <h3 className="font-title-medium-sm">커피 5만원 이하로 쓰기</h3>
+          <h3 className="font-title-medium-sm">{challenge.title}</h3>
           <ul className="flex gap-x-1">
             {challenge.keywords.map((keyword, index) => (
               <li key={index} className="font-caption-medium-md text-gray-50">

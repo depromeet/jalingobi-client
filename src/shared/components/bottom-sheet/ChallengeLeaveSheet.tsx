@@ -3,7 +3,7 @@ import React from 'react';
 import {
   useLeaveChallenge,
   useUserChallengeList,
-} from '@/features/record/queries';
+} from '@/features/challenge/queries';
 import { IconCancel } from '@/public/svgs';
 import { Button } from '@/shared/components/button';
 import { Sheet, SheetContent, SheetHeader } from '@/shared/components/sheet';

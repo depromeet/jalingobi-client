@@ -3,13 +3,13 @@ import axios from 'axios';
 import { getPresignedUrl } from '@/service/image';
 import { httpClient } from '@/service/index';
 import {
-  GetUserInfoResponse,
   UserChallengeListResult,
+  UserProfileResponse,
   UserResponse,
   UserUpdateRequest,
 } from '@/shared/types/user';
 
-export const getUserInfo = async (): Promise<GetUserInfoResponse> => {
+export const getUserInfo = async (): Promise<UserProfileResponse> => {
   const response = await httpClient.get('/user/info');
   return response.data;
 };

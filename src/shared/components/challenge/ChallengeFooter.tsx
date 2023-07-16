@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import Link from 'next/link';
+import { useMemo } from 'react';
+
+import { CheckIcon } from 'lucide-react';
 
 import { useJoinChallenge } from '@/features/challenge/queries';
 import { cn } from '@/lib/utils';
-import { IconX } from '@/public/svgs';
 import { ChallengeDetail } from '@/shared/types/challenge';
 import { calculateDaysBetween, getDayOfWeek } from '@/shared/utils/date';
 import { isChallengeDueSoon } from '@/shared/utils/time';
@@ -33,7 +35,7 @@ function ChallengeFooter({ challenge }: Props) {
   return (
     <footer className="bottom-0 left-0 flex flex-[0_0_60px] items-center justify-between bg-white px-4 py-[18px]">
       <div>
-        <span
+        <h2
           className={cn('font-body-regular-sm font-semibold', {
             'text-system-danger': isChallengeDueSoon(
               challenge?.dateInfo.startAt,
@@ -43,7 +45,7 @@ function ChallengeFooter({ challenge }: Props) {
           {isChallengeDueSoon(challenge?.dateInfo.startAt)
             ? '마감임박'
             : `D-${daysLeft}일 뒤 시작`}
-        </span>
+        </h2>
         <p>
           {startMonth}.{startDay} ({startDayOfWeek}) - {endMonth}.{endDay} (
           {endDayOfWeek})
@@ -57,19 +59,21 @@ function ChallengeFooter({ challenge }: Props) {
         }
       >
         <div className="flex flex-col items-center px-[5px]">
-          <div className="font-title-medium-md flex flex-col items-center justify-center text-black">
+          <header className="font-title-medium-md flex flex-col items-center justify-center font-semibold">
             <h3 className="text-primary">{challenge?.title}</h3>
-            <p>
+            <p className="text-black">
               {endMonth}월 {endDay}일부터 시작!
             </p>
-          </div>
+          </header>
           <div className="flex w-full flex-col items-center pb-8 pt-5">
-            <h4 className="font-body-regular-sm font-semibold">규칙</h4>
-            <article className="my-2.5 grid grid-cols-6 items-center rounded-md bg-gray-10 px-2.5 py-3">
+            <h4 className="font-body-regular-sm font-semibold text-gray-60">
+              규칙
+            </h4>
+            <article className="my-2.5 flex w-full flex-col items-start rounded-md bg-gray-10 p-2.5">
               <ul className="font-body-regular-sm col-span-5 flex flex-col gap-y-1.5 text-gray-60">
                 {challenge?.rules?.map((rule, index) => (
-                  <li key={index} className="flex items-center gap-x-2">
-                    <IconX className="h-3 w-3" strokeWidth={5} />
+                  <li key={index} className="flex items-center gap-x-2.5">
+                    <CheckIcon className="h-3 w-3" strokeWidth={3} />
                     <span>{rule}</span>
                   </li>
                 ))}
@@ -77,12 +81,14 @@ function ChallengeFooter({ challenge }: Props) {
             </article>
             <span className="text-gray-50">해당 규칙을 준수해주세요!</span>
           </div>
-          <Button
-            variant={challenge?.recruiting ? 'primary' : 'disabled'}
-            size="md"
-          >
-            {challenge?.recruiting ? '참가하기' : '마감된 챌린지'}
-          </Button>
+          <Link href="/my-poor-room">
+            <Button
+              variant={challenge?.recruiting ? 'primary' : 'disabled'}
+              size="md"
+            >
+              {challenge?.recruiting ? '확인' : '마감된 챌린지'}
+            </Button>
+          </Link>
         </div>
       </Modal>
     </footer>

@@ -12,9 +12,23 @@ export type ChallengeDate = {
   endAt: string;
 };
 
+export type CategoryKey =
+  | 'ALL'
+  | 'FOOD'
+  | 'HOBBY_LEISURE'
+  | 'FASHION_BEAUTY'
+  | 'TRANSPORTATION_AUTOMOBILE';
+
+export type Category =
+  | '전체'
+  | '식비'
+  | '취미/여가'
+  | '패션/뷰티'
+  | '교통/차량';
+
 export type ChallengeDetail = {
   challengeId: number;
-  category: string;
+  category: CategoryKey;
   title: string;
   price: number;
   challengeImgUrl: string;
@@ -30,10 +44,13 @@ export type ChallengeDetail = {
   recruiting: boolean;
 };
 
+export type SortedType = '인원순' | '금액 낮은순';
+
 export type ChallengeFilter = {
+  userId?: number;
   category?: string;
   filter?: string;
-  sortedType?: string;
+  sortedType?: SortedType;
 };
 
 export type ChallengeSearch = {
@@ -54,8 +71,6 @@ export type ChallengeSearchResult = {
   challenges: ChallengeSearch[];
   hasNext: boolean;
 };
-
-export type SortedType = '인원순' | '금액 낮은순';
 
 export type ChallengeResponse = ApiResponse<ChallengeDetail>;
 export type ChallengeListResponse = ApiResponse<ChallengeDetail[]>;

@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import {
   useUpdateUserProfile,
-  useUserProfile,
+  useUserMyPage,
 } from '@/features/profile/queries';
 import { profileSchema } from '@/lib/validation/user';
 import ProfileBottomSheet from '@/shared/components/bottom-sheet/ProfileBottomSheet';
@@ -21,7 +21,7 @@ import { TextInput } from '@/shared/components/text-input';
 import { ImageInfo } from '@/shared/types/user';
 
 const Profile = () => {
-  const { data } = useUserProfile();
+  const { data } = useUserMyPage();
   const { mutate } = useUpdateUserProfile();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const form = useForm<z.infer<typeof profileSchema>>({

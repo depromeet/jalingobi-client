@@ -1,6 +1,3 @@
-import Link from 'next/link';
-
-import { IconArrowRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { ImageLoader } from '@/shared/components/image';
 import KakaoLogin from '@/shared/components/kakao-login';
@@ -25,12 +22,6 @@ export default function Login() {
       <Spacing height={18} />
       <KakaoLogin />
       <Spacing height={32} />
-      <Link href="/search">
-        <div className="flex items-center gap-x-2 text-gray-50">
-          <span className="font-body-regular-lg">회원가입 없이 둘러보기</span>
-          <IconArrowRight className="h-4 w-4 self-end stroke-black text-gray-50" />
-        </div>
-      </Link>
     </div>
   );
 }

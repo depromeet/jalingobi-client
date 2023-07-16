@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { IconX } from '@/public/svgs';
+import { CheckIcon } from 'lucide-react';
 
 type Props = {
   rules?: string[];
@@ -14,7 +12,7 @@ export default function Rules({ rules }: Props) {
         <ul className="font-body-regular-sm col-span-5 text-gray-60">
           {rules?.map((rule, index) => (
             <li key={index} className="flex items-center gap-x-2">
-              <IconX className="h-3 w-3" strokeWidth={5} />
+              <CheckIcon className="h-3 w-3" strokeWidth={2} />
               <span>{rule}</span>
             </li>
           ))}

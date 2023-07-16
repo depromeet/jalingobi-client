@@ -43,7 +43,7 @@ export type User = {
   userChallengeResult: ChallengeStatus;
 };
 
-export type GetUserInfoType = {
+export type UserProfile = {
   id: number;
   nickname: string;
   email: string;
@@ -60,7 +60,7 @@ export type UserUpdateRequest = {
 
 export type UserResponse = ApiResponse<User>;
 
-export type GetUserInfoResponse = ApiResponse<GetUserInfoType>;
+export type UserProfileResponse = ApiResponse<UserProfile>;
 
 export type UserChallenge = {
   challengeId: number;
