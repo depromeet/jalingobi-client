@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useUserChallengeList } from '@/features/record/queries';
+import { useUserChallengeList } from '@/features/challenge/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
 import { IconAdd, IconCheck } from '@/public/svgs';
@@ -17,6 +18,7 @@ import {
   FormMessage,
 } from '@/shared/components/form/Form';
 import { memoMaxLength } from '@/shared/constant';
+import { useToast } from '@/shared/hooks/useToast';
 import { ImageInfo } from '@/shared/types/user';
 
 import { Button } from '../button';
@@ -36,10 +38,12 @@ const images = [
 ];
 
 export default function SpendingForm() {
-  const { data: challengeList } = useUserChallengeList();
+  const { data: challengeList, isError, isLoading } = useUserChallengeList();
   const addSpending = useAddSpendingMutation();
   const [poorRoom, setPoorRoom] = useState('');
   const [selected, setSelected] = useState<null | number>(null);
+  const router = useRouter();
+  const { setToastMessage } = useToast();
   const [image, setImage] = useState<ImageInfo>({
     imageUrl: '',
   });
@@ -52,6 +56,14 @@ export default function SpendingForm() {
     },
   });
   const memo = form.watch('memo');
+
+  useEffect(() => {
+    if (!challengeList) return;
+    if (challengeList.result.participatedChallenges.length === 0) {
+      setToastMessage('거지방에 참여한 뒤 지출을 추가할 수 있어요');
+      router.push('/search');
+    }
+  }, [challengeList]);
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
     addSpending.mutate({
@@ -70,6 +82,13 @@ export default function SpendingForm() {
       imageUrl: url,
     });
   };
+
+  if (
+    challengeList?.result.participatedChallenges.length === 0 ||
+    isLoading ||
+    isError
+  )
+    return null;
 
   return (
     <Form {...form}>
