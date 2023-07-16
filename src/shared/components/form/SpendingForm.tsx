@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useUserChallengeList } from '@/features/record/queries';
+import { useUserChallengeList } from '@/features/challenge/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
 import { IconAdd, IconCheck } from '@/public/svgs';
@@ -17,6 +18,7 @@ import {
   FormMessage,
 } from '@/shared/components/form/Form';
 import { memoMaxLength } from '@/shared/constant';
+import { useToast } from '@/shared/hooks/useToast';
 import { ImageInfo } from '@/shared/types/user';
 
 import { Button } from '../button';
@@ -36,22 +38,32 @@ const images = [
 ];
 
 export default function SpendingForm() {
-  const { data: challengeList } = useUserChallengeList();
+  const { data: challengeList, isError, isLoading } = useUserChallengeList();
   const addSpending = useAddSpendingMutation();
   const [poorRoom, setPoorRoom] = useState('');
   const [selected, setSelected] = useState<null | number>(null);
+  const router = useRouter();
+  const { setToastMessage } = useToast();
   const [image, setImage] = useState<ImageInfo>({
     imageUrl: '',
   });
   const form = useForm<z.infer<typeof spendSchema>>({
     resolver: zodResolver(spendSchema),
     defaultValues: {
-      price: 0,
+      price: '',
       title: '',
       memo: '',
     },
   });
   const memo = form.watch('memo');
+
+  useEffect(() => {
+    if (!challengeList) return;
+    if (challengeList.result.participatedChallenges.length === 0) {
+      setToastMessage('거지방에 참여한 뒤 지출을 추가할 수 있어요');
+      router.push('/search');
+    }
+  }, [challengeList]);
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
     addSpending.mutate({
@@ -70,6 +82,13 @@ export default function SpendingForm() {
       imageUrl: url,
     });
   };
+
+  if (
+    challengeList?.result.participatedChallenges.length === 0 ||
+    isLoading ||
+    isError
+  )
+    return null;
 
   return (
     <Form {...form}>
@@ -103,6 +122,7 @@ export default function SpendingForm() {
                 </FormLabel>
                 <FormControl>
                   <TextInput
+                    placeholder="0"
                     type="number"
                     classNames={{
                       input: 'text-right',
@@ -146,30 +166,29 @@ export default function SpendingForm() {
         />
         <div className="flex flex-col items-start gap-y-2">
           <h4 className="font-caption-medium-lg font-semibold">사진</h4>
-          {image.imageUrl ? (
-            <div className="relative h-24 w-24">
-              <ImageLoader
-                src={image.imageUrl}
-                alt="image"
-                fill
-                className="rounded-lg object-cover"
-              />
-            </div>
-          ) : (
-            <Label
-              htmlFor="picture"
-              className="flex h-[84px] w-[84px] items-center justify-center rounded-lg bg-gray-10"
-            >
+          <Label
+            htmlFor="picture"
+            className="flex h-[84px] w-[84px] items-center justify-center rounded-lg bg-gray-10"
+          >
+            {image.imageUrl ? (
+              <div className="relative h-24 w-24">
+                <ImageLoader
+                  src={image.imageUrl}
+                  alt="image"
+                  fill
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            ) : (
               <IconAdd className="h-4 w-4 text-gray-50" />
-              {/* 앨범에서 선택 */}
-              <Input
-                id="picture"
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-            </Label>
-          )}
+            )}
+            <Input
+              onChange={handleImageUpload}
+              id="picture"
+              type="file"
+              accept="image/*"
+            />
+          </Label>
         </div>
         <FormField
           control={form.control}
@@ -189,7 +208,7 @@ export default function SpendingForm() {
                     <Textarea
                       placeholder="메모를 입력해주세요"
                       className="w-full"
-                      maxLength={16}
+                      maxLength={memoMaxLength}
                       {...field}
                     />
                     <span className="font-body-regular-sm text-right text-gray-50">

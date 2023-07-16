@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 
 import { IconArrowRight } from '@/public/svgs';
 import { ImageLoader } from '@/shared/components/image';

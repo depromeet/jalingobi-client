@@ -15,7 +15,7 @@ const userKeys = {
 };
 
 // TODO: 로그인 구현 시, 로그인 유저 id를 활용하여 key 관리
-export const useUserProfile = () => {
+export const useUserMyPage = () => {
   return useQuery({
     queryKey: userKeys.all,
     queryFn: fetchUserProfile,

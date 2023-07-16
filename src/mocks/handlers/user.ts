@@ -1,8 +1,8 @@
 import { rest } from 'msw';
 
 import {
-  GetUserInfoResponse,
   UserChallengeListResult,
+  UserProfileResponse,
   UserResponse,
 } from '@/shared/types/user';
 
@@ -92,7 +92,7 @@ export const userHandlers = [
     return res(ctx.status(200), ctx.json(data));
   }),
   rest.get('/user/info', (req, res, ctx) => {
-    const data: GetUserInfoResponse = {
+    const data: UserProfileResponse = {
       isSuccess: true,
       code: 200,
       message: '요청에 성공하였습니다.',

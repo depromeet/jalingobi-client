@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-import { useUserChallengeList } from '@/features/record/queries';
+import { useUserChallengeList } from '@/features/challenge/queries';
 import { cn } from '@/lib/utils';
 import { IconArrowLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';

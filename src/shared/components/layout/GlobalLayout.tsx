@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, type ReactNode } from 'react';
 
+import { useUserInfo } from '@/features/profile/queries';
 import { httpClient } from '@/service';
+import { useUserStore } from '@/shared/store/user';
 
 import ApplyingFont from '../font/ApplyingFont';
 
@@ -11,6 +13,8 @@ type GlobalLayoutProps = {
 
 export default function GlobalLayout({ children }: GlobalLayoutProps) {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
+  const { data: user } = useUserInfo();
   useEffect(() => {
     const validateToken = async () => {
       try {
@@ -21,6 +25,11 @@ export default function GlobalLayout({ children }: GlobalLayoutProps) {
     };
     validateToken();
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    setUser(user?.result);
+  }, [user]);
 
   return (
     <ApplyingFont>
