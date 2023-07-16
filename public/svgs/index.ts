@@ -21,6 +21,7 @@ import IconCommentSmall from './icon-comment-small.svg';
 import IconCrazyBig from './icon-crazy-big.svg';
 import IconCrazySmall from './icon-crazy-small.svg';
 import IconFilter from './icon-filter.svg';
+import IconHobby from './icon-hobby.svg';
 import IconKakao from './icon-kakao.svg';
 import IconLoading from './icon-loading.svg';
 import IconNote from './icon-note.svg';
@@ -32,6 +33,10 @@ import IconRegretfulBig from './icon-regretful-big.svg';
 import IconRegretfulSmall from './icon-regretful-small.svg';
 import IconRice from './icon-rice.svg';
 import IconSearch from './icon-search.svg';
+import IconSelectedClothes from './icon-selected-clothes.svg';
+import IconSelectedHobby from './icon-selected-hobby.svg';
+import IconSelectedRice from './icon-selected-rice.svg';
+import IconSelectedCar from './icon-selected-taxi.svg';
 import IconSettings from './icon-settings.svg';
 import IconTile from './icon-tile.svg';
 import IconTimer from './icon-timer.svg';
@@ -41,45 +46,50 @@ import IconWelldoneSmall from './icon-welldone-small.svg';
 import IconX from './icon-x.svg';
 
 export {
-  IconAddSquare,
-  IconCommentSmall,
-  IconCrazySmall,
-  IconRegretfulSmall,
-  IconWelldoneSmall,
-  IconLoading,
-  IconCheck,
-  IconCrazyBig,
-  IconRegretfulBig,
-  IconWelldoneBig,
-  IconCommentBig,
-  IconReaction,
-  IconTimer,
-  IconX,
   IconAdd,
-  IconKakao,
-  IconCircle,
-  IconCancel,
-  IconOverflow,
   IconAddCircle,
+  IconAddSquare,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUpFill,
+  IconCancel,
+  IconCar,
   IconChat,
-  IconNote,
-  IconSearch,
-  IconFilter2,
-  IconUser,
-  IconSettings,
-  IconPolygonDown,
-  IconPolygonUp,
+  IconCheck,
   IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
   IconChevronUp,
-  IconArrowUpFill,
-  IconTile,
-  IconArrowRight,
-  IconArrowLeft,
+  IconCircle,
   IconClock,
-  IconRice,
   IconClothes,
-  IconCar,
+  IconCommentBig,
+  IconCommentSmall,
+  IconCrazyBig,
+  IconCrazySmall,
   IconFilter,
+  IconFilter2,
+  IconHobby,
+  IconKakao,
+  IconLoading,
+  IconNote,
+  IconOverflow,
+  IconPolygonDown,
+  IconPolygonUp,
+  IconReaction,
+  IconRegretfulBig,
+  IconRegretfulSmall,
+  IconRice,
+  IconSearch,
+  IconSelectedCar,
+  IconSelectedClothes,
+  IconSelectedHobby,
+  IconSelectedRice,
+  IconSettings,
+  IconTile,
+  IconTimer,
+  IconUser,
+  IconWelldoneBig,
+  IconWelldoneSmall,
+  IconX,
 };

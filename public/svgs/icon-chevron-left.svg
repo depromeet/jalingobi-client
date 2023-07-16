@@ -1,3 +1,7 @@
-<svg viewBox="0 0 9 16" stroke="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 1L1.35355 7.64645C1.15829 7.84171 1.15829 8.15829 1.35355 8.35355L8 15" stroke-width="1.5" stroke-linecap="round"/>
+<svg width="current" height="current" viewBox="0 0 25 25" fill="current" xmlns="http://www.w3.org/2000/svg">
+<g id="ic_chevron_left_24px">
+<g id="Icon">
+<path id="Vector 334 (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M15.0303 5.30903C14.7374 5.01613 14.2626 5.01613 13.9697 5.30903L7.32322 11.9555C6.83507 12.4436 6.83507 13.2351 7.32322 13.7232L13.9697 20.3697C14.2626 20.6626 14.7374 20.6626 15.0303 20.3697C15.3232 20.0768 15.3232 19.6019 15.0303 19.309L8.56066 12.8394L15.0303 6.36969C15.3232 6.07679 15.3232 5.60192 15.0303 5.30903Z" fill="#999999"/>
+</g>
+</g>
 </svg>
