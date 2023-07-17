@@ -139,6 +139,7 @@ export const ChallengeRoomFeedList = () => {
           );
         })}
         {hasNextPage && <div ref={intersectedRef} />}
+        <Spacing height={53} />
       </ul>
       <div ref={bottomRef} />
     </div>

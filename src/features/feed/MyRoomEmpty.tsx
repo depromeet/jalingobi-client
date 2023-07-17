@@ -2,7 +2,7 @@ import { ImageLoader } from '@/shared/components/image';
 
 export const MyRoomEmpty = () => {
   return (
-    <div className="flex h-screen flex-col items-center pt-40">
+    <div className="flex flex-col items-center pt-40">
       <p className="font-title-medium-md text-black">
         아직 지출 기록이 없어요.
       </p>
