@@ -33,7 +33,7 @@ export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
     userUpdate.profileImage?.type,
   );
 
-  if (presignedUrlInfo) {
+  if (presignedUrlInfo.presignedUrl && presignedUrlInfo.imgUrl) {
     await putPresignedUrl(
       presignedUrlInfo.presignedUrl,
       userUpdate.profileImage?.image,
