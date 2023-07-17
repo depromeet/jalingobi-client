@@ -8,9 +8,9 @@ import { GlobalLayout } from '@/shared/components/layout';
 import { ToastsContainer } from '@/shared/components/toast';
 import { NextPageWithLayout } from '@/shared/types/layout';
 
-if (process.env.NODE_ENV === 'development') {
-  await import('../mocks');
-}
+// if (process.env.NODE_ENV === 'development') {
+//   await import('../mocks');
+// }
 const queryClient = new QueryClient();
 
 type AppPropsWithLayout = AppProps & {

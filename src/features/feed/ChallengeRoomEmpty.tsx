@@ -12,7 +12,7 @@ export const ChallengeRoomEmpty = ({
   maxParticipants,
 }: ChallengeRoomEmptyProps) => {
   return (
-    <div className="flex h-screen flex-col items-center pt-40">
+    <div className="flex flex-col items-center pt-40">
       <p className="font-title-medium-md text-black">{title}</p>
       <p className="font-caption-medium-md text-gray-60">{`참여 인원 ${participants}명 / ${maxParticipants}명`}</p>
       <ImageLoader
