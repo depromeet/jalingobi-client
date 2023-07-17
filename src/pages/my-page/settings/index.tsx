@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { IconArrowLeft, IconArrowRight } from '@/public/svgs';
+import { IconArrowRight, IconChevronLeft } from '@/public/svgs';
 import { drop, logout } from '@/service/auth';
 import { Spacing } from '@/shared/components';
 import { Button } from '@/shared/components/button';
@@ -29,7 +29,7 @@ const ManagePage = () => {
     <div className="px-5">
       <header className="relative flex h-12 w-full items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
-          <IconArrowLeft className="h-4 w-4 stroke-gray-50" />
+          <IconChevronLeft className="h-4 w-4" />
         </Link>
         <h1 className="font-title-medium-sm font-semibold">관리</h1>
       </header>
