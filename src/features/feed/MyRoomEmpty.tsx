@@ -13,9 +13,7 @@ export const MyRoomEmpty = () => {
         alt=""
         className="grayscale filter"
       />
-      <p className="font-body-regular-sm text-gray-70">
-        탐색 탭을 클릭해 소비습관에 맞는
-      </p>
+      <p className="font-body-regular-sm text-gray-70">지출 추가를 눌러</p>
       <p className="text-gray- font-body-regular-sm">
         거지방 챌린지를 시작해보세요.
       </p>
