@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useUserChallengeList } from '@/features/challenge/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
-import { IconAdd, IconCheck } from '@/public/svgs';
+import { IconAdd } from '@/public/svgs';
 import {
   Form,
   FormControl,
@@ -17,9 +17,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/components/form/Form';
-import { memoMaxLength } from '@/shared/constant';
+import { contentMaxLength } from '@/shared/constant';
 import { useToast } from '@/shared/hooks/useToast';
+import { ChallengeEvaluation } from '@/shared/types/challenge';
 import { ImageInfo } from '@/shared/types/user';
+import { isActiveChallenge } from '@/shared/utils/date';
 
 import { Button } from '../button';
 import { ChipGroup } from '../chip';
@@ -32,16 +34,22 @@ import { Textarea } from '../textarea';
 import { spendSchema } from './schema';
 
 const images = [
-  { path: '/images/low', alt: 'low' },
-  { path: '/images/medium', alt: 'medium' },
-  { path: '/images/high', alt: 'high' },
+  { path: '/images/low', value: 'CRAZY', description: '미친거지' },
+  { path: '/images/medium', value: 'REGRETFUL', description: '후회할거지' },
+  { path: '/images/high', value: 'WELLDONE', description: '잘한거지' },
 ];
 
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
+  const activeChallengeList =
+    challengeList?.result.participatedChallenges.filter((challenge) =>
+      isActiveChallenge(challenge.duration.startAt, challenge.duration.endAt),
+    );
   const addSpending = useAddSpendingMutation();
-  const [poorRoom, setPoorRoom] = useState('');
-  const [selected, setSelected] = useState<null | number>(null);
+  const [challengeId, setChallengeId] = useState<string>('');
+  const [evaluation, setEvaluation] = useState<ChallengeEvaluation | undefined>(
+    undefined,
+  );
   const router = useRouter();
   const { setToastMessage } = useToast();
   const [image, setImage] = useState<ImageInfo>({
@@ -52,27 +60,38 @@ export default function SpendingForm() {
     defaultValues: {
       price: '',
       title: '',
-      memo: '',
+      content: '',
     },
   });
-  const memo = form.watch('memo');
+  const content = form.watch('content');
 
   useEffect(() => {
     if (!challengeList) return;
-    if (challengeList.result.participatedChallenges.length === 0) {
-      setToastMessage('거지방에 참여한 뒤 지출을 추가할 수 있어요');
+    if (activeChallengeList?.length === 0) {
       router.push('/search');
+      setToastMessage('진행 중인 챌린지가 없어요');
     }
+  }, [activeChallengeList]);
+
+  useEffect(() => {
+    setChallengeId(
+      String(challengeList?.result.participatedChallenges[0].challengeId),
+    );
   }, [challengeList]);
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
-    addSpending.mutate({
-      ...values,
-      poorRoom,
-      imageInfo: image,
-    });
+    addSpending.mutate(
+      {
+        ...values,
+        challengeId: Number(challengeId),
+        imageInfo: image,
+        evaluation,
+      },
+      {
+        onSuccess: () => router.back(),
+      },
+    );
   };
-
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -80,6 +99,7 @@ export default function SpendingForm() {
     setImage({
       image: file,
       imageUrl: url,
+      type: 'RECORD',
     });
   };
 
@@ -95,12 +115,16 @@ export default function SpendingForm() {
       <ChipGroup
         className="mb-4"
         initialChips={
-          challengeList?.result.participatedChallenges[0].title || ''
+          String(challengeList?.result.participatedChallenges[0].challengeId) ||
+          ''
         }
-        onChange={setPoorRoom}
+        onChange={setChallengeId}
       >
-        {challengeList?.result.participatedChallenges.map((challenge) => (
-          <ChipGroup.Chip key={challenge.challengeId} value={challenge.title}>
+        {activeChallengeList?.map((challenge) => (
+          <ChipGroup.Chip
+            key={challenge.challengeId}
+            value={String(challenge.challengeId)}
+          >
             {challenge.title}
           </ChipGroup.Chip>
         ))}
@@ -192,7 +216,7 @@ export default function SpendingForm() {
         </div>
         <FormField
           control={form.control}
-          name="memo"
+          name="content"
           render={({ field }) => (
             <div className="flex flex-col gap-y-4">
               <FormItem>
@@ -208,11 +232,11 @@ export default function SpendingForm() {
                     <Textarea
                       placeholder="메모를 입력해주세요"
                       className="w-full"
-                      maxLength={memoMaxLength}
+                      maxLength={contentMaxLength}
                       {...field}
                     />
                     <span className="font-body-regular-sm text-right text-gray-50">
-                      {memo ? memo.length : 0} / {memoMaxLength}
+                      {content ? content.length : 0} / {contentMaxLength}
                     </span>
                   </div>
                 </FormControl>
@@ -223,11 +247,13 @@ export default function SpendingForm() {
         />
         <div>
           <h4 className="font-caption-medium-lg font-semibold">내 지출 평가</h4>
-          <div className="flex justify-center gap-x-5 pt-5">
-            <IconCheck className=" h-4 w-4" />
+          <div className="flex justify-around gap-x-5 pt-5">
             {images.map((image, index) => (
-              <div key={index} className="relative">
-                {index === selected && (
+              <div
+                key={index}
+                className="relative flex flex-col items-center gap-y-1"
+              >
+                {image.value === evaluation && (
                   <ImageLoader
                     src="/images/check.png"
                     width={24}
@@ -237,18 +263,30 @@ export default function SpendingForm() {
                   />
                 )}
                 <ImageLoader
-                  onClick={() => setSelected(index)}
+                  onClick={() =>
+                    setEvaluation(image.value as ChallengeEvaluation)
+                  }
                   className={cn('cursor-pointer rounded-sm')}
-                  src={`${image.path}${index === selected ? '-check' : ''}.png`}
+                  src={`${image.path}${
+                    image.value === evaluation ? '-check' : ''
+                  }.png`}
                   width={64}
                   height={64}
-                  alt={image.alt}
+                  alt={image.value}
                 />
+                <span className="font-caption-medium-sm text-gray-60">
+                  {image.description}
+                </span>
               </div>
             ))}
           </div>
         </div>
-        <Button type="submit" className="w-full" size="lg">
+        <Button
+          disabled={addSpending.isLoading}
+          type="submit"
+          className="w-full"
+          size="lg"
+        >
           완료
         </Button>
       </form>
