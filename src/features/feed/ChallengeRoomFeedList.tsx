@@ -50,12 +50,12 @@ export const ChallengeRoomFeedList = () => {
     [data],
   );
 
+  const { containerRef } = useKeepScrollPosition([feeds]);
   const hasUsedInfiniteScroll = feeds.length > 20;
   const { bottomRef } = useScrollToBottom({
     earlyReturn: hasUsedInfiniteScroll,
   });
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
-  const { containerRef } = useKeepScrollPosition([feeds]);
 
   const handleClickFeed = (recordId: number) => {
     router.push(
