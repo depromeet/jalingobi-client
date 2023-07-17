@@ -3,7 +3,7 @@ import { getExtension } from '@/shared/utils/file';
 
 import { httpClient } from './index';
 
-export const getPresignedUrl = async (
+export const createPresignedUrl = async (
   file?: File,
   type?: string,
 ): Promise<PresignedUrlResponse> => {
