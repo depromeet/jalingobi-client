@@ -3,30 +3,28 @@ import React, { useEffect } from 'react';
 
 import { useUserChallengeList } from '@/features/challenge/queries';
 import { cn } from '@/lib/utils';
-import { IconArrowLeft } from '@/public/svgs';
+import { IconChevronLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
-import { ALL } from '@/shared/constant';
-import { Status, StatusMap } from '@/shared/types/user';
+import { categoryReverseMap } from '@/shared/constants/challenge';
+import { ChallengeStatus, Status, StatusMap } from '@/shared/types/user';
 
 const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
 
 const RecordPage = () => {
   const [status, setStatus] = React.useState<Status>('PROCEEDING');
-  const [uniqueCategorySet, setUniqueCategorySet] = React.useState<Set<string>>(
-    new Set(),
-  );
-  const [category, setCategory] = React.useState('전체');
+  const [uniqueCategorySet, setUniqueCategorySet] = React.useState<
+    Set<keyof typeof categoryReverseMap>
+  >(new Set());
+  const [category, setCategory] = React.useState('ALL');
   const { data } = useUserChallengeList();
 
   useEffect(() => {
-    const categoriesSet: Set<string> = new Set();
-    categoriesSet.add(ALL);
+    const categoriesSet: Set<keyof typeof categoryReverseMap> = new Set();
+    categoriesSet.add('ALL');
     data?.result.participatedChallenges.forEach((challenge) => {
-      challenge.categories.forEach((category) => {
-        categoriesSet.add(category);
-      });
+      categoriesSet.add(challenge.category);
     });
     setUniqueCategorySet(categoriesSet);
   }, [data?.result.participatedChallenges]);
@@ -35,18 +33,45 @@ const RecordPage = () => {
     setStatus(status);
   };
 
+  const filterChallengeStatusCallbackFn = (
+    challengeStatus: keyof ChallengeStatus,
+    status: keyof ChallengeStatus,
+  ) => {
+    if (
+      ['PROCEEDING', 'WAITING'].includes(challengeStatus) &&
+      status === 'PROCEEDING'
+    ) {
+      return true;
+    }
+
+    if (challengeStatus === 'SUCCESS' && status === 'SUCCESS') {
+      return true;
+    }
+
+    if (
+      ['FAILURE', 'SUCCESS'].includes(challengeStatus) &&
+      status === 'COMPLETED'
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   const filteredCategoryList = data?.result.participatedChallenges
     .filter(
       (challenge) =>
-        category === '전체' || challenge.categories.includes(category),
+        category === 'ALL' || challenge.category.includes(category),
     )
-    .filter((challenge) => challenge.status === status);
+    .filter((challenge) =>
+      filterChallengeStatusCallbackFn(challenge.status, status),
+    );
 
   return (
     <div className="relative flex h-full flex-col px-5">
       <header className="relative flex h-12 items-center justify-center">
         <Link href="/my-page" className="absolute left-0">
-          <IconArrowLeft className="h-4 w-4" />
+          <IconChevronLeft className="h-4 w-4 " />
         </Link>
         <h1 className="font-title-medium-sm">거지방 기록</h1>
       </header>
@@ -70,10 +95,10 @@ const RecordPage = () => {
           </button>
         ))}
       </div>
-      <ChipGroup initialChips="전체" className="py-5" onChange={setCategory}>
+      <ChipGroup initialChips="ALL" className="py-5" onChange={setCategory}>
         {Array.from(uniqueCategorySet).map((category, index) => (
           <ChipGroup.Chip value={category} key={index}>
-            {category}
+            {categoryReverseMap[category]}
           </ChipGroup.Chip>
         ))}
       </ChipGroup>

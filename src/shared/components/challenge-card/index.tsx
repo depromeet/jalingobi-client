@@ -21,6 +21,12 @@ const ChallengeCard = ({ challenge }: Props) => {
     e.preventDefault();
     setIsBottomSheetOpen(true);
   };
+
+  const handleOpenLeaveModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsLeaveModalOpen(true);
+  };
+
   return (
     <Link href={`/search/${challenge.challengeId}`}>
       <li
@@ -45,11 +51,7 @@ const ChallengeCard = ({ challenge }: Props) => {
             <span className="text-gray-50">
               {challenge.participantCount}/{challenge.availableCount}명
             </span>
-            {challenge.statusTag?.map((tag, index) => (
-              <span key={index} className="text-red-400">
-                {tag}
-              </span>
-            ))}
+            <span className="text-red-400">{challenge.statusTag}</span>
           </div>
           <h3 className="font-title-medium-sm">{challenge.title}</h3>
           <ul className="flex gap-x-1">
@@ -68,11 +70,12 @@ const ChallengeCard = ({ challenge }: Props) => {
         <RecordBottomSheet
           isOpen={isBottomSheetOpen}
           onOpenChange={setIsBottomSheetOpen}
-          openLeaveModal={() => setIsLeaveModalOpen(true)}
+          openLeaveModal={handleOpenLeaveModal}
         />
         <ChallengeLeaveSheet
           isOpen={isLeaveModalOpen}
           onOpenChange={setIsLeaveModalOpen}
+          onOpenChangeBottomSheet={setIsBottomSheetOpen}
           challengeId={challenge.challengeId}
         />
       </li>

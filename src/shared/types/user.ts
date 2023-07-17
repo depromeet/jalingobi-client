@@ -1,9 +1,13 @@
 import { ApiResponse } from '@/shared/types/api';
 
+import { categoryReverseMap } from '../constants/challenge';
+
 export type ChallengeStatus = {
   PROCEEDING: number;
   SUCCESS: number;
   COMPLETED: number;
+  WAITING: number;
+  FAILURE: number;
 };
 export type Status = keyof ChallengeStatus;
 
@@ -11,6 +15,8 @@ export const StatusMap: Record<Status, string> = {
   PROCEEDING: '참가중',
   SUCCESS: '성공',
   COMPLETED: '완료',
+  WAITING: '대기중',
+  FAILURE: '실패',
 };
 
 export type Social = {
@@ -34,7 +40,7 @@ export type User = {
   social: Social;
   profile: Profile;
   notification: boolean;
-  userChallengeResult: ChallengeStatus;
+  userChallengeResult: Partial<ChallengeStatus>;
 };
 
 export type UserProfile = {
@@ -70,7 +76,7 @@ export type UserChallenge = {
   participantCount: number;
   status: Status;
   statusTag: string[];
-  categories: string[];
+  category: keyof typeof categoryReverseMap;
   keywords: string[];
 };
 

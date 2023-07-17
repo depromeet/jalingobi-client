@@ -4,7 +4,7 @@ import React from 'react';
 import { ChallengeStatus } from '@/shared/types/user';
 
 type Props = {
-  board?: ChallengeStatus;
+  board?: Partial<ChallengeStatus>;
 };
 const Board = ({ board }: Props) => {
   return (
