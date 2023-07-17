@@ -38,7 +38,7 @@ const ChallengeCard = ({ challenge }: Props) => {
           width={54}
           height={54}
           alt="item"
-          className="relative top-5  mx-auto"
+          className="relative top-5 mx-auto aspect-square rounded-md"
         />
         {challenge.active && (
           <IconOverflow
