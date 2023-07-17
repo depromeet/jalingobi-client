@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
 
-import { IconArrowLeft } from '@/public/svgs';
+import { IconChevronLeft } from '@/public/svgs';
 
 import { ImageLoader } from '../image';
 import Spacing from '../spacing';
@@ -25,7 +24,7 @@ const ErrorPageBuilder = ({
     <div className="flex flex-col items-center px-5">
       <header className="mb-10 flex h-12 w-full items-center justify-between">
         <button type="button" onClick={handleGoBack}>
-          <IconArrowLeft className="h-4 w-4" />
+          <IconChevronLeft className="h-4 w-4" />
         </button>
       </header>
       <Spacing height={12} />

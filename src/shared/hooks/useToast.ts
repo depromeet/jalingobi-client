@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { shallow } from 'zustand/shallow';
+
 import { TOAST_DURATION } from '../components/toast/Toast';
 import { useToastStore } from '../store/toast';
 
@@ -12,10 +14,10 @@ import { useToastStore } from '../store/toast';
   };
  */
 export const useToast = (timeout = TOAST_DURATION) => {
-  const [toastMessage, setToastMessage] = useToastStore((state) => [
-    state.toastMessage,
-    state.setToastMessage,
-  ]);
+  const [toastMessage, setToastMessage] = useToastStore(
+    (state) => [state.toastMessage, state.setToastMessage],
+    shallow,
+  );
 
   useEffect(() => {
     let toastTimeout: NodeJS.Timeout;

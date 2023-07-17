@@ -2,6 +2,8 @@ import { ApiResponse } from '@/shared/types/api';
 
 import { categoryReverseMap } from '../constants/challenge';
 
+import { PresignedImageType } from './presigned';
+
 export type ChallengeStatus = {
   PROCEEDING: number;
   SUCCESS: number;
@@ -32,7 +34,7 @@ export type Profile = {
 
 export type ImageInfo = {
   image?: File;
-  type?: string;
+  type?: PresignedImageType;
   imageUrl: string;
 };
 

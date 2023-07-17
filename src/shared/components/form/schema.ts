@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { maxPrice, memoMaxLength } from '@/shared/constant';
+import { contentMaxLength, maxPrice } from '@/shared/constant';
 
 export const spendSchema = z.object({
   price: z
@@ -25,7 +25,7 @@ export const spendSchema = z.object({
     .min(1, {
       message: '지출명을 입력해주세요',
     }),
-  memo: z.string().max(memoMaxLength, {
-    message: `${memoMaxLength}자 이하로 작성해주세요`,
+  content: z.string().max(contentMaxLength, {
+    message: `${contentMaxLength}자 이하로 작성해주세요`,
   }),
 });

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getPresignedUrl } from '@/service/image';
+import { createPresignedUrl } from '@/service/image';
 import { httpClient } from '@/service/index';
 import {
   UserChallengeListResult,
@@ -19,7 +19,7 @@ export const fetchUserProfile = async (): Promise<UserResponse> => {
   return response.data;
 };
 
-const putPresignedUrl = async (presignedUrl: string, file?: File) => {
+export const putPresignedUrl = async (presignedUrl: string, file?: File) => {
   await axios.put(presignedUrl, file, {
     headers: {
       'Content-Type': file?.type,
@@ -28,7 +28,7 @@ const putPresignedUrl = async (presignedUrl: string, file?: File) => {
 };
 
 export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
-  const presignedUrlInfo = await getPresignedUrl(
+  const presignedUrlInfo = await createPresignedUrl(
     userUpdate.profileImage?.image,
     userUpdate.profileImage?.type,
   );
