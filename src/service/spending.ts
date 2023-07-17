@@ -14,7 +14,7 @@ export const addSpending = async ({
   evaluation,
 }: Spending) => {
   let presignedResponse;
-  if (imageInfo) {
+  if (imageInfo?.image && imageInfo?.type) {
     presignedResponse = await createPresignedUrl(
       imageInfo.image,
       imageInfo.type,
