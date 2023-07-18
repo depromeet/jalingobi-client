@@ -30,7 +30,7 @@ export const MyRoomFeedList = () => {
     [data],
   );
 
-  const isScrolled = feeds.length > 5;
+  const isScrolled = feeds.length > 3;
   const hasUsedInfiniteScroll = feeds.length > 20;
   const { bottomRef } = useScrollToBottom({
     earlyReturn: hasUsedInfiniteScroll,
