@@ -5,6 +5,7 @@ import { IconClock, IconOverflow } from '@/public/svgs';
 import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeaveSheet';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
+import { isActiveChallenge } from '@/shared/utils/date';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 import { ImageLoader } from '../image';
@@ -40,7 +41,10 @@ const ChallengeCard = ({ challenge }: Props) => {
           alt="item"
           className="relative top-5 mx-auto aspect-square rounded-md"
         />
-        {challenge.active && (
+        {isActiveChallenge({
+          startAt: challenge.duration.startAt,
+          endAt: 출challenge.duration.endAt,
+        }) && (
           <IconOverflow
             className="absolute right-5 top-4"
             onClick={openBottomSheet}
