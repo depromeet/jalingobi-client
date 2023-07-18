@@ -43,7 +43,7 @@ const ChallengeCard = ({ challenge }: Props) => {
         />
         {isActiveChallenge({
           startAt: challenge.duration.startAt,
-          endAt: 출challenge.duration.endAt,
+          endAt: challenge.duration.endAt,
         }) && (
           <IconOverflow
             className="absolute right-5 top-4"
