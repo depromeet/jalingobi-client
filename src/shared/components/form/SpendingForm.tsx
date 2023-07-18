@@ -42,8 +42,12 @@ const images = [
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
   const activeChallengeList =
-    challengeList?.result.participatedChallenges.filter((challenge) =>
-      isActiveChallenge(challenge.duration.startAt, challenge.duration.endAt),
+    challengeList?.result.participatedChallenges.filter(
+      ({ duration: { startAt, endAt } }) =>
+        isActiveChallenge({
+          startAt,
+          endAt,
+        }),
     );
   const addSpending = useAddSpendingMutation();
   const [challengeId, setChallengeId] = useState<string>('');

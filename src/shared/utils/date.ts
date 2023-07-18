@@ -71,7 +71,13 @@ export const getDayOfWeek = (dateStr?: string): string => {
   return dayOfWeek;
 };
 
-export const isActiveChallenge = (startAt?: string, endAt?: string) => {
+export const isActiveChallenge = ({
+  startAt,
+  endAt,
+}: {
+  startAt: string;
+  endAt: string;
+}) => {
   if (!startAt || !endAt) return false;
   const startDate = new Date(startAt);
   const endDate = new Date(endAt);
