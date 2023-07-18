@@ -27,6 +27,6 @@ export const addSpending = async ({
     title,
     content,
     evaluation,
-    ...(presignedResponse ? { imageUrl: presignedResponse.imgUrl } : {}),
+    ...(presignedResponse ? { imgUrl: presignedResponse.imgUrl } : {}),
   });
 };
