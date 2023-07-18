@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -57,15 +57,18 @@ const MyFeed = ({
   const isChallengeExist =
     !!challengeImgUrl || !!challengeTitle || !!challengeId;
 
-  const DEFAULT_EMOJIS = [
-    createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
-    createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
-    createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
-    createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
-  ];
+  const defaultEmojis = useMemo(
+    () => [
+      createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
+      createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
+      createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
+      createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
+    ],
+    [emojiInfo],
+  );
 
-  const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
-  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+  const [emojis, setEmojis] = useState<TEmoji[]>([]);
+  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>([]);
 
   const updateEmoji = useUpdateEmoji();
   const deleteEmoji = useDeleteEmoji();
@@ -137,6 +140,14 @@ const MyFeed = ({
       }),
     );
   };
+
+  useEffect(() => {
+    if (!defaultEmojis) {
+      return;
+    }
+
+    setEmojis(defaultEmojis);
+  }, [defaultEmojis]);
 
   useEffect(() => {
     if (!updateEmoji.isError) {
