@@ -25,6 +25,7 @@ export type RecordInfoType = {
   content: string;
   price: number;
   date: string;
+  evaluation: EmojiType;
 };
 
 export type ChallengeInfoType = {
