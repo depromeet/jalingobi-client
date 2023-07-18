@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
@@ -46,6 +47,8 @@ const MyFeed = ({
   recordImgUrl,
   onClickFeed,
 }: MyFeedProps) => {
+  const router = useRouter();
+
   const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedPrice = convertNumberToCurrency({
     value: price,
@@ -71,6 +74,9 @@ const MyFeed = ({
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
+      router.push(
+        `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
+      );
       return;
     }
 
