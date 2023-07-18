@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
-import { IconArrowLeft, IconArrowUpFill, IconCrazyBig } from '@/public/svgs';
+import { IconArrowUpFill, IconChevronLeft, IconCrazyBig } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
@@ -211,7 +211,7 @@ function Header() {
         className="absolute left-5 flex h-6 w-6 items-center justify-center"
         onClick={handleClickPrev}
       >
-        <IconArrowLeft className="stroke-gray-50" />
+        <IconChevronLeft />
       </button>
       <p className="font-title-medium-sm py-2.5 text-black">지출 내역</p>
     </header>
