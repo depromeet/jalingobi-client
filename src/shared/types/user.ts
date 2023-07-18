@@ -1,6 +1,6 @@
 import { ApiResponse } from '@/shared/types/api';
 
-import { categoryReverseMap } from '../constants/challenge';
+import { categoryMap } from '../constants/challenge';
 
 import { PresignedImageType } from './presigned';
 
@@ -78,7 +78,7 @@ export type UserChallenge = {
   participantCount: number;
   status: Status;
   statusTag: string[];
-  category: keyof typeof categoryReverseMap;
+  category: keyof typeof categoryMap;
   keywords: string[];
 };
 
