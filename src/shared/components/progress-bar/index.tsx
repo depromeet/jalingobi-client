@@ -12,11 +12,19 @@ const ProgressBar = ({ percent }: ProgressBarProps) => {
     }
     return 'bg-system-danger';
   };
+
+  const getPercent = (percent: number) => {
+    if (percent >= 100) {
+      return 100;
+    }
+    return percent;
+  };
+
   return (
     <div className="h-2 w-full rounded-full bg-gray-20">
       <div
         className={`h-2 rounded-full ${getBarColor(percent)}`}
-        style={{ width: `${percent}%` }}
+        style={{ width: `${getPercent(percent)}%` }}
       />
     </div>
   );
