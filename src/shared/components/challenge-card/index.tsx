@@ -6,7 +6,7 @@ import { IconClock, IconOverflow } from '@/public/svgs';
 import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeaveSheet';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
-import { isActiveChallenge } from '@/shared/utils/date';
+import { isChallengeEnded } from '@/shared/utils/date';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 type Props = {
@@ -40,10 +40,7 @@ const ChallengeCard = ({ challenge }: Props) => {
           alt="item"
           className="aspect-square rounded-md"
         />
-        {isActiveChallenge({
-          startAt: challenge.duration.startAt,
-          endAt: challenge.duration.endAt,
-        }) && (
+        {!isChallengeEnded(challenge.duration.endAt) && (
           <IconOverflow
             className="absolute right-5 top-4"
             onClick={openBottomSheet}

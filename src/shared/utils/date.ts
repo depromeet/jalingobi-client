@@ -84,3 +84,9 @@ export const isActiveChallenge = ({
   const today = new Date();
   return startDate <= today && endDate >= today;
 };
+
+export const isChallengeEnded = (endAt: string) => {
+  const endDate = new Date(endAt);
+  const today = new Date();
+  return endDate < today;
+};
