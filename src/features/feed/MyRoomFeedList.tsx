@@ -58,7 +58,12 @@ export const MyRoomFeedList = () => {
   }
 
   if (isEmpty(feeds)) {
-    return <MyRoomEmpty />;
+    return (
+      <MyRoomEmpty
+        title="아직 지출 기록이 없어요."
+        description="거지방 챌린지를 시작해보세요."
+      />
+    );
   }
 
   return (
