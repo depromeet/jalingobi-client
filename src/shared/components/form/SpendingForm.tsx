@@ -70,7 +70,6 @@ export default function SpendingForm() {
   const content = form.watch('content');
 
   useEffect(() => {
-    if (!challengeList) return;
     if (activeChallengeList?.length === 0) {
       router.push('/search');
       setToastMessage('진행 중인 챌린지가 없어요');
@@ -78,9 +77,7 @@ export default function SpendingForm() {
   }, [activeChallengeList]);
 
   useEffect(() => {
-    setChallengeId(
-      String(challengeList?.result.participatedChallenges[0].challengeId),
-    );
+    setChallengeId(String(activeChallengeList?.[0]?.challengeId));
   }, [challengeList]);
 
   const onSubmit = (values: z.infer<typeof spendSchema>) => {
