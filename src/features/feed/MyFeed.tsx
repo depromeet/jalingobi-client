@@ -223,12 +223,13 @@ const MyFeed = ({
 
         <Spacing height={8} />
         <div className="flex gap-1">
-          {emojis.map(({ type, count }, index) => {
+          {emojis.map(({ type, count, selected }, index) => {
             return (
               <Emoji
                 key={index}
                 type={type}
                 count={count}
+                selected={selected}
                 onClickEmoji={handleClickEmoji}
               />
             );
