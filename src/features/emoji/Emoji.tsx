@@ -12,6 +12,7 @@ import { EmojiType } from '@/shared/types/feed';
 type Props = {
   type: EmojiType;
   count: number;
+  selected: boolean;
   onClickEmoji: (type: EmojiType) => void;
 };
 
@@ -22,7 +23,7 @@ const getIcon: Record<EmojiType, ReactNode> = {
   comment: <IconCommentSmall className="h-5 w-5" />,
 };
 
-export const Emoji = ({ type, count, onClickEmoji }: Props) => {
+export const Emoji = ({ type, count, selected, onClickEmoji }: Props) => {
   const bgColor = {
     CRAZY: 'bg-[#FFD2B5]',
     REGRETFUL: 'bg-[#FFEEAF]',
@@ -35,7 +36,7 @@ export const Emoji = ({ type, count, onClickEmoji }: Props) => {
       type="button"
       className={cn(
         `flex h-7 w-[3.25rem] items-center justify-center gap-1.5 rounded bg-white ${
-          count > 0 && bgColor[type]
+          selected && bgColor[type]
         }`,
       )}
       onClick={() => onClickEmoji(type)}
