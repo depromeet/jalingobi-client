@@ -2,10 +2,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
+import { shallow } from 'zustand/shallow';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { ImageLoader } from '@/shared/components/image';
+import { useRoom } from '@/shared/store/room';
 import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -23,7 +25,6 @@ type MyFeedProps = {
   emojiInfo: EmojiInfoType;
   challengeImgUrl?: string;
   challengeTitle?: string;
-  challengeId?: string;
   recordImgUrl?: string;
   onClickFeed: (recordId: number, challengeId: string | undefined) => void;
 };
@@ -43,19 +44,19 @@ const MyFeed = ({
   emojiInfo,
   challengeImgUrl = '',
   challengeTitle,
-  challengeId,
   recordImgUrl,
   onClickFeed,
 }: MyFeedProps) => {
   const router = useRouter();
+
+  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedPrice = convertNumberToCurrency({
     value: price,
     unitOfCurrency: '원',
   });
-  const isChallengeExist =
-    !!challengeImgUrl || !!challengeTitle || !!challengeId;
+  const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
 
   const defaultEmojis = useMemo(
     () => [
@@ -173,7 +174,7 @@ const MyFeed = ({
             <button
               type="button"
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
-              onClick={() => onClickFeed(recordId, challengeId)}
+              onClick={() => onClickFeed(recordId, `${challengeId}`)}
             >
               <ImageLoader
                 src={recordImgUrl}
@@ -188,7 +189,7 @@ const MyFeed = ({
         )}
         <div
           className="relative w-[13.75rem] rounded-md bg-white p-2.5"
-          onClick={() => onClickFeed(recordId, challengeId)}
+          onClick={() => onClickFeed(recordId, `${challengeId}`)}
         >
           <div className="font-body-regular-sm flex items-center justify-between font-[600] text-gray-70">
             <div>
@@ -222,12 +223,13 @@ const MyFeed = ({
 
         <Spacing height={8} />
         <div className="flex gap-1">
-          {emojis.map(({ type, count }, index) => {
+          {emojis.map(({ type, count, selected }, index) => {
             return (
               <Emoji
                 key={index}
                 type={type}
                 count={count}
+                selected={selected}
                 onClickEmoji={handleClickEmoji}
               />
             );
