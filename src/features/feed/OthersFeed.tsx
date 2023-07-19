@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
+import { shallow } from 'zustand/shallow';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { ImageLoader } from '@/shared/components/image';
+import { useRoom } from '@/shared/store/room';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -46,6 +49,10 @@ const OthersFeed = ({
   recordImgUrl,
   onClickFeed,
 }: OthersFeedProps) => {
+  const router = useRouter();
+
+  const challengeId = useRoom((state) => state.challengeId, shallow);
+
   const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedCurrentCharge = convertNumberToCurrency({
     value: currentCharge,
@@ -72,6 +79,9 @@ const OthersFeed = ({
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
+      router.push(
+        `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
+      );
       return;
     }
 
