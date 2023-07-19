@@ -98,46 +98,52 @@ export const ChallengeRoomFeedList = () => {
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(({ isMine, userInfo, recordInfo, emojiInfo }, index) => {
-          return (
-            <Fragment key={recordInfo.id}>
-              {isMine ? (
-                <MyFeed
-                  recordId={recordInfo.id}
-                  recordImgUrl={recordInfo.imgUrl}
-                  title={recordInfo.title}
-                  price={recordInfo.price}
-                  content={recordInfo.content}
-                  recordDate={recordInfo.date}
-                  emojiInfo={emojiInfo}
-                  onClickFeed={handleClickFeed}
-                />
-              ) : (
-                <OthersFeed
-                  recordId={recordInfo.id}
-                  recordImgUrl={recordInfo.imgUrl}
-                  title={recordInfo.title}
-                  price={recordInfo.price}
-                  content={recordInfo.content}
-                  recordDate={recordInfo.date}
-                  profileImgUrl={userInfo.imgUrl}
-                  nickname={userInfo.nickname}
-                  currentCharge={userInfo.currentCharge}
-                  emojiInfo={emojiInfo}
-                  onClickFeed={handleClickFeed}
-                />
-              )}
-              {isFeedDateDifferent({
-                currentFeed: feeds[index],
-                nextFeed: feeds[index + 1],
-              }) ? (
-                <DateChip date={recordInfo.date} />
-              ) : (
-                <Spacing height={32} />
-              )}
-            </Fragment>
-          );
-        })}
+        {feeds.map(
+          (
+            { isMine, userInfo, recordInfo, emojiInfo, challengeInfo },
+            index,
+          ) => {
+            return (
+              <Fragment key={recordInfo.id}>
+                {isMine ? (
+                  <MyFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    challengeId={challengeInfo.id}
+                    emojiInfo={emojiInfo}
+                    onClickFeed={handleClickFeed}
+                  />
+                ) : (
+                  <OthersFeed
+                    recordId={recordInfo.id}
+                    recordImgUrl={recordInfo.imgUrl}
+                    title={recordInfo.title}
+                    price={recordInfo.price}
+                    content={recordInfo.content}
+                    recordDate={recordInfo.date}
+                    profileImgUrl={userInfo.imgUrl}
+                    nickname={userInfo.nickname}
+                    currentCharge={userInfo.currentCharge}
+                    emojiInfo={emojiInfo}
+                    onClickFeed={handleClickFeed}
+                  />
+                )}
+                {isFeedDateDifferent({
+                  currentFeed: feeds[index],
+                  nextFeed: feeds[index + 1],
+                }) ? (
+                  <DateChip date={recordInfo.date} />
+                ) : (
+                  <Spacing height={32} />
+                )}
+              </Fragment>
+            );
+          },
+        )}
         {hasNextPage && <div ref={intersectedRef} />}
         <Spacing height={53} />
       </ul>

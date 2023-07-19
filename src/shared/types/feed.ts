@@ -38,6 +38,7 @@ export type ChallengeFeedType = {
   isMine: boolean;
   userInfo: UserInfoType;
   recordInfo: RecordInfoType;
+  challengeInfo: { id: string };
   emojiInfo: EmojiInfoType;
 };
 

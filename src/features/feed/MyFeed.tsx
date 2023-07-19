@@ -2,12 +2,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
-import { shallow } from 'zustand/shallow';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { ImageLoader } from '@/shared/components/image';
-import { useRoom } from '@/shared/store/room';
 import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -23,6 +21,7 @@ type MyFeedProps = {
   content: string;
   recordDate: string;
   emojiInfo: EmojiInfoType;
+  challengeId: string;
   challengeImgUrl?: string;
   challengeTitle?: string;
   recordImgUrl?: string;
@@ -42,14 +41,13 @@ const MyFeed = ({
   content,
   recordDate,
   emojiInfo,
+  challengeId,
   challengeImgUrl = '',
   challengeTitle,
   recordImgUrl,
   onClickFeed,
 }: MyFeedProps) => {
   const router = useRouter();
-
-  const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedPrice = convertNumberToCurrency({

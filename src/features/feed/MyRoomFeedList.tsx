@@ -82,6 +82,7 @@ export const MyRoomFeedList = () => {
                 price={recordInfo.price}
                 content={recordInfo.content}
                 recordDate={recordInfo.date}
+                challengeId={challengeInfo.id}
                 challengeImgUrl={challengeInfo.imgUrl}
                 challengeTitle={challengeInfo.title}
                 emojiInfo={emojiInfo}
