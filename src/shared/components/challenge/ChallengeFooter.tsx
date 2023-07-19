@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 import { CheckIcon } from 'lucide-react';
@@ -17,6 +17,7 @@ type Props = {
 };
 
 function ChallengeFooter({ challenge }: Props) {
+  const router = useRouter();
   const join = useJoinChallenge(challenge?.challengeId);
   const dateInfo = challenge?.dateInfo;
   const startDate = dateInfo?.startAt;
@@ -31,6 +32,10 @@ function ChallengeFooter({ challenge }: Props) {
   const endMonth = endDate && (new Date(endDate)?.getMonth?.() ?? 0) + 1;
   const startDay = startDate && (new Date(startDate)?.getDate?.() ?? 1);
   const endDay = endDate && (new Date(endDate)?.getDate?.() ?? 1);
+
+  const handleClickModal = () => {
+    router.push('/my-poor-room');
+  };
 
   return (
     <footer className="bottom-0 left-0 flex flex-[0_0_60px] items-center justify-between bg-white px-4 py-[18px]">
@@ -81,14 +86,14 @@ function ChallengeFooter({ challenge }: Props) {
             </article>
             <span className="text-gray-50">해당 규칙을 준수해주세요!</span>
           </div>
-          <Link href="/my-poor-room">
-            <Button
-              variant={challenge?.recruiting ? 'primary' : 'disabled'}
-              size="md"
-            >
-              {challenge?.recruiting ? '확인' : '마감된 챌린지'}
-            </Button>
-          </Link>
+          <Button
+            disabled={!challenge?.recruiting}
+            onClick={handleClickModal}
+            variant={challenge?.recruiting ? 'primary' : 'disabled'}
+            size="md"
+          >
+            {challenge?.recruiting ? '확인' : '마감된 챌린지'}
+          </Button>
         </div>
       </Modal>
     </footer>

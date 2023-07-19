@@ -42,7 +42,7 @@ const ProfileBottomSheet = ({
                 src={profileImage}
                 alt="avatar"
                 fill
-                className="rounded-lg object-cover"
+                className="-z-10 rounded-lg object-cover"
               />
             )}
           </div>

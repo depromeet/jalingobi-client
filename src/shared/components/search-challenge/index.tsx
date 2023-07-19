@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router';
 
+import { isEmpty } from 'lodash-es';
+
 import {
   useChallengeSearch,
   useUserChallengeList,
 } from '@/features/challenge/queries';
+import { MyRoomEmpty } from '@/features/feed/MyRoomEmpty';
 import { IconClock } from '@/public/svgs';
 import { useToast } from '@/shared/hooks/useToast';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
-import ChallengeNotFound from '../challenge/ChallengeNotFound';
 import { ImageLoader } from '../image';
 
 type Props = {
@@ -45,8 +47,18 @@ export default function SearchChallengeList({
     return isParticipated;
   };
 
-  if (!result?.challenges || result.challenges.length === 0) {
-    return <ChallengeNotFound />;
+  if (isEmpty(result?.challenges)) {
+    return (
+      <MyRoomEmpty
+        title="리스트 준비 중입니다."
+        description={
+          <>
+            <p>해당 거지방 리스트는 곧 업데이트 됩니다.</p>
+            <p>조금만 기다려주세요!</p>
+          </>
+        }
+      />
+    );
   }
 
   const handleRouting = (challengeId: number) => {

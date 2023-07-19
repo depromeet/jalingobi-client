@@ -7,7 +7,7 @@ import { IconChevronLeft } from '@/public/svgs';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import ChallengeList from '@/shared/components/challenge-list';
 import { ChipGroup } from '@/shared/components/chip';
-import { categoryReverseMap } from '@/shared/constants/challenge';
+import { categoryMap } from '@/shared/constants/challenge';
 import { ChallengeStatus, Status, StatusMap } from '@/shared/types/user';
 
 const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
@@ -15,13 +15,13 @@ const recordCategories: Status[] = ['PROCEEDING', 'SUCCESS', 'COMPLETED'];
 const RecordPage = () => {
   const [status, setStatus] = React.useState<Status>('PROCEEDING');
   const [uniqueCategorySet, setUniqueCategorySet] = React.useState<
-    Set<keyof typeof categoryReverseMap>
+    Set<keyof typeof categoryMap>
   >(new Set());
   const [category, setCategory] = React.useState('ALL');
   const { data } = useUserChallengeList();
 
   useEffect(() => {
-    const categoriesSet: Set<keyof typeof categoryReverseMap> = new Set();
+    const categoriesSet: Set<keyof typeof categoryMap> = new Set();
     categoriesSet.add('ALL');
     data?.result.participatedChallenges.forEach((challenge) => {
       categoriesSet.add(challenge.category);
@@ -98,7 +98,7 @@ const RecordPage = () => {
       <ChipGroup initialChips="ALL" className="py-5" onChange={setCategory}>
         {Array.from(uniqueCategorySet).map((category, index) => (
           <ChipGroup.Chip value={category} key={index}>
-            {categoryReverseMap[category]}
+            {categoryMap[category]}
           </ChipGroup.Chip>
         ))}
       </ChipGroup>

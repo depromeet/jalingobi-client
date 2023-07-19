@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -5,9 +6,8 @@ import { IconClock, IconOverflow } from '@/public/svgs';
 import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeaveSheet';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
+import { isChallengeEnded } from '@/shared/utils/date';
 import { calculateDaysLeft } from '@/shared/utils/time';
-
-import { ImageLoader } from '../image';
 
 type Props = {
   challenge: UserChallenge;
@@ -31,22 +31,22 @@ const ChallengeCard = ({ challenge }: Props) => {
     <Link href={`/search/${challenge.challengeId}`}>
       <li
         key={challenge.challengeId}
-        className="relative grid min-h-[130px] w-full grid-cols-4 rounded-md bg-gray-5 px-5 py-4"
+        className="relative flex items-start gap-x-4 bg-gray-5 px-5 py-4"
       >
-        <ImageLoader
+        <Image
           src={challenge.imgUrl}
           width={54}
           height={54}
           alt="item"
-          className="relative top-5 mx-auto aspect-square rounded-md"
+          className="aspect-square rounded-md"
         />
-        {challenge.active && (
+        {!isChallengeEnded(challenge.duration.endAt) && (
           <IconOverflow
             className="absolute right-5 top-4"
             onClick={openBottomSheet}
           />
         )}
-        <div className="col-span-3 flex flex-col gap-y-[1px]">
+        <div className="flex flex-col gap-y-[1px]">
           <div className="font-caption-medium-md flex items-center  gap-x-1 font-semibold">
             <span className="text-gray-50">
               {challenge.participantCount}/{challenge.availableCount}명
@@ -57,13 +57,14 @@ const ChallengeCard = ({ challenge }: Props) => {
           <ul className="flex gap-x-1">
             {challenge.keywords.map((keyword, index) => (
               <li key={index} className="font-caption-medium-md text-gray-50">
-                #{keyword}
+                {keyword}
               </li>
             ))}
           </ul>
           <div className="font-caption-medium-md flex items-center gap-x-[2px] text-gray-60">
-            <IconClock />
-            <p>D{calculateDaysLeft(challenge.duration.startAt)} /</p>
+            <IconClock className="h-5 w-5" />
+            <p>D{calculateDaysLeft(challenge.duration.startAt)} </p>
+            <p>/</p>
             {challenge.duration.period}일 동안
           </div>
         </div>

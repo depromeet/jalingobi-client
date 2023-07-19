@@ -1,4 +1,4 @@
-import React from 'react';
+import { isEmpty } from 'lodash-es';
 
 import ChallengeCard from '@/shared/components/challenge-card';
 import { UserChallenge } from '@/shared/types/user';
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ChallengeList = ({ filteredCategoryList }: Props) => {
-  if (!filteredCategoryList) {
+  if (isEmpty(filteredCategoryList)) {
     return <ChallengeNotFound />;
   }
 
