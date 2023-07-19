@@ -11,13 +11,14 @@ type Props = {
 const Profile = ({ profile }: Props) => {
   return (
     <section className="flex items-center justify-start pb-4">
-      <ImageLoader
-        src={profile?.imgUrl || ''}
-        alt="profile"
-        width={60}
-        height={60}
-        className="mr-6"
-      />
+      <div className="relative mr-6 h-[60px] w-[60px]">
+        <ImageLoader
+          src={profile?.imgUrl || ''}
+          alt="profile"
+          fill
+          className="rounded-[10px] object-cover"
+        />
+      </div>
       <Link
         href="/my-page/profile"
         className="flex items-center gap-x-2 text-right"
