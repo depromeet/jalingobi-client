@@ -71,7 +71,7 @@ export default function SearchChallengeList({
 
   return (
     <ul className="flex flex-col gap-y-2.5">
-      {result.challenges?.map((challenge) => {
+      {result?.challenges?.map((challenge) => {
         return (
           <button
             key={challenge.id}
