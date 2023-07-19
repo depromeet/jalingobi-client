@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { isEmpty } from 'lodash-es';
@@ -11,8 +12,6 @@ import { IconClock } from '@/public/svgs';
 import { useToast } from '@/shared/hooks/useToast';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
-
-import { ImageLoader } from '../image';
 
 type Props = {
   categoryKey: CategoryKey;
@@ -80,7 +79,7 @@ export default function SearchChallengeList({
             type="button"
           >
             <li className="relative flex min-h-[130px] w-full items-start rounded-md bg-gray-5 px-5 py-4">
-              <ImageLoader
+              <Image
                 src={challenge.imgUrl}
                 width={54}
                 height={54}

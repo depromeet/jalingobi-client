@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -5,7 +6,6 @@ import { IconArrowRight, IconChevronLeft } from '@/public/svgs';
 import { drop, logout } from '@/service/auth';
 import { Spacing } from '@/shared/components';
 import { Button } from '@/shared/components/button';
-import { ImageLoader } from '@/shared/components/image';
 import { Modal } from '@/shared/components/modal';
 import { useToast } from '@/shared/hooks/useToast';
 
@@ -65,7 +65,7 @@ const ManagePage = () => {
               <p className="font-title-medium-sm font-semibold">회원탈퇴</p>
             </div>
             <Spacing height={20} />
-            <ImageLoader
+            <Image
               src="/images/fish-with-tear.png"
               alt="avatar"
               width="260"

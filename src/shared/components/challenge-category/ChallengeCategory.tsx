@@ -1,6 +1,6 @@
-import clsx from 'clsx';
+import Image from 'next/image';
 
-import { ImageLoader } from '../image';
+import clsx from 'clsx';
 
 type ChallengeCategoryProps = {
   challengeId: number;
@@ -30,7 +30,7 @@ export const ChallengeCategory = ({
             'border-2 border-solid border-primary  shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
         )}
       >
-        <ImageLoader src={imgUrl} alt="" fill sizes="(max-width: 600px) 10vw" />
+        <Image src={imgUrl} alt="" fill sizes="(max-width: 600px) 10vw" />
       </div>
       <p
         className={clsx(

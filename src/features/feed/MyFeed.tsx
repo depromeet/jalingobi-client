@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { ImageLoader } from '@/shared/components/image';
 import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date';
@@ -158,7 +158,7 @@ const MyFeed = ({
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId, challengeId)}
             >
-              <ImageLoader
+              <Image
                 src={recordImgUrl}
                 alt="피드 이미지"
                 fill
@@ -189,7 +189,7 @@ const MyFeed = ({
           {isChallengeExist && (
             <div className="flex gap-[5px]">
               <div className="relative h-[1.125rem] w-[1.125rem]">
-                <ImageLoader
+                <Image
                   src={challengeImgUrl}
                   alt=""
                   fill

@@ -1,4 +1,4 @@
-import { ImageLoader } from '@/shared/components/image';
+import Image from 'next/image';
 
 type ChallengeRoomRecrutingProps = {
   title?: string;
@@ -15,7 +15,7 @@ export const ChallengeRoomRecruting = ({
     <div className="flex flex-col items-center pt-40">
       <p className="font-title-medium-md text-black">{title}</p>
       <p className="font-caption-medium-md text-gray-60">{`참여 인원 ${participants}명 / ${maxParticipants}명`}</p>
-      <ImageLoader
+      <Image
         width={110}
         height={110}
         src="/images/mark.png"

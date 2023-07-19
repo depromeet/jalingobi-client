@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -6,7 +7,6 @@ import { IconChevronLeft, IconRice } from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
-import { ImageLoader } from '@/shared/components/image';
 import { categoryMap } from '@/shared/constants/challenge';
 
 const ChallengeDetailPage = () => {
@@ -26,11 +26,7 @@ const ChallengeDetailPage = () => {
             <IconChevronLeft className="z-10 h-4 w-4 stroke-white text-white" />
           </Link>
           {challenge?.result.challengeImgUrl && (
-            <ImageLoader
-              src={challenge?.result.challengeImgUrl}
-              fill
-              alt="item"
-            />
+            <Image src={challenge?.result.challengeImgUrl} fill alt="item" />
           )}
         </header>
         <section className="px-5">

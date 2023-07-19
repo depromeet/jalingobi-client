@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { IconChevronLeft } from '@/public/svgs';
 
-import { ImageLoader } from '../image';
 import Spacing from '../spacing';
 
 const ErrorPageBuilder = ({
@@ -29,7 +29,7 @@ const ErrorPageBuilder = ({
       </header>
       <Spacing height={12} />
       <span>
-        <ImageLoader
+        <Image
           src="/images/mark.png"
           alt="에러이미지"
           width={335}

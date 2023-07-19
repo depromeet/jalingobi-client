@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -25,7 +26,6 @@ import { isActiveChallenge } from '@/shared/utils/date';
 
 import { Button } from '../button';
 import { ChipGroup } from '../chip';
-import { ImageLoader } from '../image';
 import { Input } from '../input';
 import { Label } from '../label';
 import { TextInput } from '../text-input';
@@ -197,7 +197,7 @@ export default function SpendingForm() {
           >
             {image.imageUrl ? (
               <div className="relative h-24 w-24">
-                <ImageLoader
+                <Image
                   src={image.imageUrl}
                   alt="image"
                   fill
@@ -255,7 +255,7 @@ export default function SpendingForm() {
                 className="relative flex flex-col items-center gap-y-1"
               >
                 {image.value === evaluation && (
-                  <ImageLoader
+                  <Image
                     src="/images/check.png"
                     width={24}
                     height={24}
@@ -263,7 +263,7 @@ export default function SpendingForm() {
                     className="absolute right-0 top-0"
                   />
                 )}
-                <ImageLoader
+                <Image
                   onClick={() =>
                     setEvaluation(image.value as ChallengeEvaluation)
                   }
