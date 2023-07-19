@@ -56,8 +56,7 @@ const MyFeed = ({
     value: price,
     unitOfCurrency: '원',
   });
-  const isChallengeExist =
-    !!challengeImgUrl || !!challengeTitle || !!challengeId;
+  const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
 
   const defaultEmojis = useMemo(
     () => [
