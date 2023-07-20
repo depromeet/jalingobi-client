@@ -44,7 +44,7 @@ const nextConfig = {
       {
         source: '/',
         destination: '/search',
-        permanent: false,
+        permanent: true,
       },
     ];
   },
