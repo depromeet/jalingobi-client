@@ -59,6 +59,7 @@ export default function SearchChallengeList({
   return (
     <ul className="flex flex-col gap-y-2.5">
       {result?.challenges?.map((challenge) => {
+        const daysLeft = calculateDaysLeft(challenge.startAt);
         return (
           <button
             key={challenge.id}
@@ -93,9 +94,10 @@ export default function SearchChallengeList({
                     </li>
                   ))}
                 </ul>
-                <div className="font-caption-medium-md flex items-center gap-x-[2px] text-gray-60">
+                <div className="font-caption-medium-md flex items-center gap-x-[0.5px] text-gray-60">
                   <IconClock />
-                  <p>D{calculateDaysLeft(challenge.startAt)} /</p>
+                  {daysLeft > 0 ? <p>{daysLeft}일 뒤 시작</p> : <p>진행 중</p>}
+                  <p>/</p>
                   {challenge.period}일 동안
                 </div>
               </div>
