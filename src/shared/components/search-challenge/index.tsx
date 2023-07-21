@@ -10,7 +10,7 @@ import {
 import { MyRoomEmpty } from '@/features/feed/MyRoomEmpty';
 import { IconClock } from '@/public/svgs';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
-import { calculateDaysLeft } from '@/shared/utils/time';
+import { calculateDaysLeft } from '@/shared/utils/time/time';
 
 type Props = {
   categoryKey: CategoryKey;

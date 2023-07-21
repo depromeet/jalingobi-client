@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { useUserStore } from '@/shared/store/user';
 import { ChallengeDetail } from '@/shared/types/challenge';
 import { calculateDaysBetween, getDayOfWeek } from '@/shared/utils/date/date';
-import { isChallengeDueSoon } from '@/shared/utils/time';
+import { isChallengeDueSoon } from '@/shared/utils/time/time';
 
 import { Button } from '../button';
 import { Modal } from '../modal';

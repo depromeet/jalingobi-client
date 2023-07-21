@@ -7,7 +7,7 @@ import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeave
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
 import { isChallengeEnded } from '@/shared/utils/date/date';
-import { calculateDaysLeft } from '@/shared/utils/time';
+import { calculateDaysLeft } from '@/shared/utils/time/time';
 
 type Props = {
   challenge: UserChallenge;
