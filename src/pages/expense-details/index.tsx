@@ -218,7 +218,7 @@ function Header() {
         className="absolute left-5 flex h-6 w-6 items-center justify-center"
         onClick={handleClickPrev}
       >
-        <IconChevronLeft />
+        <IconChevronLeft className="h-6 w-6" />
       </button>
       <p className="font-title-medium-sm py-2.5 text-black">지출 내역</p>
     </header>
