@@ -9,7 +9,6 @@ import {
 } from '@/features/challenge/queries';
 import { MyRoomEmpty } from '@/features/feed/MyRoomEmpty';
 import { IconClock } from '@/public/svgs';
-import { useToast } from '@/shared/hooks/useToast';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
@@ -31,20 +30,7 @@ export default function SearchChallengeList({
     filter,
     sortedType,
   });
-  const { setToastMessage } = useToast();
   const result = data?.result;
-
-  const checkIsParticipatedChallenge = (challengeId: number) => {
-    const isParticipated =
-      userChallengeList?.result.participatedChallenges.some(
-        (userChallenge) => userChallenge.challengeId === challengeId,
-      );
-
-    if (isParticipated) {
-      setToastMessage('이미 참여한 거지방입니다.');
-    }
-    return isParticipated;
-  };
 
   if (isEmpty(result?.challenges)) {
     return (
@@ -61,9 +47,11 @@ export default function SearchChallengeList({
   }
 
   const handleRouting = (challengeId: number) => {
-    const route = checkIsParticipatedChallenge(challengeId)
-      ? '/my-poor-room'
-      : `/search/${challengeId}`;
+    const isParticipated =
+      userChallengeList?.result.participatedChallenges.some(
+        (userChallenge) => userChallenge.challengeId === challengeId,
+      );
+    const route = isParticipated ? '/my-poor-room' : `/search/${challengeId}`;
 
     router.push(route);
   };
