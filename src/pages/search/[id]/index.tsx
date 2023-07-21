@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useChallengeQuery } from '@/features/challenge/queries';
@@ -14,18 +13,19 @@ const ChallengeDetailPage = () => {
   const { id } = router.query;
   const challengeId = typeof id === 'string' ? id : '';
   const { data: challenge } = useChallengeQuery(Number(challengeId));
-  console.log('first');
+
   return (
     <div className="flex h-screen flex-col">
       <div className="flex-1 overflow-auto">
         <section className="relative h-[348px]">
           <header className="relative h-12">
-            <Link
-              href="/search"
-              className="absolute top-3 flex h-12 items-center justify-between p-3"
+            <button
+              className="absolute left-3 flex h-12 items-center"
+              type="button"
+              onClick={() => router.back()}
             >
               <IconChevronLeft className="absolute z-10 h-4 w-4  stroke-white text-white" />
-            </Link>
+            </button>
           </header>
           {challenge?.result.challengeImgUrl && (
             <Image
