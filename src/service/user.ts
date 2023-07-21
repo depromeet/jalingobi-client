@@ -3,7 +3,9 @@ import axios from 'axios';
 import { createPresignedUrl } from '@/service/image';
 import { httpClient } from '@/service/index';
 import {
+  ImageRequest,
   UserChallengeListResult,
+  UserDefaultImageResponse,
   UserProfileResponse,
   UserResponse,
   UserUpdateRequest,
@@ -19,7 +21,10 @@ export const fetchUserProfile = async (): Promise<UserResponse> => {
   return response.data;
 };
 
-export const putPresignedUrl = async (presignedUrl: string, file?: File) => {
+export const uploadImageWithPresignedUrl = async (
+  presignedUrl: string,
+  file?: File,
+) => {
   await axios.put(presignedUrl, file, {
     headers: {
       'Content-Type': file?.type,
@@ -28,22 +33,20 @@ export const putPresignedUrl = async (presignedUrl: string, file?: File) => {
 };
 
 export const updateUserProfile = async (userUpdate: UserUpdateRequest) => {
-  const presignedUrlInfo = await createPresignedUrl(
-    userUpdate.profileImage?.image,
-    userUpdate.profileImage?.type,
-  );
-
-  if (presignedUrlInfo.presignedUrl && presignedUrlInfo.imgUrl) {
-    await putPresignedUrl(
-      presignedUrlInfo.presignedUrl,
-      userUpdate.profileImage?.image,
-    );
-  }
-
   return httpClient.patch('/mypage/profile', {
     nickName: userUpdate.nickName,
-    profileImgUrl: presignedUrlInfo.imgUrl || userUpdate.profileImage?.imageUrl,
+    profileImgUrl: userUpdate.imageUrl,
   });
+};
+
+export const updateImage = async ({ image, type }: ImageRequest) => {
+  const presignedUrlInfo = await createPresignedUrl(image, type);
+
+  if (presignedUrlInfo.presignedUrl && presignedUrlInfo.imgUrl) {
+    await uploadImageWithPresignedUrl(presignedUrlInfo.presignedUrl, image);
+  }
+
+  return presignedUrlInfo.imgUrl;
 };
 
 export const fetchUserChallengeList =
@@ -55,3 +58,9 @@ export const fetchUserChallengeList =
 export const leaveChallenge = async (challengeId: number) => {
   return httpClient.delete(`/mypage/challenge/${challengeId}`);
 };
+
+export const fetchUserDefaultImage =
+  async (): Promise<UserDefaultImageResponse> => {
+    const response = await httpClient.get('/mypage/jalingobi');
+    return response.data;
+  };

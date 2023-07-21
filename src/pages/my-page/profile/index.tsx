@@ -8,6 +8,7 @@ import {
   useUserMyPage,
 } from '@/features/profile/queries';
 import { profileSchema } from '@/lib/validation/user';
+import { updateImage } from '@/service/user';
 import ProfileBottomSheet from '@/shared/components/bottom-sheet/ProfileBottomSheet';
 import {
   Form,
@@ -22,7 +23,7 @@ import { ImageInfo } from '@/shared/types/user';
 
 const Profile = () => {
   const { data } = useUserMyPage();
-  const { mutate } = useUpdateUserProfile();
+  const updateUser = useUpdateUserProfile();
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const form = useForm<z.infer<typeof profileSchema>>({
     defaultValues: {
@@ -48,10 +49,18 @@ const Profile = () => {
     form.setValue('nickName', data.result.profile.nickname);
   }, [data]);
 
-  const onSubmit = (values: z.infer<typeof profileSchema>) => {
-    mutate({
+  const onSubmit = async (values: z.infer<typeof profileSchema>) => {
+    let imageUrl = '';
+    if (profileImage.type && profileImage.image) {
+      imageUrl = await updateImage({
+        image: profileImage.image,
+        type: profileImage.type,
+      });
+    }
+
+    updateUser.mutate({
       nickName: values.nickName,
-      profileImage,
+      imageUrl: imageUrl || data?.result.profile.imgUrl,
     });
   };
 
@@ -71,7 +80,8 @@ const Profile = () => {
     <div className="flex flex-col items-center px-5">
       <ProfileHeader hasChanged={hasChanged} />
       <ProfileBottomSheet
-        onOpenChange={setIsBottomSheetOpen}
+        user={data?.result.profile}
+        setIsBottomSheetOpen={setIsBottomSheetOpen}
         isOpen={isBottomSheetOpen}
         profileImage={profileImage?.imageUrl || ''}
         handleImageUpload={handleImageUpload}

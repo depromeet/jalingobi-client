@@ -10,6 +10,7 @@ import { useUserChallengeList } from '@/features/challenge/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
 import { IconAdd } from '@/public/svgs';
+import { updateImage } from '@/service/user';
 import {
   Form,
   FormControl,
@@ -80,19 +81,28 @@ export default function SpendingForm() {
     setChallengeId(String(activeChallengeList?.[0]?.challengeId));
   }, [challengeList]);
 
-  const onSubmit = (values: z.infer<typeof spendSchema>) => {
+  const onSubmit = async (values: z.infer<typeof spendSchema>) => {
+    let imageUrl = '';
+    if (image.type && image.image) {
+      imageUrl = await updateImage({
+        image: image.image,
+        type: image.type,
+      });
+    }
+
     addSpending.mutate(
       {
         ...values,
         challengeId: Number(challengeId),
-        imageInfo: image,
         evaluation,
+        imageUrl,
       },
       {
         onSuccess: () => router.back(),
       },
     );
   };
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;

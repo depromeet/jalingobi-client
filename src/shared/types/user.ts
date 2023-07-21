@@ -38,6 +38,11 @@ export type ImageInfo = {
   imageUrl: string;
 };
 
+export type ImageRequest = {
+  image: File;
+  type: PresignedImageType;
+};
+
 export type User = {
   social: Social;
   profile: Profile;
@@ -56,8 +61,8 @@ export type UserProfile = {
 };
 
 export type UserUpdateRequest = {
-  nickName: string;
-  profileImage?: ImageInfo;
+  nickName?: string;
+  imageUrl?: string;
 };
 
 export type UserResponse = ApiResponse<User>;
@@ -84,4 +89,8 @@ export type UserChallenge = {
 
 export type UserChallengeListResult = ApiResponse<{
   participatedChallenges: UserChallenge[];
+}>;
+
+export type UserDefaultImageResponse = ApiResponse<{
+  imgUrl: string;
 }>;
