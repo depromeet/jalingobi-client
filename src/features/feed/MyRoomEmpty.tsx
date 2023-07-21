@@ -16,9 +16,9 @@ export const MyRoomEmpty = ({ title, description }: Props) => {
         alt="empty"
         className="grayscale filter"
       />
-      <p className="font-body-regular-sm text-center font-semibold text-gray-70">
+      <div className="font-body-regular-sm text-center font-semibold text-gray-70">
         {description}
-      </p>
+      </div>
     </div>
   );
 };
