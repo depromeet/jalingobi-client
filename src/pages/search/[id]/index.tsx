@@ -14,7 +14,7 @@ const ChallengeDetailPage = () => {
   const { id } = router.query;
   const challengeId = typeof id === 'string' ? id : '';
   const { data: challenge } = useChallengeQuery(Number(challengeId));
-
+  console.log('first');
   return (
     <div className="flex h-screen flex-col">
       <div className="flex-1 overflow-auto">
@@ -28,7 +28,12 @@ const ChallengeDetailPage = () => {
             </Link>
           </header>
           {challenge?.result.challengeImgUrl && (
-            <Image src={challenge?.result.challengeImgUrl} fill alt="item" />
+            <Image
+              className="object-cover"
+              src={challenge?.result.challengeImgUrl}
+              fill
+              alt="item"
+            />
           )}
         </section>
         <section className="px-5">
