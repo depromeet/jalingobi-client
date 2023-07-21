@@ -2,7 +2,6 @@ import IconFilter2 from './filter.svg';
 import IconAddCircle from './icon-add-circle.svg';
 import IconAddSquare from './icon-add-square.svg';
 import IconAdd from './icon-add.svg';
-import IconArrowLeft from './icon-arrow-left.svg';
 import IconArrowRight from './icon-arrow-right.svg';
 import IconArrowUpFill from './icon-arrow-up-fill.svg';
 import IconCancel from './icon-cancel.svg';
@@ -49,7 +48,6 @@ export {
   IconAdd,
   IconAddCircle,
   IconAddSquare,
-  IconArrowLeft,
   IconArrowRight,
   IconArrowUpFill,
   IconCancel,
