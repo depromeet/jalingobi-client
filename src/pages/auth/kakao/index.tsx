@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { OAuthRequestToKakao, authKakao } from '@/service/auth';
+import { PageLoading } from '@/shared/components/loading';
 
 export interface State {
   code: string;
@@ -31,9 +32,5 @@ export default function RedirectedKakao() {
     getToken();
   }, []);
 
-  return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-4" />
-    </div>
-  );
+  return <PageLoading />;
 }
