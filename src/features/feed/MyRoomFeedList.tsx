@@ -8,7 +8,7 @@ import { DateChip } from '@/shared/components/date-chip';
 import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
-import { isFeedDateDifferent } from '@/shared/utils/date';
+import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
 import { MyFeed } from './MyFeed';
 import { MyRoomEmpty } from './MyRoomEmpty';

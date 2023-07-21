@@ -1,7 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { IconArrowRight } from '@/public/svgs';
-import { ImageLoader } from '@/shared/components/image';
 import { Profile } from '@/shared/types/user';
 
 type Props = {
@@ -12,7 +12,7 @@ const Profile = ({ profile }: Props) => {
   return (
     <section className="flex items-center justify-start pb-4">
       <div className="relative mr-6 h-[60px] w-[60px]">
-        <ImageLoader
+        <Image
           src={profile?.imgUrl || ''}
           alt="profile"
           fill

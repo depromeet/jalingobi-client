@@ -11,7 +11,7 @@
     "lint": "next lint",
     "host": "next dev -H $(node -e \"var ip = require('ip'); console.log(ip.address())\")",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write '*/**/*.{ts,tsx,js,jsx}'",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:type": "tsc --noEmit",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",

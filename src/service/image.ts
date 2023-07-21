@@ -4,13 +4,9 @@ import { getExtension } from '@/shared/utils/file';
 import { httpClient } from './index';
 
 export const createPresignedUrl = async (
-  file?: File,
-  type?: string,
+  file: File,
+  type: string,
 ): Promise<PresignedUrlResponse> => {
-  if (!file) {
-    return Promise.resolve({ presignedUrl: '', imgUrl: '' });
-  }
-
   const response = await httpClient.post('/image/presigned', {
     imageFileExtension: getExtension(file?.type).toUpperCase(),
     type,

@@ -51,14 +51,14 @@ export default function MyPage() {
         {/*    </Link> */}
         {/*  </div> */}
         {/* </li> */}
-        <li className="flex items-center justify-between">
-          <span className="font-body-regular-lg font-semibold">
-            서비스 문의/피드백
-          </span>
-          <Link href="/feedback">
+        <a href="https://forms.gle/mWu4VMtTR2rjgJPv8" target="_blank">
+          <li className="flex items-center justify-between">
+            <span className="font-body-regular-lg font-semibold">
+              서비스 문의/피드백
+            </span>
             <IconArrowRight />
-          </Link>
-        </li>
+          </li>
+        </a>
         <li className="flex items-center justify-between">
           <span className="font-body-regular-lg font-semibold">버전정보</span>
           <span>{version}</span>

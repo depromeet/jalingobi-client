@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -6,7 +7,6 @@ import { IconChevronLeft, IconRice } from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
-import { ImageLoader } from '@/shared/components/image';
 import { categoryMap } from '@/shared/constants/challenge';
 
 const ChallengeDetailPage = () => {
@@ -18,21 +18,19 @@ const ChallengeDetailPage = () => {
   return (
     <div className="flex h-screen flex-col">
       <div className="flex-1 overflow-auto">
-        <header className="relative h-[348px]">
-          <Link
-            href="/search"
-            className="flex h-12 items-center justify-between p-3"
-          >
-            <IconChevronLeft className="z-10 h-4 w-4 stroke-white text-white" />
-          </Link>
+        <section className="relative h-[348px]">
+          <header className="relative h-12">
+            <Link
+              href="/search"
+              className="absolute top-3 flex h-12 items-center justify-between p-3"
+            >
+              <IconChevronLeft className="absolute z-10 h-4 w-4  stroke-white text-white" />
+            </Link>
+          </header>
           {challenge?.result.challengeImgUrl && (
-            <ImageLoader
-              src={challenge?.result.challengeImgUrl}
-              fill
-              alt="item"
-            />
+            <Image src={challenge?.result.challengeImgUrl} fill alt="item" />
           )}
-        </header>
+        </section>
         <section className="px-5">
           <div className="pt-4">
             <div className="flex justify-between">

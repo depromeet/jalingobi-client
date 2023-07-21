@@ -79,10 +79,12 @@ export const isActiveChallenge = ({
   endAt: string;
 }) => {
   if (!startAt || !endAt) return false;
-  const startDate = new Date(startAt);
-  const endDate = new Date(endAt);
-  const today = new Date();
-  return startDate <= today && endDate >= today;
+
+  const startDate = dayjs(startAt);
+  const endDate = dayjs(endAt);
+  const today = dayjs().startOf('day');
+
+  return !startDate.isAfter(today) && !endDate.isBefore(today);
 };
 
 export const isChallengeEnded = (endAt: string) => {

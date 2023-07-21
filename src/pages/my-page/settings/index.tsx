@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -5,7 +6,6 @@ import { IconArrowRight, IconChevronLeft } from '@/public/svgs';
 import { drop, logout } from '@/service/auth';
 import { Spacing } from '@/shared/components';
 import { Button } from '@/shared/components/button';
-import { ImageLoader } from '@/shared/components/image';
 import { Modal } from '@/shared/components/modal';
 import { useToast } from '@/shared/hooks/useToast';
 
@@ -34,18 +34,24 @@ const ManagePage = () => {
         <h1 className="font-title-medium-sm font-semibold">관리</h1>
       </header>
       <ul className="flex flex-col font-semibold text-gray-60">
-        <li className="flex items-center justify-between py-4">
-          <span>이용약관</span>
-          <Link href="/my-page/rules">
+        <a
+          href="https://twilight-tartan-155.notion.site/e991930418eb42a8be559b6131996b21?pvs=4"
+          target="_blank"
+        >
+          <li className="flex items-center justify-between py-4">
+            <span>이용약관</span>
             <IconArrowRight className="h-4 w-4" />
-          </Link>
-        </li>
-        <li className="flex items-center justify-between py-4">
-          <span>개인정보보호정책</span>
-          <Link href="/my-page/privacy">
+          </li>
+        </a>
+        <a
+          href="https://twilight-tartan-155.notion.site/74bc26b93c7947588bde38fed45121b5?pvs=4"
+          type="_blank"
+        >
+          <li className="flex items-center justify-between py-4">
+            <span>개인정보보호정책</span>
             <IconArrowRight className="h-4 w-4" />
-          </Link>
-        </li>
+          </li>
+        </a>
         <button type="button" onClick={logoutAndToast}>
           <li className="flex items-center justify-between py-4">
             <span>로그아웃</span>
@@ -65,7 +71,7 @@ const ManagePage = () => {
               <p className="font-title-medium-sm font-semibold">회원탈퇴</p>
             </div>
             <Spacing height={20} />
-            <ImageLoader
+            <Image
               src="/images/fish-with-tear.png"
               alt="avatar"
               width="260"

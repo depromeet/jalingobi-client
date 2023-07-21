@@ -1,6 +1,6 @@
-import { Participant } from '@/shared/types/challenge';
+import Image from 'next/image';
 
-import { ImageLoader } from '../image';
+import { Participant } from '@/shared/types/challenge';
 
 type Props = {
   participants?: Participant[];
@@ -17,12 +17,14 @@ export default function ChallengeParticipants({ participants }: Props) {
       {visibleParticipants?.map((participant, index) => (
         <li key={index} className="flex items-center justify-between py-2.5">
           <div className="flex items-center gap-x-2">
-            <ImageLoader
-              src={participant.imgUrl}
-              width={40}
-              height={40}
-              alt="profile"
-            />
+            <div className="relative h-12 w-12">
+              <Image
+                className="rounded-[10px] object-cover"
+                src={participant.imgUrl}
+                fill
+                alt="profile"
+              />
+            </div>
             <span>{participant.nickname}</span>
           </div>
           <button

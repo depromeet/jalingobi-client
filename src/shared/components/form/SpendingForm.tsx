@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +10,7 @@ import { useUserChallengeList } from '@/features/challenge/queries';
 import { useAddSpendingMutation } from '@/features/spending/queries';
 import { cn } from '@/lib/utils';
 import { IconAdd } from '@/public/svgs';
+import { updateImage } from '@/service/user';
 import {
   Form,
   FormControl,
@@ -21,11 +23,10 @@ import { contentMaxLength } from '@/shared/constant';
 import { useToast } from '@/shared/hooks/useToast';
 import { ChallengeEvaluation } from '@/shared/types/challenge';
 import { ImageInfo } from '@/shared/types/user';
-import { isActiveChallenge } from '@/shared/utils/date';
+import { isActiveChallenge } from '@/shared/utils/date/date';
 
 import { Button } from '../button';
 import { ChipGroup } from '../chip';
-import { ImageLoader } from '../image';
 import { Input } from '../input';
 import { Label } from '../label';
 import { TextInput } from '../text-input';
@@ -41,6 +42,7 @@ const images = [
 
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
+  console.log(challengeList?.result);
   const activeChallengeList =
     challengeList?.result.participatedChallenges.filter(
       ({ duration: { startAt, endAt } }) =>
@@ -80,19 +82,28 @@ export default function SpendingForm() {
     setChallengeId(String(activeChallengeList?.[0]?.challengeId));
   }, [challengeList]);
 
-  const onSubmit = (values: z.infer<typeof spendSchema>) => {
+  const onSubmit = async (values: z.infer<typeof spendSchema>) => {
+    let imageUrl = '';
+    if (image.type && image.image) {
+      imageUrl = await updateImage({
+        image: image.image,
+        type: image.type,
+      });
+    }
+
     addSpending.mutate(
       {
         ...values,
         challengeId: Number(challengeId),
-        imageInfo: image,
         evaluation,
+        imageUrl,
       },
       {
         onSuccess: () => router.back(),
       },
     );
   };
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -197,7 +208,7 @@ export default function SpendingForm() {
           >
             {image.imageUrl ? (
               <div className="relative h-24 w-24">
-                <ImageLoader
+                <Image
                   src={image.imageUrl}
                   alt="image"
                   fill
@@ -255,7 +266,7 @@ export default function SpendingForm() {
                 className="relative flex flex-col items-center gap-y-1"
               >
                 {image.value === evaluation && (
-                  <ImageLoader
+                  <Image
                     src="/images/check.png"
                     width={24}
                     height={24}
@@ -263,7 +274,7 @@ export default function SpendingForm() {
                     className="absolute right-0 top-0"
                   />
                 )}
-                <ImageLoader
+                <Image
                   onClick={() =>
                     setEvaluation(image.value as ChallengeEvaluation)
                   }

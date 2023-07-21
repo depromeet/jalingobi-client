@@ -12,7 +12,7 @@ import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
-import { isFeedDateDifferent } from '@/shared/utils/date';
+import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
 import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
 import { ChallengeRoomRecruting } from './ChallengeRoomRecruting';

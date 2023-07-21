@@ -1,5 +1,6 @@
+import Image from 'next/image';
+
 import { Spacing } from '@/shared/components';
-import { ImageLoader } from '@/shared/components/image';
 import KakaoLogin from '@/shared/components/kakao-login';
 
 export default function Login() {
@@ -10,12 +11,7 @@ export default function Login() {
       <h1 className="font-title-medium-md">
         거지들의 이야기로 쌓이는 소비습관
       </h1>
-      <ImageLoader
-        src="/images/fish.png"
-        alt="avatar"
-        width="335"
-        height="335"
-      />
+      <Image src="/images/fish.png" alt="avatar" width="335" height="335" />
       <span className="font-body-regular-sm items-center justify-center rounded-full bg-white px-4 py-2">
         5초안에 시작하고 소비 습관 챙기기🚀
       </span>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -6,11 +7,10 @@ import { shallow } from 'zustand/shallow';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { ImageLoader } from '@/shared/components/image';
 import { useRoom } from '@/shared/store/room';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date';
+import { getKoreanDate } from '@/shared/utils/date/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
 
 import { Emoji } from '../emoji/Emoji';
@@ -172,7 +172,7 @@ const OthersFeed = ({
   return (
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
-        <ImageLoader
+        <Image
           src={profileImgUrl}
           alt=""
           fill
@@ -196,7 +196,7 @@ const OthersFeed = ({
               className="relative h-[9.125rem] w-[13.75rem] overflow-hidden rounded-md"
               onClick={() => onClickFeed(recordId)}
             >
-              <ImageLoader
+              <Image
                 src={recordImgUrl}
                 alt="피드 이미지"
                 fill

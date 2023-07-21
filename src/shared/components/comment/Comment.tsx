@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 import { IconOverflow } from '@/public/svgs';
 import { CommentInfoType } from '@/shared/types/feed';
-import { timeDifference } from '@/shared/utils/date';
+import { timeDifference } from '@/shared/utils/date/date';
 
-import { ImageLoader } from '../image';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '../sheet';
 import Spacing from '../spacing';
 
@@ -22,7 +22,7 @@ export const Comment = ({
     <div className="flex justify-between pb-1.5">
       <div className="flex gap-2.5">
         <div className="relative h-10 w-10 shrink-0 object-cover">
-          <ImageLoader
+          <Image
             src={imgUrl}
             alt=""
             fill

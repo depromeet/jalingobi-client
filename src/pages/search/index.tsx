@@ -15,11 +15,9 @@ import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
-import { useHandleBack } from '@/shared/hooks';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
 
 function Search() {
-  useHandleBack();
   const [category, setCategory] = useState<CategoryKey>('ALL'); // ['전체', '식비', '문화생활', '취미'
   const [showOnlyActiveRoom, setShowOnlyActiveRoom] = useState(true);
   const [sortedType, setSortedType] = useState<SortedType>('인원순');

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
@@ -15,7 +16,6 @@ import {
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
-import { ImageLoader } from '@/shared/components/image';
 import { PageLoading } from '@/shared/components/loading';
 import { TextInput } from '@/shared/components/text-input';
 import { useToast } from '@/shared/hooks/useToast';
@@ -26,7 +26,7 @@ import {
   UserInfoType,
 } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date';
+import { getKoreanDate } from '@/shared/utils/date/date';
 
 export default function ExpenseDetails() {
   const router = useRouter();
@@ -262,7 +262,7 @@ function Contents({
   return (
     <div className="p-5">
       <div className="flex gap-2.5">
-        <ImageLoader
+        <Image
           src={userImgUrl}
           alt=""
           width={40}
@@ -280,7 +280,7 @@ function Contents({
         <>
           <Spacing height={20} />
           <div className="relative h-[12.5rem] w-[21rem] overflow-hidden rounded-lg">
-            <ImageLoader
+            <Image
               src={recordImgUrl}
               alt=""
               fill
