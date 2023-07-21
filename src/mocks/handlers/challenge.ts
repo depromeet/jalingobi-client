@@ -63,16 +63,19 @@ export const challengeHandlers = [
         },
         participantsInfo: [
           {
+            userId: 1,
             imgUrl: '/images/baemin.png',
             nickname: '닉네임',
             level: 1,
           },
           {
+            userId: 2,
             imgUrl: '/images/baemin.png',
             nickname: '닉네임',
             level: 1,
           },
           {
+            userId: 3,
             imgUrl: '/images/baemin.png',
             nickname: '닉네임',
             level: 1,
