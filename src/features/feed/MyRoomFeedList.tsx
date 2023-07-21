@@ -30,7 +30,6 @@ export const MyRoomFeedList = () => {
     [data],
   );
 
-  const isScrolled = feeds.length > 3;
   const hasUsedInfiniteScroll = feeds.length > 20;
   const { bottomRef } = useScrollToBottom({
     earlyReturn: hasUsedInfiniteScroll,
@@ -68,7 +67,6 @@ export const MyRoomFeedList = () => {
 
   return (
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
-      {!isScrolled && <Spacing height={60} />}
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
         {/* TODO: 서버 데이터 그대로 넘기기  */}
