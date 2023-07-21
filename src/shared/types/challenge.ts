@@ -1,6 +1,7 @@
 import { ApiResponse } from './api';
 
 export type Participant = {
+  userId: number;
   imgUrl: string;
   nickname: string;
   level: number;
