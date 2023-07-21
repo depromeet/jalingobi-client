@@ -42,7 +42,6 @@ const images = [
 
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
-  console.log(challengeList?.result);
   const activeChallengeList =
     challengeList?.result.participatedChallenges.filter(
       ({ duration: { startAt, endAt } }) =>
