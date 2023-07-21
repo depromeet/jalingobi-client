@@ -46,11 +46,7 @@ function Search() {
           전체
         </ChipGroup.Chip>
         {chips.map((chip) => (
-          <ChipGroup.Chip
-            key={chip}
-            className="flex gap-x-1"
-            value="HOBBY_LEISURE"
-          >
+          <ChipGroup.Chip key={chip} className="flex gap-x-1" value={chip}>
             {category === chip
               ? categoryIconMap[chip].selected
               : categoryIconMap[chip].default}
