@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { contentMaxLength, maxPrice } from '@/shared/constant';
+import { contentMaxLength, maxPrice } from '@/shared/constants/spending';
 
 export const spendSchema = z.object({
   price: z

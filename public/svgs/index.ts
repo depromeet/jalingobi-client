@@ -21,6 +21,7 @@ import IconCrazyBig from './icon-crazy-big.svg';
 import IconCrazySmall from './icon-crazy-small.svg';
 import IconFilter from './icon-filter.svg';
 import IconHobby from './icon-hobby.svg';
+import IconJalingobi from './icon-jalingobi.svg';
 import IconKakao from './icon-kakao.svg';
 import IconLoading from './icon-loading.svg';
 import IconNote from './icon-note.svg';
@@ -68,6 +69,7 @@ export {
   IconFilter,
   IconFilter2,
   IconHobby,
+  IconJalingobi,
   IconKakao,
   IconLoading,
   IconNote,

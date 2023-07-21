@@ -1,14 +1,47 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useChallengeQuery } from '@/features/challenge/queries';
-import { IconChevronLeft, IconRice } from '@/public/svgs';
+import {
+  IconCar,
+  IconChevronLeft,
+  IconClothes,
+  IconHobby,
+  IconRice,
+  IconSelectedCar,
+  IconSelectedClothes,
+  IconSelectedHobby,
+  IconSelectedRice,
+} from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
 import { categoryMap } from '@/shared/constants/challenge';
+import { CategoryKey } from '@/shared/types/challenge';
+
+export const categoryIconMap: Record<CategoryKey, any> = {
+  ALL: {
+    default: '',
+    selected: '',
+  },
+  FOOD: {
+    default: <IconRice />,
+    selected: <IconSelectedRice />,
+  },
+  HOBBY_LEISURE: {
+    default: <IconHobby />,
+    selected: <IconSelectedHobby />,
+  },
+  FASHION_BEAUTY: {
+    default: <IconClothes />,
+    selected: <IconSelectedClothes />,
+  },
+  TRANSPORTATION_AUTOMOBILE: {
+    default: <IconCar />,
+    selected: <IconSelectedCar />,
+  },
+};
 
 const ChallengeDetailPage = () => {
   const router = useRouter();
@@ -21,15 +54,21 @@ const ChallengeDetailPage = () => {
       <div className="flex-1 overflow-auto">
         <section className="relative h-[348px]">
           <header className="relative h-12">
-            <Link
-              href="/search"
-              className="absolute top-3 flex h-12 items-center justify-between p-3"
+            <button
+              className="absolute left-3 flex h-12 items-center"
+              type="button"
+              onClick={() => router.back()}
             >
               <IconChevronLeft className="absolute z-10 h-4 w-4  stroke-white text-white" />
-            </Link>
+            </button>
           </header>
           {challenge?.result.challengeImgUrl && (
-            <Image src={challenge?.result.challengeImgUrl} fill alt="item" />
+            <Image
+              className="object-cover"
+              src={challenge?.result.challengeImgUrl}
+              fill
+              alt="item"
+            />
           )}
         </section>
         <section className="px-5">
@@ -39,7 +78,8 @@ const ChallengeDetailPage = () => {
                 {challenge?.result.dateInfo.period}일 동안
               </span>
               <div className="flex items-center justify-center gap-x-1 rounded-md bg-gray-10 px-2.5">
-                <IconRice className="h-6 w-6" />
+                {challenge &&
+                  categoryIconMap[challenge.result.category].default}
                 {challenge && (
                   <span>{categoryMap[challenge.result.category]}</span>
                 )}

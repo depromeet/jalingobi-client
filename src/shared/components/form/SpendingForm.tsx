@@ -19,7 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/components/form/Form';
-import { contentMaxLength } from '@/shared/constant';
+import { contentMaxLength } from '@/shared/constants/spending';
 import { useToast } from '@/shared/hooks/useToast';
 import { ChallengeEvaluation } from '@/shared/types/challenge';
 import { ImageInfo } from '@/shared/types/user';
@@ -42,7 +42,6 @@ const images = [
 
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
-  console.log(challengeList?.result);
   const activeChallengeList =
     challengeList?.result.participatedChallenges.filter(
       ({ duration: { startAt, endAt } }) =>

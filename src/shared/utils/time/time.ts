@@ -1,10 +1,11 @@
-export const calculateDaysLeft = (startAt: string): number => {
-  const startAtDate = new Date(startAt);
-  const today = new Date();
+import dayjs from 'dayjs';
 
-  const diffInMilliseconds = startAtDate.getTime() - today.getTime();
-  const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
-  return Math.floor(diffInDays);
+export const calculateDaysLeft = (startAt: string): number => {
+  const startAtDate = dayjs(startAt);
+  const today = dayjs().startOf('day');
+
+  const diffInDays = startAtDate.diff(today, 'day');
+  return Math.max(0, diffInDays);
 };
 
 export const isNewChallenge = (challengeDate: string): string => {

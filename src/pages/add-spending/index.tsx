@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { IconChevronLeft } from '@/public/svgs';
@@ -6,12 +6,17 @@ import SpendingForm from '@/shared/components/form/SpendingForm';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 
 export default function CostPage() {
+  const router = useRouter();
   return (
     <div className="flex flex-col overflow-y-auto">
       <header className="border-b-gray20 relative flex h-12 items-center justify-center border-b-[1px] px-5">
-        <Link href="/search" className="absolute left-4">
+        <button
+          type="button"
+          className="absolute left-4"
+          onClick={() => router.back()}
+        >
           <IconChevronLeft className="h-6 w-6" />
-        </Link>
+        </button>
         <h1>지출 추가</h1>
       </header>
       <main className="px-5 pt-6">
