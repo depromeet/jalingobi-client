@@ -19,7 +19,7 @@ import {
   UserInfoType,
 } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date';
+import { getKoreanDate } from '@/shared/utils/date/date';
 
 export default function ExpenseDetails() {
   const router = useRouter();

@@ -23,7 +23,7 @@ import { contentMaxLength } from '@/shared/constant';
 import { useToast } from '@/shared/hooks/useToast';
 import { ChallengeEvaluation } from '@/shared/types/challenge';
 import { ImageInfo } from '@/shared/types/user';
-import { isActiveChallenge } from '@/shared/utils/date';
+import { isActiveChallenge } from '@/shared/utils/date/date';
 
 import { Button } from '../button';
 import { ChipGroup } from '../chip';
@@ -42,6 +42,7 @@ const images = [
 
 export default function SpendingForm() {
   const { data: challengeList, isError, isLoading } = useUserChallengeList();
+  console.log(challengeList?.result);
   const activeChallengeList =
     challengeList?.result.participatedChallenges.filter(
       ({ duration: { startAt, endAt } }) =>

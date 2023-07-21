@@ -6,7 +6,7 @@ import { IconClock, IconOverflow } from '@/public/svgs';
 import ChallengeLeaveSheet from '@/shared/components/bottom-sheet/ChallengeLeaveSheet';
 import RecordBottomSheet from '@/shared/components/bottom-sheet/RecordBottomSheet';
 import { UserChallenge } from '@/shared/types/user';
-import { isChallengeEnded } from '@/shared/utils/date';
+import { isChallengeEnded } from '@/shared/utils/date/date';
 import { calculateDaysLeft } from '@/shared/utils/time';
 
 type Props = {

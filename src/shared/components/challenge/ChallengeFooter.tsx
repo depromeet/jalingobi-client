@@ -6,7 +6,7 @@ import { CheckIcon } from 'lucide-react';
 import { useJoinChallenge } from '@/features/challenge/queries';
 import { cn } from '@/lib/utils';
 import { ChallengeDetail } from '@/shared/types/challenge';
-import { calculateDaysBetween, getDayOfWeek } from '@/shared/utils/date';
+import { calculateDaysBetween, getDayOfWeek } from '@/shared/utils/date/date';
 import { isChallengeDueSoon } from '@/shared/utils/time';
 
 import { Button } from '../button';

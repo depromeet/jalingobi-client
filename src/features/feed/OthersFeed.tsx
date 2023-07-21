@@ -7,7 +7,7 @@ import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date';
+import { getKoreanDate } from '@/shared/utils/date/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
 
 import { Emoji } from '../emoji/Emoji';
