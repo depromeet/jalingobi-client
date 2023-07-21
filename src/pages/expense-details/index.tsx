@@ -6,7 +6,13 @@ import dayjs from 'dayjs';
 
 import { useAddComment, useDeleteComment } from '@/features/comment/queries';
 import { useChallengeDetail } from '@/features/feed/queries';
-import { IconArrowUpFill, IconChevronLeft, IconCrazyBig } from '@/public/svgs';
+import {
+  IconArrowUpFill,
+  IconChevronLeft,
+  IconCrazyBig,
+  IconRegretfulBig,
+  IconWelldoneBig,
+} from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { CommentContainer } from '@/shared/components/comment/CommentContainer';
 import { ExpenseDetailsEmojiContainer } from '@/shared/components/emoji/ExpenseDetailsEmojiContainer';
@@ -15,6 +21,7 @@ import { TextInput } from '@/shared/components/text-input';
 import { useToast } from '@/shared/hooks/useToast';
 import {
   CommentInfoType,
+  EmojiType,
   RecordInfoType,
   UserInfoType,
 } from '@/shared/types/feed';
@@ -225,7 +232,14 @@ function Contents({
   userInfo: UserInfoType;
   recordInfo: RecordInfoType;
 }) {
-  const { date, price, imgUrl: recordImgUrl, title, content } = recordInfo;
+  const {
+    date,
+    price,
+    imgUrl: recordImgUrl,
+    title,
+    content,
+    evaluation,
+  } = recordInfo;
   const { imgUrl: userImgUrl, nickname } = userInfo;
 
   const convertedRecordDate = dayjs(date).format('MM월 DD일 a hh:mm');
@@ -233,6 +247,18 @@ function Contents({
     value: price || 0,
     unitOfCurrency: '원',
   });
+
+  const evaluationIcons = {
+    REGRETFUL: <IconRegretfulBig className="h-10 w-10" />,
+    CRAZY: <IconCrazyBig className="h-10 w-10" />,
+    WELLDONE: <IconWelldoneBig className="h-10 w-10" />,
+    comment: null,
+  };
+
+  const getEvaluationIcon = (key: EmojiType) => {
+    return evaluationIcons[key] || null;
+  };
+
   return (
     <div className="p-5">
       <div className="flex gap-2.5">
@@ -274,7 +300,7 @@ function Contents({
             {content}
           </p>
         </div>
-        <IconCrazyBig className="h-10 w-10" />
+        {getEvaluationIcon(evaluation)}
       </div>
       <Spacing height={20} />
     </div>

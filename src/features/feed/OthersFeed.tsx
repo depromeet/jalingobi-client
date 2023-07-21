@@ -1,11 +1,14 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
+import { shallow } from 'zustand/shallow';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
+import { useRoom } from '@/shared/store/room';
+import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
 import { getKoreanDate } from '@/shared/utils/date/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
@@ -46,6 +49,10 @@ const OthersFeed = ({
   recordImgUrl,
   onClickFeed,
 }: OthersFeedProps) => {
+  const router = useRouter();
+
+  const challengeId = useRoom((state) => state.challengeId, shallow);
+
   const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedCurrentCharge = convertNumberToCurrency({
     value: currentCharge,
@@ -56,15 +63,18 @@ const OthersFeed = ({
     unitOfCurrency: '원',
   });
 
-  const DEFAULT_EMOJIS = [
-    createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
-    createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
-    createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
-    createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
-  ];
+  const defaultEmojis = useMemo(
+    () => [
+      createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
+      createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
+      createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
+      createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
+    ],
+    [emojiInfo],
+  );
 
-  const [emojis, setEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
-  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>(DEFAULT_EMOJIS);
+  const [emojis, setEmojis] = useState<TEmoji[]>([]);
+  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>([]);
 
   const updateEmoji = useUpdateEmoji();
   const deleteEmoji = useDeleteEmoji();
@@ -72,6 +82,9 @@ const OthersFeed = ({
   // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
+      router.push(
+        `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
+      );
       return;
     }
 
@@ -131,6 +144,14 @@ const OthersFeed = ({
       }),
     );
   };
+
+  useEffect(() => {
+    if (!defaultEmojis) {
+      return;
+    }
+
+    setEmojis(defaultEmojis);
+  }, [defaultEmojis]);
 
   useEffect(() => {
     if (!updateEmoji.isError) {
@@ -204,12 +225,13 @@ const OthersFeed = ({
         </div>
         <Spacing height={8} />
         <div className="flex gap-1">
-          {emojis.map(({ type, count }, index) => {
+          {emojis.map(({ type, count, selected }, index) => {
             return (
               <Emoji
                 key={index}
                 type={type}
                 count={count}
+                selected={selected}
                 onClickEmoji={handleClickEmoji}
               />
             );

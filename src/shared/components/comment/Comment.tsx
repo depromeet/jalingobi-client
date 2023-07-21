@@ -21,7 +21,7 @@ export const Comment = ({
   return (
     <div className="flex justify-between pb-1.5">
       <div className="flex gap-2.5">
-        <div className="relative h-10 w-10 object-cover">
+        <div className="relative h-10 w-10 shrink-0 object-cover">
           <Image
             src={imgUrl}
             alt=""
@@ -32,7 +32,9 @@ export const Comment = ({
         </div>
         <div>
           <p className="font-body-regular-sm text-black">{nickname}</p>
-          <p className="font-body-regular-sm text-gray-60">{content}</p>
+          <p className="font-body-regular-sm break-all text-gray-60">
+            {content}
+          </p>
           <p className="font-caption-medium-md text-gray-50">
             {timeDifference(commentDate, new Date())}
           </p>
