@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { useQuery } from '@tanstack/react-query';
+
+import { useUpdateUserProfile } from '@/features/profile/queries';
+import { fetchUserDefaultImage } from '@/service/user';
 import { Input } from '@/shared/components/input';
 import { Label } from '@/shared/components/label';
 import {
@@ -9,23 +13,40 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/shared/components/sheet';
+import { Profile } from '@/shared/types/user';
 
 type Props = {
+  user?: Profile;
   profileImage: string;
   handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isOpen?: boolean;
-  onOpenChange?: (isOpen: boolean) => void;
+  setIsBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ProfileBottomSheet = ({
+  user,
   profileImage,
   handleImageUpload,
   isOpen,
-  onOpenChange,
+  setIsBottomSheetOpen,
 }: Props) => {
+  const { data } = useQuery({
+    queryKey: ['user', 'defaultImage'],
+    queryFn: fetchUserDefaultImage,
+  });
+  const { mutate } = useUpdateUserProfile();
+
+  const updateUserImage = async () => {
+    mutate({
+      nickName: user?.nickname,
+      imageUrl: data?.result.imgUrl,
+    });
+    setIsBottomSheetOpen(false);
+  };
+
   return (
     <div className="relative mb-[60px]">
-      <Sheet open={isOpen} onOpenChange={onOpenChange}>
+      <Sheet open={isOpen} onOpenChange={setIsBottomSheetOpen}>
         <SheetTrigger asChild>
           <div className="relative h-[90px] w-[90px]">
             <div className="absolute -bottom-4 -right-4 h-8 w-8 rounded-full bg-gray-20 p-1">
@@ -64,7 +85,11 @@ const ProfileBottomSheet = ({
                 onChange={handleImageUpload}
               />
             </li>
-            <li className="py-2.5">내 자린고비 이미지로 변경</li>
+            <li className="py-2.5">
+              <button type="button" onClick={updateUserImage}>
+                내 자린고비 이미지로 변경
+              </button>
+            </li>
           </ul>
         </SheetContent>
       </Sheet>
