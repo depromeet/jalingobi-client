@@ -1,21 +1,21 @@
 import { ReactElement, useState } from 'react';
 
-import {
-  IconCar,
-  IconClothes,
-  IconHobby,
-  IconRice,
-  IconSelectedCar,
-  IconSelectedClothes,
-  IconSelectedHobby,
-  IconSelectedRice,
-} from '@/public/svgs';
 import ChallengeFilterSheet from '@/shared/components/bottom-sheet/ChallengeFilter.Sheet';
 import { ChipGroup } from '@/shared/components/chip';
 import BottomNavLayout from '@/shared/components/layout/BottomNavLayout';
 import SearchChallengeList from '@/shared/components/search-challenge';
 import { Toggle } from '@/shared/components/toggle';
+import { categoryMap } from '@/shared/constants/challenge';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
+
+import { categoryIconMap } from './[id]';
+
+const chips: CategoryKey[] = [
+  'FOOD',
+  'HOBBY_LEISURE',
+  'FASHION_BEAUTY',
+  'TRANSPORTATION_AUTOMOBILE',
+];
 
 function Search() {
   const [category, setCategory] = useState<CategoryKey>('ALL'); // ['전체', '식비', '문화생활', '취미'
@@ -45,38 +45,18 @@ function Search() {
         <ChipGroup.Chip value="ALL" className="inline-block shrink-0">
           전체
         </ChipGroup.Chip>
-        <ChipGroup.Chip value="FOOD">
-          {category === 'FOOD' ? (
-            <IconSelectedRice className="mr-1 h-6 w-6" />
-          ) : (
-            <IconRice className="mr-1 h-6 w-6" />
-          )}
-          <span>식비</span>
-        </ChipGroup.Chip>
-        <ChipGroup.Chip value="HOBBY_LEISURE">
-          {category === 'HOBBY_LEISURE' ? (
-            <IconSelectedHobby className="mr-1 h-6 w-6" />
-          ) : (
-            <IconHobby className="mr-1 h-6 w-6" />
-          )}
-          <span>취미/여가</span>
-        </ChipGroup.Chip>
-        <ChipGroup.Chip value="FASHION_BEAUTY">
-          {category === 'FASHION_BEAUTY' ? (
-            <IconSelectedClothes className="mr-1 h-6 w-6" />
-          ) : (
-            <IconClothes className="mr-1 h-6 w-6" />
-          )}
-          패션/뷰티
-        </ChipGroup.Chip>
-        <ChipGroup.Chip value="TRANSPORTATION_AUTOMOBILE">
-          {category === 'TRANSPORTATION_AUTOMOBILE' ? (
-            <IconSelectedCar className="mr-1 h-6 w-6" />
-          ) : (
-            <IconCar className="mr-1 h-6 w-6" />
-          )}
-          교통/차량
-        </ChipGroup.Chip>
+        {chips.map((chip) => (
+          <ChipGroup.Chip
+            key={chip}
+            className="flex gap-x-1"
+            value="HOBBY_LEISURE"
+          >
+            {category === chip
+              ? categoryIconMap[chip].selected
+              : categoryIconMap[chip].default}
+            <span>{categoryMap[chip]}</span>
+          </ChipGroup.Chip>
+        ))}
       </ChipGroup>
       <div className="flex justify-between">
         <div className="flex items-start gap-x-1 pb-7">

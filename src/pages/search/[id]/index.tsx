@@ -2,11 +2,45 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { useChallengeQuery } from '@/features/challenge/queries';
-import { IconChevronLeft, IconRice } from '@/public/svgs';
+import {
+  IconCar,
+  IconChevronLeft,
+  IconClothes,
+  IconHobby,
+  IconRice,
+  IconSelectedCar,
+  IconSelectedClothes,
+  IconSelectedHobby,
+  IconSelectedRice,
+} from '@/public/svgs';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
 import { categoryMap } from '@/shared/constants/challenge';
+import { CategoryKey } from '@/shared/types/challenge';
+
+export const categoryIconMap: Record<CategoryKey, any> = {
+  ALL: {
+    default: '',
+    selected: '',
+  },
+  FOOD: {
+    default: <IconRice />,
+    selected: <IconSelectedRice />,
+  },
+  HOBBY_LEISURE: {
+    default: <IconHobby />,
+    selected: <IconSelectedHobby />,
+  },
+  FASHION_BEAUTY: {
+    default: <IconClothes />,
+    selected: <IconSelectedClothes />,
+  },
+  TRANSPORTATION_AUTOMOBILE: {
+    default: <IconCar />,
+    selected: <IconSelectedCar />,
+  },
+};
 
 const ChallengeDetailPage = () => {
   const router = useRouter();
@@ -43,7 +77,8 @@ const ChallengeDetailPage = () => {
                 {challenge?.result.dateInfo.period}일 동안
               </span>
               <div className="flex items-center justify-center gap-x-1 rounded-md bg-gray-10 px-2.5">
-                <IconRice className="h-6 w-6" />
+                {challenge &&
+                  categoryIconMap[challenge.result.category].default}
                 {challenge && (
                   <span>{categoryMap[challenge.result.category]}</span>
                 )}
