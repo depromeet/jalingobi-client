@@ -13,6 +13,7 @@ import {
   IconSelectedHobby,
   IconSelectedRice,
 } from '@/public/svgs';
+import { Spacing } from '@/shared/components';
 import ChallengeFooter from '@/shared/components/challenge/ChallengeFooter';
 import ChallengeParticipants from '@/shared/components/challenge/ChallengeParticipants';
 import Rules from '@/shared/components/challenge/Rules';
@@ -112,6 +113,7 @@ const ChallengeDetailPage = () => {
         </section>
       </div>
       <ChallengeFooter challenge={challenge?.result} />
+      <Spacing height={84} />
     </div>
   );
 };

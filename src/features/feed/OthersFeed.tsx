@@ -181,7 +181,7 @@ const OthersFeed = ({
       </div>
       <div className="relative">
         <div className="flex items-center gap-[4px]">
-          <p className="font-body-regular-sm w-40 truncate font-[600] text-black">
+          <p className="font-body-regular-sm max-w-[160px] truncate font-[600] text-black">
             {nickname}
           </p>
           <p className="font-caption-medium-md text-gray-50 ">
