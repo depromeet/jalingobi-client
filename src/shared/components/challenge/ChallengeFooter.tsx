@@ -47,7 +47,7 @@ function ChallengeFooter({ challenge }: Props) {
   };
 
   return (
-    <footer className="fixed bottom-0 flex w-full items-center justify-between bg-white px-4 py-[18px]">
+    <footer className="fixed bottom-0 flex w-full max-w-[600px] items-center justify-between bg-white px-4 py-[18px]">
       <div>
         <p className={cn('font-body-regular-sm font-semibold text-primary')}>
           {isParticipatedChallenge
