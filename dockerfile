@@ -7,31 +7,23 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /usr/src/app
 
-COPY package.json pnpm-lock.yaml ./
+COPY --link package.json pnpm-lock.yaml ./
 ENV HUSKY 0
-RUN npm install -g pnpm
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN yarn global add pnpm && pnpm i --frozen-lockfile --prod
 
 # 프로젝트를 빌드하는 컨테이너입니다.
 FROM base AS builder
 
 WORKDIR /usr/src/app
-
-COPY next.config.js ./
-COPY tsconfig.json ./
-COPY package.json pnpm-lock.yaml ./
-COPY .env.production ./
 COPY --from=deps --link /usr/src/app/node_modules ./node_modules
-COPY public ./public
-COPY src ./src
+COPY --link next.config.js ./
+COPY --link tsconfig.json ./
+COPY --link package.json pnpm-lock.yaml ./
+COPY --link .env.production ./
+COPY --link public ./public
+COPY --link src ./src
 
-
-ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN npm install -g pnpm
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
-
+RUN yarn global add pnpm && pnpm run build
 
 # 프로덕션에서 실행되는 이미지입니다. 빌드된 결과물과 public asset을 가지고 와서 next를 실행합니다.
 FROM base AS runner
