@@ -13,7 +13,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:type": "tsc --noEmit",
-    "prepare": "husky install",
+    "prepare": "if [ \"$HUSKY\" != \"0\" ]; then husky install; fi",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}",
