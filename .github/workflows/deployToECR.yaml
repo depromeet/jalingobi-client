@@ -39,7 +39,6 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker buildx build -f dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY .
-          docker buildx push $ECR_REGISTRY/$ECR_REPOSITORY
+          docker buildx build -f dockerfile --push -t $ECR_REGISTRY/$ECR_REPOSITORY .
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY"
           echo "docker Image push done"
