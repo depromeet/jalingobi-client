@@ -3,10 +3,14 @@ import '@/styles/globals.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import 'dayjs/locale/ko';
+import dayjs from 'dayjs';
 
 import { GlobalLayout } from '@/shared/components/layout';
 import { ToastsContainer } from '@/shared/components/toast';
 import { NextPageWithLayout } from '@/shared/types/layout';
+
+dayjs.locale('ko');
 
 // if (process.env.NODE_ENV === 'development') {
 //   await import('../mocks');

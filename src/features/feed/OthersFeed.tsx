@@ -10,7 +10,6 @@ import { Spacing } from '@/shared/components';
 import { useRoom } from '@/shared/store/room';
 import { EmojiType, EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
 
 import { Emoji } from '../emoji/Emoji';
@@ -53,7 +52,7 @@ const OthersFeed = ({
 
   const challengeId = useRoom((state) => state.challengeId, shallow);
 
-  const convertedDate = dayjs(recordDate).format('a hh:mm');
+  const convertedDate = dayjs(recordDate).format('A hh:mm');
   const convertedCurrentCharge = convertNumberToCurrency({
     value: currentCharge,
     unitOfCurrency: '원',
@@ -239,7 +238,7 @@ const OthersFeed = ({
         </div>
         <div className="absolute bottom-0 left-[14rem] flex">
           <p className="font-caption-medium-sm shrink-0 text-gray-50">
-            {getKoreanDate(convertedDate)}
+            {convertedDate}
           </p>
         </div>
       </div>

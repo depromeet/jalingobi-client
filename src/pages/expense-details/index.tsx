@@ -26,7 +26,6 @@ import {
   UserInfoType,
 } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date/date';
 
 export default function ExpenseDetails() {
   const router = useRouter();
@@ -242,7 +241,7 @@ function Contents({
   } = recordInfo;
   const { imgUrl: userImgUrl, nickname } = userInfo;
 
-  const convertedRecordDate = dayjs(date).format('MM월 DD일 a hh:mm');
+  const convertedRecordDate = dayjs(date).format('MM월 DD일 A hh:mm');
   const convertedPrice = convertNumberToCurrency({
     value: price || 0,
     unitOfCurrency: '원',
@@ -272,7 +271,7 @@ function Contents({
         <div>
           <p className="font-caption-medium-lg text-black">{nickname}</p>
           <p className="font-caption-medium-md text-gray-50">
-            {getKoreanDate(convertedRecordDate)}
+            {convertedRecordDate}
           </p>
         </div>
       </div>

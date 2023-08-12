@@ -22,16 +22,6 @@ export const isFeedDateDifferent = ({
   return currentDate !== nextDate; // return true if the dates are different
 };
 
-export const getKoreanDate = (date: string) => {
-  if (date.includes('am')) {
-    return date.replace('am', '오전');
-  }
-  if (date.includes('pm')) {
-    return date.replace('pm', '오후');
-  }
-  return '';
-};
-
 export const timeDifference = (date1: string, date2: Date) => {
   const diffMinutes = dayjs(date2).diff(date1, 'minute');
   const diffHours = dayjs(date2).diff(date1, 'hour');

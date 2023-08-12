@@ -8,7 +8,6 @@ import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
 import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date/date';
 import { createEmojiInfo } from '@/shared/utils/emoji';
 
 import { Emoji } from '../emoji';
@@ -49,7 +48,8 @@ const MyFeed = ({
 }: MyFeedProps) => {
   const router = useRouter();
 
-  const convertedDate = dayjs(recordDate).format('a hh:mm');
+  const convertedDate = dayjs(recordDate).format('A hh:mm');
+
   const convertedPrice = convertNumberToCurrency({
     value: price,
     unitOfCurrency: '원',
@@ -234,7 +234,7 @@ const MyFeed = ({
           })}
         </div>
         <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
-          {getKoreanDate(convertedDate)}
+          {convertedDate}
         </p>
       </div>
     </li>
