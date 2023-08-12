@@ -65,6 +65,7 @@ const MyFeed = ({
             <Spacing height={6} />
           </>
         )}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
         <div
           className="relative w-[13.75rem] rounded-md bg-white p-2.5"
           onClick={() => onClickFeed(recordId, `${challengeId}`)}
