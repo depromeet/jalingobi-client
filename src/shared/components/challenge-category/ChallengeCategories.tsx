@@ -23,9 +23,6 @@ export const ChallengeCategories = () => {
     setChallengeId(challengeId);
   };
 
-  // TODO: 라우팅 필요
-  const handleClickIcon = () => console.log('아이콘 클릭');
-
   // TODO: react-error-boundary, suspense 도입하기
   if (isLoading) {
     return <PageLoading />;
@@ -54,16 +51,6 @@ export const ChallengeCategories = () => {
           },
         )}
       </div>
-      {/* <div className="flex w-[5rem] shrink-0 flex-col items-center justify-center gap-1">
-        <button
-          type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-20"
-          onClick={handleClickIcon}
-        >
-          <IconTile />
-        </button>
-        <p className="font-caption-medium-md text-gray-60">전체보기</p>
-      </div> */}
     </div>
   );
 };
