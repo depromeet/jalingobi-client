@@ -79,7 +79,6 @@ export const ExpenseDetailsEmojiContainer = (emojiInfo: EmojiInfoType) => {
       return;
     }
 
-    // TODO: debounce 적용이 필요할 수도.
     updateEmoji.mutate({
       recordId: Number(recordId),
       type: clickedEmojiType,

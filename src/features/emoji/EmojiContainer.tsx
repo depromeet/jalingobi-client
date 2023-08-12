@@ -42,8 +42,6 @@ export const EmojiContainer = ({
   const updateEmoji = useUpdateEmoji();
   const deleteEmoji = useDeleteEmoji();
 
-  // TODO: 이모지 컨테이너 분리하기
-  // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
   const handleClickEmoji = (clickedEmojiType: EmojiType) => {
     if (clickedEmojiType === 'comment') {
       router.push(
@@ -80,7 +78,6 @@ export const EmojiContainer = ({
       return;
     }
 
-    // TODO: debounce 적용이 필요할 수도.
     updateEmoji.mutate({
       recordId,
       type: clickedEmojiType,
