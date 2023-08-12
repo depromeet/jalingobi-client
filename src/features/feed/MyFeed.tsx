@@ -1,18 +1,13 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
 
 import { IconChevronRight } from '@/public/svgs';
 import { Spacing } from '@/shared/components';
-import { EmojiInfoType, EmojiType } from '@/shared/types/feed';
+import { EmojiInfoType } from '@/shared/types/feed';
 import { convertNumberToCurrency } from '@/shared/utils/currency';
-import { getKoreanDate } from '@/shared/utils/date/date';
-import { createEmojiInfo } from '@/shared/utils/emoji';
 
-import { Emoji } from '../emoji';
-import { useDeleteEmoji, useUpdateEmoji } from '../emoji/queries';
+import { EmojiContainer } from '../emoji/EmojiContainer';
 
 type MyFeedProps = {
   recordId: number;
@@ -28,12 +23,6 @@ type MyFeedProps = {
   onClickFeed: (recordId: number, challengeId: string | undefined) => void;
 };
 
-type TEmoji = {
-  type: EmojiType;
-  count: number;
-  selected: boolean;
-};
-
 const MyFeed = ({
   recordId,
   title,
@@ -47,122 +36,13 @@ const MyFeed = ({
   recordImgUrl,
   onClickFeed,
 }: MyFeedProps) => {
-  const router = useRouter();
+  const convertedDate = dayjs(recordDate).format('A hh:mm');
 
-  const convertedDate = dayjs(recordDate).format('a hh:mm');
   const convertedPrice = convertNumberToCurrency({
     value: price,
     unitOfCurrency: '원',
   });
   const isChallengeExist = !!challengeImgUrl || !!challengeTitle;
-
-  const defaultEmojis = useMemo(
-    () => [
-      createEmojiInfo('CRAZY', emojiInfo.CRAZY, emojiInfo.selected),
-      createEmojiInfo('REGRETFUL', emojiInfo.REGRETFUL, emojiInfo.selected),
-      createEmojiInfo('WELLDONE', emojiInfo.WELLDONE, emojiInfo.selected),
-      createEmojiInfo('comment', emojiInfo.comment, emojiInfo.selected),
-    ],
-    [emojiInfo],
-  );
-
-  const [emojis, setEmojis] = useState<TEmoji[]>([]);
-  const [prevEmojis, setPrevEmojis] = useState<TEmoji[]>([]);
-
-  const updateEmoji = useUpdateEmoji();
-  const deleteEmoji = useDeleteEmoji();
-
-  // TODO: 이모지 컨테이너 분리하기
-  // TODO: 서버 호출 로직까지 작성한 이후에 리펙토링
-  const handleClickEmoji = (clickedEmojiType: EmojiType) => {
-    if (clickedEmojiType === 'comment') {
-      router.push(
-        `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
-      );
-      return;
-    }
-
-    setPrevEmojis(emojis);
-
-    const clickedEmoji = emojis.find(
-      (emoji) => emoji.type === clickedEmojiType,
-    );
-    const isClickedEmojiSelectedBefore = clickedEmoji?.selected;
-
-    if (isClickedEmojiSelectedBefore) {
-      deleteEmoji.mutate({
-        recordId,
-        type: clickedEmojiType,
-      });
-
-      setEmojis((prev) =>
-        prev.map((emoji) => {
-          if (emoji.type === clickedEmojiType) {
-            return {
-              ...emoji,
-              selected: false,
-              count: emoji.count - 1,
-            };
-          }
-          return emoji;
-        }),
-      );
-      return;
-    }
-
-    // TODO: debounce 적용이 필요할 수도.
-    updateEmoji.mutate({
-      recordId,
-      type: clickedEmojiType,
-    });
-
-    setEmojis((prev) =>
-      prev.map((emoji) => {
-        if (emoji.type === clickedEmojiType) {
-          return {
-            ...emoji,
-            selected: true,
-            count: emoji.count + 1,
-          };
-        }
-        if (emoji.selected) {
-          return {
-            ...emoji,
-            selected: false,
-            count: emoji.count - 1,
-          };
-        }
-        return {
-          ...emoji,
-          selected: false,
-        };
-      }),
-    );
-  };
-
-  useEffect(() => {
-    if (!defaultEmojis) {
-      return;
-    }
-
-    setEmojis(defaultEmojis);
-  }, [defaultEmojis]);
-
-  useEffect(() => {
-    if (!updateEmoji.isError) {
-      return;
-    }
-
-    setEmojis(prevEmojis);
-  }, [updateEmoji.isError]);
-
-  useEffect(() => {
-    if (!deleteEmoji.isError) {
-      return;
-    }
-
-    setEmojis(prevEmojis);
-  }, [deleteEmoji.isError]);
 
   return (
     <li className="flex justify-end">
@@ -185,6 +65,7 @@ const MyFeed = ({
             <Spacing height={6} />
           </>
         )}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
         <div
           className="relative w-[13.75rem] rounded-md bg-white p-2.5"
           onClick={() => onClickFeed(recordId, `${challengeId}`)}
@@ -220,21 +101,13 @@ const MyFeed = ({
         </div>
 
         <Spacing height={8} />
-        <div className="flex gap-1">
-          {emojis.map(({ type, count, selected }, index) => {
-            return (
-              <Emoji
-                key={index}
-                type={type}
-                count={count}
-                selected={selected}
-                onClickEmoji={handleClickEmoji}
-              />
-            );
-          })}
-        </div>
+        <EmojiContainer
+          emojiInfo={emojiInfo}
+          challengeId={challengeId}
+          recordId={recordId}
+        />
         <p className="font-caption-medium-sm absolute bottom-0 left-[-3.25rem] text-gray-50">
-          {getKoreanDate(convertedDate)}
+          {convertedDate}
         </p>
       </div>
     </li>
