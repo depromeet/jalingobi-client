@@ -14,9 +14,9 @@ import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
-import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
 import { ChallengeRoomRecruting } from './ChallengeRoomRecruting';
 import { MyFeed } from './MyFeed';
+import { NoChallengeAvailable } from './MyRoomEmpty';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
 
@@ -85,10 +85,19 @@ export const ChallengeRoomFeedList = () => {
 
   if (isEmpty(feeds)) {
     return (
-      <ChallengeRoomEmpty
-        title={currentCategoryInfo?.title}
-        participants={currentCategoryInfo?.participants}
-        maxParticipants={currentCategoryInfo?.maxParticipants}
+      <NoChallengeAvailable
+        title={currentCategoryInfo?.title ?? ''}
+        subtitle={`참여 인원 ${currentCategoryInfo?.participants}명 / ${currentCategoryInfo?.maxParticipants}명`}
+        description={
+          <>
+            <p className="font-body-regular-sm text-gray-70">
+              아무도 지출 기록을 올리지 않았어요.
+            </p>
+            <p className="text-gray- font-body-regular-sm">
+              지출 기록의 첫번째 주인공이 되어보세요.
+            </p>
+          </>
+        }
       />
     );
   }

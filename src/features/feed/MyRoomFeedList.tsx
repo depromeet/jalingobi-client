@@ -11,7 +11,7 @@ import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
 import { MyFeed } from './MyFeed';
-import { MyRoomEmpty } from './MyRoomEmpty';
+import { NoChallengeAvailable } from './MyRoomEmpty';
 import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 0;
@@ -58,7 +58,7 @@ export const MyRoomFeedList = () => {
 
   if (isEmpty(feeds)) {
     return (
-      <MyRoomEmpty
+      <NoChallengeAvailable
         title="아직 지출 기록이 없어요."
         description="거지방 챌린지를 시작해보세요."
       />
