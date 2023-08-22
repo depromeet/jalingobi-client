@@ -14,7 +14,7 @@ import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
-import { ChallengeRoomRecruting } from './ChallengeRoomRecruting';
+import { RecrutingChallenge } from './ChallengeRoomRecruting';
 import { MyFeed } from './MyFeed';
 import { NoChallengeAvailable } from './MyRoomEmpty';
 import { OthersFeed } from './OthersFeed';
@@ -65,7 +65,7 @@ export const ChallengeRoomFeedList = () => {
 
   if (currentCategoryInfo?.status === 'RECRUITING') {
     return (
-      <ChallengeRoomRecruting
+      <RecrutingChallenge
         title={currentCategoryInfo?.title}
         participants={currentCategoryInfo?.participants}
         maxParticipants={currentCategoryInfo?.maxParticipants}
