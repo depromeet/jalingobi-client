@@ -6,13 +6,12 @@ import { isEmpty } from 'lodash-es';
 import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
-import { DateChip } from '@/shared/components/date-chip';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
-import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
+import { FeedDate } from './FeedDate';
 import { MyFeed } from './MyFeed';
 import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { OthersFeed } from './OthersFeed';
@@ -137,14 +136,10 @@ export const ChallengeRoomFeedList = () => {
                     onClickFeed={handleClickFeed}
                   />
                 )}
-                {isFeedDateDifferent({
-                  currentFeed: feeds[index],
-                  nextFeed: feeds[index + 1],
-                }) ? (
-                  <DateChip date={recordInfo.date} />
-                ) : (
-                  <Spacing height={32} />
-                )}
+                <FeedDate
+                  currentFeed={feeds[index]}
+                  nextFeed={feeds[index + 1]}
+                />
               </Fragment>
             );
           },
