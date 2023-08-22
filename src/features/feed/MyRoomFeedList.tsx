@@ -5,7 +5,6 @@ import { isEmpty } from 'lodash-es';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
-import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
@@ -20,10 +19,9 @@ const INITIAL_VALUE_OFFSET = 0;
 export const MyRoomFeedList = () => {
   const router = useRouter();
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useMyRoomFeedList({
-      offset: INITIAL_VALUE_OFFSET,
-    });
+  const { data, isError, hasNextPage, fetchNextPage } = useMyRoomFeedList({
+    offset: INITIAL_VALUE_OFFSET,
+  });
 
   const feeds = useMemo(
     () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
@@ -46,11 +44,7 @@ export const MyRoomFeedList = () => {
     );
   };
 
-  if (isLoading) {
-    // TODO: react-error-boundary, suspense 도입하기
-    return <PageLoading />;
-  }
-
+  // TODO: react-error-boundary
   if (isError) {
     router.push('/not-found');
     return null;

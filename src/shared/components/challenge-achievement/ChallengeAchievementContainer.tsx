@@ -6,8 +6,6 @@ import { useChallengeAchievement } from '@/features/feed/queries';
 import { useConvertChallengeAcievement } from '@/shared/hooks/useChallengeAchievement';
 import { useRoom } from '@/shared/store/room';
 
-import { PageLoading } from '../loading';
-
 import { ChallengeAchievement } from './ChallengeAchievement';
 
 export const ChallengeAchievementContainer = () => {
@@ -15,14 +13,11 @@ export const ChallengeAchievementContainer = () => {
 
   const router = useRouter();
 
-  const { data, isLoading, isError } = useChallengeAchievement({ challengeId });
+  const { data, isError } = useChallengeAchievement({ challengeId });
 
-  const convertedData = useConvertChallengeAcievement(data || null);
+  const convertedData = useConvertChallengeAcievement(data ?? null);
 
-  // TODO: react-error-boundary, suspense 도입하기
-  if (isLoading) {
-    return <PageLoading />;
-  }
+  // TODO: react-error-boundary
 
   if (isError) {
     router.push('/not-found');

@@ -7,7 +7,6 @@ import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
-import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
@@ -36,7 +35,7 @@ export const ChallengeRoomFeedList = () => {
       ({ challengeId: _challengeId }) => _challengeId === challengeId,
     );
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+  const { data, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
       challengeId,
       offsetRecordId: INITIAL_VALUE_OFFSET_RECORD_ID,
@@ -73,10 +72,7 @@ export const ChallengeRoomFeedList = () => {
     );
   }
 
-  // TODO: react-error-boundary, suspense 도입하기
-  if (isLoading) {
-    return <PageLoading />;
-  }
+  // TODO: react-error-boundary
 
   if (isError) {
     router.push('/not-found');

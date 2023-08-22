@@ -31,6 +31,7 @@ export const useChallengeRoomFeedList = ({
 
       return result.lastRecordId;
     },
+    suspense: true,
   });
 };
 
@@ -47,6 +48,7 @@ export const useMyRoomFeedList = ({ offset }: MyRoomFeedListRequest) => {
       }
       return offset + result.current;
     },
+    suspense: true,
   });
 };
 
@@ -56,6 +58,7 @@ export const useChallengeAchievement = ({
   return useQuery({
     queryKey: ['challengeAchievement', challengeId],
     queryFn: () => getChallengeAchievement({ challengeId }),
+    suspense: true,
   });
 };
 
@@ -63,6 +66,7 @@ export const useChallengeList = () => {
   return useQuery({
     queryKey: ['challengeList'],
     queryFn: getChallengeList,
+    suspense: true,
   });
 };
 
