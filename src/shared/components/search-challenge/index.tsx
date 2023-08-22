@@ -7,7 +7,7 @@ import {
   useChallengeSearch,
   useUserChallengeList,
 } from '@/features/challenge/queries';
-import { NoChallengeAvailable } from '@/features/feed/MyRoomEmpty';
+import { NoChallengeAvailable } from '@/features/feed/NoChallengeAvailable';
 import { IconClock } from '@/public/svgs';
 import { CategoryKey, SortedType } from '@/shared/types/challenge';
 import { calculateDaysLeft } from '@/shared/utils/time/time';

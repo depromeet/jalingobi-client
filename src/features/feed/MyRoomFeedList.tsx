@@ -10,7 +10,7 @@ import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
 import { MyFeed } from './MyFeed';
-import { NoChallengeAvailable } from './MyRoomEmpty';
+import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 0;

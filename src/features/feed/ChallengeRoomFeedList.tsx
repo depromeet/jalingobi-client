@@ -13,11 +13,11 @@ import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
-import { RecrutingChallenge } from './ChallengeRoomRecruting';
 import { MyFeed } from './MyFeed';
-import { NoChallengeAvailable } from './MyRoomEmpty';
+import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
+import { RecrutingChallenge } from './RecrutingChallenge';
 
 const INITIAL_VALUE_OFFSET_RECORD_ID = null;
 
