@@ -23,7 +23,25 @@ export const MyRoomFeedList = () => {
   });
 
   const feeds = useMemo(
-    () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
+    () =>
+      data
+        ? data.pages
+            .flatMap(({ result }) => result.myFeedList)
+            .map(({ recordInfo, challengeInfo, emojiInfo }) => {
+              return {
+                recordId: recordInfo.id,
+                recordImgUrl: recordInfo.imgUrl,
+                title: recordInfo.title,
+                price: recordInfo.price,
+                content: recordInfo.content,
+                recordDate: recordInfo.date,
+                challengeId: challengeInfo.id,
+                challengeImgUrl: challengeInfo.imgUrl,
+                challengeTitle: challengeInfo.title,
+                emojiInfo,
+              };
+            })
+        : [],
     [data],
   );
 
@@ -62,23 +80,10 @@ export const MyRoomFeedList = () => {
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
+        {feeds.map((feedData, index) => {
           return (
-            <Fragment key={recordInfo.id}>
-              <MyFeed
-                recordId={recordInfo.id}
-                recordImgUrl={recordInfo.imgUrl}
-                title={recordInfo.title}
-                price={recordInfo.price}
-                content={recordInfo.content}
-                recordDate={recordInfo.date}
-                challengeId={challengeInfo.id}
-                challengeImgUrl={challengeInfo.imgUrl}
-                challengeTitle={challengeInfo.title}
-                emojiInfo={emojiInfo}
-                onClickFeed={handleClickFeed}
-              />
+            <Fragment key={feedData.recordId}>
+              <MyFeed {...feedData} onClickFeed={handleClickFeed} />
               <FeedDate
                 currentFeed={feeds[index]}
                 nextFeed={feeds[index + 1]}

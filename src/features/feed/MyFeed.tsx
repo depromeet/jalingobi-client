@@ -9,14 +9,14 @@ import { convertNumberToCurrency } from '@/shared/utils/currency';
 
 import { EmojiContainer } from '../emoji/EmojiContainer';
 
-type MyFeedProps = {
+export type MyFeedProps = {
   recordId: number;
   title: string;
   price: number;
   content: string;
   recordDate: string;
   emojiInfo: EmojiInfoType;
-  challengeId: string;
+  challengeId?: string;
   challengeImgUrl?: string;
   challengeTitle?: string;
   recordImgUrl?: string;
@@ -30,7 +30,7 @@ const MyFeed = ({
   content,
   recordDate,
   emojiInfo,
-  challengeId,
+  challengeId = '',
   challengeImgUrl = '',
   challengeTitle,
   recordImgUrl,

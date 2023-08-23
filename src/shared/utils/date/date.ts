@@ -1,23 +1,19 @@
 import dayjs from 'dayjs';
 
-import { ChallengeFeedType, MyFeedType } from '@/shared/types/feed';
+import { MyFeedProps } from '@/features/feed/MyFeed';
+import { OthersFeedProps } from '@/features/feed/OthersFeed';
 
 export const isFeedDateDifferent = ({
   currentFeed,
   nextFeed,
 }: {
-  currentFeed: MyFeedType | ChallengeFeedType;
-  nextFeed: MyFeedType | ChallengeFeedType;
+  currentFeed: MyFeedProps | OthersFeedProps;
+  nextFeed: MyFeedProps | OthersFeedProps;
 }) => {
   if (!nextFeed) return true; // if there is no next feed, show the DateChip
 
-  const currentDate = new Date(currentFeed.recordInfo.date).setHours(
-    0,
-    0,
-    0,
-    0,
-  );
-  const nextDate = new Date(nextFeed.recordInfo.date).setHours(0, 0, 0, 0);
+  const currentDate = new Date(currentFeed.recordDate).setHours(0, 0, 0, 0);
+  const nextDate = new Date(nextFeed.recordDate).setHours(0, 0, 0, 0);
 
   return currentDate !== nextDate; // return true if the dates are different
 };

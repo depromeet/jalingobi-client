@@ -11,18 +11,18 @@ import { convertNumberToCurrency } from '@/shared/utils/currency';
 
 import { EmojiContainer } from '../emoji/EmojiContainer';
 
-type OthersFeedProps = {
+export type OthersFeedProps = {
   recordId: number;
   price: number;
-  currentCharge: number;
-  nickname: string;
+  currentCharge?: number;
+  nickname?: string;
   title: string;
   content: string;
   recordDate: string;
-  profileImgUrl: string;
+  profileImgUrl?: string;
   emojiInfo: EmojiInfoType;
   recordImgUrl?: string;
-  onClickFeed: (recordId: number) => void;
+  onClickFeed?: (recordId: number) => void;
 };
 
 const OthersFeed = ({
@@ -36,13 +36,13 @@ const OthersFeed = ({
   recordDate,
   emojiInfo,
   recordImgUrl,
-  onClickFeed,
+  onClickFeed = () => null,
 }: OthersFeedProps) => {
   const challengeId = useRoom((state) => state.challengeId, shallow);
 
   const convertedDate = dayjs(recordDate).format('A hh:mm');
   const convertedCurrentCharge = convertNumberToCurrency({
-    value: currentCharge,
+    value: currentCharge ?? 0,
     unitOfCurrency: '원',
   });
   const convertedPrice = convertNumberToCurrency({
@@ -54,7 +54,7 @@ const OthersFeed = ({
     <li className="flex gap-[10px]">
       <div className="relative h-[2.625rem] w-[2.625rem] rounded-[0.625rem] object-cover ">
         <Image
-          src={profileImgUrl}
+          src={profileImgUrl ?? ''}
           alt=""
           fill
           sizes="(max-width: 600px) 10vw"

@@ -44,7 +44,37 @@ export const ChallengeRoomFeedList = () => {
 
   const feeds = useMemo(
     () =>
-      data ? data.pages.flatMap(({ result }) => result.challengeFeedList) : [],
+      data
+        ? data.pages
+            .flatMap(({ result }) => result.challengeFeedList)
+            .map(({ isMine, userInfo, recordInfo, emojiInfo, challengeInfo }) =>
+              isMine
+                ? {
+                    isMine,
+                    recordId: recordInfo.id,
+                    recordImgUrl: recordInfo.imgUrl,
+                    title: recordInfo.title,
+                    price: recordInfo.price,
+                    content: recordInfo.content,
+                    recordDate: recordInfo.date,
+                    challengeId: challengeInfo?.id,
+                    emojiInfo,
+                  }
+                : {
+                    isMine,
+                    recordId: recordInfo.id,
+                    recordImgUrl: recordInfo.imgUrl,
+                    title: recordInfo.title,
+                    price: recordInfo.price,
+                    content: recordInfo.content,
+                    recordDate: recordInfo.date,
+                    profileImgUrl: userInfo.imgUrl,
+                    nickname: userInfo.nickname,
+                    currentCharge: userInfo.currentCharge,
+                    emojiInfo,
+                  },
+            )
+        : [],
     [data],
   );
 
@@ -101,49 +131,21 @@ export const ChallengeRoomFeedList = () => {
     <div className="-z-10 bg-gray-10 px-5" ref={containerRef}>
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(
-          (
-            { isMine, userInfo, recordInfo, emojiInfo, challengeInfo },
-            index,
-          ) => {
-            return (
-              <Fragment key={recordInfo.id}>
-                {isMine ? (
-                  <MyFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    challengeId={challengeInfo.id}
-                    emojiInfo={emojiInfo}
-                    onClickFeed={handleClickFeed}
-                  />
-                ) : (
-                  <OthersFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    profileImgUrl={userInfo.imgUrl}
-                    nickname={userInfo.nickname}
-                    currentCharge={userInfo.currentCharge}
-                    emojiInfo={emojiInfo}
-                    onClickFeed={handleClickFeed}
-                  />
-                )}
-                <FeedDate
-                  currentFeed={feeds[index]}
-                  nextFeed={feeds[index + 1]}
-                />
-              </Fragment>
-            );
-          },
-        )}
+        {feeds.map(({ isMine, ...feedData }, index) => {
+          return (
+            <Fragment key={feedData.recordId}>
+              {isMine ? (
+                <MyFeed {...feedData} onClickFeed={handleClickFeed} />
+              ) : (
+                <OthersFeed {...feedData} onClickFeed={handleClickFeed} />
+              )}
+              <FeedDate
+                currentFeed={feeds[index]}
+                nextFeed={feeds[index + 1]}
+              />
+            </Fragment>
+          );
+        })}
         {hasNextPage && <div ref={intersectedRef} />}
         <Spacing height={53} />
       </ul>
