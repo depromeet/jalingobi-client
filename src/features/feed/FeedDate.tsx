@@ -2,20 +2,17 @@ import { Spacing } from '@/shared/components';
 import { DateChip } from '@/shared/components/date-chip';
 import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
-import { MyFeedProps } from './MyFeed';
-import { OthersFeedProps } from './OthersFeed';
-
 type FeedDateProps = {
-  currentFeed: MyFeedProps | OthersFeedProps;
-  nextFeed: MyFeedProps | OthersFeedProps;
+  currentFeedDate: string;
+  nextFeedDate: string;
 };
 
-export const FeedDate = ({ currentFeed, nextFeed }: FeedDateProps) => {
+export const FeedDate = ({ currentFeedDate, nextFeedDate }: FeedDateProps) => {
   return isFeedDateDifferent({
-    currentFeed,
-    nextFeed,
+    currentFeedDate,
+    nextFeedDate,
   }) ? (
-    <DateChip date={currentFeed.recordDate} />
+    <DateChip date={currentFeedDate} />
   ) : (
     <Spacing height={32} />
   );

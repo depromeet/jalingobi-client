@@ -7,8 +7,10 @@ import { Spacing } from '@/shared/components';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 
+import { EmojiContainer } from '../emoji/EmojiContainer';
+
+import { Feed } from './Feed';
 import { FeedDate } from './FeedDate';
-import { MyFeed } from './MyFeed';
 import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useMyRoomFeedList } from './queries';
 
@@ -83,10 +85,17 @@ export const MyRoomFeedList = () => {
         {feeds.map((feedData, index) => {
           return (
             <Fragment key={feedData.recordId}>
-              <MyFeed {...feedData} onClickFeed={handleClickFeed} />
+              <div>
+                <Feed {...feedData} onClickFeed={handleClickFeed} />
+                <EmojiContainer
+                  emojiInfo={feedData.emojiInfo}
+                  challengeId={feedData.challengeId}
+                  recordId={feedData.recordId}
+                />
+              </div>
               <FeedDate
-                currentFeed={feeds[index]}
-                nextFeed={feeds[index + 1]}
+                currentFeedDate={feeds[index].recordDate}
+                nextFeedDate={feeds[index + 1]?.recordDate}
               />
             </Fragment>
           );

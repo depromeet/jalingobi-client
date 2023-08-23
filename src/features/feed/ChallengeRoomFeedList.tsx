@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { isEmpty } from 'lodash-es';
 import { shallow } from 'zustand/shallow';
 
@@ -11,10 +12,12 @@ import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
 
+import { EmojiContainer } from '../emoji/EmojiContainer';
+
+import { Feed } from './Feed';
+import { FeedCreationDate } from './FeedCreationDate';
 import { FeedDate } from './FeedDate';
-import { MyFeed } from './MyFeed';
 import { NoChallengeAvailable } from './NoChallengeAvailable';
-import { OthersFeed } from './OthersFeed';
 import { useChallengeRoomFeedList } from './queries';
 import { RecrutingChallenge } from './RecrutingChallenge';
 
@@ -71,6 +74,7 @@ export const ChallengeRoomFeedList = () => {
                     profileImgUrl: userInfo.imgUrl,
                     nickname: userInfo.nickname,
                     currentCharge: userInfo.currentCharge,
+                    challengeId: challengeId.toString(),
                     emojiInfo,
                   },
             )
@@ -85,7 +89,8 @@ export const ChallengeRoomFeedList = () => {
   });
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
 
-  const handleClickFeed = (recordId: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleClickFeed = (recordId: number, _: string | undefined) => {
     router.push(
       `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
     );
@@ -135,13 +140,33 @@ export const ChallengeRoomFeedList = () => {
           return (
             <Fragment key={feedData.recordId}>
               {isMine ? (
-                <MyFeed {...feedData} onClickFeed={handleClickFeed} />
+                <div>
+                  <Feed {...feedData} onClickFeed={handleClickFeed} />
+                  <EmojiContainer
+                    emojiInfo={feedData.emojiInfo}
+                    challengeId={feedData.challengeId}
+                    recordId={feedData.recordId}
+                  />
+                  <FeedCreationDate
+                    date={dayjs(feedData.recordDate).format('A hh:mm')}
+                  />
+                </div>
               ) : (
-                <OthersFeed {...feedData} onClickFeed={handleClickFeed} />
+                <div>
+                  <Feed {...feedData} onClickFeed={handleClickFeed} />
+                  <EmojiContainer
+                    emojiInfo={feedData.emojiInfo}
+                    challengeId={feedData.challengeId}
+                    recordId={feedData.recordId}
+                  />
+                  <FeedCreationDate
+                    date={dayjs(feedData.recordDate).format('A hh:mm')}
+                  />
+                </div>
               )}
               <FeedDate
-                currentFeed={feeds[index]}
-                nextFeed={feeds[index + 1]}
+                currentFeedDate={feeds[index].recordDate}
+                nextFeedDate={feeds[index + 1]?.recordDate}
               />
             </Fragment>
           );
