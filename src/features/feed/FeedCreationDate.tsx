@@ -1,5 +1,10 @@
-type FeedCreationDateProps = { date: string };
+import { cn } from '@/lib/utils';
 
-export const FeedCreationDate = ({ date }: FeedCreationDateProps) => (
-  <p className="font-caption-medium-sm text-gray-50">{date}</p>
+type FeedCreationDateProps = { date: string; className?: string };
+
+export const FeedCreationDate = ({
+  date,
+  className,
+}: FeedCreationDateProps) => (
+  <p className={cn('font-caption-medium-sm text-gray-50', className)}>{date}</p>
 );

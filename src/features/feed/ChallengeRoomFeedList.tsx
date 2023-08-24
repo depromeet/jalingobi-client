@@ -11,12 +11,15 @@ import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
+import { convertNumberToCurrency } from '@/shared/utils/currency';
 
 import { EmojiContainer } from '../emoji/EmojiContainer';
 
 import { Feed } from './Feed';
 import { FeedCreationDate } from './FeedCreationDate';
 import { FeedDate } from './FeedDate';
+import { FeedUserImg } from './FeedUserImg';
+import { FeedUserInfo } from './FeedUserInfo';
 import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useChallengeRoomFeedList } from './queries';
 import { RecrutingChallenge } from './RecrutingChallenge';
@@ -73,7 +76,10 @@ export const ChallengeRoomFeedList = () => {
                     recordDate: recordInfo.date,
                     profileImgUrl: userInfo.imgUrl,
                     nickname: userInfo.nickname,
-                    currentCharge: userInfo.currentCharge,
+                    convertedCurrentCharge: convertNumberToCurrency({
+                      value: userInfo.currentCharge ?? 0,
+                      unitOfCurrency: '원',
+                    }),
                     challengeId: challengeId.toString(),
                     emojiInfo,
                   },
@@ -140,28 +146,50 @@ export const ChallengeRoomFeedList = () => {
           return (
             <Fragment key={feedData.recordId}>
               {isMine ? (
-                <div>
-                  <Feed {...feedData} onClickFeed={handleClickFeed} />
-                  <EmojiContainer
-                    emojiInfo={feedData.emojiInfo}
-                    challengeId={feedData.challengeId}
-                    recordId={feedData.recordId}
-                  />
-                  <FeedCreationDate
-                    date={dayjs(feedData.recordDate).format('A hh:mm')}
-                  />
+                <div className="flex justify-end">
+                  <div className="relative">
+                    <Feed {...feedData} onClickFeed={handleClickFeed} />
+                    <Spacing height={8} />
+                    <EmojiContainer
+                      emojiInfo={feedData.emojiInfo}
+                      challengeId={feedData.challengeId}
+                      recordId={feedData.recordId}
+                    />
+                    <FeedCreationDate
+                      date={dayjs(feedData.recordDate).format('A hh:mm')}
+                      className="absolute bottom-9 left-[-3.25rem]"
+                    />
+                  </div>
                 </div>
               ) : (
-                <div>
-                  <Feed {...feedData} onClickFeed={handleClickFeed} />
-                  <EmojiContainer
-                    emojiInfo={feedData.emojiInfo}
-                    challengeId={feedData.challengeId}
-                    recordId={feedData.recordId}
-                  />
-                  <FeedCreationDate
-                    date={dayjs(feedData.recordDate).format('A hh:mm')}
-                  />
+                <div className="flex gap-2.5">
+                  {feedData.profileImgUrl && (
+                    <FeedUserImg imgUrl={feedData.profileImgUrl} />
+                  )}
+                  <div className="relative">
+                    {feedData.nickname && feedData.convertedCurrentCharge && (
+                      <>
+                        <FeedUserInfo
+                          nickname={feedData.nickname}
+                          convertedCurrentCharge={
+                            feedData.convertedCurrentCharge
+                          }
+                        />
+                        <Spacing height={8} />
+                      </>
+                    )}
+                    <Feed {...feedData} onClickFeed={handleClickFeed} />
+                    <Spacing height={8} />
+                    <EmojiContainer
+                      emojiInfo={feedData.emojiInfo}
+                      challengeId={feedData.challengeId}
+                      recordId={feedData.recordId}
+                    />
+                    <FeedCreationDate
+                      date={dayjs(feedData.recordDate).format('A hh:mm')}
+                      className="absolute bottom-9 right-[-3.25rem]"
+                    />
+                  </div>
                 </div>
               )}
               <FeedDate
