@@ -1,17 +1,19 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import dayjs from 'dayjs';
 import { isEmpty } from 'lodash-es';
 
 import { Spacing } from '@/shared/components';
-import { DateChip } from '@/shared/components/date-chip';
-import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
-import { isFeedDateDifferent } from '@/shared/utils/date/date';
 
-import { MyFeed } from './MyFeed';
-import { MyRoomEmpty } from './MyRoomEmpty';
+import { EmojiContainer } from '../emoji/EmojiContainer';
+
+import { Feed } from './Feed';
+import { FeedCreationDate } from './FeedCreationDate';
+import { FeedDate } from './FeedDate';
+import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useMyRoomFeedList } from './queries';
 
 const INITIAL_VALUE_OFFSET = 0;
@@ -20,13 +22,30 @@ const INITIAL_VALUE_OFFSET = 0;
 export const MyRoomFeedList = () => {
   const router = useRouter();
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useMyRoomFeedList({
-      offset: INITIAL_VALUE_OFFSET,
-    });
+  const { data, isError, hasNextPage, fetchNextPage } = useMyRoomFeedList({
+    offset: INITIAL_VALUE_OFFSET,
+  });
 
   const feeds = useMemo(
-    () => (data ? data.pages.flatMap(({ result }) => result.myFeedList) : []),
+    () =>
+      data
+        ? data.pages
+            .flatMap(({ result }) => result.myFeedList)
+            .map(({ recordInfo, challengeInfo, emojiInfo }) => {
+              return {
+                recordId: recordInfo.id,
+                recordImgUrl: recordInfo.imgUrl,
+                title: recordInfo.title,
+                price: recordInfo.price,
+                content: recordInfo.content,
+                recordDate: recordInfo.date,
+                challengeId: challengeInfo.id,
+                challengeImgUrl: challengeInfo.imgUrl,
+                challengeTitle: challengeInfo.title,
+                emojiInfo,
+              };
+            })
+        : [],
     [data],
   );
 
@@ -46,11 +65,7 @@ export const MyRoomFeedList = () => {
     );
   };
 
-  if (isLoading) {
-    // TODO: react-error-boundary, suspense 도입하기
-    return <PageLoading />;
-  }
-
+  // TODO: react-error-boundary
   if (isError) {
     router.push('/not-found');
     return null;
@@ -58,7 +73,7 @@ export const MyRoomFeedList = () => {
 
   if (isEmpty(feeds)) {
     return (
-      <MyRoomEmpty
+      <NoChallengeAvailable
         title="아직 지출 기록이 없어요."
         description="거지방 챌린지를 시작해보세요."
       />
@@ -69,31 +84,28 @@ export const MyRoomFeedList = () => {
     <div className="-z-10 overflow-y-auto bg-gray-10 px-5" ref={containerRef}>
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(({ recordInfo, challengeInfo, emojiInfo }, index) => {
+        {feeds.map((feedData, index) => {
           return (
-            <Fragment key={recordInfo.id}>
-              <MyFeed
-                recordId={recordInfo.id}
-                recordImgUrl={recordInfo.imgUrl}
-                title={recordInfo.title}
-                price={recordInfo.price}
-                content={recordInfo.content}
-                recordDate={recordInfo.date}
-                challengeId={challengeInfo.id}
-                challengeImgUrl={challengeInfo.imgUrl}
-                challengeTitle={challengeInfo.title}
-                emojiInfo={emojiInfo}
-                onClickFeed={handleClickFeed}
+            <Fragment key={feedData.recordId}>
+              <div className="flex justify-end">
+                <div className="relative">
+                  <Feed {...feedData} onClickFeed={handleClickFeed} />
+                  <Spacing height={8} />
+                  <EmojiContainer
+                    emojiInfo={feedData.emojiInfo}
+                    challengeId={feedData.challengeId}
+                    recordId={feedData.recordId}
+                  />
+                  <FeedCreationDate
+                    date={dayjs(feedData.recordDate).format('A hh:mm')}
+                    className="absolute bottom-9 left-[-3.25rem]"
+                  />
+                </div>
+              </div>
+              <FeedDate
+                currentFeedDate={feeds[index].recordDate}
+                nextFeedDate={feeds[index + 1]?.recordDate}
               />
-              {isFeedDateDifferent({
-                currentFeed: feeds[index],
-                nextFeed: feeds[index + 1],
-              }) ? (
-                <DateChip date={recordInfo.date} />
-              ) : (
-                <Spacing height={32} />
-              )}
             </Fragment>
           );
         })}

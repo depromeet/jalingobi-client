@@ -2,23 +2,27 @@ import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { isEmpty } from 'lodash-es';
 import { shallow } from 'zustand/shallow';
 
 import { Spacing } from '@/shared/components';
-import { DateChip } from '@/shared/components/date-chip';
-import { PageLoading } from '@/shared/components/loading';
 import { useIntersectionObserver, useScrollToBottom } from '@/shared/hooks';
 import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { useRoom } from '@/shared/store/room';
 import { ChallengeListResponse } from '@/shared/types/feed';
-import { isFeedDateDifferent } from '@/shared/utils/date/date';
+import { convertNumberToCurrency } from '@/shared/utils/currency';
 
-import { ChallengeRoomEmpty } from './ChallengeRoomEmpty';
-import { ChallengeRoomRecruting } from './ChallengeRoomRecruting';
-import { MyFeed } from './MyFeed';
-import { OthersFeed } from './OthersFeed';
+import { EmojiContainer } from '../emoji/EmojiContainer';
+
+import { Feed } from './Feed';
+import { FeedCreationDate } from './FeedCreationDate';
+import { FeedDate } from './FeedDate';
+import { FeedUserImg } from './FeedUserImg';
+import { FeedUserInfo } from './FeedUserInfo';
+import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useChallengeRoomFeedList } from './queries';
+import { RecrutingChallenge } from './RecrutingChallenge';
 
 const INITIAL_VALUE_OFFSET_RECORD_ID = null;
 
@@ -36,7 +40,7 @@ export const ChallengeRoomFeedList = () => {
       ({ challengeId: _challengeId }) => _challengeId === challengeId,
     );
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
+  const { data, isError, hasNextPage, fetchNextPage } =
     useChallengeRoomFeedList({
       challengeId,
       offsetRecordId: INITIAL_VALUE_OFFSET_RECORD_ID,
@@ -46,7 +50,41 @@ export const ChallengeRoomFeedList = () => {
 
   const feeds = useMemo(
     () =>
-      data ? data.pages.flatMap(({ result }) => result.challengeFeedList) : [],
+      data
+        ? data.pages
+            .flatMap(({ result }) => result.challengeFeedList)
+            .map(({ isMine, userInfo, recordInfo, emojiInfo, challengeInfo }) =>
+              isMine
+                ? {
+                    isMine,
+                    recordId: recordInfo.id,
+                    recordImgUrl: recordInfo.imgUrl,
+                    title: recordInfo.title,
+                    price: recordInfo.price,
+                    content: recordInfo.content,
+                    recordDate: recordInfo.date,
+                    challengeId: challengeInfo?.id,
+                    emojiInfo,
+                  }
+                : {
+                    isMine,
+                    recordId: recordInfo.id,
+                    recordImgUrl: recordInfo.imgUrl,
+                    title: recordInfo.title,
+                    price: recordInfo.price,
+                    content: recordInfo.content,
+                    recordDate: recordInfo.date,
+                    profileImgUrl: userInfo.imgUrl,
+                    nickname: userInfo.nickname,
+                    convertedCurrentCharge: convertNumberToCurrency({
+                      value: userInfo.currentCharge ?? 0,
+                      unitOfCurrency: '원',
+                    }),
+                    challengeId: challengeId.toString(),
+                    emojiInfo,
+                  },
+            )
+        : [],
     [data],
   );
 
@@ -57,7 +95,8 @@ export const ChallengeRoomFeedList = () => {
   });
   const { intersectedRef } = useIntersectionObserver(fetchNextPage, {});
 
-  const handleClickFeed = (recordId: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleClickFeed = (recordId: number, _: string | undefined) => {
     router.push(
       `/expense-details?challengeId=${challengeId}&recordId=${recordId}`,
     );
@@ -65,7 +104,7 @@ export const ChallengeRoomFeedList = () => {
 
   if (currentCategoryInfo?.status === 'RECRUITING') {
     return (
-      <ChallengeRoomRecruting
+      <RecrutingChallenge
         title={currentCategoryInfo?.title}
         participants={currentCategoryInfo?.participants}
         maxParticipants={currentCategoryInfo?.maxParticipants}
@@ -73,10 +112,7 @@ export const ChallengeRoomFeedList = () => {
     );
   }
 
-  // TODO: react-error-boundary, suspense 도입하기
-  if (isLoading) {
-    return <PageLoading />;
-  }
+  // TODO: react-error-boundary
 
   if (isError) {
     router.push('/not-found');
@@ -85,10 +121,19 @@ export const ChallengeRoomFeedList = () => {
 
   if (isEmpty(feeds)) {
     return (
-      <ChallengeRoomEmpty
-        title={currentCategoryInfo?.title}
-        participants={currentCategoryInfo?.participants}
-        maxParticipants={currentCategoryInfo?.maxParticipants}
+      <NoChallengeAvailable
+        title={currentCategoryInfo?.title ?? ''}
+        subtitle={`참여 인원 ${currentCategoryInfo?.participants}명 / ${currentCategoryInfo?.maxParticipants}명`}
+        description={
+          <>
+            <p className="font-body-regular-sm text-gray-70">
+              아무도 지출 기록을 올리지 않았어요.
+            </p>
+            <p className="text-gray- font-body-regular-sm">
+              지출 기록의 첫번째 주인공이 되어보세요.
+            </p>
+          </>
+        }
       />
     );
   }
@@ -97,53 +142,63 @@ export const ChallengeRoomFeedList = () => {
     <div className="-z-10 bg-gray-10 px-5" ref={containerRef}>
       <ul className="flex flex-col-reverse">
         <Spacing height={32} />
-        {/* TODO: 서버 데이터 그대로 넘기기  */}
-        {feeds.map(
-          (
-            { isMine, userInfo, recordInfo, emojiInfo, challengeInfo },
-            index,
-          ) => {
-            return (
-              <Fragment key={recordInfo.id}>
-                {isMine ? (
-                  <MyFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    challengeId={challengeInfo.id}
-                    emojiInfo={emojiInfo}
-                    onClickFeed={handleClickFeed}
-                  />
-                ) : (
-                  <OthersFeed
-                    recordId={recordInfo.id}
-                    recordImgUrl={recordInfo.imgUrl}
-                    title={recordInfo.title}
-                    price={recordInfo.price}
-                    content={recordInfo.content}
-                    recordDate={recordInfo.date}
-                    profileImgUrl={userInfo.imgUrl}
-                    nickname={userInfo.nickname}
-                    currentCharge={userInfo.currentCharge}
-                    emojiInfo={emojiInfo}
-                    onClickFeed={handleClickFeed}
-                  />
-                )}
-                {isFeedDateDifferent({
-                  currentFeed: feeds[index],
-                  nextFeed: feeds[index + 1],
-                }) ? (
-                  <DateChip date={recordInfo.date} />
-                ) : (
-                  <Spacing height={32} />
-                )}
-              </Fragment>
-            );
-          },
-        )}
+        {feeds.map(({ isMine, ...feedData }, index) => {
+          return (
+            <Fragment key={feedData.recordId}>
+              {isMine ? (
+                <div className="flex justify-end">
+                  <div className="relative">
+                    <Feed {...feedData} onClickFeed={handleClickFeed} />
+                    <Spacing height={8} />
+                    <EmojiContainer
+                      emojiInfo={feedData.emojiInfo}
+                      challengeId={feedData.challengeId}
+                      recordId={feedData.recordId}
+                    />
+                    <FeedCreationDate
+                      date={dayjs(feedData.recordDate).format('A hh:mm')}
+                      className="absolute bottom-9 left-[-3.25rem]"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex gap-2.5">
+                  {feedData.profileImgUrl && (
+                    <FeedUserImg imgUrl={feedData.profileImgUrl} />
+                  )}
+                  <div className="relative">
+                    {feedData.nickname && feedData.convertedCurrentCharge && (
+                      <>
+                        <FeedUserInfo
+                          nickname={feedData.nickname}
+                          convertedCurrentCharge={
+                            feedData.convertedCurrentCharge
+                          }
+                        />
+                        <Spacing height={8} />
+                      </>
+                    )}
+                    <Feed {...feedData} onClickFeed={handleClickFeed} />
+                    <Spacing height={8} />
+                    <EmojiContainer
+                      emojiInfo={feedData.emojiInfo}
+                      challengeId={feedData.challengeId}
+                      recordId={feedData.recordId}
+                    />
+                    <FeedCreationDate
+                      date={dayjs(feedData.recordDate).format('A hh:mm')}
+                      className="absolute bottom-9 right-[-3.25rem]"
+                    />
+                  </div>
+                </div>
+              )}
+              <FeedDate
+                currentFeedDate={feeds[index].recordDate}
+                nextFeedDate={feeds[index + 1]?.recordDate}
+              />
+            </Fragment>
+          );
+        })}
         {hasNextPage && <div ref={intersectedRef} />}
         <Spacing height={53} />
       </ul>

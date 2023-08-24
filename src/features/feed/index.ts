@@ -1,6 +1,5 @@
 import { ChallengeRoomFeedList } from './ChallengeRoomFeedList';
-import { MyFeed } from './MyFeed';
+import { Feed } from './Feed';
 import { MyRoomFeedList } from './MyRoomFeedList';
-import { OthersFeed } from './OthersFeed';
 
-export { MyFeed, OthersFeed, MyRoomFeedList, ChallengeRoomFeedList };
+export { Feed, MyRoomFeedList, ChallengeRoomFeedList };

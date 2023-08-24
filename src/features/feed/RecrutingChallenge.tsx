@@ -6,7 +6,7 @@ type ChallengeRoomRecrutingProps = {
   maxParticipants?: number;
 };
 
-export const ChallengeRoomRecruting = ({
+export const RecrutingChallenge = ({
   title,
   participants,
   maxParticipants,
