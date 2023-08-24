@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Fragment, useMemo } from 'react';
 
+import dayjs from 'dayjs';
 import { isEmpty } from 'lodash-es';
 
 import { Spacing } from '@/shared/components';
@@ -10,6 +11,7 @@ import useKeepScrollPosition from '@/shared/hooks/useKeepScrollPosition';
 import { EmojiContainer } from '../emoji/EmojiContainer';
 
 import { Feed } from './Feed';
+import { FeedCreationDate } from './FeedCreationDate';
 import { FeedDate } from './FeedDate';
 import { NoChallengeAvailable } from './NoChallengeAvailable';
 import { useMyRoomFeedList } from './queries';
@@ -85,13 +87,20 @@ export const MyRoomFeedList = () => {
         {feeds.map((feedData, index) => {
           return (
             <Fragment key={feedData.recordId}>
-              <div>
-                <Feed {...feedData} onClickFeed={handleClickFeed} />
-                <EmojiContainer
-                  emojiInfo={feedData.emojiInfo}
-                  challengeId={feedData.challengeId}
-                  recordId={feedData.recordId}
-                />
+              <div className="flex justify-end">
+                <div className="relative">
+                  <Feed {...feedData} onClickFeed={handleClickFeed} />
+                  <Spacing height={8} />
+                  <EmojiContainer
+                    emojiInfo={feedData.emojiInfo}
+                    challengeId={feedData.challengeId}
+                    recordId={feedData.recordId}
+                  />
+                  <FeedCreationDate
+                    date={dayjs(feedData.recordDate).format('A hh:mm')}
+                    className="absolute bottom-9 left-[-3.25rem]"
+                  />
+                </div>
               </div>
               <FeedDate
                 currentFeedDate={feeds[index].recordDate}
